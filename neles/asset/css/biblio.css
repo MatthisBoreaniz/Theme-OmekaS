@@ -1,0 +1,233 @@
+/* BANDEAU HERO BIBLIO */
+.biblio-hero {
+  position: relative !important;
+  width: 100% !important;
+  height: 350px !important; 
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  margin-bottom: 40px !important; 
+  background-color: #222 !important; 
+}
+
+
+.biblio-hero img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; 
+    object-position: top !important; 
+  
+  z-index: 1 !important;
+  filter: brightness(50%) !important; 
+}
+
+
+.biblio-hero h1 {
+  position: relative !important;
+  z-index: 2 !important;
+  color: #ffffff !important; 
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 3.5rem !important;
+  font-weight: normal !important;
+  margin: 0 !important;
+  text-align: center !important;
+  letter-spacing: 0.03em !important;
+  
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6) !important; 
+}
+
+@media (max-width: 768px) {
+  .biblio-hero {
+    height: 200px !important; 
+  }
+  .biblio-hero h1 {
+    font-size: 2.2rem !important; 
+  }
+}
+
+
+/* Publication */
+
+.pub-container {
+  display: block !important;
+  max-width: 100% !important;
+  margin: 60px auto !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  padding: 60px !important;
+  box-sizing: border-box !important;
+}
+
+.pub-container::after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}
+
+.pub-image {
+  float: left !important;
+  width: 35% !important; 
+  max-width: 350px !important; 
+  margin-right: 50px !important;
+  margin-bottom: 20px !important;
+}
+
+.pub-image img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border-radius: 4px !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important; 
+}
+
+.pub-content {
+  display: block !important;
+}
+
+.pub-content h2 {
+  color: #1a1a1a !important;
+  font-size: 3rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 30px !important;
+  border-bottom: 3px solid #F3E8D2 !important; 
+  padding-bottom: 10px !important;
+}
+
+.pub-content h3 {
+  font-size: 3rem !important;
+  color: #1a1a1a !important;
+  line-height: 1.5 !important;
+  margin-bottom: 30px !important;
+}
+
+.pub-content p {
+  font-size: 1.2em !important;
+  line-height: 1.7 !important;
+  color: #3a3530 !important;
+  margin: 0 !important;
+}
+
+
+@media (max-width: 900px) {
+  .pub-container {
+    padding: 30px 20px !important;
+    margin: 30px auto !important;
+  }
+  
+  .pub-image {
+    width: 45% !important; 
+    margin-right: 30px !important;
+  }
+  
+  .pub-content h2, .pub-content h3 {
+    font-size: 2.2rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .pub-image {
+    width: 100% !important; 
+    max-width: 300px !important;
+    float: none !important;
+    margin: 0 auto 30px auto !important;
+  }
+  
+  .pub-content h2, .pub-content h3 {
+    font-size: 1.8rem !important;
+    text-align: center !important;
+  }
+
+  .pub-content p {
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  color: #3a3530 !important;
+  margin: 0 !important;
+}
+
+}
+
+/* Spécification et logo */
+.pub-infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--accent) !important; 
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.pub-specs {
+    color: #787776;
+    font-size: 1rem !important;
+}
+
+
+@media (max-width: 600px) {
+  .pub-infos {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+
+
+/* En savoir plus */
+.pub-more {
+  max-width: 900px !important;
+  margin: 50px auto !important; 
+  padding: 30px 40px !important;
+  background-color: #FAFAFA !important; 
+  border-left: 4px solid var(--accent) !important; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important; 
+  border-radius: 0 6px 6px 0 !important;
+}
+
+.pub-more-title {
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 1.3rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+  text-transform: uppercase !important; 
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid #e0dbd3 !important; 
+  padding-bottom: 12px !important;
+}
+
+
+.pub-more-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.pub-more-item {
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  color: #3a3530 !important;
+  margin-bottom: 16px !important;
+  
+  padding-left: 2em !important; 
+  text-indent: -2em !important; 
+}
+
+.pub-more-item:hover {
+  color: #1a1a1a !important;
+}
+
+
+@media (max-width: 768px) {
+  .pub-more {
+    padding: 25px 20px !important;
+    margin: 30px 20px !important; 
+  }
+  .pub-more-item {
+    padding-left: 1.5em !important;
+    text-indent: -1.5em !important;
+  }
+}

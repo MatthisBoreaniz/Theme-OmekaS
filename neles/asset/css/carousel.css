@@ -1,0 +1,159 @@
+/*CAROUSEL*/
+
+.affiche-carousel-wrapper {
+  position: relative !important;
+  width: 100vw !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  background: #f4f1ec !important;
+  padding: 40px 0 60px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.affiche-carousel-track {
+  display: flex !important;
+  align-items: center !important;
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.18, 1) !important;
+  will-change: transform !important;
+  gap: 24px !important;
+  padding: 0 10% !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+.affiche-slide {
+  flex: 0 0 auto !important;
+  width: 32% !important;
+  display: block !important;
+  transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease !important;
+  opacity: 0.45 !important;
+  transform: scale(0.88) !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+  border: none !important;
+}
+
+.affiche-slide.active {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.28) !important;
+  z-index: 2 !important;
+}
+
+.affiche-slide img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: cover !important;
+  max-width: none !important;
+}
+
+/* Boutons prev/next */
+.affiche-btn {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-60%) !important;
+  background: rgba(255,255,255,0.9) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 48px !important;
+  height: 48px !important;
+  font-size: 1.8rem !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15) !important;
+  transition: background 0.2s, box-shadow 0.2s !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+}
+
+.affiche-btn:hover {
+  background: #fff !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+  opacity: 1 !important;
+}
+
+.affiche-btn-prev { left: 16px !important; }
+.affiche-btn-next { right: 16px !important; }
+
+/* Dots */
+.affiche-dots {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  position: absolute !important;
+  bottom: 16px !important;
+  width: 100% !important;
+}
+
+.affiche-dot {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: #c5bdb0 !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  transition: background 0.2s, transform 0.2s !important;
+  min-width: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  opacity: 1 !important;
+}
+
+.affiche-dot.active {
+  background: #c0392b !important;
+  transform: scale(1.25) !important;
+}
+
+/* ============================================================
+   CAROUSEL RESPONSIVE 
+   ============================================================ */
+
+/* Tablette (sous 1024px) */
+@media (max-width: 1024px) {
+  .affiche-slide { 
+    width: 50% !important; /* 2 slides visibles */
+  }
+  .affiche-carousel-track { 
+    padding: 0 25% !important; 
+    gap: 20px !important; 
+  }
+  .affiche-btn {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Mobile (sous 680px) */
+@media (max-width: 680px) {
+  .affiche-slide { 
+    width: 80% !important; /* 1 slide centrale majoritaire */
+  }
+  .affiche-carousel-track { 
+    padding: 0 10% !important; 
+    gap: 12px !important; 
+  }
+  .affiche-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.2rem !important;
+  }
+  .affiche-btn-prev { left: 8px !important; }
+  .affiche-btn-next { right: 8px !important; }
+  
+  /* Ajuster la hauteur de la zone pour mobile */
+  .affiche-carousel-wrapper {
+    padding: 20px 0 50px !important;
+  }
+}

@@ -1,0 +1,109 @@
+/* HERO */
+
+.neles-hero-wrap {
+  display: flex !important;
+  align-items: stretch;
+  background: #000;
+  color: #fff;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.neles-hero-img {
+  flex: 1 1 50%;
+}
+
+.neles-hero-img img {
+  width: auto;
+  height: 90vh;
+  object-fit: cover;
+  display: block;
+}
+
+.neles-hero-text {
+  flex: 1 1 50%;
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;  
+}
+
+.neles-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.neles-years {
+  font-size: 28px;
+  line-height: 1.2;
+  color: #cfcfcf;
+}
+
+.neles-title {
+  font-size: 100px;
+  line-height: 0.95;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.neles-desc {
+  font-size: 3rem;
+  line-height: 1.4;
+  color: #ddd;
+}
+
+.neles-desc em {
+  font-style: italic;
+}
+
+/* RESPONSIVE HERO */
+
+@media (max-width: 800px) {
+
+  .neles-hero-wrap {
+    flex-direction: column;
+  }
+
+  .neles-hero-img {
+    display: flex;
+    justify-content: center;
+    background: #000;
+  }
+
+  .neles-hero-img img {
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    margin: 20px auto;
+    border: 1px solid #9c9c9c;
+    border-radius: 10px;
+  }
+
+  .neles-hero-text {
+    padding: 40px 25px;
+    text-align: center;
+  }
+
+  .neles-heading {
+    justify-content: center;
+  }
+
+  .neles-title {
+    font-size: 46px;
+  }
+
+  .neles-desc {
+    text-align: center;
+  }
+
+  .neles-desc {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: #ddd;
+}
+
+}

@@ -1,0 +1,109 @@
+/* SUPPRIMER LES MARGES OMEKA */
+
+#content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.block.block-html {
+    margin: 0;
+}
+
+/* ============================================================
+   TESTIMONIALS 
+   ============================================================ */
+
+/* Styles généraux pour le conteneur principal */
+.testimonial-section {
+  background-color: #f0f0f0;
+  padding: 60px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px; 
+  font-family: 'Inter', 'Segoe UI', sans-serif; 
+}
+
+
+.testimonial-quote-wrapper {
+  max-width: 580px;
+}
+
+.testimonial-text {
+  position: relative; 
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 20px 30px;
+}
+
+
+.testimonial-text::before,
+.testimonial-text::after {
+  position: absolute;
+  font-family: Georgia, serif;
+  font-size: 5rem;
+  color: #1a1a1a;
+  line-height: 0.5;
+}
+
+
+.testimonial-text::before {
+  content: '\201C';
+  top: 15px;
+  left: -20px;
+}
+
+
+.testimonial-text::after {
+  content: '\201D';
+  bottom: -15px;
+  right: -10px;
+}
+
+
+.testimonial-author-wrapper {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.author-name-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author-line {
+  width: 15px;
+  height: 1px;
+  background-color: #1a1a1a;
+}
+
+.author-name {
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 600;
+}
+
+.author-title {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0;
+  margin-left: 27px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .testimonial-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 60px 40px;
+  }
+}
+
