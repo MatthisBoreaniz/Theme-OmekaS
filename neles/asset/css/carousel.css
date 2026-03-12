@@ -96,11 +96,10 @@
 }
 
 .affiche-dot {
-  width: 10px !important;
-  height: 10px !important;
+  width: 20px !important;
+  height: 20px !important;
   border-radius: 50% !important;
   background: #c5bdb0 !important;
-  border: none !important;
   cursor: pointer !important;
   padding: 0 !important;
   transition: background 0.2s, transform 0.2s !important;
@@ -113,16 +112,15 @@
 .affiche-dot.active {
   background: #c0392b !important;
   transform: scale(1.25) !important;
+  border: 1px solid #1a1a1a !important;
 }
 
-/* ============================================================
-   CAROUSEL RESPONSIVE 
-   ============================================================ */
+
 
 /* Tablette (sous 1024px) */
 @media (max-width: 1024px) {
   .affiche-slide { 
-    width: 50% !important; /* 2 slides visibles */
+    width: 50% !important; 
   }
   .affiche-carousel-track { 
     padding: 0 25% !important; 
@@ -135,10 +133,10 @@
   }
 }
 
-/* Mobile (sous 680px) */
+
 @media (max-width: 680px) {
   .affiche-slide { 
-    width: 80% !important; /* 1 slide centrale majoritaire */
+    width: 80% !important; 
   }
   .affiche-carousel-track { 
     padding: 0 10% !important; 
@@ -152,7 +150,6 @@
   .affiche-btn-prev { left: 8px !important; }
   .affiche-btn-next { right: 8px !important; }
   
-  /* Ajuster la hauteur de la zone pour mobile */
   .affiche-carousel-wrapper {
     padding: 20px 0 50px !important;
   }

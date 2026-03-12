@@ -30,7 +30,6 @@
   position: relative !important;
   z-index: 2 !important;
   color: #ffffff !important; 
-  font-family: Georgia, 'Times New Roman', serif !important;
   font-size: 3.5rem !important;
   font-weight: normal !important;
   margin: 0 !important;
@@ -55,9 +54,8 @@
 .pub-container {
   display: block !important;
   max-width: 100% !important;
-  margin: 60px auto !important;
-  font-family: Georgia, 'Times New Roman', serif !important;
-  padding: 60px !important;
+  font-family: 'Lato', sans-serif !important;
+  padding: 0px 40px !important;
   box-sizing: border-box !important;
 }
 
@@ -152,10 +150,10 @@
 /* Spécification et logo */
 .pub-infos {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     margin-bottom: 30px;
-    border-bottom: 3px solid var(--accent) !important; 
+    /* border-bottom: 3px solid var(--accent) !important;  */
     padding-left: 60px;
     padding-right: 60px;
 }
@@ -188,7 +186,7 @@
 }
 
 .pub-more-title {
-  font-family: Georgia, 'Times New Roman', serif !important;
+  font-family: 'Lato', sans-serif !important;
   font-size: 1.3rem !important;
   margin-top: 0 !important;
   margin-bottom: 20px !important;
@@ -206,7 +204,7 @@
 }
 
 .pub-more-item {
-  font-family: Georgia, 'Times New Roman', serif !important;
+  font-family: 'Lato', sans-serif !important;
   font-size: 0.95rem !important;
   line-height: 1.6 !important;
   color: #3a3530 !important;

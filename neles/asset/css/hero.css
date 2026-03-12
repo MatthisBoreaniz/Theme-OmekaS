@@ -39,12 +39,16 @@
   font-size: 28px;
   line-height: 1.2;
   color: #cfcfcf;
+  font-family: 'futura pt', sans-serif;
+  font-weight: 300;
+
 }
 
 .neles-title {
-  font-size: 100px;
+  font-family: 'Futura PT', 'Futura', 'Open Sans', sans-serif !important;
+  font-size: 128px !important;
   line-height: 0.95;
-  font-weight: 700;
+  font-weight: 500 !important;
   margin: 0 0 30px 0;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -54,6 +58,8 @@
   font-size: 3rem;
   line-height: 1.4;
   color: #ddd;
+  font-family: 'merriweather', serif;
+  font-weight: 300;
 }
 
 .neles-desc em {

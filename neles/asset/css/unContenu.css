@@ -1,0 +1,70 @@
+/* On prépare le terrain pour Mirador */
+#mirador, .mirador-container {
+    display: block !important;
+    height: 700px !important; /* Hauteur généreuse */
+    width: 100% !important;
+    background-color: #333 !important;
+    margin-bottom: 20px !important;
+    border: 1px solid #000 !important;
+}
+
+
+/* mettre en forme les metadata uniquement sur les pages item */
+
+/* metadata sur page item */
+
+body.item.resource.show dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    max-width: 1200px;
+    margin: 20px auto;
+    border: 1px solid #626262;
+    border-radius: 12px;
+    padding: 30px 40px;
+    background-color: #f4f4f4;
+}
+
+body.item.resource.show dl .property {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding: 15px 0;
+    border-bottom: 1px solid #d6d5d5;
+}
+
+body.item.resource.show dl .property dt {
+    flex: 0 0 40%;
+    font-weight: bold;
+}
+
+body.item.resource.show dl .property dd {
+    flex: 1;
+    margin: 0;
+}
+
+body.item.resource.show dl .property:last-child {
+    border-bottom: none;
+}
+
+body.item.resource.show dl .property dd {
+    flex: 1;
+    margin: 0;
+    text-align: left;
+    color: #111;
+    font-size: 1rem;
+
+    /* gestion des longs textes */
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* pour les contenus internes */
+body.item.resource.show dl .value-content {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+body.item.resource.show dl a {
+    word-break: break-all;
+}

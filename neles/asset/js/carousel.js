@@ -79,6 +79,29 @@ document.addEventListener('DOMContentLoaded', function() {
     goTo(current + 1);
   });
 
+  // --- Touch Swipe Support ---
+  var touchStartX = 0;
+  var touchEndX = 0;
+
+  track.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+  }, {passive: true});
+
+  track.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+  }, {passive: true});
+
+  function handleSwipe() {
+      var swipeThreshold = 50; 
+      if (touchEndX < touchStartX - swipeThreshold) {
+          goTo(current + 1);
+      }
+      if (touchEndX > touchStartX + swipeThreshold) {
+          goTo(current - 1);
+      }
+  }
+
   // Init : afficher la deuxième slide
   goTo(1);
 

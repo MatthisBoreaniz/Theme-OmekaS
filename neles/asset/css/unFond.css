@@ -1,0 +1,313 @@
+/* =========================================
+   STYLE DU BLOC MENU LATÉRAL (.block-listOfPages)
+   ========================================= */
+
+/* --- Conteneur principal du menu --- */
+.block-listOfPages {
+    border: 1px solid #111 !important;
+    border-radius: 6px !important;
+    padding: 30px !important;
+    /* Marge par défaut, sera écrasée sur la page spécifique */
+    margin: 30px !important; 
+    box-sizing: border-box !important;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    background-color: #fff !important;
+}
+
+/* --- Nettoyage des listes (ul) --- */
+/* Supprime les puces et les marges par défaut */
+.block-listOfPages ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* --- Style des éléments de liste (li) --- */
+/* C'est ici que tout se joue ! */
+.block-listOfPages li {
+    position: relative !important; /* Nécessaire pour placer la flèche */
+    padding-left: 20px !important; /* Espace réservé à gauche pour la flèche */
+    margin-bottom: 15px !important; /* Espace entre les éléments */
+    font-size: 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    
+    /* COULEUR PAR DÉFAUT : NOIR */
+    color: #000 !important; 
+    transition: color 0.3s ease !important;
+}
+
+/* Enlève la marge sous le tout dernier élément */
+.block-listOfPages li:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* --- Création de la FLÈCHE avec ::before --- */
+.block-listOfPages li::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    /* Centrage vertical parfait de la flèche */
+    top: 50% !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+    
+    /* Taille et forme de la flèche */
+    width: 6px !important;
+    height: 6px !important;
+    /* La flèche prend la couleur du texte de son parent (noir ou accent) */
+    border-top: 2px solid currentColor !important;
+    border-right: 2px solid currentColor !important;
+    transition: border-color 0.3s ease !important;
+}
+
+/* --- Style des liens (a) à l'intérieur des li --- */
+.block-listOfPages li a {
+    /* Le lien hérite de la couleur du li (noir par défaut) */
+    color: inherit !important; 
+    text-decoration: none !important;
+    line-height: 1.4 !important;
+    transition: color 0.3s ease !important;
+    display: block !important; /* Rend toute la largeur cliquable */
+    width: 100% !important;
+}
+
+/* =========================================
+   ÉTATS ACTIF ET SURVOL (CORRIGÉ)
+   ========================================= */
+
+/* On cible le li au survol ou s'il est actif */
+.block-listOfPages li:hover,
+.block-listOfPages li.current,
+.block-listOfPages li.active {
+    color: var(--accent) !important;
+}
+
+/* On cible spécifiquement le lien ET on vérifie les attributs générés par Omeka */
+.block-listOfPages li:hover > a,
+.block-listOfPages li.current > a,
+.block-listOfPages li.active > a,
+.block-listOfPages li a.active,
+.block-listOfPages li a.current,
+.block-listOfPages li a[aria-current="page"] {
+    color: var(--accent) !important;
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   1. MISE EN PAGE GLOBALE (MENU À GAUCHE, RESTE À DROITE)
+   ========================================= */
+
+/* On utilise CSS Grid pour gérer plusieurs blocs à droite */
+.blocks-inner:has(.block-listOfPages) {
+    display: grid !important;
+    grid-template-columns: 320px 1fr !important;
+    grid-auto-rows: min-content !important;
+    gap: 30px 50px !important; /* 30px entre les lignes, 50px entre les colonnes */
+    align-items: start !important;
+    padding: 20px !important;
+}
+
+/* Le menu est bloqué dans la colonne 1 et s'étire sur toute la hauteur */
+.blocks-inner:has(.block-listOfPages) .block-listOfPages {
+    grid-column: 1 !important;
+    grid-row: 1 / span 10 !important; 
+    margin: 0 !important; 
+}
+
+/* Tous les autres blocs (HTML, Aperçu) vont dans la colonne 2 */
+.blocks-inner:has(.block-listOfPages) > *:not(.block-listOfPages) {
+    grid-column: 2 !important;
+    margin: 0 !important;
+}
+
+/* Style de votre paragraphe de présentation */
+.unfond-presentation-paragraph {
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    color: #222 !important;
+    margin-bottom: 10px !important;
+    width: 50%;
+
+}
+
+/* =========================================
+   2. APERÇU DES RESSOURCES EN 2 COLONNES (CORRIGÉ)
+   ========================================= */
+
+/* On transforme la liste des ressources en grille de 2 colonnes */
+.block-browsePreview .resource-list {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+/* On enlève les styles par défaut du <li> */
+.block-browsePreview .resource {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Le lien englobe l'image et le titre : on le transforme en colonne centrée */
+.block-browsePreview .resource-link {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    text-decoration: none !important;
+}
+
+/* L'image passe tout en haut */
+.block-browsePreview .resource-link img {
+    order: -1 !important; /* Force l'image au-dessus du texte */
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 350px !important;
+    object-fit: contain !important;
+    margin: 0 0 15px 0 !important; /* Espace sous l'image */
+}
+
+/* Style du titre sous l'image */
+.block-browsePreview .resource-name {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: normal !important;
+    color: #111 !important;
+    margin: 0 !important;
+}
+
+
+/* =========================================
+   3. BOUTON "VOIR PLUS"
+   ========================================= */
+
+/* Le bouton 'Voir plus' est directement un <a> dans .preview-block */
+.block-browsePreview .preview-block > a {
+    display: block !important;
+    width: fit-content !important; /* La taille s'adapte au texte */
+    margin: 40px auto 0 auto !important; /* Centre le bouton */
+    padding: 10px 30px !important;
+    border: 1px solid var(--accent) !important;
+    border-radius: 40px !important;
+    text-decoration: none !important;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+    color: #111 !important;
+    background-color: #fff !important;
+}
+
+.block-browsePreview .preview-block > a:hover {
+    background-color: var(--accent) !important;
+    color: #fff !important;
+}
+
+
+/* =========================================
+   MISE À JOUR RESPONSIVE (À AJOUTER DANS VOTRE @MEDIA EXISTANT)
+   ========================================= */
+
+/* (Assurez-vous d'avoir ceci dans votre @media (max-width: 900px) à la fin de votre fichier) */
+@media (max-width: 900px) {
+    .block-browsePreview .resource-list {
+        grid-template-columns: 1fr !important;
+    }
+}
+/* =========================================
+   3. BOUTON "VOIR PLUS"
+   ========================================= */
+
+.block-browse {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Style du bouton centré en bas */
+.block-browse > a,
+.block-browse .browse-link a {
+    align-self: center !important;
+    margin-top: 40px !important;
+    padding: 10px 30px !important;
+    border: 1px solid var(--accent) !important;
+    border-radius: 40px !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.block-browse > a:hover,
+.block-browse .browse-link a:hover {
+    background-color: var(--accent) !important;
+    color: #fff !important;
+}
+
+/* =========================================
+   4. RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+    /* Sur mobile, on repasse tout en colonne unique */
+    .blocks-inner:has(.block-listOfPages) {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    
+    .blocks-inner:has(.block-listOfPages) .block-listOfPages {
+        width: 100% !important;
+    }
+
+    /* L'aperçu passe à 1 seule colonne */
+    .block-browse .resource-list {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+
+/* =========================================
+   EFFETS AU SURVOL (HOVER) SUR LES RESSOURCES
+   ========================================= */
+
+/* Transition douce pour l'animation */
+.block-browsePreview .resource-link img,
+.block-browsePreview .resource-name {
+    transition: all 0.3s ease !important;
+}
+
+/* Au survol du lien : l'image zoome légèrement et gagne une petite ombre */
+.block-browsePreview .resource-link:hover img {
+    transform: scale(1.03) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Au survol du lien : le texte prend la couleur d'accentuation rouge */
+.block-browsePreview .resource-link:hover .resource-name {
+    color: var(--accent) !important;
+}
+
+/* =========================================
+   SYSTÈME "VOIR PLUS" (Masquage par défaut)
+   ========================================= */
+
+/* On cache tous les éléments à partir du 5ème, SAUF si la liste a la classe 'show-all' */
+.block-browsePreview .resource-list:not(.show-all) .resource:nth-child(n+5) {
+    display: none !important;
+}
+
+.breadcrumbs {
+    margin-top: 0 !important;
+    padding: 10px !important;
+}

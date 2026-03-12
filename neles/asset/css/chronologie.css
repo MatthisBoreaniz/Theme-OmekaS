@@ -1,10 +1,5 @@
-/* ============================================================
-   CHRONOLOGIE — TIMELINE DESIGN POUR OMEKA-S
-   ============================================================ */
 
-/* Conteneur principal */
 .chronologie-container {
-  font-family: Georgia, 'Times New Roman', serif !important;
   margin: 60px auto !important;
   padding: 40px 20px !important;
   max-width: 1200px !important;
@@ -12,7 +7,6 @@
   background: #fff !important;
 }
 
-/* Timeline verticale centrale (barre principale) */
 .chronologie-container::before {
   content: '' !important;
   position: absolute !important;
@@ -25,10 +19,6 @@
   opacity: 0.3 !important;
 }
 
-/* Ligne : chaque "étape" de la chronologie regroupe le texte et l'image */
-/* Puisque le HTML Omeka-S crache un flux plat (texte, image, texte, image),
-   nous allons les positionner en grid empilée et utiliser le nth-of-type
-   pour simuler des blocs alignés sur la timeline. */
 
 .chronologie-container {
   display: grid !important;
@@ -38,24 +28,15 @@
   column-gap: 60px !important;
 }
 
-/* ── Éléments de la Timeline ─────────────────────────────────── */
-
-/* 
-  Rangée 1: Texte (1) à gauche, Image (2) à droite
-  Rangée 2: Image (4) à gauche, Texte (3) à droite
-  Rangée 3: Texte (5) à gauche, Image (6) à droite
-  Rangée 4: Image (8) à gauche, Texte (7) à droite
-*/
 
 .chronologie-container .chrono-content,
 .chronologie-container .chrono-image {
   position: relative !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  background: none !important; /* Retirer les vieux fonds gris */
+  background: none !important; 
 }
 
-/* ── Points de chronologie (Cercles sur la ligne) ────────────── */
 
 .chronologie-container .chrono-content::before {
   content: '' !important;
@@ -70,38 +51,27 @@
   z-index: 2 !important;
 }
 
-/* Points pour les textes à gauche */
 .chronologie-container .chrono-content:nth-of-type(1)::before,
 .chronologie-container .chrono-content:nth-of-type(5)::before {
-  right: -39.5px !important; /* Aligné sur la ligne centrale */
+  right: -39.5px !important; 
 }
 
-/* Points pour les textes à droite */
 .chronologie-container .chrono-content:nth-of-type(3)::before,
 .chronologie-container .chrono-content:nth-of-type(7)::before {
-  left: -38.5px !important; /* Aligné sur la ligne centrale */
+  left: -38.5px !important; 
 }
 
-/* ── Alignement Grille ───────────────────────────────────────── */
-
-/* Rangée 1 */
 .chronologie-container .chrono-content:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; text-align: right !important; padding-right: 20px !important; }
 .chronologie-container .chrono-image:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; justify-content: flex-start !important; }
 
-/* Rangée 2 */
 .chronologie-container .chrono-image:nth-of-type(4) { grid-column: 1 !important; grid-row: 2 !important; justify-content: flex-end !important; }
 .chronologie-container .chrono-content:nth-of-type(3) { grid-column: 2 !important; grid-row: 2 !important; text-align: left !important; padding-left: 20px !important; }
 
-/* Rangée 3 */
 .chronologie-container .chrono-content:nth-of-type(5) { grid-column: 1 !important; grid-row: 3 !important; text-align: right !important; padding-right: 20px !important; }
 .chronologie-container .chrono-image:nth-of-type(6) { grid-column: 2 !important; grid-row: 3 !important; justify-content: flex-start !important; }
 
-/* Rangée 4 */
 .chronologie-container .chrono-image:nth-of-type(8) { grid-column: 1 !important; grid-row: 4 !important; justify-content: flex-end !important; }
 .chronologie-container .chrono-content:nth-of-type(7) { grid-column: 2 !important; grid-row: 4 !important; text-align: left !important; padding-left: 20px !important; }
-
-
-/* ── Styles du Texte (chrono-content) ────────────────────────── */
 
 .chronologie-container .chrono-content {
   display: flex !important;
@@ -110,7 +80,6 @@
   gap: 20px !important;
 }
 
-/* Inverser l'ordre interne (dates / texte) pour les textes à gauche */
 .chronologie-container .chrono-content:nth-of-type(1) .chrono-body,
 .chronologie-container .chrono-content:nth-of-type(5) .chrono-body {
   flex-direction: row-reverse !important;
@@ -173,10 +142,9 @@
   font-weight: 600 !important;
   text-decoration: none !important;
   transition: all 0.3s ease !important;
-  align-self: flex-start !important; /* Override below */
+  align-self: flex-start !important; 
 }
 
-/* Alignement bouton selon le côté */
 .chronologie-container .chrono-content:nth-of-type(1) .btn-consulter,
 .chronologie-container .chrono-content:nth-of-type(5) .btn-consulter {
   align-self: flex-end !important;
@@ -189,7 +157,6 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
 }
 
-/* ── Publication finale ──────────────────────────────────────── */
 
 .chronologie-container .chrono-content:last-of-type .chrono-body {
   background: #fdfdfd !important;
@@ -200,18 +167,16 @@
 }
 
 
-/* ── Styles des Images (chrono-image) ────────────────────────── */
 
 .chronologie-container .chrono-image {
   display: flex !important;
   align-items: center !important;
 }
 
-/* The prompt specifically requested: "n'affecte pas l'image, elle doit rester complete" */
 .chronologie-container .chrono-image img {
   max-width: 90% !important;
   max-height: 450px !important; 
-  object-fit: contain !important; /* Guarantee uncropped */
+  object-fit: contain !important; 
   display: block !important;
   border-radius: 4px !important;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
@@ -225,7 +190,6 @@
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 
-/* Tablette (sous 900px) */
 @media (max-width: 900px) {
   .chronologie-container {
     padding: 20px !important;
@@ -243,10 +207,10 @@
   .chronologie-container .chrono-content:nth-of-type(7)::before { left: -24px !important; }
 }
 
-/* Mobile (sous 768px) - Passage à 1 colonne */
+
 @media (max-width: 768px) {
   
-  /* Déplacer la ligne sur la gauche */
+
   .chronologie-container::before {
     left: 20px !important;
     transform: none !important;
@@ -262,7 +226,7 @@
   .chronologie-container .chrono-content,
   .chronologie-container .chrono-image {
     width: 100% !important;
-    padding-left: 50px !important; /* Espace pour la ligne à gauche */
+    padding-left: 50px !important; 
     padding-right: 0 !important;
     text-align: left !important;
     margin-bottom: 30px !important;
@@ -270,19 +234,14 @@
     justify-content: flex-start !important;
   }
 
-  /* Rétablir l'ordre Image puis Texte sur mobile, ou grouper ensemble */
-  /* Comme l'ordre HTML est Texte (1) puis Image (2), on laisse couler normalement */
-  
-  /* Aligner tous les points sur la ligne de gauche */
   .chronologie-container .chrono-content::before {
-    left: 12px !important; /* (20px left de la ligne - 8px de rayon) = 12px */
+    left: 12px !important; 
     right: auto !important;
     top: 0 !important;
     transform: none !important;
     margin-top: 5px !important;
   }
   
-  /* Rétablir TOUTES les inversions du mode desktop pour n'importe quel côté */
   .chronologie-container .chrono-content .chrono-body {
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -293,7 +252,6 @@
     align-self: flex-start !important;
   }
   
-  /* Force le texte à gauche, de force! */
   .chronologie-container .chrono-content,
   .chronologie-container .chrono-content:nth-of-type(n) {
     text-align: left !important;
@@ -312,18 +270,16 @@
     display: none !important;
   }
 
-  /* Ajuster l'image sur mobile */
   .chronologie-container .chrono-image img {
     max-width: 100% !important;
     max-height: 350px !important;
     margin-left: 0 !important;
   }
   
-  /* Réduire l'espacement entre bloc texte et bloc image de la même étape */
   .chronologie-container .chrono-content {
     margin-bottom: 20px !important;
   }
   .chronologie-container .chrono-image:nth-of-type(even) {
-    margin-bottom: 60px !important; /* Espacement vers l'étape suivante */
+    margin-bottom: 60px !important; 
   }
 }
