@@ -156,6 +156,11 @@
     /* border-bottom: 3px solid var(--accent) !important;  */
     padding-left: 60px;
     padding-right: 60px;
+    gap: 40px;
+}
+
+.pub-img {
+  width: 20% !important;
 }
 
 .pub-specs {
@@ -170,6 +175,14 @@
     align-items: flex-start;
     gap: 20px;
   }
+  .pub-img {
+  width: 40% !important;
+}
+}
+@media (max-width: 900px) {
+  .pub-img {
+  width: 40% !important;
+}
 }
 
 

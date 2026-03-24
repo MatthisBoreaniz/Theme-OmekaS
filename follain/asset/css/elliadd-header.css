@@ -341,7 +341,7 @@ footer {
     height: 48px;
     border-radius: 25%;
     border: 2px solid var(--accent, #920b0b);
-    background-color: transparent;
+    background-color: white;
     color: var(--accent, #920b0b);
     cursor: pointer;
     display: flex;

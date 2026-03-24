@@ -2,52 +2,61 @@
 
 .neles-hero-wrap {
   display: flex !important;
-  align-items: stretch;
+  flex-direction: row !important; /* Force l'alignement horizontal */
+  align-items: center !important;  /* Centre verticalement l'un par rapport à l'autre */
+  justify-content: center !important; /* Centre l'ensemble dans la page */
   background: #000;
   color: #fff;
-  max-width: 100%;
+  width: 100% !important;
+  min-height: 500px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .neles-hero-img {
-  flex: 1 1 50%;
+  flex: 1 !important;
+  display: flex !important;
+  justify-content: center !important; /* Centre l'image horizontalement dans sa moitié */
+  align-items: center !important;     /* Centre l'image verticalement dans sa moitié */
+  height: 100%;
 }
 
 .neles-hero-img img {
-  width: auto;
-  height: 90vh;
-  object-fit: cover;
-  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain; /* Évite que l'image ne soit rognée si elle n'est pas au bon format */
 }
 
 .neles-hero-text {
-  flex: 1 1 50%;
-  padding: 60px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 30px;  
+  flex: 1 !important;
+  padding: 60px;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important; /* Centre le bloc de texte verticalement */
+  align-items: flex-start !important; /* Aligne le texte à gauche (standard) ou 'center' selon ton choix */
+  gap: 20px;
 }
 
 .neles-heading {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 30px;
 }
 
 .neles-years {
-  font-size: 28px;
-  line-height: 1.2;
+  font-size: 50px;
+  line-height: 1.2!important;
   color: #cfcfcf;
-  font-family: 'futura pt', sans-serif;
-  font-weight: 300;
-
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 200 !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .neles-title {
-  font-family: 'Futura PT', 'Futura', 'Open Sans', sans-serif !important;
-  font-size: 128px !important;
-  line-height: 0.95;
+  font-family: 'futura-pt', 'Futura', 'Open Sans', sans-serif !important;
+  font-size: clamp(36px, 8vw, 128px) !important;
+  line-height: 1 !important;
   font-weight: 500 !important;
   margin: 0 0 30px 0;
   letter-spacing: 2px;
@@ -60,56 +69,87 @@
   color: #ddd;
   font-family: 'merriweather', serif;
   font-weight: 300;
+  margin-left: 100px;
+  text-align: left;
 }
 
 .neles-desc em {
   font-style: italic;
 }
 
-/* RESPONSIVE HERO */
 
-@media (max-width: 800px) {
+/* =========================================
+   RESPONSIVE HERO OPTIMISÉ
+   ========================================= */
 
+@media (max-width: 1024px) {
   .neles-hero-wrap {
-    flex-direction: column;
-  }
-
-  .neles-hero-img {
-    display: flex;
-    justify-content: center;
+    flex-direction: column !important;
     background: #000;
   }
 
-  .neles-hero-img img {
-    width: 70%;
-    height: auto;
-    object-fit: contain;
-    margin: 20px auto;
-    border: 1px solid #9c9c9c;
-    border-radius: 10px;
+  /* 1. L'Image : on la traite comme une pièce d'expo */
+  .neles-hero-img {
+    flex: none !important;
+    min-height: auto !important;
+    padding: 20px;
+    background: #0a0a0a; /* Léger contraste avec le fond */
   }
 
+  .neles-hero-img img {
+    width: 90% !important; /* Plus large que 70% pour mieux voir les + */
+    max-height: 300px;
+    object-fit: contain;
+    margin: 0 auto;
+    border: 1px solid #333; /* Bordure plus subtile que #9c9c9c */
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  /* 2. Le Texte : recentrage et suppression des décalages */
   .neles-hero-text {
-    padding: 40px 25px;
+    padding: 30px 20px 50px 20px !important;
     text-align: center;
+    gap: 20px;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
   .neles-heading {
+    flex-direction: column; /* Années au-dessus du titre sur mobile */
+    gap: 10px;
     justify-content: center;
   }
 
+  .neles-years {
+    font-size: 24px !important; /* Plus discret */
+    letter-spacing: 4px;
+  }
+
   .neles-title {
-    font-size: 46px;
+    font-size: 42px !important; /* Taille fixe lisible */
+    line-height: 1.1 !important;
+    margin-bottom: 10px !important;
+    letter-spacing: 1px;
   }
 
+  /* 3. La Description : Suppression du margin-left de 100px */
   .neles-desc {
+    font-size: 1.25rem !important; /* Plus proche d'un texte de lecture */
+    line-height: 1.5;
+    margin-left: 0 !important; /* CRUCIAL : on enlève le décalage desktop */
+    padding: 0 10px;
     text-align: center;
+    color: #bbb;
   }
-
-  .neles-desc {
-  font-size: 1.5rem;
-  line-height: 1.4;
-  color: #ddd;
 }
 
+/* Ajustement spécifique pour les très petits écrans (iPhone SE, etc.) */
+@media (max-width: 400px) {
+  .neles-title {
+    font-size: 32px !important;
+  }
+  .neles-desc {
+    font-size: 1.1rem !important;
+  }
 }

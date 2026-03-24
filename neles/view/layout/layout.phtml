@@ -45,6 +45,7 @@ $userBar = $this->userBar();
     <?php echo $this->partial('common/theme-config'); ?>
     <!-- Adobe Fonts Typekit -->
     <link rel="stylesheet" href="https://use.typekit.net/omj7fcx.css">
+    <link rel="icon" type="image/x-icon" href="<?php echo $this->assetUrl('img/favicon.ico'); ?>">
 </head>
 
 <?php echo $this->htmlElement('body'); ?>
@@ -116,59 +117,517 @@ $userBar = $this->userBar();
 
 <!-- Header + back-to-top JS -->
 <script src="<?php echo $this->assetUrl('js/elliadd-header.js'); ?>"></script>
-<script>document.addEventListener("DOMContentLoaded", function() {
-    const currentUrl = window.location.href.split('#')[0];
-    const menuLinks = document.querySelectorAll('.block-listOfPages a');
-    
-    menuLinks.forEach(link => {
-        if (link.href.split('#')[0] === currentUrl) {
-            link.parentElement.classList.add('active');
-            link.classList.add('active');
-        }
-    });
-});
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentUrl = window.location.href.split('#')[0];
+        const menuLinks = document.querySelectorAll('.block-listOfPages a');
 
-/*bouton voir plus */
-document.addEventListener("DOMContentLoaded", function() {
-    const previewBlocks = document.querySelectorAll('.block-browsePreview');
-    
-    previewBlocks.forEach(block => {
-        const toggleBtn = block.querySelector('.preview-block > a');
-        const resourceList = block.querySelector('.resource-list');
-        
-        if (toggleBtn && resourceList) {
-            const totalItems = resourceList.querySelectorAll('.resource').length;
-            
-            // On mémorise le texte d'origine ("Voir plus" défini dans Omeka)
-            const textVoirPlus = toggleBtn.textContent;
-            const textVoirMoins = "Voir moins";
-            
-            if (totalItems > 4) {
-                toggleBtn.addEventListener('click', function(e) {
-                    e.preventDefault(); // Empêche de changer de page
-                    
-                    // On bascule l'état d'affichage (Ajoute ou Enlève la classe)
-                    resourceList.classList.toggle('show-all'); 
-                    
-                    // Si on vient de tout afficher...
-                    if (resourceList.classList.contains('show-all')) {
-                        toggleBtn.textContent = textVoirMoins; // On change le texte
+        menuLinks.forEach(link => {
+            if (link.href.split('#')[0] === currentUrl) {
+                link.parentElement.classList.add('active');
+                link.classList.add('active');
+            }
+        });
+    });
+
+    /* Bouton voir plus */
+    document.addEventListener("DOMContentLoaded", function () {
+        const previewBlocks = document.querySelectorAll('.block-browsePreview');
+
+        previewBlocks.forEach(block => {
+            const toggleBtn = block.querySelector('.preview-block > a');
+            const resourceList = block.querySelector('.resource-list');
+
+            if (toggleBtn && resourceList) {
+                const totalItems = resourceList.querySelectorAll('.resource').length;
+
+                // On mémorise le texte d'origine
+                const textVoirPlus = toggleBtn.textContent;
+                const textVoirMoins = "Voir moins";
+
+                if (totalItems > 4) {
+                    toggleBtn.addEventListener('click', function (e) {
+                        e.preventDefault(); // Empêche de changer de page
+
+                        // On bascule l'état d'affichage
+                        resourceList.classList.toggle('show-all');
+
+                        if (resourceList.classList.contains('show-all')) {
+                            toggleBtn.textContent = textVoirMoins;
+                        } else {
+                            toggleBtn.textContent = textVoirPlus;
+                            block.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                } else {
+                    // LE CORRECTIF EST ICI :
+                    // Puisque le CSS a un !important, on force la disparition en JS
+                    toggleBtn.style.setProperty('display', 'none', 'important');
+
+                    // (Option radicale : tu pourrais aussi juste mettre toggleBtn.remove(); pour le détruire)
+                }
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // On cible uniquement les valeurs dans ta liste de métadonnées
+        const metadataValues = document.querySelectorAll('.resource.show dl .value-content');
+
+        const urlPattern = /(https?:\/\/[^\s<]+)/g;
+
+        metadataValues.forEach(function (el) {
+            // On récupère le contenu
+            let html = el.innerHTML;
+
+            // Cette regex cherche les URL qui ne sont PAS précédées par un guillemet (souvent dans les balises)
+            // et qui ne sont pas déjà dans une balise <a>
+            const urlPattern = /(?<!href="|">)(https?:\/\/[^\s<]+)/g;
+
+            const linkedHTML = html.replace(urlPattern, function (url) {
+                let cleanUrl = url.replace(/[.,;]$/, "");
+                return '<a href="' + cleanUrl + '" target="_blank" rel="noopener noreferrer">' + cleanUrl + '</a>';
+            });
+
+            el.innerHTML = linkedHTML;
+        });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // 1. On cible bien les colonnes DD
+        const dds = document.querySelectorAll('.resource.show dl dd, .block-itemWithMetadata .resource dd');
+        const maxHeight = 150; // Hauteur avant coupure
+
+        dds.forEach((dd) => {
+            // Sécurité : on ne rajoute pas le bouton si le script a déjà tourné
+            if (dd.querySelector('.btn-read-more')) return;
+
+            // 2. On vérifie la hauteur de la colonne
+            if (dd.offsetHeight > maxHeight) {
+
+                // 3. On sauvegarde le texte original et on vide le DD
+                const originalHTML = dd.innerHTML;
+                dd.innerHTML = '';
+
+                // 4. On crée le conteneur et on y remet le texte
+                const container = document.createElement("div");
+                container.className = "value-truncate-container is-truncated";
+                container.style.maxHeight = maxHeight + "px";
+                container.innerHTML = originalHTML;
+
+                // 5. On remet le conteneur DANS le DD
+                dd.appendChild(container);
+
+                // 6. On crée le bouton
+                const btn = document.createElement("button");
+                btn.className = "btn-read-more";
+                btn.type = "button"; // Évite les comportements bizarres
+                btn.innerText = "Lire la suite";
+
+                // 7. On met le bouton DANS le DD (il se placera naturellement en dessous du conteneur grâce au CSS)
+                dd.appendChild(btn);
+
+                // 8. Logique du clic
+                btn.addEventListener("click", function () {
+                    if (container.classList.contains("is-truncated")) {
+                        // scrollHeight permet de déplier exactement à la taille réelle du texte
+                        container.style.maxHeight = container.scrollHeight + "px";
+                        container.classList.remove("is-truncated");
+                        btn.innerText = "Réduire";
                     } else {
-                        // Si on vient de tout cacher...
-                        toggleBtn.textContent = textVoirPlus; // On remet le texte initial
-                        // On fait remonter l'écran en douceur au niveau de la grille
-                        block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        container.style.maxHeight = maxHeight + "px";
+                        container.classList.add("is-truncated");
+                        btn.innerText = "Lire la suite";
                     }
                 });
-            } else {
-                // S'il y a 4 éléments ou moins, on cache le bouton
-                toggleBtn.style.display = 'none';
             }
+        });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const menus = document.querySelectorAll('.block-listOfPages');
+
+        menus.forEach(menu => {
+            // --- 1. BOUTON POUR REPLIER LA COLONNE (< / >) ---
+            const blocksInner = menu.closest('.blocks-inner');
+            if (blocksInner && !menu.querySelector('.sidebar-toggle')) {
+                const toggleMenuBtn = document.createElement('div');
+                toggleMenuBtn.className = 'sidebar-toggle';
+                toggleMenuBtn.innerHTML = '❮';
+                menu.appendChild(toggleMenuBtn);
+
+                toggleMenuBtn.addEventListener('click', () => {
+                    blocksInner.classList.toggle('is-collapsed');
+                    toggleMenuBtn.innerHTML = blocksInner.classList.contains('is-collapsed') ? '❯' : '❮';
+                });
+            }
+
+            // --- 2. GESTION DE L'ARBRE (+ / -) ---
+            const items = menu.querySelectorAll('li');
+
+            items.forEach((li, index) => {
+                const nextEl = li.nextElementSibling;
+                const hasActualSubMenu = nextEl && nextEl.tagName.toLowerCase() === 'ul' && nextEl.children.length > 0;
+
+                if (index === 0) {
+                    li.classList.add('menu-root-title');
+                    if (nextEl && nextEl.tagName.toLowerCase() === 'ul') {
+                        nextEl.style.display = 'block';
+                    }
+                    return;
+                }
+
+                const toggleBtn = document.createElement('span');
+                toggleBtn.className = 'toc-toggle';
+
+                let depth = 0;
+                let parent = li.parentElement;
+                while (parent && !parent.classList.contains('block-listOfPages')) {
+                    if (parent.tagName.toLowerCase() === 'ul') depth++;
+                    parent = parent.parentElement;
+                }
+
+                if (depth === 2) {
+                    toggleBtn.classList.add('style-box');
+                } else {
+                    toggleBtn.classList.add('style-chevron');
+                }
+
+                toggleBtn.innerText = toggleBtn.classList.contains('style-box') ? '+' : '›';
+
+                const link = li.querySelector('a');
+                if (link) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'item-wrapper';
+                    li.insertBefore(wrapper, link);
+                    wrapper.appendChild(toggleBtn);
+                    wrapper.appendChild(link);
+                }
+
+                toggleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (!hasActualSubMenu) {
+                        if (link && link.href) {
+                            window.location.href = link.href;
+                        }
+                        return;
+                    }
+
+                    li.classList.toggle('is-open');
+                    if (li.classList.contains('is-open')) {
+                        toggleBtn.innerText = toggleBtn.classList.contains('style-box') ? '-' : 'v';
+                    } else {
+                        toggleBtn.innerText = toggleBtn.classList.contains('style-box') ? '+' : '›';
+                    }
+                });
+            });
+
+            // --- 3. DÉPLIER L'ARBRE POUR LA PAGE ACTIVE ---
+            const activeLink = menu.querySelector('a.active, li.active a, li.current a');
+            if (activeLink) {
+                let currentLi = activeLink.closest('li');
+                let parentUl = currentLi.parentElement;
+                const rootUl = menu.querySelector('ul');
+
+                // On remonte l'arbre pour ouvrir UNIQUEMENT les parents, pas l'élément lui-même
+                while (parentUl && parentUl !== rootUl) {
+                    const parentLi = parentUl.previousElementSibling;
+
+                    if (parentLi && parentLi.tagName.toLowerCase() === 'li' && !parentLi.classList.contains('menu-root-title')) {
+                        parentLi.classList.add('is-open');
+                        const btn = parentLi.querySelector('.toc-toggle');
+                        if (btn) {
+                            btn.innerText = btn.classList.contains('style-box') ? '-' : 'v';
+                        }
+                    }
+                    parentUl = parentUl.parentElement;
+                }
+            }
+        });
+    });
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // 1. On crée la boîte d'info-bulle et on l'ajoute au corps de la page
+        const tooltip = document.createElement('div');
+        tooltip.className = 'custom-alt-tooltip';
+        document.body.appendChild(tooltip);
+
+        // 2. On cible TOUTES les images de la page
+        const images = document.querySelectorAll('img');
+
+        images.forEach(img => {
+            // On récupère le texte alt (et on enlève les espaces vides autour)
+            const altText = (img.getAttribute('alt') || '').trim();
+
+            // S'il n'y a pas de texte alt, on ignore cette image
+            if (!altText) return;
+
+            // 3. Quand la souris ENTRE sur l'image
+            img.addEventListener('mouseenter', function () {
+                tooltip.textContent = altText; // On injecte le texte
+                tooltip.classList.add('is-visible'); // On lance le compte à rebours d'1s
+            });
+
+            // 4. Quand la souris BOUGE sur l'image, l'info-bulle suit le curseur
+            img.addEventListener('mousemove', function (e) {
+                // On décale légèrement la boîte (+15px) pour qu'elle ne soit pas sous le curseur
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY + 15) + 'px';
+            });
+
+            // 5. Quand la souris SORT de l'image
+            img.addEventListener('mouseleave', function () {
+                tooltip.classList.remove('is-visible'); // On cache instantanément
+            });
+        });
+    });
+
+
+    /* Séparation des vocabulaires : dcterms vs indexation (bibo, custom vocab, etc.) */
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // On cible les dl sur les pages item/show ET les pages avec block-itemWithMetadata
+        const dlList = document.querySelectorAll(
+            'body.item.resource.show dl, ' +
+            'body.page.site-page-archives.resource.show dl, ' +
+            '.block-itemWithMetadata .resource dl'
+        );
+        if (!dlList.length) return;
+
+        // Préfixes considérés comme "indexation"
+        const indexationPrefixes = ['bibo:', 'index:'];
+
+        dlList.forEach(dl => {
+            const allProperties = Array.from(dl.querySelectorAll('.property[data-term]'));
+            if (!allProperties.length) return;
+
+            // Séparer les propriétés en deux groupes
+            const propsDescription = [];
+            const propsIndexation = [];
+
+            allProperties.forEach(prop => {
+                const term = prop.getAttribute('data-term');
+                const isIndexation = indexationPrefixes.some(prefix => term.startsWith(prefix));
+                if (isIndexation) {
+                    propsIndexation.push(prop);
+                } else {
+                    propsDescription.push(prop);
+                }
+            });
+
+            // S'il n'y a pas de propriétés indexation, on ne touche pas à ce dl
+            // 2. Créer le titre "Indexation" (si on a des propriétés)
+            let indexTitle = null;
+            if (propsIndexation.length > 0) {
+                indexTitle = document.createElement('h4');
+                indexTitle.className = 'vocab-group-title';
+
+                const titleText = document.createElement('span');
+                titleText.textContent = 'Indexation';
+
+                const chevron = document.createElement('span');
+                chevron.className = 'vocab-toggle-icon';
+                const plusSvg = '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+                const minusSvg = '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+                chevron.innerHTML = plusSvg; // Plier par défaut
+                chevron.style.display = 'inline-flex';
+                chevron.style.alignItems = 'center';
+                chevron.style.justifyContent = 'center';
+                chevron.style.width = '24px';
+                chevron.style.height = '24px';
+                chevron.style.borderRadius = '50%';
+                chevron.style.backgroundColor = 'var(--accent)';
+                chevron.style.color = '#ffffff';
+                chevron.style.transition = 'all 0.2s ease';
+
+                indexTitle.appendChild(titleText);
+                indexTitle.appendChild(chevron);
+
+                indexTitle.style.cursor = 'pointer';
+                indexTitle.style.display = 'flex';
+                indexTitle.style.justifyContent = 'flex-start'; // Rapprocher le +
+                indexTitle.style.gap = '20px';
+                indexTitle.style.alignItems = 'center';
+                indexTitle.style.userSelect = 'none';
+
+                let isExpanded = false;
+                dl.classList.add('indexation-collapsed');
+                indexTitle.addEventListener('click', function () {
+                    isExpanded = !isExpanded;
+                    chevron.innerHTML = isExpanded ? minusSvg : plusSvg;
+                    dl.classList.toggle('indexation-collapsed', !isExpanded);
+                });
+            }
+
+            // 3. Vider le dl original
+            dl.innerHTML = '';
+
+            // 3. Remettre les propriétés de description
+            propsDescription.forEach(prop => dl.appendChild(prop));
+
+            // 4. Ajouter le titre et les propriétés d'indexation dans le MÊME dl
+            dl.appendChild(indexTitle);
+            propsIndexation.forEach(prop => {
+                prop.classList.add('indexation-prop');
+                dl.appendChild(prop);
+            });
+        });
+    });
+
+    /* Bouton retour sur les pages item/show */
+    document.addEventListener("DOMContentLoaded", function () {
+        if (!document.body.classList.contains('item') || !document.body.classList.contains('show')) return;
+
+        const content = document.querySelector('.content');
+        if (!content) return;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'btn-back-wrap';
+
+        const btn = document.createElement('a');
+        btn.className = 'btn-back-item';
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg> Retour';
+
+        // Si on vient d'une page du même site, on y retourne ; sinon on va au browse
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (document.referrer && new URL(document.referrer).origin === window.location.origin) {
+                history.back();
+            } else {
+                // Fallback : remonter d'un niveau dans l'URL
+                window.location.href = window.location.href.replace(/\/item\/\d+.*$/, '/page/archives');
+            }
+        });
+
+        wrap.appendChild(btn);
+
+        // Insérer juste en dessous du titre H2
+        const title = content.querySelector('h2');
+        if (title && title.nextSibling) {
+            content.insertBefore(wrap, title.nextSibling);
+        } else {
+            content.insertBefore(wrap, content.firstChild);
         }
     });
-});
 
+    /* ===== Barre d'outils pour les métadonnées ===== */
+    document.addEventListener("DOMContentLoaded", function () {
+        const metadataDl = document.querySelector('.resource.show dl, .block-itemWithMetadata .resource dl');
+        if (!metadataDl) return;
 
+        // On cherche l'email dans le footer pour le bouton Signaler
+        const mailtoLink = document.querySelector('footer a[href^="mailto:"]');
+        const emailHref = mailtoLink ? mailtoLink.getAttribute('href') : 'mailto:';
+
+        // Récupération de l'URL du manifest IIIF
+        <?php
+        $phpManifestUrl = '';
+        if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentation) {
+            try {
+                $phpManifestUrl = $this->url('iiif-item', ['id' => $item->id()], ['force_canonical' => true]);
+            } catch (\Exception $e) {
+                $phpManifestUrl = $this->serverUrl() . '/iiif/2/' . $item->id() . '/manifest';
+            }
+        } elseif (isset($this->resource) && $this->resource instanceof \Omeka\Api\Representation\ItemRepresentation) {
+            try {
+                $phpManifestUrl = $this->url('iiif-item', ['id' => $this->resource->id()], ['force_canonical' => true]);
+            } catch (\Exception $e) {
+                $phpManifestUrl = $this->serverUrl() . '/iiif/2/' . $this->resource->id() . '/manifest';
+            }
+        }
+        ?>
+        let manifestUrl = <?= json_encode($phpManifestUrl) ?>;
+        const iiifLogoUrl = <?= json_encode($this->assetUrl('img/International_Image_Interoperability_Framework_logo.png')) ?>;
+        const iiifLink = document.querySelector('link[rel="alternate"][type="application/ld+json"][href*="manifest"]');
+        if (!manifestUrl && iiifLink) {
+            manifestUrl = iiifLink.href;
+        }
+        if (!manifestUrl && window.location.pathname.includes('/item/')) {
+            const matches = window.location.pathname.match(/\/item\/(\d+)/);
+            if (matches && matches[1]) {
+                manifestUrl = window.location.origin + '/iiif/2/' + matches[1] + '/manifest';
+            }
+        }
+        if (!manifestUrl && typeof window.miradors !== 'undefined') {
+            const miradorKeys = Object.keys(window.miradors);
+            if (miradorKeys.length > 0) {
+                const config = window.miradors[miradorKeys[0]];
+                if (config && config.windows && config.windows.length > 0) {
+                    manifestUrl = config.windows[0].manifestId || config.windows[0].loadedManifest;
+                }
+            }
+        }
+
+        // Création de la barre
+        const toolbar = document.createElement('div');
+        toolbar.className = 'metadata-toolbar';
+
+        // Toast notifications
+        const toast = document.createElement('div');
+        toast.className = 'mirador-toast';
+        toast.innerText = 'Lien copié !';
+        document.body.appendChild(toast);
+
+        if (manifestUrl) {
+            const btnIiif = document.createElement('button');
+            btnIiif.className = 'metadata-btn-action btn-iiif';
+            btnIiif.title = 'Copier le manifest IIIF';
+            btnIiif.innerHTML = '<img src="' + iiifLogoUrl + '" alt="IIIF" width="20" height="20" style="vertical-align: middle; display: block;">';
+            toolbar.appendChild(btnIiif);
+
+            btnIiif.addEventListener('click', function () {
+                navigator.clipboard.writeText(manifestUrl).then(() => {
+                    toast.innerText = 'Manifest copié !';
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                        setTimeout(() => toast.innerText = 'Lien copié !', 400);
+                    }, 2500);
+                });
+            });
+        }
+
+        const btnShare = document.createElement('button');
+        btnShare.className = 'metadata-btn-action btn-share';
+        btnShare.title = 'Copier le lien de cette page';
+        btnShare.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+
+        const btnReport = document.createElement('a');
+        btnReport.className = 'metadata-btn-action btn-report';
+        btnReport.title = 'Signaler un problème sur cette page';
+        btnReport.href = emailHref + '?subject=Signalement sur la page ' + encodeURIComponent(window.location.href);
+        btnReport.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+
+        const btnHelp = document.createElement('a');
+        btnHelp.className = 'metadata-btn-action btn-help';
+        btnHelp.title = 'Aide';
+        btnHelp.href = '/s/neles/page/aide'; // Redirection vers la page d'aide
+        btnHelp.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+
+        toolbar.appendChild(btnShare);
+        toolbar.appendChild(btnReport);
+        toolbar.appendChild(btnHelp);
+
+        btnShare.addEventListener('click', function () {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                toast.innerText = 'Lien copié !';
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
+            });
+        });
+
+        // Insérer au-dessus du tableau des métadonnées (avant le dl)
+        metadataDl.parentNode.insertBefore(toolbar, metadataDl);
+    });
 </script>
 
 

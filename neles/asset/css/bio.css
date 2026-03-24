@@ -187,8 +187,17 @@
     margin-top: 15px;
     text-align: left; 
     font-style: italic;
+    line-height: 1.4;
 }
 
+.biography-icon-extern {
+    height: 1em; 
+    width: auto; 
+    margin-left: 8px; 
+    vertical-align: middle; 
+    display: inline-block; 
+    cursor: pointer;
+}
 
 .biography-content {
     flex: 1; 
