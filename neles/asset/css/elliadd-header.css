@@ -97,6 +97,8 @@ footer {
     flex-shrink: 0;
 }
 
+
+
 #elliadd-header .elliadd-header-logo img {
     max-height: 70px;
     width: auto;
@@ -154,7 +156,11 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a:hover,
 #elliadd-header .elliadd-header-nav ul.navigation>li>a:hover {
     color: #B3B3B3 !important;
-}
+    text-decoration: underline !important;
+    text-underline-offset: 20px !important;
+    text-decoration-thickness: 4px !important;
+    text-decoration-color: var(--accent) !important;
+} 
 
 #elliadd-header .elliadd-header-nav ul.navigation>li.active>.parent-link>a,
 #elliadd-header .elliadd-header-nav ul.navigation>li.current>.parent-link>a,
@@ -272,6 +278,7 @@ footer {
     padding: 5px;
     color: #FFFFFF;
     text-decoration: none;
+    position: relative; /* Pour positionner le texte au hover */
 }
 
 #elliadd-header .elliadd-header-search a.search-link svg {
@@ -286,6 +293,28 @@ footer {
 #elliadd-header .elliadd-header-search a.search-link:hover svg {
     stroke: #B3B3B3;
 }
+
+/* Texte "Recherche avancée" au hover */
+#elliadd-header .elliadd-header-search a.search-link:hover::after {
+    content: "Recherche avancée";
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-family: 'Open Sans', sans-serif;
+    white-space: nowrap;
+    margin-top: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    border: 1px solid #333333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+
 
 /* ── Burger button (hidden on desktop) ── */
 #elliadd-header .elliadd-mobile-toggle {
@@ -359,18 +388,28 @@ footer {
 }
 
 #back-to-top.over-footer {
-    background-color: #0D0D0D; /* Footer background */
-    border-color: #FFFFFF;
+    background-color: #0D0D0D !important; /* Footer background */
+    border-color: #FFFFFF !important;
+    color: #FFFFFF !important;
 }
+
+#back-to-top.hide-on-logos {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+
 
 #back-to-top.over-footer svg {
     stroke: #FFFFFF;
 }
 
 #back-to-top.over-footer:hover {
-    background-color: var(--accent, #920b0b);
-    border-color: var(--accent, #920b0b);
+    background-color: var(--accent, #920b0b) !important;
+    border-color: var(--accent, #920b0b) !important;
 }
+
 
 /* ══════════════════════════════════════════
    Mobile (≤ 800px)
@@ -511,13 +550,18 @@ footer {
         background-color: #252525 !important;
     }
 
-    #elliadd-header .elliadd-header-nav ul.navigation li:hover>ul {
-        /* hover disabled on mobile, only slide controls visibility */
-    }
-
     #elliadd-header .elliadd-header-search {
         padding: 20px !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
     }
+
+    #elliadd-header .elliadd-header-search a.search-link:hover::after {
+        display: none;
+    }
+
 
     #elliadd-header .elliadd-mobile-toggle.is-active span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);

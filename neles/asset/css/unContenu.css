@@ -1,3 +1,4 @@
+/* ===== MIRADOR (fix global) ===== */
 body:not(:has(.block-listOfPages)) #mirador, 
 body:not(:has(.block-listOfPages)) .mirador-container, 
 body:not(:has(.block-listOfPages)) [id^="mirador"],
@@ -11,8 +12,9 @@ body:not(:has(.block-listOfPages)) .block-mirador {
     margin: 0 auto !important;
 }
 
-.resource.show dl,
-.block-itemWithMetadata .resource dl {
+/* ===== METADATA (EXCLUSION MIRADOR) ===== */
+.resource.show dl:not(.mirador-label-value-metadata),
+.block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata) {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     column-gap: 50px !important;
@@ -62,6 +64,7 @@ body:not(:has(.block-listOfPages)) .block-mirador {
     border-bottom: none !important;
 }
 
+/* ===== TRUNCATE ===== */
 .value-truncate-container {
     width: 100% !important;
     text-align: left !important;
@@ -81,6 +84,7 @@ body:not(:has(.block-listOfPages)) .block-mirador {
     pointer-events: none;
 }
 
+/* ===== BUTTON READ MORE ===== */
 .btn-read-more {
     align-self: center !important;
     margin: 15px 0 5px 0 !important;
@@ -101,56 +105,7 @@ body:not(:has(.block-listOfPages)) .block-mirador {
     color: white !important;
 }
 
-@media screen and (max-width: 900px) {
-    .resource.show dl,
-    .block-itemWithMetadata .resource dl {
-        grid-template-columns: 1fr !important;
-        display: block !important;
-        padding: 20px !important;
-        margin: 10px !important;
-    }
-
-    .block-itemWithMetadata .resource dl  {
-        grid-template-columns: 1fr !important;
-        display: block !important;
-        padding: 20px !important;
-        margin: 10px !important;
-    }
-
-    .resource.show .property,
-    .block-itemWithMetadata .resource .property {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        padding: 12px 0 !important;
-    }
-
-    .resource.show .property dt,
-    .block-itemWithMetadata .resource .property dt {
-        width: 100% !important;
-        margin-bottom: 8px !important;
-        color: #666 !important;
-    }
-
-    .resource.show .property dd,
-    .block-itemWithMetadata .resource .property dd {
-        width: 100% !important;
-        line-height: 1.5 !important;
-    }
-
-    #mirador, 
-    .mirador-container, 
-    [id^="mirador"] {
-        height: 450px !important;
-        width: calc(100% - 20px) !important;
-        margin: 10px auto !important;
-    }
-body.item.show #content {
-        padding: 20px !important;
-    }
-}
-
-
-
+/* ===== MASQUAGE ELEMENTS NATIFS ===== */
 body.item.show .content > h3 {
     display: none !important;
 }
@@ -208,6 +163,7 @@ body.item.show .content {
     transform: translateX(-4px) !important;
 }
 
+/* ===== TITRE ===== */
 body.item.show .content > h2 {
     font-size: 1.6rem !important;
     font-weight: 600 !important;
@@ -220,7 +176,7 @@ body.item.show .content > h2 {
     text-align: center !important;
 }
 
-/* ===== Titre "Indexation" ===== */
+/* ===== Titre "Indexation" (VOCAB CUSTOM) ===== */
 .vocab-group-title {
     grid-column: 1 / -1 !important;
     margin: 10px -40px 10px -40px !important;
@@ -228,7 +184,6 @@ body.item.show .content > h2 {
     font-size: 1.3rem !important;
     font-weight: 600 !important;
     color: #2c2c2c !important;
-
 }
 
 dl.vocab-indexation .property dt {
@@ -250,8 +205,6 @@ dl.vocab-indexation .property dd {
     word-break: break-word !important;
     overflow-wrap: break-word !important;
 }
-
-
 
 /* ===== Animation Indexation Plier/Déplier ===== */
 .resource.show dl .indexation-prop,
@@ -310,7 +263,7 @@ dl.indexation-collapsed .indexation-prop {
     transform: scale(1.1);
 }
 
-/* Toast Lien copié */
+/* ===== Toast Lien copié ===== */
 .mirador-toast {
     position: fixed;
     bottom: 30px;
@@ -337,11 +290,93 @@ dl.indexation-collapsed .indexation-prop {
     transform: translateX(-50%) translateY(0);
 }
 
+/* ===== MIRADOR METADATA FIX (Panneau latéral Mirador protégé) ===== */
+.mirador-label-value-metadata {
+    background: #000 !important;
+    color: #fff !important;
+    border-radius: 6px !important;
+    padding: 12px !important;
+}
+
+.mirador-label-value-metadata dt,
+.mirador-label-value-metadata dd {
+    color: #fff !important;
+}
+
+.mirador-label-value-metadata a {
+    color: #ccc !important;
+}
+
+.mirador-label-value-metadata a:hover {
+    color: #fff !important;
+}
+
+/* ===== RESPONSIVE ===== */
 @media screen and (max-width: 900px) {
+    .resource.show dl:not(.mirador-label-value-metadata),
+    .block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata) {
+        grid-template-columns: 1fr !important;
+        display: block !important;
+        padding: 20px !important;
+        margin: 10px !important;
+    }
+
+    .block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata) {
+        grid-template-columns: 1fr !important;
+        display: block !important;
+        padding: 20px !important;
+        margin: 10px !important;
+    }
+
+    .resource.show .property,
+    .block-itemWithMetadata .resource .property {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 12px 0 !important;
+    }
+
+    .resource.show .property dt,
+    .block-itemWithMetadata .resource .property dt {
+        width: 100% !important;
+        margin-bottom: 8px !important;
+        color: #666 !important;
+    }
+
+    .resource.show .property dd,
+    .block-itemWithMetadata .resource .property dd {
+        width: 100% !important;
+        line-height: 1.5 !important;
+    }
+
+    #mirador, 
+    .mirador-container, 
+    [id^="mirador"] {
+        height: 450px !important;
+        width: calc(100% - 20px) !important;
+        margin: 10px auto !important;
+    }
+
+    body.item.show #content {
+        padding: 20px !important;
+    }
+
     .metadata-toolbar {
         flex-direction: row;
         justify-content: center;
         align-items: center;
         padding: 0 10px;
     }
+}
+
+
+
+.resource.show dl.media-list {
+    display: none !important;
+}
+
+.vocab-toggle-icon:hover {
+    cursor: pointer !important;
+    background-color: #f9f9f9 !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--accent) !important;
 }
