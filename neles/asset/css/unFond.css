@@ -415,9 +415,7 @@
    7. PAGE ITEM SHOW
    ========================================= */
 
-body.item.show .content > h3 {
-    display: none !important;
-}
+/* body.item.show h3 hiding is in unContenu.css */
 
 body.item.show .content > h2 {
     font-size: 1.6rem !important;
@@ -506,7 +504,7 @@ body.item.show .content > h2 {
     }
 
     .block-browsePreview .resource-list,
-    .block-browse .res ource-list {
+    .block-browse .resource-list {
         grid-template-columns: 1fr !important;
     }
 

@@ -271,9 +271,8 @@
 
 .block-itemWithMetadata .resource .property dt {
     flex: 0 0 40%;
-    font-weight: 600;
-    color: #000;
     font-weight: bold;
+    color: #000;
     margin: 0;
 }
 

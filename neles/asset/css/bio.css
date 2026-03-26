@@ -275,7 +275,6 @@
     font-size: 0.95rem;
     color: #666;
     margin-top: 15px;
-    text-align: left; 
     font-style: italic;
     padding-left: 20px;
     text-align: center;
@@ -286,12 +285,7 @@
     margin: 0 auto;
 }
 
-.biography-paragraph {
-    line-height: 1.6;
-    margin-top: 25px;
-    font-size: 1.1rem;
-    text-align: justify;
-}
+/* .biography-paragraph base styles are in the biography section above */
 
 @media (max-width: 768px) {
     .biography-bottom-section {
@@ -312,6 +306,4 @@
 }
 }
 
-#content {
-    max-width: 100%;
-}
+/* #content max-width override is in elliadd-header.css */

@@ -3,22 +3,8 @@
     function fixIframeAspect() {
         $('iframe').each(function () {
             var aspect = $(this).attr('height') / $(this).attr('width');
-            $(this).height($(this).width() * aspect);
+            if (aspect) $(this).height($(this).width() * aspect);
         });
-    }
-
-    function framerateCallback(callback) {
-        var waiting = false;
-        callback = callback.bind(this);
-        return function () {
-            if (!waiting) {
-                waiting = true;
-                window.requestAnimationFrame(function () {
-                    callback();
-                    waiting = false;
-                });
-            }
-        }
     }
 
 
@@ -117,38 +103,8 @@
             }
         });
         
-        // Back-to-top footer overlapping detection
-        var backToTop = document.getElementById('back-to-top');
-        var footer = document.querySelector('footer');
-        var partnersLogo = document.querySelector('.elliadd-footer-logos');
-        
-        if (backToTop && footer) {
-            // Observer 1 : Change de style quand on entre dans le footer
-            var footerObserver = new IntersectionObserver(function(entries) {
-                if (entries[0].isIntersecting) {
-                    backToTop.classList.add('over-footer');
-                } else {
-                    backToTop.classList.remove('over-footer');
-                }
-            }, { root: null, rootMargin: '0px', threshold: 0 });
-            footerObserver.observe(footer);
-        }
-
-        if (backToTop && partnersLogo) {
-            // Observer 2 : Masque le bouton quand on arrive aux logos partenaires
-            var logoObserver = new IntersectionObserver(function(entries) {
-                if (entries[0].isIntersecting) {
-                    backToTop.classList.add('hide-on-logos');
-                } else {
-                    backToTop.classList.remove('hide-on-logos');
-                }
-            }, { root: null, rootMargin: '0px', threshold: 0 });
-            logoObserver.observe(partnersLogo);
-        }
-
-        
         // Maintain iframe aspect ratios
-        $(window).on('load resize', framerateCallback(fixIframeAspect));
+        $(window).on('load resize', fixIframeAspect);
         fixIframeAspect();
 
         /**

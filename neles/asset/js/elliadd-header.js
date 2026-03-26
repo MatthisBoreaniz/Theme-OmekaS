@@ -135,5 +135,21 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTop.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        // Footer overlap detection
+        var footer = document.querySelector('footer');
+        if (footer) {
+            new IntersectionObserver(function(entries) {
+                backToTop.classList.toggle('over-footer', entries[0].isIntersecting);
+            }, { threshold: 0 }).observe(footer);
+        }
+
+        // Hide on partner logos section
+        var partnersLogo = document.querySelector('.elliadd-footer-logos');
+        if (partnersLogo) {
+            new IntersectionObserver(function(entries) {
+                backToTop.classList.toggle('hide-on-logos', entries[0].isIntersecting);
+            }, { threshold: 0 }).observe(partnersLogo);
+        }
     }
 });

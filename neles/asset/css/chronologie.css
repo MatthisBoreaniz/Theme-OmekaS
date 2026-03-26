@@ -5,6 +5,11 @@
   max-width: 1200px !important;
   position: relative !important;
   background: #fff !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  align-items: center !important;
+  row-gap: 80px !important;
+  column-gap: 60px !important;
 }
 
 .chronologie-container::before {
@@ -17,15 +22,6 @@
   background: var(--accent) !important;
   transform: translateX(-50%) !important;
   opacity: 0.3 !important;
-}
-
-
-.chronologie-container {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  align-items: center !important;
-  row-gap: 80px !important;
-  column-gap: 60px !important;
 }
 
 
