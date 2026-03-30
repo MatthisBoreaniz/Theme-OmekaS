@@ -79,6 +79,39 @@ document.addEventListener("DOMContentLoaded", function () {
     toast.innerText = 'Lien copié !';
     document.body.appendChild(toast);
 
+    // SVG checkmark pour le feedback visuel
+    const checkSvg = '<svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--accent)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    // Fallback copie pour HTTP (navigator.clipboard nécessite HTTPS)
+    function copyToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
+        }
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        return Promise.resolve();
+    }
+
+    // Helper : feedback visuel sur un bouton après copie
+    function showCopySuccess(button, toastText) {
+        const originalHTML = button.innerHTML;
+        button.innerHTML = checkSvg;
+        button.classList.add('is-copied');
+        toast.innerText = toastText;
+        toast.classList.add('show');
+        setTimeout(function () {
+            toast.classList.remove('show');
+            button.innerHTML = originalHTML;
+            button.classList.remove('is-copied');
+        }, 2000);
+    }
+
     if (manifestUrl) {
         const btnIiif = document.createElement('button');
         btnIiif.className = 'metadata-btn-action btn-iiif';
@@ -87,13 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
         toolbar.appendChild(btnIiif);
 
         btnIiif.addEventListener('click', function () {
-            navigator.clipboard.writeText(manifestUrl).then(() => {
-                toast.innerText = 'Manifest copié !';
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                    setTimeout(() => toast.innerText = 'Lien copié !', 400);
-                }, 2500);
+            copyToClipboard(manifestUrl).then(function () {
+                showCopySuccess(btnIiif, 'Manifest IIIF copié !');
             });
         });
     }
@@ -120,10 +148,8 @@ document.addEventListener("DOMContentLoaded", function () {
     toolbar.appendChild(btnHelp);
 
     btnShare.addEventListener('click', function () {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            toast.innerText = 'Lien copié !';
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
+        copyToClipboard(window.location.href).then(function () {
+            showCopySuccess(btnShare, 'Lien copié !');
         });
     });
 

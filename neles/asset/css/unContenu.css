@@ -263,6 +263,12 @@ dl.indexation-collapsed .indexation-prop {
     transform: scale(1.1);
 }
 
+.metadata-btn-action.is-copied {
+    border-color: var(--accent);
+    background-color: mix(var(--accent), white, 20%);
+    transform: scale(1.15);
+}
+
 /* ===== Toast Lien copié ===== */
 .mirador-toast {
     position: fixed;
