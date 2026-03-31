@@ -132,6 +132,18 @@
             observer.observe(footer);
         }
         
+        // Hide on partner logos section
+        var partnersLogo = document.querySelector('.elliadd-footer-logos');
+        if (partnersLogo && backToTop) {
+            new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting) {
+                    backToTop.classList.add('hide-on-logos');
+                } else {
+                    backToTop.classList.remove('hide-on-logos');
+                }
+            }, { root: null, rootMargin: '0px', threshold: 0 }).observe(partnersLogo);
+        }
+
         // Maintain iframe aspect ratios
         $(window).on('load resize', framerateCallback(fixIframeAspect));
         fixIframeAspect();

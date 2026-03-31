@@ -393,6 +393,12 @@ footer {
     border-color: var(--accent, #920b0b);
 }
 
+#back-to-top.hide-on-logos {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 /* ══════════════════════════════════════════
    Mobile (≤ 800px)
    ══════════════════════════════════════════ */

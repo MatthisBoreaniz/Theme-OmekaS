@@ -4,9 +4,8 @@
         <div class="elliadd-footer-col">
             <h4>Lien pratiques</h4>
             <ul>
-                <li><a href="<?php echo $site->url() . '/page/archives'; ?>">Fonds d'archives</a></li>
+                <li><a href="<?php echo $site->url() . '/page/seminaires-en-podcast'; ?>">Séminaires en podcast</a></li>
                 <li><a href="/admin/login">Accès membre</a></li>
-                <li><a href="<?php echo $site->url() . '/item/search'; ?>">Recherche</a></li>
             </ul>
         </div>
 
@@ -64,14 +63,11 @@
         <div class="elliadd-footer-logos">
             <a href="https://elliadd.univ-fcomte.fr/"><img src="<?php echo $this->basePath(); ?>/themes/elliadd-common-files/img/logo-gouv.png" alt="République Française"></a>
             <a href="https://www.umlp.fr/"><img src="<?php echo $this->basePath(); ?>/themes/elliadd-common-files/img/logo-umlp.png" alt="Université de Franche-Comté"></a>
-            <a href="https://www.enseignementsup-recherche.gouv.fr/fr"><img src="<?php echo $this->basePath(); ?>/themes/elliadd-common-files/img/logo-elliadd.png" alt="ELLIADD"></a>
-            <a href="https://mshe.univ-fcomte.fr/"><img src="<?php echo $this->basePath(); ?>/themes/elliadd-common-files/img/logo-mshe.png" alt="MSHE"></a>
+            <a href="https://www.mshparisnord.fr/"><img src="<?php echo $this->basePath(); ?>/themes/elliadd-common-files/img/logo-MSHPN.png" alt="Maison des Sciences de l'Homme Paris Nord"></a>
+            <a href="https://www.maisondesculturesdumonde.org/"><img src="<?php echo $this->basePath(); ?>/themes/elliadd-common-files/img/logo-MCM.png" alt="Maison des Cultures du Monde"></a>
             <?php
             $themeName = isset($site) ? $site->theme() : null;
             ?>
-            <?php if (in_array($themeName, ['gouv', 'follain', 'default',])): ?>
-                <a href="https://www.bourgognefranchecomte.fr/"><img src="<?= $this->basePath(); ?>/themes/elliadd-common-files/img/logo-region.png" alt="Région Bourgogne Franche-Comté"></a>
-            <?php endif; ?>
             <?php
             // debug pour voir le nom du theme qu'il y a sur le site (enlever les deux slashes pour activer)
             //var_dump('le nom du site est :', $site->theme());
