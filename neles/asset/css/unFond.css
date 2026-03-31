@@ -4,7 +4,7 @@
 
 .blocks-inner:has(.block-listOfPages) {
     display: grid !important;
-    grid-template-columns: minmax(220px, 28%) 1fr !important;
+    grid-template-columns: auto 1fr !important;
     grid-auto-rows: min-content !important;
     gap: 30px 50px !important;
     align-items: start !important;
@@ -21,6 +21,9 @@
 }
 
 .blocks-inner.is-collapsed .block-listOfPages {
+    width: auto !important;
+    min-width: unset !important;
+    resize: none !important;
     padding: 0 !important;
     min-height: 250px !important;
     display: flex !important;
@@ -40,6 +43,38 @@
     grid-column: 1 !important;
     grid-row: 2 / span 20 !important;
     margin: 0 !important;
+    width: 28vw;
+    min-width: 220px;
+    max-width: 60vw;
+    max-height: calc(100vh - 180px);
+    overflow: auto;
+    resize: both;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) #f9f9f9;
+}
+
+/* Scrollbar styling for Chrome/Safari */
+.blocks-inner .block-listOfPages::-webkit-scrollbar {
+    width: 15px; /* Un peu plus large pour laisser la place à l'icône de redimensionnement */
+}
+.blocks-inner .block-listOfPages::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+.blocks-inner .block-listOfPages::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 10px;
+}
+/* Customisation de la poignée de redimensionnement */
+.blocks-inner .block-listOfPages::-webkit-resizer {
+    background-color: var(--accent);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 14L14 20M20 7L7 20' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top-left-radius: 4px;
+}
+.blocks-inner .block-listOfPages::-webkit-scrollbar-corner {
+    background-color: #f9f9f9;
 }
 
 .blocks-inner:has(.block-listOfPages) > *:not(.block-listOfPages):not(:has(.unfond-fonds-hero)) {
@@ -78,12 +113,13 @@
 .sidebar-toggle {
     position: absolute;
     top: 25px;
-    right: 25px;
+    right: 20px;
     font-size: 1.6rem;
     cursor: pointer;
     color: #333;
     font-weight: bold;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 10;
 }
 
 .sidebar-toggle:hover {
@@ -286,6 +322,7 @@
     transition: all 0.3s ease !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
 }
@@ -300,6 +337,7 @@
     display: block !important;
     overflow: visible !important;
     -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
 }
 
 .block-browsePreview .resource-list:not(.show-all) .resource:nth-child(n+5) {
@@ -454,6 +492,8 @@ body.item.show .content > h2 {
 
     .blocks-inner:has(.block-listOfPages) .block-listOfPages {
         width: 100% !important;
+        max-width: none !important;
+        resize: none !important;
         padding: 25px 20px !important;
         border-radius: 8px !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;

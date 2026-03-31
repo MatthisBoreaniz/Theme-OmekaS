@@ -10,6 +10,15 @@ window.addEventListener('load', function() {
     }
 });
 
+// Sécurité : si le loader n'est pas caché après 5 secondes (ex: erreur JS ou ressource bloquée)
+setTimeout(function() {
+    var loader = document.querySelector('#elliadd-loader');
+    if (loader && !loader.classList.contains('loader-hidden')) {
+        loader.classList.add('loader-hidden');
+        console.warn("Loader masqué par la sécurité (timeout 5s).");
+    }
+}, 5000);
+
 document.addEventListener('DOMContentLoaded', function() {
 
     /* ── Burger menu toggle ── */

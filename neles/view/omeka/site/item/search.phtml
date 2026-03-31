@@ -54,8 +54,18 @@ $this->htmlElement('body')->appendAttribute('class', 'items search');
                 <div class="inputs custom-filters-grid">
                     <?php
                     // Hack to elegantly fetch distinct values per site without heavy item queries
-                    $baseDir = defined('OMEKA_PATH') ? OMEKA_PATH : dirname(__DIR__, 5);
-                    $dbConfig = parse_ini_file($baseDir . '/config/database.ini');
+                    $pathToCheck = __DIR__;
+                    $baseDir = null;
+                    // On remonte jusqu'à trouver le dossier 'config' à la racine d'Omeka
+                    for ($i = 0; $i < 10; $i++) {
+                        if (file_exists($pathToCheck . '/config/database.ini')) {
+                            $baseDir = $pathToCheck;
+                            break;
+                        }
+                        $pathToCheck = dirname($pathToCheck);
+                    }
+                    
+                    $dbConfig = $baseDir ? parse_ini_file($baseDir . '/config/database.ini') : [];
                     $host = $dbConfig['host'] ?? '127.0.0.1';
                     $dbname = $dbConfig['dbname'] ?? 'omekas';
                     $user = $dbConfig['user'] ?? 'root';
@@ -67,6 +77,10 @@ $this->htmlElement('body')->appendAttribute('class', 'items search');
                         $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                     } catch (\Exception $e) {
                         $pdo = null;
+                        // Log the error silently for debugging if enabled
+                        if (defined('APPLICATION_ENV') && APPLICATION_ENV === 'development') {
+                            error_log("Search custom filters PDO error: " . $e->getMessage());
+                        }
                     }
 
                     $customFilters = [

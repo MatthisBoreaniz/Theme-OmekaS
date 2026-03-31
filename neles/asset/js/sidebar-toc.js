@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
             menu.appendChild(toggleMenuBtn);
 
             toggleMenuBtn.addEventListener('click', () => {
+                // Réinitialiser la taille manuelle lors du pliage
+                menu.style.width = '';
+                menu.style.height = '';
+
                 blocksInner.classList.toggle('is-collapsed');
                 toggleMenuBtn.innerHTML = blocksInner.classList.contains('is-collapsed') ? '❯' : '❮';
             });
@@ -86,8 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let parentUl = currentLi.parentElement;
             const rootUl = menu.querySelector('ul');
 
-            // On remonte l'arbre pour ouvrir UNIQUEMENT les parents, pas l'élément lui-même
-            while (parentUl && parentUl !== rootUl) {
+            while (parentUl && parentUl !== rootUl && parentUl !== menu) {
                 const parentLi = parentUl.previousElementSibling;
 
                 if (parentLi && parentLi.tagName.toLowerCase() === 'li' && !parentLi.classList.contains('menu-root-title')) {

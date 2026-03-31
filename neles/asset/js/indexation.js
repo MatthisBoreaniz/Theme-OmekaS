@@ -71,17 +71,21 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Vider le dl original
-        dl.innerHTML = '';
+        // S'il n'y a pas de propriétés indexation, on ne change rien au DL original
+        // Cela évite de vider la liste inutilement et d'ajouter un titre nul
+        if (propsIndexation.length > 0 && indexTitle) {
+            // Vider le dl original pour réorganiser
+            dl.innerHTML = '';
 
-        // Remettre les propriétés de description
-        propsDescription.forEach(prop => dl.appendChild(prop));
+            // Remettre les propriétés de description
+            propsDescription.forEach(prop => dl.appendChild(prop));
 
-        // Ajouter le titre et les propriétés d'indexation
-        dl.appendChild(indexTitle);
-        propsIndexation.forEach(prop => {
-            prop.classList.add('indexation-prop');
-            dl.appendChild(prop);
-        });
+            // Ajouter le titre et les propriétés d'indexation
+            dl.appendChild(indexTitle);
+            propsIndexation.forEach(prop => {
+                prop.classList.add('indexation-prop');
+                dl.appendChild(prop);
+            });
+        }
     });
 });
