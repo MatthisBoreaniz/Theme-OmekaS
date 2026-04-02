@@ -1,0 +1,111 @@
+.goux-hero-container {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: stretch; 
+    width: 100%;
+    margin: 0 auto !important;
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.goux-hero-side-image {
+    flex: 0 0 50%; 
+    max-width: 50%;
+}
+
+.goux-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    border-bottom-right-radius: 200px;
+}
+
+.goux-hero-side-content {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: flex-start; 
+    padding: 60px; 
+    box-sizing: border-box;
+}
+
+.goux-hero-row-subtitle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.goux-hero-text-subtitle {
+    font-family: serif;
+    font-size: clamp(1.2rem, 2.5vw, 2rem) !important;
+    font-weight: bold;
+    margin: 0 15px 0 0 !important;
+    color: #000;
+}
+
+.goux-hero-line-short {
+    height: 1px;
+    width: 60px;
+    background-color: #000;
+}
+
+.goux-hero-row-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.goux-hero-line-long {
+    height: 1px;
+    width: 60px;
+    background-color: #999;
+    margin-right: 20px;
+}
+
+.goux-hero-text-name {
+    font-family: serif;
+    font-size: clamp(2rem, 5vw, 3.5rem) !important;
+    font-weight: bold;
+    color: #1a5a66;
+    margin: 0 !important;
+}
+
+.goux-hero-text-body {
+    max-width: 500px; 
+    margin-left: 80px; 
+}
+
+.goux-hero-text-body p {
+    font-family: sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+@media (max-width: 1024px) {
+    .goux-hero-side-content {
+        padding: 40px;
+    }
+    .goux-hero-text-body {
+        margin-left: 0; 
+    }
+    .goux-hero-line-long {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .goux-hero-container {
+        flex-direction: column !important;
+    }
+    .goux-hero-side-image, .goux-hero-side-content {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .goux-hero-img {
+        border-bottom-right-radius: 100px;
+    }
+}

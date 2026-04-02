@@ -10,9 +10,18 @@ $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1')
 $this->headTitle($siteTitle)->setSeparator(' · ');
 $this->headTitle()->append($this->setting('installation_title', 'Omeka S'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/style.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/tooltip.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/elliadd-header.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/normalize.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/home.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/enseignement.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/recherche.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/journee-etudes.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/leprojet.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/equipe.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/biblio.css'));
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
-$this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700');
+$this->headLink()->prependStylesheet('//fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 $this->headScript()->prependFile($this->assetUrl('js/default.js'));
 $this->headScript()->prependFile($this->assetUrl('js/global.js', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 'Omeka'));
@@ -39,7 +48,8 @@ $userBar = $this->userBar();
 <div id="elliadd-loader">
     <div class="loader-logo-container">
         <?php if ($this->themeSettingAssetUrl('logo')): ?>
-            <img src="<?php echo $this->escapeHtml($this->themeSettingAssetUrl('logo')); ?>" alt="<?php echo $this->escapeHtml($site->title()); ?>">
+            <img src="<?php echo $this->escapeHtml($this->themeSettingAssetUrl('logo')); ?>"
+                alt="<?php echo $this->escapeHtml($site->title()); ?>">
         <?php else: ?>
             <?php echo $this->escapeHtml($site->title()); ?>
         <?php endif; ?>
@@ -54,7 +64,8 @@ $userBar = $this->userBar();
     <div class="elliadd-header-logo">
         <a href="<?php echo $site->url(); ?>">
             <?php if ($this->themeSettingAssetUrl('logo')): ?>
-                <img src="<?php echo $this->escapeHtml($this->themeSettingAssetUrl('logo')); ?>" alt="<?php echo $this->escapeHtml($site->title()); ?>">
+                <img src="<?php echo $this->escapeHtml($this->themeSettingAssetUrl('logo')); ?>"
+                    alt="<?php echo $this->escapeHtml($site->title()); ?>">
             <?php else: ?>
                 <?php echo $this->escapeHtml($site->title()); ?>
             <?php endif; ?>
@@ -88,17 +99,33 @@ $userBar = $this->userBar();
 
 <!-- Footer -->
 <footer>
-    <?php include __DIR__ . '/../../../elliadd-common-files/footer.phtml'; ?>
+    <?php include __DIR__ . '/../../../elliadd-common-files/gouxFooter.phtml'; ?>
 </footer>
 
 <!-- Back to top button -->
 <button id="back-to-top" aria-label="Retour en haut">
-    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
 </button>
 
 <!-- Header + back-to-top JS -->
 <script src="<?php echo $this->assetUrl('js/elliadd-header.js'); ?>"></script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentDomain = window.location.hostname;
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            if (link.href && link.host !== currentDomain && link.href.startsWith('http')) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    });
+</script>
+<script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/equipe-accordeon.js'); ?>"></script>
 </body>
 
 </html>

@@ -1,0 +1,49 @@
+.leprojet-text {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 60%;
+    padding-bottom: 100px;
+}
+
+.leprojet-paragraph {
+    text-align: start;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .leprojet-text {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .leprojet-paragraph {
+    text-align: start;
+}
+
+    .goux-card-solo {
+    margin: 0 auto;
+    min-width: 90%;
+
+}
+}
+
+@media (max-width: 480px) {
+    .leprojet-text {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .leprojet-paragraph {
+    text-align: start;
+}
+}
+
+.goux-card-solo {
+    margin: 0 auto;
+    width: 50%;
+    padding: 20px;
+}

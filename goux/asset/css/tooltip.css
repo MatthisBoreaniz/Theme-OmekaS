@@ -1,0 +1,30 @@
+/* =========================================
+   INFO-BULLE PERSONNALISÉE (ALT DES IMAGES)
+   ========================================= */
+
+.custom-alt-tooltip {
+    position: fixed; /* Suit la souris par rapport à l'écran */
+    background-color: rgba(0, 0, 0, 0.85); /* Fond noir légèrement transparent */
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    max-width: 300px;
+    word-wrap: break-word;
+    pointer-events: none; /* Empêche l'info-bulle de bloquer le clic sur l'image */
+    z-index: 99999; /* Toujours au-dessus du reste */
+    
+    /* Par défaut : caché et disparition immédiate quand on quitte l'image */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* L'état quand on survole l'image depuis 1 seconde */
+.custom-alt-tooltip.is-visible {
+    opacity: 1;
+    visibility: visible;
+    /* La magie est ici : on attend 1s (1s) avant de lancer l'animation (0.3s) */
+    transition: opacity 0.3s ease 1s, visibility 0.3s ease 1s; 
+}
