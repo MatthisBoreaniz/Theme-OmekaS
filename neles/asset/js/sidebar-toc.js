@@ -48,11 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (depth === 2) {
                 toggleBtn.classList.add('style-box');
+                toggleBtn.innerText = '+';
+            } else if (!hasActualSubMenu) {
+                toggleBtn.classList.add('style-document');
             } else {
                 toggleBtn.classList.add('style-chevron');
+                toggleBtn.innerText = '›';
             }
-
-            toggleBtn.innerText = toggleBtn.classList.contains('style-box') ? '+' : '›';
 
             const link = li.querySelector('a');
             if (link) {
