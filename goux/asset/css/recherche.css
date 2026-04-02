@@ -25,7 +25,7 @@
 }
 
 .goux-card {
-    background: #ffffff;
+    background: color-mix(in srgb, white 90%, var(--accent));
     border-radius: 12px; 
     overflow: hidden; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); 
@@ -93,8 +93,7 @@
     filter: brightness(1.1);
     color: var(--accent) !important;
     text-decoration: none !important;
-    background-color: white;
-    border: 2px solid var(--accent);
+    background-color: #9DC2A9;
 }
 
 @media (max-width: 768px) {
