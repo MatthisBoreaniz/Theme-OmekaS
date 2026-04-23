@@ -1,0 +1,386 @@
+/* ============== */
+/* Carousel */
+/* ============== */
+
+.biographie-carousel-section {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    background-color: #E4EDE4 !important;
+    padding: 40px !important;
+    align-items: center !important;
+    gap: 40px !important;
+    box-sizing: border-box !important;
+    margin-top: 80px !important;
+    margin-bottom: 80px !important;
+}
+
+.biographie-carousel-text-panel {
+    flex: 1 1 35% !important;
+    min-width: 300px !important;
+}
+
+.biographie-carousel-text-panel p {
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    color: #1a1a1a !important;
+    margin-bottom: 15px !important;
+}
+
+.biographie-carousel-slider-panel {
+    flex: 1 1 55% !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    min-width: 300px !important;
+    padding: 20px 0 !important;
+}
+
+.biographie-carousel-track-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: none !important; 
+    -ms-overflow-style: none !important; 
+    padding: 20px 0 !important; 
+}
+
+.biographie-carousel-track-container::-webkit-scrollbar {
+    display: none !important; 
+}
+
+.biographie-carousel-track {
+    display: flex !important;
+    gap: 30px !important;
+}
+
+.biographie-carousel-slide {
+    flex: 0 0 calc((100% - 60px) / 3) !important; 
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: transparent !important;
+    padding: 0 !important; 
+}
+
+.biographie-carousel-slide img {
+    max-width: 100% !important;
+    max-height: 35vh !important; 
+    object-fit: contain !important; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important; 
+    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.15) !important; 
+    border-radius: 2px !important; 
+}
+
+.biographie-carousel-slide:hover img {
+    transform: scale(1.05) translateY(-5px) !important; 
+    box-shadow: 6px 10px 20px rgba(0, 0, 0, 0.2) !important; 
+}
+
+.biographie-carousel-nav-btn {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 45px !important;
+    height: 45px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    z-index: 10 !important;
+    font-size: 20px !important;
+    color: #333 !important;
+    transition: background 0.2s, transform 0.2s !important;
+    padding-bottom: 2px !important; 
+}
+
+.biographie-carousel-nav-btn:hover {
+    background: #ffffff !important;
+    transform: translateY(-50%) scale(1.1) !important;
+}
+
+.biographie-carousel-prev { left: -15px !important; }
+.biographie-carousel-next { right: -15px !important; }
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .biographie-carousel-slide {
+        flex: 0 0 calc((100% - 30px) / 2) !important; 
+    }
+}
+
+@media (max-width: 650px) {
+    .biographie-carousel-section {
+        flex-direction: column !important;
+        padding: 30px 15px !important;
+    }
+    .biographie-carousel-slide {
+        flex: 0 0 100% !important; 
+    }
+    .biographie-carousel-prev { left: 5px !important; }
+    .biographie-carousel-next { right: 5px !important; }
+}
+
+/* ===================== */
+/* Biographie avec photo */
+/* ======================*/
+.biographie-presection-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 50px !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 40px auto !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+}
+
+.biographie-presection-content {
+  flex: 1 !important;
+}
+
+.biographie-presection-text p {
+  font-size: 1.1rem !important;
+  font-weight: normal !important;
+  line-height: 1.6 !important;
+  margin-bottom: 20px !important;
+  color: #333 !important;
+}
+
+.biographie-presection-image-wrapper {
+  flex: 0 0 auto !important;
+}
+
+.biographie-presection-img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  box-shadow: 2px 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+@media screen and (max-width: 768px) {
+  .biographie-presection-container {
+    flex-direction: column !important;
+    gap: 30px !important;
+    padding: 10px !important;
+  }
+
+  .biographie-presection-image-wrapper {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .biographie-presection-img {
+    max-width: 80% !important;
+  }
+}
+
+/* ===================== */
+/* Biographie bento */
+/* ======================*/
+
+.biographie-bento-section-container {
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 60px auto !important;
+  padding: 0 20px !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.biographie-bento-section-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 50px 60px !important;
+  align-items: start !important;
+}
+
+.biographie-bento-section-text p {
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
+  color: #1a1a1a !important;
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+}
+
+.biographie-bento-section-figure {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.biographie-bento-section-img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+.biographie-bento-section-figure-cover .biographie-bento-section-img {
+  box-shadow: none !important; /* La couverture a déjà un fond, on enlève l'ombre si non nécessaire */
+}
+
+.biographie-bento-section-caption {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  font-size: 0.95rem !important;
+  color: #333 !important;
+}
+
+.biographie-bento-section-icon-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.2s ease !important;
+}
+
+.biographie-bento-section-icon-link:hover {
+  transform: scale(1.1) !important;
+}
+
+.biographie-bento-section-icon {
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+}
+
+.biographie-bento-section-text-bottom {
+  grid-column: 1 / -1 !important; /* Étire le texte sur toute la largeur */
+  margin-top: 20px !important;
+}
+
+/* --- Responsive Mobile & Tablette --- */
+@media screen and (max-width: 800px) {
+  .biographie-bento-section-grid {
+    grid-template-columns: 1fr !important; /* Passe sur une seule colonne */
+    gap: 40px !important;
+  }
+  
+  .biographie-bento-section-text-bottom {
+    grid-column: 1 !important; 
+    margin-top: 0 !important;
+  }
+}
+
+/* ===================== */
+/* Biographie quotes */
+/* ======================*/
+
+.biographie-quote-section {
+  background-color: #f0f0f0 !important;
+  padding: 80px 20px !important;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.biographie-quote-container {
+  max-width: 850px !important;
+  width: 100% !important;
+}
+
+.biographie-quote-text {
+  position: relative !important;
+  font-size: 1.4rem !important;
+  line-height: 1.6 !important;
+  color: #111 !important;
+  margin: 0 0 50px 0 !important;
+  font-weight: 400 !important;
+  padding: 0 50px !important;
+}
+
+.biographie-quote-text::before,
+.biographie-quote-text::after {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 5rem !important;
+  line-height: 1 !important;
+  color: #111 !important;
+  position: absolute !important;
+}
+
+.biographie-quote-text::before {
+  content: '\201C' !important;
+  top: -10px !important;
+  left: -10px !important;
+}
+
+.biographie-quote-text::after {
+  content: '\201D' !important; 
+  bottom: -40px !important;
+  right: 0 !important;
+}
+
+
+.biographie-quote-footer {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  padding-left: 15% !important;
+}
+
+.biographie-quote-line {
+  width: 60px !important;
+  height: 1px !important;
+  background-color: #111 !important;
+  margin-top: 14px !important;
+}
+
+.biographie-quote-author-info {
+  display: flex !important;
+  flex-direction: column !important;
+  font-size: 1.15rem !important;
+  color: #111 !important;
+}
+
+.biographie-quote-author {
+  margin-bottom: 5px !important;
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 768px) {
+  .biographie-quote-section {
+    padding: 50px 15px !important;
+  }
+  
+  .biographie-quote-text {
+    font-size: 1.1rem !important;
+    padding: 0 30px !important;
+    margin: 0 0 40px 0 !important;
+  }
+
+  .biographie-quote-text::before,
+  .biographie-quote-text::after {
+    font-size: 3.5rem !important;
+  }
+
+  .biographie-quote-text::before {
+    top: -5px !important;
+    left: -5px !important;
+  }
+
+  .biographie-quote-text::after {
+    bottom: -25px !important;
+    right: -10px !important;
+  }
+
+  .biographie-quote-footer {
+    padding-left: 0 !important;
+    justify-content: flex-start !important;
+  }
+  
+  .biographie-quote-line {
+    width: 40px !important;
+  }
+}
+
+

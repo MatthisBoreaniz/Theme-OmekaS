@@ -138,7 +138,7 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a {
     color: #333333 !important;
     text-decoration: none !important;
-    font-size: clamp(14px, 1.2vw, 16px) !important;
+    font-size: clamp(14px, 1.2vw, 24px) !important;
     font-weight: 300 !important;
     transition: color 0.3s ease !important;
     white-space: nowrap;
@@ -147,6 +147,12 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a:hover,
 #elliadd-header .elliadd-header-nav ul.navigation>li>a:hover {
     color: #555555 !important;
+    text-decoration: underline !important;
+    text-underline-offset: 20px !important;
+    text-decoration-thickness: 5px !important;
+    text-decoration-color: var(--accent) !important;
+    transition: all 0.3s ease !important;
+    transform: translateY(-2px) !important;
 }
 #elliadd-header .elliadd-header-nav ul.navigation>li.active>.parent-link>a,
 #elliadd-header .elliadd-header-nav ul.navigation>li.current>.parent-link>a,
@@ -154,6 +160,10 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation>li.current>a {
     color: #111111 !important;
     font-weight: 600 !important;
+    text-decoration: underline !important;
+    text-underline-offset: 20px !important;
+    text-decoration-thickness: 5px !important;
+    text-decoration-color: var(--accent) !important;
 }
 #elliadd-header .elliadd-header-nav ul.navigation::before,
 #elliadd-header .elliadd-header-nav ul.navigation::after,

@@ -1,133 +1,207 @@
 .recherche-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    width: 60%;
-    padding-bottom: 50px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    width: 60% !important;
+    padding-bottom: 50px !important;
 }
 
 .recherche-paragraph {
-    text-align: center;
-    margin: 0 auto;
-    line-height: 1.5;
-    font-size: 1.2rem;
+    text-align: center !important;
+    margin: 0 auto !important;
+    line-height: 1.5 !important;
+    font-size: 1.2rem !important;
 }
 
 .goux-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 40px auto 0 auto;
-    padding: 20px;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1000px !important;
+    margin: 40px auto 0 auto !important;
+    padding: 20px !important;
+    /* On ajoute une transition sur la grille elle-même pour l'espacement */
+    transition: all 0.5s ease-in-out !important; 
 }
 
 .goux-card {
-    background: color-mix(in srgb, white 90%, var(--accent));
-    border-radius: 12px; 
-    overflow: hidden; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
+    background: color-mix(in srgb, white 90%, var(--accent)) !important;
+    border-radius: 12px !important; 
+    overflow: hidden !important; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    /* On combine toutes les transitions ici pour adoucir le redimensionnement ET le survol */
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, padding 0.5s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .goux-card-link {
     text-decoration: none !important;
     color: inherit !important;
-    display: block;
+    display: block !important;
 }
 
 .goux-card:hover {
-    transform: translateY(-8px); 
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px) !important; 
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12) !important;
 }
 
 .goux-card-image-box {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background-color: #f4f4f4;
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    overflow: hidden !important;
+    background-color: #f4f4f4 !important;
 }
 
 .goux-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    transition: transform 0.5s ease;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; 
+    transition: transform 0.5s ease !important;
 }
 
 .goux-card-content {
-    padding: 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    gap: 15px;
+    padding: 25px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important; 
+    gap: 15px !important;
+    transition: padding 0.5s ease-in-out, flex-direction 0.5s ease-in-out !important;
 }
 
 .goux-card-title {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 1.3rem; 
-    font-weight: 600;
-    color: #222;
+    font-family: "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 1.3rem !important; 
+    font-weight: 600 !important;
+    color: #222 !important;
     margin: 0 !important;
-    line-height: 1.2;
+    line-height: 1.2 !important;
 }
 
 .goux-card-btn {
-    display: inline-block;
-    background-color: var(--accent); 
+    display: inline-block !important;
+    background-color: var(--accent) !important; 
     color: #ffffff !important;
-    padding: 10px 20px;
-    border-radius: 50px; 
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    border: 2px solid transparent;
+    padding: 10px 20px !important;
+    border-radius: 50px !important; 
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+    border: 2px solid transparent !important;
 }
 
 .goux-card-btn:hover {
-    filter: brightness(1.1);
-    color: var(--accent) !important;
+    filter: brightness(1.1) !important;
     text-decoration: none !important;
-    background-color: #9DC2A9;
+    background-color: #9DC2A9 !important;
+}
+
+.goux-card--wide {
+    grid-column: 1 / -1 !important; 
+}
+
+.goux-card-image-box--wide {
+    aspect-ratio: 21 / 9 !important; 
+    max-height: 450px !important; 
+}
+
+.goux-card-image-box--wide .goux-card-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+    object-position: top center !important; 
+    display: block !important;
+}
+
+.goux-card-content--wide {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 30px !important;
+    gap: 20px !important;
+
+}
+
+.goux-card-image-box .goux-card-link {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.goux-card-image-box .goux-card-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+}
+
+@media (max-width: 900px) {
+    .goux-card-content--wide {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+    .goux-card-action {
+        width: 100% !important;
+    }
+    .goux-card-content--wide .goux-card-btn {
+        width: 100% !important;
+        text-align: center !important;
+        margin-top: 10px !important;
+    }
 }
 
 @media (max-width: 768px) {
     .recherche-text {
-        width: 80%;
-        padding: 20px;
+        width: 80% !important;
+        padding: 20px !important;
     }
     .recherche-paragraph {
-        text-align: start;
+        text-align: start !important;
+    }
+    .goux-card-image-box--wide {
+        aspect-ratio: 16 / 9 !important; 
+        max-height: none !important;
+    }
+    .goux-card-content--wide {
+        padding: 25px !important;
     }
 }
 
 @media (max-width: 600px) {
     .goux-cards-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
     .goux-card-content {
-        padding: 20px 15px;
-        flex-direction: column;
-        align-items: flex-start;
+        padding: 20px 15px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
     }
     .goux-card-btn {
-        margin-top: 15px;
-        width: 100%;
-        text-align: center;
+        margin-top: 15px !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .goux-card-content--wide {
+        padding: 20px 15px !important; 
+    }
+    .goux-card-content--wide .goux-card-btn {
+        margin-top: 15px !important;
     }
 }
 
 @media (max-width: 480px) {
     .recherche-text {
-        width: 100%;
-        padding: 20px;
+        width: 100% !important;
+        padding: 20px !important;
     }
     .recherche-paragraph {
-        text-align: start;
+        text-align: start !important;
     }
 }

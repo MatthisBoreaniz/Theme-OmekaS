@@ -70,4 +70,77 @@
     }
 }
 
+/* ===================== */
+/* Biographie titleSection */
+/* ======================*/
 
+.biographie-titleSection-wrapper {
+  text-align: center !important; 
+  width: 100% !important;
+  padding: 80px 0 !important; 
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.biographie-titleSection-heading {
+  position: relative !important;         
+  display: inline-block !important;      
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 140px !important; 
+  font-size: 3.5rem !important;
+  line-height: 1.1 !important;
+  font-weight: bold !important; 
+  color: #000 !important;
+}
+
+.biographie-titleSection-heading::before,
+.biographie-titleSection-heading::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 55% !important; 
+  transform: translateY(-50%) !important;
+  width: 100px !important;
+  height: 1.5px !important;
+  background-color: #000 !important;
+}
+
+.biographie-titleSection-heading::before { 
+  left: 0 !important; 
+}
+
+.biographie-titleSection-heading::after { 
+  right: 0 !important; 
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 768px) {
+  .biographie-titleSection-wrapper {
+    padding: 40px 0 !important; 
+  }
+    
+  .biographie-titleSection-heading {
+    font-size: 2rem !important;
+    padding: 0 60px !important; 
+  }
+
+  .biographie-titleSection-heading::before,
+  .biographie-titleSection-heading::after {
+    width: 40px !important; 
+    top: 55% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Sur très petit écran, on enlève les lignes pour gagner de la place */
+  .biographie-titleSection-heading::before,
+  .biographie-titleSection-heading::after {
+    display: none !important;
+  }
+  
+  .biographie-titleSection-heading {
+    padding: 0 15px !important; /* Léger padding pour que ça ne touche pas les bords de l'écran */
+    font-size: 1.8rem !important;
+  }
+}

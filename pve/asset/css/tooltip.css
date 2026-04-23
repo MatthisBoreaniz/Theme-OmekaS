@@ -1,0 +1,30 @@
+
+
+.custom-alt-tooltip {
+    position: fixed; 
+    background-color: rgba(0, 0, 0, 0.85); 
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Montserrat', 'Open Sans', 'Helvetica Neue', sans-serif;
+    max-width: 300px;
+    word-wrap: break-word;
+    pointer-events: none; 
+    z-index: 99999; 
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.custom-alt-tooltip.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease 1s, visibility 0.3s ease 1s; 
+}
+
+
+.breadcrumbs{
+    display: none !important;
+}

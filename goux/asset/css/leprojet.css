@@ -14,6 +14,19 @@
     font-size: 1.2rem;
 }
 
+.leprojet-imagesExpo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+.leprojet-imagesExpo img {
+    height: 400px;
+    display: block;
+}
+
 @media (max-width: 768px) {
     .leprojet-text {
         width: 80%;
@@ -29,6 +42,20 @@
     min-width: 90%;
 
 }
+
+.leprojet-imagesExpo {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.leprojet-imagesExpo img {
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
 }
 
 @media (max-width: 480px) {
@@ -40,6 +67,20 @@
     .leprojet-paragraph {
     text-align: start;
 }
+
+    .leprojet-imagesExpo {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.leprojet-imagesExpo img {
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
 }
 
 .goux-card-solo {

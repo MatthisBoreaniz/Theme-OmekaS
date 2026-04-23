@@ -20,6 +20,11 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/journee-etudes.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/leprojet.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/equipe.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/biblio.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/parolesDouvrieres.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/uneOeuvre.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/méditation.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/biographie.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/fabriqueEnclave.css'));
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
 $this->headLink()->prependStylesheet('//fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 $this->headScript()->prependFile($this->assetUrl('js/default.js'));
@@ -126,6 +131,7 @@ $userBar = $this->userBar();
 </script>
 <script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/equipe-accordeon.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/carousselBio.js'); ?>"></script>
 </body>
 
 </html>

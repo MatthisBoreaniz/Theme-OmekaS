@@ -1,0 +1,15 @@
+.meditation-text {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 60%;
+    padding-bottom: 100px;
+}
+
+.meditation-paragraph {
+    text-align: start;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-size: 1.2rem;
+}

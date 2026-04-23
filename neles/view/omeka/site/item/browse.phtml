@@ -3,6 +3,9 @@ $translate = $this->plugin('translate');
 $escape = $this->plugin('escapeHtml');
 $thumbnail = $this->plugin('thumbnail');
 
+// 1. On récupère le site sur lequel l'utilisateur se trouve
+$site = $this->currentSite();
+
 $this->htmlElement('body')->appendAttribute('class', 'item resource browse neles-advanced-search');
 
 $filterLocale = (bool) $this->siteSetting('filter_locale_values');
@@ -10,6 +13,13 @@ $lang = $this->lang();
 $valueLang = $filterLocale ? [$lang, ''] : null;
 
 $query = $this->params()->fromQuery();
+
+// 2. ON FORCE LE FILTRE PAR SITE
+// Si on est bien sur un site, on ajoute son ID à la requête de recherche
+if ($site) {
+    $query['site_id'] = $site->id();
+}
+
 $itemSetShow = isset($itemSet);
 
 if ($itemSetShow):

@@ -6,11 +6,17 @@ $browseBodyTruncation = ($this->themeSetting('browse_body_truncation')) ? $this-
 $banner = $this->themeSettingAssetUrl('banner');
 $this->htmlElement('html')->setAttribute('lang', $this->lang());
 $this->headMeta()->setCharset('utf-8');
-$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1');
+$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1');   
 $this->headTitle($siteTitle)->setSeparator(' · ');
 $this->headTitle()->append($this->setting('installation_title', 'Omeka S'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/style.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/home.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/podcasts-index.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/partcipants.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/prologuePodcast.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/unPodcast.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/elliadd-header.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/tooltip.css'));
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
 $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700');
 $this->headScript()->prependFile($this->assetUrl('js/default.js'));
@@ -78,6 +84,7 @@ $userBar = $this->userBar();
 <!-- Main content -->
 <div class="content" id="content" role="main">
     <?php echo $this->content; ?>
+
 </div>
 
 <!-- Footer -->
@@ -94,6 +101,9 @@ $userBar = $this->userBar();
 
 <!-- Header + back-to-top JS -->
 <script src="<?php echo $this->assetUrl('js/elliadd-header.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/unPoscastCarousel.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/partcipantsAccordeon.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
 
 </body>
 

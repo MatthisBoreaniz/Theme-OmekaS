@@ -1,0 +1,193 @@
+.fabriqueEnclave-text {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 60%;
+    padding-bottom: 100px;
+}
+
+.fabriqueEnclave-paragraph {
+    text-align: start;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-size: 1.2rem;
+}
+
+.fabriqueEnclave-container {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  gap: 20px !important;
+  margin-bottom: 100px !important;
+}
+
+.fabriqueEnclave-left {
+  width: 75% !important;
+}
+
+.fabriqueEnclave-img-main {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+.fabriqueEnclave-right {
+  width: 25% !important;
+  position: relative !important;
+}
+
+.fabriqueEnclave-img-cover {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: left top !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important; 
+  padding: 10px !important;
+  border-radius: 5px !important;
+
+}
+
+.fabriqueEnclave-expo-alone {
+  padding: 20px !important;
+  margin: 0 auto !important;
+}
+
+.fabriqueEnclave-expo-img-alone {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+@media screen and (max-width: 768px) {
+  .fabriqueEnclave-container {
+    flex-direction: column !important;
+    gap: 30px !important; 
+    height: auto !important; 
+    margin-bottom: 20px !important;
+  }
+  
+  .fabriqueEnclave-left {
+    width: 100% !important;
+  }
+  
+  .fabriqueEnclave-right {
+    width: 100% !important;
+    position: static !important; 
+    display: flex !important;
+    justify-content: center !important; 
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .fabriqueEnclave-img-cover {
+    position: static !important;
+    width: 100% !important;
+    max-width: 220px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center !important; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important; 
+  }
+  .fabriqueEnclave-expo {
+    padding: 20px !important;
+    margin: 0 auto !important;
+  }
+  .fabriqueEnclave-expo-img-alone {
+    margin-bottom: 20px !important;
+  }
+}
+
+.credits-editorial {
+  max-width: 1000px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.credits-list {
+  border-top: 3px solid var(--accent);
+}
+
+.credit-row {
+  display: flex;
+  padding: 30px 0;
+  border-bottom: 1px solid #eaeaea;
+  transition: padding-left 0.3s ease, background-color 0.3s ease;
+}
+
+.credit-row:hover {
+  padding-left: 15px;
+  background-color: #fafafa;
+}
+
+.credit-label {
+  flex: 0 0 35%;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.credit-people {
+  flex: 1;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #222;
+  font-weight: 400;
+}
+
+.credit-partnership-block {
+  margin-top: 60px;
+  padding: 40px;
+  border-left: 8px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, white);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.credit-partnership-block .credit-label {
+  margin-bottom: 15px;
+  padding-right: 0;
+}
+
+.credit-partnership-block p {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: #111;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .credit-row {
+    flex-direction: column;
+    padding: 25px 0;
+  }
+  
+  .credit-row:hover {
+    padding-left: 0;
+    background-color: transparent;
+  }
+  
+  .credit-label {
+    flex: none;
+    margin-bottom: 8px;
+  }
+  
+  .credit-partnership-block {
+    padding: 25px;
+    border-left-width: 5px;
+  }
+  
+  .credit-partnership-block p {
+    font-size: 1.1rem;
+  }
+}
