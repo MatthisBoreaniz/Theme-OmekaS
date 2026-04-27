@@ -1,105 +1,57 @@
-.pve-podcasts {
-    padding: 80px 15px !important;
-    background: #f6f8fc !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-.pve-podcasts-inner {
-    max-width: 1100px !important;
-    margin: 0 auto !important;
-}
-
-.pve-podcasts-title {
+.pve-podcast-index {
+    padding: 80px 20px !important;
+    background: #f8fafc !important;
     text-align: center !important;
-    font-size: 38px !important;
+}
+
+.pve-podcast-index-title {
+    font-size: 36px !important;
     font-weight: 800 !important;
-    font-family: 'Montserrat', sans-serif !important;
     margin-bottom: 50px !important;
+    font-family: 'Montserrat', sans-serif !important;
     color: #0f172a !important;
 }
 
-/* =========================
-   FLEX SAFE 2 COL (Omeka-proof)
-   ========================= */
-.pve-podcasts-flex {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 28px !important;
+/* GRID */
+.pve-podcast-index-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    gap: 25px !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
 }
 
-/* =========================
-   CARD
-   ========================= */
-.pve-podcasts-card {
-    flex: 0 0 calc(50% - 14px) !important;
+/* ITEM */
+.pve-podcast-index-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
-    position: relative !important;
-    overflow: hidden !important;
+    height: 120px !important;
+    border-radius: 16px !important;
 
-    border-radius: 18px !important;
+    background: var(--accent) !important;
+    color: white !important;
+
+    font-size: 18px !important;
+    font-weight: 700 !important;
     text-decoration: none !important;
 
-    background: #fff !important;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
-
-    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+    transition: all 0.25s ease !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
 }
 
-.pve-podcasts-card:hover {
-    transform: translateY(-6px) !important;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.15) !important;
+/* HOVER */
+.pve-podcast-index-item:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
+    filter: brightness(1.1) !important;
 }
 
-/* =========================
-   IMAGE (tu gardes tes visuels)
-   ========================= */
-.pve-podcasts-img {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important;
-
-    display: block !important;
-    transition: transform 0.35s ease !important;
-}
-
-.pve-podcasts-card:hover .pve-podcasts-img {
-    transform: scale(1.05) !important;
-}
-
-/* =========================
-   LABEL SUR IMAGE (clean UI)
-   ========================= */
-.pve-podcasts-label {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-
-    padding: 16px 18px !important;
-
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.75),
-        rgba(0,0,0,0)
-    ) !important;
-
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-}
-
-/* =========================
-   MOBILE
-   ========================= */
-@media (max-width: 768px) {
-    .pve-podcasts-card {
-        flex: 0 0 100% !important;
+/* MOBILE */
+@media (max-width: 600px) {
+    .pve-podcast-index-item {
+        height: 100px !important;
+        font-size: 16px !important;
     }
-}   
+}
