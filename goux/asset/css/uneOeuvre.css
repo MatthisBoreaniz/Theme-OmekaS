@@ -82,10 +82,12 @@
   flex-wrap: wrap !important;
   gap: 25px !important;
   align-items: center !important;
+  justify-content: center !important;
+
 }
 
 .uneOeuvre-meta-item {
-  font-size: 0.95rem !important;
+  font-size: 1.1rem !important;
   color: #111111 !important;
   white-space: nowrap !important;
 }
