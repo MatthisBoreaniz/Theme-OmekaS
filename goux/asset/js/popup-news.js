@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const title = item["o:title"] || "Actualité";
 
+      // 🔒 sécurité : n'afficher que si le titre commence par 'actualité' ou 'actu'
+      // 🔒 sécurité : titre doit commencer par 'actualité' ou 'actu' (mot entier)
+      // ex: "Actualité du jour" ✅ | "Actu 2024" ✅ | "Actucscs" ❌
+      const titleNorm = title.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      if (!/^actualite/.test(titleNorm) && !/^actu([^a-z]|$)/.test(titleNorm)) return;
+
       const content =
         item["dcterms:description"]?.[0]?.["@value"] ||
         item["o:description"]?.[0]?.["@value"] ||
