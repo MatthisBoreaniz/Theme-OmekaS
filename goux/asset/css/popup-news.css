@@ -37,8 +37,8 @@
   border-radius: 50%;
   border: none;
 
-  background: color-mix(in srgb, var(--accent) 60%, black);
-  color: white;
+  background: white;
+  color: var(--accent);
 
   font-size: 18px;
   line-height: 1;
@@ -50,8 +50,10 @@
 }
 
 .popup-close:hover {
-  background: rgba(0,0,0,0.85);
+  background: var(--accent);
+  color: white;
   transform: scale(1.05);
+  border: none;
 }
 
 /* IMAGE */
@@ -104,6 +106,33 @@
 
 .popup-more:hover {
   opacity: 0.85;
+}
+
+.popup-btn {
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: white;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  width: fit-content;
+  border-radius: 4px;
+  margin-top: 12px;
+  border: 0.5px solid var(--accent);
+}
+
+.popup-btn:hover {
+  background-color: var(--accent, #2563eb);
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  width: fit-content;
+  border-radius: 4px;
 }
 
 /* ANIMATION */

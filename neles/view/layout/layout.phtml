@@ -24,6 +24,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/fond-archive-satic.css'
 $this->headLink()->appendStylesheet($this->assetUrl('css/unFond.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/unContenu.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/bio.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/popup-news.css'));
 $this->headScript()->appendFile($this->assetUrl('js/carousel.js'));
 $this->headScript()->appendFile($this->assetUrl('js/bio.js'));
 $this->headScript()->prependFile($this->assetUrl('js/default.js'));
@@ -148,6 +149,8 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/indexation.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/item-toolbar.js'); ?>"></script>
+<script>window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";</script>
+<script src="<?php echo $this->assetUrl('js/popup-news.js'); ?>"></script>
 
 
 
