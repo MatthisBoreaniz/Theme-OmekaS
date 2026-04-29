@@ -110,7 +110,7 @@
 }
 
 .affiche-dot.active {
-  background: #c0392b !important;
+  background: var(--accent) !important;
   transform: scale(1.25) !important;
   border: 1px solid #1a1a1a !important;
 }

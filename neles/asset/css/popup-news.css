@@ -135,6 +135,25 @@
   border-radius: 4px;
 }
 
+
+/*Custom scrollbar*/
+.popup-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.popup-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.popup-body::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-bottom-right-radius: 20px;
+}
+
+.popup-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
 /* ANIMATION */
 @keyframes popupFade {
   from {
