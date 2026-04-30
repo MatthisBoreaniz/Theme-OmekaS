@@ -1,0 +1,167 @@
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999; /* 👈 très important */
+}
+
+/* CARD */
+.popup-center {
+  width: 90%;
+  max-width: 520px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+  animation: popupFade 0.35s ease;
+  position: relative;
+}
+
+/* CLOSE BUTTON */
+.popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: none;
+
+  background: white;
+  color: var(--accent);
+
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+  z-index: 10;
+
+  transition: 0.2s;
+}
+
+.popup-close:hover {
+  background: var(--accent);
+  color: white;
+  transform: scale(1.05);
+  border: none;
+}
+
+/* IMAGE */
+.popup-image {
+  height: 220px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.popup-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* BODY */
+.popup-body {
+  padding: 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* TITLE */
+.popup-body h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.popup-text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+
+  white-space: pre-line; /* garde les retours à la ligne */
+}
+
+/* BUTTON "VOIR +" */
+.popup-more {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 16px;
+  background: var(--accent, #2563eb);
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.popup-more:hover {
+  opacity: 0.85;
+}
+
+.popup-btn {
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: white;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  width: fit-content;
+  border-radius: 4px;
+  margin-top: 12px;
+  border: 0.5px solid var(--accent);
+}
+
+.popup-btn:hover {
+  background-color: var(--accent, #2563eb);
+  color: white;
+  text-decoration: none;
+  transition: 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  width: fit-content;
+  border-radius: 4px;
+}
+
+
+/*Custom scrollbar*/
+.popup-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.popup-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.popup-body::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-bottom-right-radius: 20px;
+}
+
+.popup-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ANIMATION */
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

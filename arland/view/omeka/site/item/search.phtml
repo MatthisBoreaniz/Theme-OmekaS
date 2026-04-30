@@ -1,0 +1,435 @@
+<?php
+$translate = $this->plugin('translate');
+$this->htmlElement('body')->appendAttribute('class', 'items search');
+?>
+
+<div class="custom-search-container">
+
+    <div class="search-header">
+        <h2>Recherche avancée</h2>
+    </div>
+
+    <form id="advanced-search" method="get"
+        action="<?php echo $this->escapeHtml($this->url(null, ['action' => 'browse'], true)); ?>">
+
+        <?php
+        $this->headLink()->prependStylesheet($this->assetUrl('css/advanced-search.css', 'Omeka'));
+        $this->headScript()->appendFile($this->assetUrl('js/advanced-search.js', 'Omeka'));
+        $query = $this->params()->fromQuery();
+        ?>
+        <div class="advanced-search-content">
+            <?php
+            // Fetch Cote property ID dynamically
+            $propDataCote = $this->api()->searchOne('properties', ['term' => 'dcterms:bibliographicCitation'])->getContent();
+            $propertyIdCote = $propDataCote ? $propDataCote->id() : 'dcterms:bibliographicCitation';
+            
+            // Retain submitted value for Cote
+            $submittedTextCote = '';
+            if (isset($query['property'])) {
+                foreach ($query['property'] as $pq) {
+                    if (isset($pq['property']) && ($pq['property'] == $propertyIdCote || $pq['property'] == 'dcterms:bibliographicCitation')) {
+                        $submittedTextCote = $pq['text'] ?? '';
+                        break;
+                    }
+                }
+            }
+            ?>
+            <div id="cote-query" class="field">
+                <div class="field-meta">
+                    <label>Cote</label>
+                </div>
+                <div class="inputs">
+                    <input type="hidden" name="property[99][joiner]" value="and">
+                    <input type="hidden" name="property[99][property]" value="<?php echo $this->escapeHtml($propertyIdCote); ?>">
+                    <input type="hidden" name="property[99][type]" value="eq">
+                    <input type="text" name="property[99][text]" value="<?php echo $this->escapeHtml($submittedTextCote); ?>" placeholder="Cote">
+                </div>
+            </div>
+            
+            <div id="property-queries" class="field custom-filters">
+                <div class="field-meta">
+                    <span id="by-value-label" class="label">Filtres</span>
+                    <div class="field-description">Recherche par champs spécifiques</div>
+                </div>
+                <div class="inputs custom-filters-grid">
+                    <?php
+                    // Hack to elegantly fetch distinct values per site without heavy item queries
+                    $pathToCheck = __DIR__;
+                    $baseDir = null;
+                    // On remonte jusqu'à trouver le dossier 'config' à la racine d'Omeka
+                    for ($i = 0; $i < 10; $i++) {
+                        if (file_exists($pathToCheck . '/config/database.ini')) {
+                            $baseDir = $pathToCheck;
+                            break;
+                        }
+                        $pathToCheck = dirname($pathToCheck);
+                    }
+                    
+                    $dbConfig = $baseDir ? parse_ini_file($baseDir . '/config/database.ini') : [];
+                    $host = $dbConfig['host'] ?? '127.0.0.1';
+                    $dbname = $dbConfig['dbname'] ?? 'omekas';
+                    $user = $dbConfig['user'] ?? 'root';
+                    $password = $dbConfig['password'] ?? '';
+                    $port = isset($dbConfig['port']) && $dbConfig['port'] ? ';port=' . $dbConfig['port'] : '';
+                    
+                    try {
+                        $pdo = new \PDO("mysql:host={$host}{$port};dbname={$dbname}", $user, $password);
+                        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                    } catch (\Exception $e) {
+                        $pdo = null;
+                        // Log the error silently for debugging if enabled
+                        if (defined('APPLICATION_ENV') && APPLICATION_ENV === 'development') {
+                            error_log("Search custom filters PDO error: " . $e->getMessage());
+                        }
+                    }
+
+                    $customFilters = [
+                        ['label' => 'Année', 'term' => 'index:year'],
+                        ['label' => 'Lieu', 'term' => 'index:geogname'],
+                        ['label' => 'Organisme', 'term' => 'index:corpname'],
+                        ['label' => 'Personne', 'term' => 'index:persname'],
+                        ['label' => 'Sujet', 'term' => 'index:subject'],
+                        ['label' => 'Typologie documentaire', 'term' => 'index:recordType'],
+                    ];
+                    
+                    $siteId = $this->layout()->site->id();
+                    $index = 0;
+                    
+                    foreach ($customFilters as $filter):
+                        // Fetch proper property ID dynamically
+                        $propData = $this->api()->searchOne('properties', ['term' => $filter['term']])->getContent();
+                        $propertyId = $propData ? $propData->id() : $filter['term'];
+                        
+                        // Retain submitted values
+                        $submittedText = '';
+                        if (isset($query['property'])) {
+                            foreach ($query['property'] as $pq) {
+                                if (isset($pq['property']) && ($pq['property'] == $propertyId || $pq['property'] == $filter['term'])) {
+                                    $submittedText = $pq['text'] ?? '';
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // Fetch distinct values for datalist
+                        $distinctValues = [];
+                        if (empty($filter['nolist']) && $pdo && is_numeric($propertyId)) {
+                            $stmt = $pdo->prepare("
+                                SELECT DISTINCT value
+                                FROM value
+                                WHERE property_id = :propertyId
+                                AND value IS NOT NULL
+                                AND value != ''
+                                ORDER BY value ASC
+                            ");
+                            $stmt->execute(['propertyId' => $propertyId]);
+                            $distinctValues = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+                        }
+                        
+                        $listId = "list_" . $index;
+                    ?>
+                    <div class="custom-filter-item">
+                        <label><?php echo $this->escapeHtml($filter['label']); ?></label>
+                        <input type="hidden" name="property[<?php echo $index; ?>][joiner]" value="and">
+                        <input type="hidden" name="property[<?php echo $index; ?>][property]" value="<?php echo $this->escapeHtml($propertyId); ?>">
+                        <input type="hidden" name="property[<?php echo $index; ?>][type]" value="eq">
+                        <input type="text" name="property[<?php echo $index; ?>][text]" value="<?php echo $this->escapeHtml($submittedText); ?>" placeholder="<?php echo $this->escapeHtml($filter['label']); ?>" <?php if (!empty($distinctValues)) echo 'list="' . $listId . '"'; ?>>
+                        <?php if (!empty($distinctValues)): ?>
+                        <datalist id="<?php echo $listId; ?>">
+                            <?php foreach ($distinctValues as $val): ?>
+                                <option value="<?php echo $this->escapeHtml($val); ?>"></option>
+                            <?php endforeach; ?>
+                        </datalist>
+                        <?php endif; ?>
+                    </div>
+                    <?php 
+                    $index++;
+                    endforeach; 
+                    ?>
+                </div>
+            </div>
+            
+            <?php echo $this->partial('common/advanced-search/fulltext', ['query' => $query, 'resourceType' => 'item']); ?>
+            <?php echo $this->partial('common/advanced-search/resource-template-restrict', ['query' => $query, 'resourceType' => 'item']); ?>
+        </div>
+        <script>Omeka.prepareSearchForm($('#advanced-search'));</script>
+
+        <div id="page-actions" class="search-actions">
+            <button type="submit" name="submit" class="btn-submit">RECHERCHE</button>
+            <button type="button" class="btn-reset" id="reset-search">réinitialiser</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('reset-search').addEventListener('click', function () {
+            var form = document.getElementById('advanced-search');
+            // Clear all text inputs
+            form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function (input) {
+                input.value = '';
+            });
+            // Reset all selects to first option
+            form.querySelectorAll('select').forEach(function (select) {
+                select.selectedIndex = 0;
+            });
+            // Remove extra value rows (cloned by Omeka's add-value)
+            form.querySelectorAll('.value:not(:first-child)').forEach(function (row) {
+                row.remove();
+            });
+        });
+    });
+</script>
+
+<style>
+    /* ══════════════════════════════════════════
+       Search page – neles theme
+       ══════════════════════════════════════════ */
+
+    /* Conteneur principal */
+    .custom-search-container {
+        max-width: 900px;
+        padding: 0 20px;
+        font-family: 'Open Sans', sans-serif;
+        padding: 40px;
+        margin: 0 auto;
+    }
+
+    /* Titre avec les petites lignes sur le côté */
+    .search-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .search-header h2 {
+        display: inline-block;
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #1a1a1a;
+        position: relative;
+        margin: 0;
+    }
+
+    .search-header h2::before,
+    .search-header h2::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 50px;
+        height: 1.5px;
+        background-color: var(--accent, #920b0b);
+    }
+
+    .search-header h2::before {
+        right: 100%;
+        margin-right: 20px;
+    }
+
+    .search-header h2::after {
+        left: 100%;
+        margin-left: 20px;
+    }
+
+    /* ── Grid layout on the wrapper that contains the .field elements ── */
+    #advanced-search .advanced-search-content {
+        display: flex !important;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* ── Card style for each .field ── */
+    #advanced-search .advanced-search-content>.field {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 22px;
+        margin: 0 !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        display: block !important;
+        flex-wrap: nowrap !important;
+    }
+
+    /* ── Labels ── */
+    #advanced-search .advanced-search-content>.field .field-meta {
+        width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 12px;
+    }
+
+    #advanced-search .advanced-search-content>.field .field-meta label {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #222;
+        display: block;
+        margin-bottom: 0;
+    }
+
+    #advanced-search .advanced-search-content>.field .field-description {
+        font-size: 0.8rem;
+        color: #999;
+        margin-top: 4px;
+    }
+
+    /* ── Inputs wrapper ── */
+    #advanced-search .advanced-search-content>.field .inputs {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* ── Inputs & selects ── */
+    #advanced-search .advanced-search-content input[type="text"],
+    #advanced-search .advanced-search-content input[type="search"],
+    #advanced-search .advanced-search-content select {
+        width: 100% !important;
+        padding: 10px 12px;
+        border: 1.5px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 8px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.9rem;
+        transition: border-color 0.2s ease;
+        appearance: auto;
+    }
+
+    #advanced-search .advanced-search-content input[type="text"]:focus,
+    #advanced-search .advanced-search-content input[type="search"]:focus,
+    #advanced-search .advanced-search-content select:focus {
+        border-color: var(--accent, #920b0b);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(146, 11, 11, 0.08);
+    }
+
+    /* ── Add/Remove value buttons ── */
+    #advanced-search .add-value,
+    #advanced-search .remove-value {
+        background-color: var(--accent, #920b0b) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        transition: opacity 0.2s ease;
+    }
+
+    #advanced-search .add-value:hover,
+    #advanced-search .remove-value:hover {
+        opacity: 0.8;
+    }
+
+    /* ── Flaubert Custom Filters Grid ── */
+    .custom-filters-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .custom-filter-item {
+        flex: 1 1 calc(33.333% - 15px);
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .custom-filter-item label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #444;
+    }
+
+    .custom-filter-item input[type="text"] {
+        width: 100% !important;
+    }
+
+    /* end of custom search css */
+
+    /* ══════════════════════════════════════════
+       Action buttons
+       ══════════════════════════════════════════ */
+    .search-actions {
+        display: flex;
+        gap: 15px;
+        padding-top: 25px;
+        justify-content: flex-start;
+    }
+
+    .btn-submit,
+    .btn-reset {
+        padding: 12px 36px;
+        border-radius: 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.25s ease;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .btn-submit {
+        background-color: var(--accent, #920b0b);
+        color: #fff;
+        border: 2px solid var(--accent, #920b0b);
+    }
+
+    .btn-submit:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-reset {
+        background-color: #fff;
+        color: var(--accent, #920b0b);
+        border: 2px solid #ddd;
+    }
+
+    .btn-reset:hover {
+        border-color: var(--accent, #920b0b);
+        background-color: #fafafa;
+    }
+
+    /* ══════════════════════════════════════════
+       Responsive
+       ══════════════════════════════════════════ */
+    @media screen and (max-width: 768px) {
+        #advanced-search .advanced-search-content {
+            grid-template-columns: 1fr !important;
+        }
+
+        #advanced-search .advanced-search-content>.field {
+            grid-column: 1 / -1 !important;
+        }
+
+        .search-header h2 {
+            font-size: 1.6rem;
+        }
+
+        .search-header h2::before,
+        .search-header h2::after {
+            width: 30px;
+        }
+
+        .search-actions {
+            display: block;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .btn-submit,
+        .btn-reset {
+            display: block;
+            margin: 10px auto;
+        }
+    }
+</style>

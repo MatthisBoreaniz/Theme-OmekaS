@@ -1,0 +1,139 @@
+/* SUPPRIMER LES MARGES OMEKA */
+
+#content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.block.block-html {
+    margin: 0;
+}
+
+/* ============================================================
+   TESTIMONIALS 
+   ============================================================ */
+
+/* Styles généraux pour le conteneur principal */
+.testimonial-section {
+  background-color: #f0f0f0;
+  padding: 60px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px; 
+  font-family: 'Futura PT', 'Futura', sans-serif; 
+}
+
+
+.testimonial-quote-wrapper {
+  max-width: 580px;
+}
+
+.testimonial-text {
+  position: relative; 
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 20px 30px;
+}
+
+
+.testimonial-text::before,
+.testimonial-text::after {
+  position: absolute;
+  font-family: 'Merriweather', serif;
+  font-size: 5rem;
+  color: #1a1a1a;
+  line-height: 0.5;
+}
+
+
+.testimonial-text::before {
+  content: '\201C';
+  top: 15px;
+  left: -20px;
+}
+
+
+.testimonial-text::after {
+  content: '\201D';
+  bottom: -15px;
+  right: -10px;
+}
+
+
+.testimonial-author-wrapper {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.author-name-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author-line {
+  width: 15px;
+  height: 1px;
+  background-color: #1a1a1a;
+}
+
+.author-name {
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 600;
+}
+
+.author-title {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0;
+  margin-left: 27px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .testimonial-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 60px 40px;
+  }
+}
+
+/* =========================================
+   INFO-BULLE PERSONNALISÉE (ALT DES IMAGES)
+   ========================================= */
+
+.custom-alt-tooltip {
+    position: fixed; /* Suit la souris par rapport à l'écran */
+    background-color: rgba(0, 0, 0, 0.85); /* Fond noir légèrement transparent */
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    max-width: 300px;
+    word-wrap: break-word;
+    pointer-events: none; /* Empêche l'info-bulle de bloquer le clic sur l'image */
+    z-index: 99999; /* Toujours au-dessus du reste */
+    
+    /* Par défaut : caché et disparition immédiate quand on quitte l'image */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* L'état quand on survole l'image depuis 1 seconde */
+.custom-alt-tooltip.is-visible {
+    opacity: 1;
+    visibility: visible;
+    /* La magie est ici : on attend 1s (1s) avant de lancer l'animation (0.3s) */
+    transition: opacity 0.3s ease 1s, visibility 0.3s ease 1s; 
+}

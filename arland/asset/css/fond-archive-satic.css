@@ -1,0 +1,364 @@
+.archive-fonds-hero {
+    display: flex;
+    border-bottom: 1px solid #000;
+    background-color: #fff;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.archive-fonds-hero-img-wrap {
+    flex: 0 0 60%;
+    border-right: 1px solid #000
+}
+
+.archive-fonds-hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.archive-fonds-hero-text-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 40px;
+    box-sizing: border-box;
+}
+
+.archive-fonds-hero-ref {
+    color: #666;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin: 0 0 15px 0;
+    font-family: 'futura-pt', 'Open Sans', sans-serif;
+}
+
+.archive-fonds-hero-title {
+    font-size: 2.4rem;
+    color: #111;
+    line-height: 1.2;
+    margin: 0;
+    font-weight: bold;
+}
+
+.archive-fonds-hero-dates-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.archive-fonds-hero-dates {
+    color: #8b3a3a;
+    border: 1px solid #8b3a3a;
+    padding: 6px 18px;
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: 'futura-pt', 'Open Sans', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .archive-fonds-hero {
+        flex-direction: column;
+        max-height: none;
+    }
+    
+    .archive-fonds-hero-img-wrap {
+        border-right: none;
+        border-bottom: 1px solid #000;
+    }
+    
+    .archive-fonds-hero-img-wrap img {
+        max-height: 200px;
+    }
+    
+    .archive-fonds-hero-text-wrap {
+        padding: 25px;
+    }
+}
+
+
+.archives-fonds-pres {
+    width: 75%;
+    padding: 20px 80px;
+}
+
+.archives-fonds-pres-titre {
+    font-family: 'futura-pt', 'Open Sans', sans-serif !important;
+    font-weight: 300 !important;
+    padding-bottom: 20px;
+}
+
+.archives-fonds-pres-text {
+    font-family: 'futura-pt', 'Open Sans', sans-serif !important;
+    font-weight: 300 !important;
+}
+
+@media (max-width: 768px) {
+        .archives-fonds-pres {
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+    }
+}
+
+/* archives-fonds-presentation des contenus */
+
+.archives-fonds-subtitle{
+    font-family: 'futura-pt', 'Open Sans', sans-serif !important;
+    font-weight: 300 !important;
+    padding: 0px 80px;
+}
+
+.index-fonds-content-card {
+    display: flex;
+    max-width: 100%;
+    padding: 0 80px;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.index-fonds-content-text-col {
+    flex: 1;
+    background-color: #f9f9f9;
+    border: 1px solid #444;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.index-fonds-content-img-col {
+    flex: 0 0 42%;
+}
+
+.index-fonds-content-img {
+    width: 70%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.index-fonds-content-title {
+    font-family: 'Georgia', serif;
+    font-size: 2.2rem;
+    color: #111;
+    line-height: 1.3;
+    margin: 0 0 25px 0;
+    font-weight: bold;
+}
+
+.index-fonds-content-desc {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.05rem;
+    color: #222;
+    line-height: 1.6;
+    margin: 0 0 40px 0;
+}
+
+.index-fonds-content-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 1px solid var(--accent);
+    border-radius: 40px;
+    text-decoration: none;
+    color: #111;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.index-fonds-content-btn:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+
+@media (max-width: 1200px) {
+.index-fonds-content-card {
+        gap: 15px;
+    }
+
+    .index-fonds-content-img-col {
+        flex: 0 0 45%;
+    }
+
+    .index-fonds-content-text-col {
+        padding: 30px;
+    }
+
+    .index-fonds-content-title {
+        font-size: 1.8rem;
+        margin: 0 0 15px 0;
+    }
+
+    .index-fonds-content-desc {
+        font-size: 0.95rem;
+        margin: 0 0 25px 0;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+    .index-fonds-content-card {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .index-fonds-content-text-col {
+        padding: 30px 20px;
+    }
+
+    .index-fonds-content-img-col {
+        order: -1;
+    }
+    .index-fonds-content-img {
+        width: 30%;
+        margin: 0 auto;
+        display: block;
+        object-fit: cover;
+    }
+       .archives-fonds-subtitle{
+    font-family: 'futura-pt', 'Open Sans', sans-serif !important;
+    font-weight: 300 !important;
+    text-align: center;
+}
+}
+
+/* Enlever les surplus et les navigation automatique */
+.site-page-pagination {
+    display: none;
+}
+.navigation {
+    display: none;
+}
+
+.block-itemWithMetadata {
+    margin: 0px !important;
+    padding: 20px !important;
+}
+
+
+/* mettre en forme les metadata */
+
+.block-itemWithMetadata .resource dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #626262;
+    border-radius: 12px;
+    padding: 30px 40px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.block-itemWithMetadata .resource .property {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding: 15px 0;
+    border-bottom: 1px solid #d6d5d5;
+}
+
+.block-itemWithMetadata .resource .property dt {
+    flex: 0 0 40%;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+
+.block-itemWithMetadata .resource .property dd {
+    flex: 1;
+    margin: 0;
+    text-align: left;
+    color: #111;
+    font-size: 1rem;
+
+    /* empêche le texte de sortir du cadre */
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.block-itemWithMetadata .resource .value-content {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.block-itemWithMetadata .resource .property:nth-last-child(-n+2) {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .block-itemWithMetadata .resource dl {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        margin: 0 15px;
+    }
+
+    .block-itemWithMetadata .resource .property {
+        flex-direction: column;
+    }
+
+    .block-itemWithMetadata .resource .property dt {
+        margin-bottom: 8px;
+        color: #666;
+    }
+
+    .block-itemWithMetadata .resource .property:nth-last-child(2) {
+        border-bottom: 1px solid #d6d5d5;
+    }
+}
+
+
+/* Cache l'intégralité du bloc Médias dans les métadonnées */
+.block-itemWithMetadata .resource .media-list {
+    display: none !important;
+}
+
+.block-itemWithMetadata .resource .site-pages {
+    display: none !important;
+}
+
+
+.export-wrap {
+  text-align: center !important;
+  padding: 40px 20px !important;
+}
+
+.export-title {
+  font-size: 1.3rem !important;
+  font-weight: 300 !important;
+  margin-bottom: 30px !important;
+  color: #111 !important;
+}
+
+.export-buttons {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+}
+
+.export-btn {
+  padding: 10px 28px !important;
+  border: 1.5px solid var(--accent) !important;
+  border-radius: 40px !important;
+  text-decoration: none !important;
+  color: #111 !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.export-btn:hover {
+  background-color: var(--accent);
+  color: #fff !important;
+}
