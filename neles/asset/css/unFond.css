@@ -416,9 +416,9 @@
 
 .unfond-fonds-hero-text-wrap {
     flex: 1;
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 30px 40px;
     box-sizing: border-box;
 }
@@ -432,17 +432,22 @@
 }
 
 .unfond-fonds-hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
     font-size: 2.5rem !important;
     color: #111;
     line-height: 1.2;
-    margin: 0;
     font-weight: bold;
+    text-align: center;
 }
 
 .unfond-fonds-hero-dates-wrap {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: auto;
 }
 
 .unfond-fonds-hero-dates {
@@ -604,4 +609,40 @@ body.item.show .content > h2 {
     text-align: center !important;
     border-radius: 0px 8px 8px 0px !important;
 
+}
+
+
+
+/* responsive hero */
+
+@media (max-width: 768px) {
+    .unfond-fonds-hero {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .unfond-fonds-hero-img-wrap {
+        border-right: none;
+        border-bottom: 1px solid #000;
+    }
+
+    .unfond-fonds-hero-img-wrap img {
+        max-height: 200px;
+    }
+
+    .unfond-fonds-hero-text-wrap {
+        padding: 25px;
+        gap: 30px;
+    }
+
+    .unfond-fonds-hero-title {
+        position: static;
+        transform: none;
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    .unfond-fonds-hero-dates-wrap {
+        justify-content: flex-start;
+    }
 }

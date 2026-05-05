@@ -20,9 +20,9 @@
 
 .archive-fonds-hero-text-wrap {
     flex: 1;
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 30px 40px;
     box-sizing: border-box;
 }
@@ -36,17 +36,22 @@
 }
 
 .archive-fonds-hero-title {
-    font-size: 2.4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 2.5rem !important;
     color: #111;
     line-height: 1.2;
-    margin: 0;
     font-weight: bold;
+    text-align: center;
 }
 
 .archive-fonds-hero-dates-wrap {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: auto;
 }
 
 .archive-fonds-hero-dates {
@@ -75,6 +80,18 @@
     
     .archive-fonds-hero-text-wrap {
         padding: 25px;
+        gap: 30px;
+    }
+
+    .archive-fonds-hero-title {
+        position: static;
+        transform: none;
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    .archive-fonds-hero-dates-wrap {
+        justify-content: flex-start;
     }
 }
 
