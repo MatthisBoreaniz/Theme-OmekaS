@@ -84,3 +84,20 @@ i, em {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+
+.block.block-pageTitle {
+    text-align: center; 
+    width: 100%;
+    padding: 80px 0 !important; 
+    margin: 0 !important;
+}
+
+.block.block-pageTitle h2 {
+    position: relative;         
+    display: inline-block;      
+    width: auto;
+    margin: 0 !important;
+    padding: 0 140px !important; 
+    font-size: 3.5rem !important;
+    line-height: 1.1; 
+}

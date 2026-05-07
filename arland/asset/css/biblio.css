@@ -1,0 +1,66 @@
+/* Conteneur principal */
+.bibliography-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: transparent;
+    color: #333333;
+}
+
+/* Grille/Liste de la bibliographie */
+.biblio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Style de chaque élément (la carte) */
+.biblio-item {
+    background-color: #ffffff;
+    padding: 1.2rem 1.5rem;
+    border-radius: 6px;
+    border-left: 4px solid #eaeaea;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Animation au survol */
+.biblio-item:hover {
+    border-left-color: var(--accent);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Auteurs en gras */
+.author {
+    font-weight: 700;
+    color: #111111;
+}
+
+/* Titres d'ouvrages en italique */
+.title-book {
+    font-style: italic;
+}
+
+/* Titres d'articles avec guillemets automatiques */
+.title-article {
+    font-style: normal;
+}
+.title-article::before { 
+    content: "« "; 
+}
+.title-article::after { 
+    content: " »"; 
+}
+
+/* Liens cliquables */
+.biblio-link {
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-all;
+}
+.biblio-link:hover {
+    text-decoration: underline;
+}
