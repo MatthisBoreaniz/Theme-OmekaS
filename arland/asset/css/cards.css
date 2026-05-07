@@ -1,0 +1,186 @@
+
+.arland-cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1000px !important;
+    margin: 40px auto 0 auto !important;
+    padding: 20px !important;
+    /* On ajoute une transition sur la grille elle-même pour l'espacement */
+    transition: all 0.5s ease-in-out !important; 
+}
+
+.arland-card {
+    background: color-mix(in srgb, white 90%, var(--accent)) !important;
+    border-radius: 12px !important; 
+    overflow: hidden !important; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    /* On combine toutes les transitions ici pour adoucir le redimensionnement ET le survol */
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, padding 0.5s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.arland-card-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block !important;
+}
+
+.arland-card:hover {
+    transform: translateY(-8px) !important; 
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+.arland-card-image-box {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    overflow: hidden !important;
+    background-color: #f4f4f4 !important;
+}
+
+.arland-card-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; 
+    transition: transform 0.5s ease !important;
+}
+
+.arland-card-content {
+    padding: 25px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important; 
+    gap: 15px !important;
+    transition: padding 0.5s ease-in-out, flex-direction 0.5s ease-in-out !important;
+}
+
+.arland-card-title {
+    font-family: "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 1.3rem !important; 
+    font-weight: 600 !important;
+    color: #222 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+}
+
+.arland-card-btn {
+    display: inline-block !important;
+    background-color: var(--accent) !important; 
+    color: #ffffff !important;
+    padding: 10px 20px !important;
+    border-radius: 50px !important; 
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+    border: 2px solid transparent !important;
+}
+
+.arland-card-btn:hover {
+    filter: brightness(1.1) !important;
+    text-decoration: none !important;
+    background-color: color-mix(in srgb, var(--accent) 70%, white 30%) !important;
+}
+
+.arland-card--wide {
+    grid-column: 1 / -1 !important; 
+}
+
+.arland-card-image-box--wide {
+    aspect-ratio: 21 / 9 !important; 
+    max-height: 450px !important; 
+}
+
+.arland-card-image-box--wide .arland-card-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+    object-position: top center !important; 
+    display: block !important;
+}
+
+.arland-card-content--wide {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 30px !important;
+    gap: 20px !important;
+
+}
+
+.arland-card-image-box .arland-card-link {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.arland-card-image-box .arland-card-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+}
+
+@media (max-width: 900px) {
+    .arland-card-content--wide {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+    .arland-card-action {
+        width: 100% !important;
+    }
+    .arland-card-content--wide .arland-card-btn {
+        width: 100% !important;
+        text-align: center !important;
+        margin-top: 10px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .recherche-text {
+        width: 80% !important;
+        padding: 20px !important;
+    }
+    .recherche-paragraph {
+        text-align: start !important;
+    }
+    .arland-card-image-box--wide {
+        aspect-ratio: 16 / 9 !important; 
+        max-height: none !important;
+    }
+    .arland-card-content--wide {
+        padding: 25px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .arland-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .arland-card-content {
+        padding: 20px 15px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    .arland-card-btn {
+        margin-top: 15px !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .arland-card-content--wide {
+        padding: 20px 15px !important; 
+    }
+    .arland-card-content--wide .arland-card-btn {
+        margin-top: 15px !important;
+    }
+}
+
+
+
+
+/* Grandes cards avec image à gauche et description à droite */
