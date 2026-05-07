@@ -9,111 +9,13 @@
     margin: 0;
 }
 
-/* ============================================================
-   TESTIMONIALS 
-   ============================================================ */
-
-/* Styles généraux pour le conteneur principal */
-.testimonial-section {
-  background-color: #f0f0f0;
-  padding: 60px 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 80px; 
-  font-family: 'Futura PT', 'Futura', sans-serif; 
-}
-
-
-.testimonial-quote-wrapper {
-  max-width: 580px;
-}
-
-.testimonial-text {
-  position: relative; 
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: #1a1a1a;
-  margin: 0;
-  padding: 20px 30px;
-}
-
-
-.testimonial-text::before,
-.testimonial-text::after {
-  position: absolute;
-  font-family: 'Merriweather', serif;
-  font-size: 5rem;
-  color: #1a1a1a;
-  line-height: 0.5;
-}
-
-
-.testimonial-text::before {
-  content: '\201C';
-  top: 15px;
-  left: -20px;
-}
-
-
-.testimonial-text::after {
-  content: '\201D';
-  bottom: -15px;
-  right: -10px;
-}
-
-
-.testimonial-author-wrapper {
-  max-width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.author-name-group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.author-line {
-  width: 15px;
-  height: 1px;
-  background-color: #1a1a1a;
-}
-
-.author-name {
-  font-size: 0.95rem;
-  color: #1a1a1a;
-  margin: 0;
-  font-weight: 600;
-}
-
-.author-title {
-  font-size: 0.85rem;
-  color: #555;
-  margin: 0;
-  margin-left: 27px;
-  line-height: 1.5;
-  font-weight: 300;
-}
-
-@media (max-width: 900px) {
-  .testimonial-section {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 40px;
-    padding: 60px 40px;
-  }
-}
-
 /* =========================================
    INFO-BULLE PERSONNALISÉE (ALT DES IMAGES)
    ========================================= */
 
 .custom-alt-tooltip {
-    position: fixed; /* Suit la souris par rapport à l'écran */
-    background-color: rgba(0, 0, 0, 0.85); /* Fond noir légèrement transparent */
+    position: fixed; 
+    background-color: rgba(0, 0, 0, 0.85); 
     color: #fff;
     padding: 6px 12px;
     border-radius: 4px;
@@ -121,19 +23,269 @@
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     max-width: 300px;
     word-wrap: break-word;
-    pointer-events: none; /* Empêche l'info-bulle de bloquer le clic sur l'image */
-    z-index: 99999; /* Toujours au-dessus du reste */
+    pointer-events: none;
+    z-index: 99999;
     
-    /* Par défaut : caché et disparition immédiate quand on quitte l'image */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-/* L'état quand on survole l'image depuis 1 seconde */
 .custom-alt-tooltip.is-visible {
     opacity: 1;
     visibility: visible;
-    /* La magie est ici : on attend 1s (1s) avant de lancer l'animation (0.3s) */
     transition: opacity 0.3s ease 1s, visibility 0.3s ease 1s; 
+}
+
+
+/* =========================================
+   Carousel
+   ========================================= */
+
+   .arland-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Lato', sans-serif;
+  background: #111;
+}
+ 
+.arland-track {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.77, 0, 0.18, 1);
+  will-change: transform;
+}
+ 
+.arland-slide {
+  min-width: 100%;
+  background: #8D323B;
+  transition: background 0.7s ease;
+}
+ 
+.arland-slide-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 420px;
+  max-height: 500px;
+}
+ 
+.arland-slide-text {
+  padding: 3rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  color: #fff;
+}
+ 
+.arland-slide-num {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+ 
+.arland-slide-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0;
+  color: #fff;
+}
+ 
+.arland-slide-desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.75;
+  opacity: 0.88;
+  margin: 0;
+  max-width: 480px;
+}
+ 
+.arland-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.7rem 1.8rem;
+  background: #fff;
+  color: #111 !important;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+  text-decoration: none !important;
+  width: fit-content;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.arland-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+ 
+.arland-slide-img {
+  overflow: hidden;
+  position: relative;
+}
+ 
+.arland-slide-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.8s ease;
+}
+ 
+.arland-slide:hover .arland-slide-img img {
+  transform: scale(1.03);
+}
+ 
+/* NAV BUTTONS */
+.arland-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+ 
+.arland-nav:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-50%) scale(1.08);
+}
+ 
+.arland-prev { left: 1.2rem; }
+.arland-next { right: 1.2rem; }
+ 
+/* DOTS */
+.arland-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+ 
+.arland-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+}
+ 
+.arland-dot.active {
+  background: #fff;
+  transform: scale(1.3);
+}
+ 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .arland-slide-content {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+  .arland-slide-img {
+    height: 220px;
+  }
+  .arland-slide-text {
+    padding: 2rem 1.5rem;
+  }
+  .arland-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+}
+
+/* =========================================
+   Section presentation et CTA
+   ========================================= */
+
+  .arland-home-split-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.arland-home-split-img {
+  overflow: hidden;
+}
+
+.arland-home-split-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.arland-home-split-text {
+  padding: 3rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  background: #fff;
+}
+
+.arland-home-split-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  margin: 0;
+}
+
+.arland-home-split-btn {
+  display: inline-block;
+  padding: 0.7rem 2rem;
+  border: 1px solid #222;
+  border-radius: 999px;
+  color: #222 !important;
+  text-decoration: none !important;
+  font-size: 0.9rem;
+  width: fit-content;
+  transition: background 0.2s, color 0.2s;
+}
+
+.arland-home-split-btn:hover {
+  background: #222;
+  color: #fff !important;
+}
+
+@media (max-width: 768px) {
+  .arland-home-split-block {
+    grid-template-columns: 1fr;
+  }
+
+  .arland-home-split-img {
+    height: 260px;
+  }
+
+  .arland-home-split-text {
+    padding: 2rem 1.5rem;
+  }
 }
