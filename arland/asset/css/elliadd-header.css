@@ -125,7 +125,7 @@ footer {
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    gap: 96px    !important;
+    gap: 20px    !important;
     background: transparent !important;
     height: auto !important;
     overflow: visible !important;
@@ -144,7 +144,7 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a {
     color: #000 !important;
     text-decoration: none !important;
-    font-size: 24px !important;
+    font-size: 20px !important;
     font-family: 'futura-pt', sans-serif;
     font-weight: 300 !important;
     transition: color 0.3s ease !important;
@@ -414,7 +414,7 @@ footer {
    Mobile (≤ 800px)
    ══════════════════════════════════════════ */
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     #elliadd-header.elliadd-header {
         padding: 15px 20px !important;
     }

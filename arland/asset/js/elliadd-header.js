@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* ── Submenu toggle buttons ── */
-    var isMobile = function() { return window.innerWidth <= 1100; };
+    var isMobile = function() { return window.innerWidth <= 1200; };
 
     var navItems = document.querySelectorAll('#elliadd-header .elliadd-header-nav ul.navigation > li');
     navItems.forEach(function(li) {
