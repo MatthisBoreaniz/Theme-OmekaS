@@ -4,8 +4,8 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
     gap: 30px !important;
     max-width: 1000px !important;
-    margin: 40px auto 0 auto !important;
-    padding: 20px !important;
+    margin: 0px auto 0 auto !important;
+    padding: 40px !important;
     /* On ajoute une transition sur la grille elle-même pour l'espacement */
     transition: all 0.5s ease-in-out !important; 
 }
