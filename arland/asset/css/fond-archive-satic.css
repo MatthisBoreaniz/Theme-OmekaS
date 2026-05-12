@@ -4,6 +4,7 @@
 .archive-fonds-hero {
     display: flex;
     border-bottom: 1px solid #999;
+    border-top: 1px solid #999;
     background-color: #fff;
     max-height: 400px;
     overflow: hidden;
