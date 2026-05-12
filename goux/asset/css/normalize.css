@@ -70,6 +70,18 @@
     }
 }
 
+/* Désactive les barres décoratives si le conteneur contient une liste de pages */
+.blocks-inner:has(.block-listOfPages) .block.block-pageTitle h2::before,
+.blocks-inner:has(.block-listOfPages) .block.block-pageTitle h2::after {
+    display: none !important;
+}
+
+/* Optionnel : Ajuster le padding du titre quand les barres disparaissent 
+   pour éviter un grand espace vide sur les côtés */
+.blocks-inner:has(.block-listOfPages) .block.block-pageTitle h2 {
+    padding: 0 !important;
+}
+
 /* ===================== */
 /* Biographie titleSection */
 /* ======================*/

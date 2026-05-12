@@ -1,0 +1,381 @@
+/* ===== MIRADOR (fix global) ===== */
+body:not(:has(.block-listOfPages)) #mirador, 
+body:not(:has(.block-listOfPages)) .mirador-container, 
+body:not(:has(.block-listOfPages)) [id^="mirador"],
+body:not(:has(.block-listOfPages)) .block-mirador {
+    display: block !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    height: 700px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin: 0 auto !important;
+}
+
+/* ===== METADATA (EXCLUSION MIRADOR) ===== */
+.resource.show dl:not(.mirador-label-value-metadata),
+.block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    column-gap: 50px !important;
+    max-width: 1200px !important;
+    margin: 20px auto !important;
+    border: 1px solid #626262 !important;
+    border-radius: 12px !important;
+    padding: 30px 40px !important;
+    background-color: #f4f4f4 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+.resource.show .property,
+.block-itemWithMetadata .resource .property {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    padding: 15px 0 !important;
+    border-bottom: 1px solid #d6d5d5 !important;
+}
+
+.resource.show .property dt,
+.block-itemWithMetadata .resource .property dt {
+    flex: 0 0 40% !important;
+    font-weight: bold !important;
+    color: #000 !important;
+    margin: 0 !important;
+    margin-right: 20px !important;
+}
+
+.resource.show .property dd,
+.block-itemWithMetadata .resource .property dd {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    flex: 1 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    color: #111 !important;
+    font-size: 1rem !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+.resource.show .property:last-child,
+.block-itemWithMetadata .resource .property:nth-last-child(-n+2) {
+    border-bottom: none !important;
+}
+
+/* ===== TRUNCATE ===== */
+.value-truncate-container {
+    width: 100% !important;
+    text-align: left !important;
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.value-truncate-container.is-truncated::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(transparent, #f4f4f4);
+    pointer-events: none;
+}
+
+/* ===== BUTTON READ MORE ===== */
+.btn-read-more {
+    align-self: center !important;
+    margin: 15px 0 5px 0 !important;
+    width: max-content !important;
+    float: none !important;
+    padding: 6px 16px !important;
+    background-color: white !important;
+    color: #626262 !important;
+    border: 1px solid #626262 !important;
+    border-radius: 4px !important;
+    font-size: 0.85rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-read-more:hover {
+    background-color: #626262 !important;
+    color: white !important;
+}
+
+/* ===== MASQUAGE ELEMENTS NATIFS ===== */
+body.item.show .content > h3 {
+    display: none !important;
+}
+
+body.item.show .site-pages {
+    display: none !important;
+}
+
+/* ===== Bouton Retour ===== */
+body.item.show .content {
+    position: relative !important;
+}
+
+.btn-back-wrap {
+    text-align: center !important;
+    width: 100% !important;
+    margin: 20px 0 10px 0 !important;
+}
+
+.btn-back-item {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 8px 20px !important;
+    border: 1.5px solid var(--accent) !important;
+    border-radius: 40px !important;
+    background: transparent !important;
+    color: #111 !important;
+    font-size: 0.9rem !important;
+    font-family: 'futura-pt', 'Open Sans', sans-serif !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    z-index: 10 !important;
+}
+
+.btn-back-item:hover {
+    background-color: var(--accent) !important;
+    color: #fff !important;
+}
+
+.btn-back-item svg {
+    width: 16px !important;
+    height: 16px !important;
+    stroke: currentColor !important;
+    fill: none !important;
+    stroke-width: 2 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+    transition: transform 0.3s ease !important;
+}
+
+.btn-back-item:hover svg {
+    transform: translateX(-4px) !important;
+}
+
+/* ===== TITRE ===== */
+body.item.show .content > h2 {
+    font-size: 1.6rem !important;
+    font-weight: 600 !important;
+    color: var(--accent) !important;
+    padding: 18px 30px !important;
+    border-left: 3px solid var(--accent) !important;
+    background: color-mix(in srgb, var(--accent) 5%, transparent) !important;
+    margin: 0 0 0 0 !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+}
+
+/* ===== Titre "Indexation" (VOCAB CUSTOM) ===== */
+.vocab-group-title {
+    grid-column: 1 / -1 !important;
+    margin: 10px -40px 10px -40px !important;
+    padding: 12px 40px !important;
+    font-size: 1.3rem !important;
+    font-weight: 600 !important;
+    color: #2c2c2c !important;
+}
+
+dl.vocab-indexation .property dt {
+    flex: 0 0 40% !important;
+    font-weight: bold !important;
+    color: #000 !important;
+    margin: 0 !important;
+}
+
+dl.vocab-indexation .property dd {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    flex: 1 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    color: #111 !important;
+    font-size: 1rem !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* ===== Animation Indexation Plier/Déplier ===== */
+.resource.show dl .indexation-prop,
+.block-itemWithMetadata .resource dl .indexation-prop,
+.indexation-prop {
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.3s ease-in-out, border-width 0.4s ease-in-out, margin 0.4s ease-in-out !important;
+    overflow: hidden !important;
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.resource.show dl.indexation-collapsed .indexation-prop,
+.block-itemWithMetadata .resource dl.indexation-collapsed .indexation-prop,
+dl.indexation-collapsed .indexation-prop {
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom-width: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    opacity: 0 !important;
+}
+
+/* ===== Barre d'outils sous les métadonnées ===== */
+.metadata-toolbar {
+    display: flex;
+    gap: 15px;
+    max-width: 1200px;
+    padding: 40px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.metadata-btn-action {
+    width: 60px;
+    height: 60px;
+    background-color: #f9f9f9;
+    border: 1.5px solid #eaeaea;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    margin-bottom: 15px !important;
+}
+
+.metadata-btn-action:hover {
+    background-color: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: scale(1.1);
+}
+
+.metadata-btn-action.is-copied {
+    border-color: var(--accent);
+    background-color: mix(var(--accent), white, 20%);
+    transform: scale(1.15);
+}
+
+/* ===== Toast Lien copié ===== */
+.mirador-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background-color: rgba(30, 30, 30, 0.9);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.mirador-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ===== MIRADOR METADATA FIX (Panneau latéral Mirador protégé) ===== */
+.mirador-label-value-metadata {
+    background: #000 !important;
+    color: #fff !important;
+    border-radius: 6px !important;
+    padding: 12px !important;
+}
+
+.mirador-label-value-metadata dt,
+.mirador-label-value-metadata dd {
+    color: #fff !important;
+}
+
+.mirador-label-value-metadata a {
+    color: #ccc !important;
+}
+
+.mirador-label-value-metadata a:hover {
+    color: #fff !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 900px) {
+    .resource.show dl:not(.mirador-label-value-metadata),
+    .block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata) {
+        grid-template-columns: 1fr !important;
+        display: block !important;
+        padding: 20px !important;
+        margin: 10px !important;
+    }
+
+    .resource.show .property,
+    .block-itemWithMetadata .resource .property {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 12px 0 !important;
+    }
+
+    .resource.show .property dt,
+    .block-itemWithMetadata .resource .property dt {
+        width: 100% !important;
+        margin-bottom: 8px !important;
+        color: #666 !important;
+    }
+
+    .resource.show .property dd,
+    .block-itemWithMetadata .resource .property dd {
+        width: 100% !important;
+        line-height: 1.5 !important;
+    }
+
+    #mirador, 
+    .mirador-container, 
+    [id^="mirador"] {
+        height: 450px !important;
+        width: calc(100% - 20px) !important;
+        margin: 10px auto !important;
+    }
+
+    body.item.show #content {
+        padding: 20px !important;
+    }
+
+    .metadata-toolbar {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+    }
+}
+
+
+
+.resource.show dl.media-list {
+    display: none !important;
+}
+
+.vocab-toggle-icon:hover {
+    cursor: pointer !important;
+    background-color: #f9f9f9 !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--accent) !important;
+}
