@@ -106,7 +106,6 @@
     font-family: Arial, sans-serif;
 }
 
-
 .janine-bio-carousel-title {
     font-size: 24px;
     font-weight: 300;
@@ -121,15 +120,15 @@
     position: relative;
     padding: 0;
     border-radius: 5px;
+    overflow: hidden;
 }
-
 
 .janine-bio-carousel-window {
     flex: 1;
     overflow: hidden; 
     position: relative;
+    margin: 0 50px;
 }
-
 
 .janine-bio-carousel-track {
     display: flex;
@@ -143,8 +142,9 @@
     justify-content: center;
     align-items: center;
     margin: 0 10px; 
-    padding: 10px 0; 
+    padding: 20px 0; 
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
 }
 
 .janine-bio-carousel-item a {
@@ -156,8 +156,7 @@
 }
 
 .janine-bio-carousel-item:hover {
-    scale: 1.02;
-    transition: transform 5s ease-in-out;
+    transform: scale(1.02);
 }
 
 .janine-bio-carousel-item img {
@@ -171,23 +170,25 @@
     background: none;
     border: none;
     cursor: pointer;
-    flex: 0 0 50px; 
-    height: 100%;
+    width: 50px; 
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 0;
-    z-index: 10;
-    padding: 0;
 }
 
 .janine-bio-carousel-btn.prev-btn {
     left: 0;
+    background: linear-gradient(to right, rgba(0,78,72,0.9), transparent);
 }
 
 .janine-bio-carousel-btn.next-btn {
     right: 0;
+    background: linear-gradient(to left, rgba(0,78,72,0.9), transparent);
 }
 
 .janine-bio-carousel-btn svg {
@@ -195,7 +196,6 @@
     height: 40px;
     fill: white;
 }
-
 
 .janine-bio-carousel-link-external {
     display: flex;
@@ -218,7 +218,6 @@
     display: block;
 }
 
-
 @media (max-width: 900px) {
     .janine-bio-carousel-item {
         flex: 0 0 calc(50% - 20px); 
@@ -226,7 +225,10 @@
 }
 
 @media (max-width: 600px) {
+    .janine-bio-carousel-window {
+        margin: 0 40px;
+    }
     .janine-bio-carousel-item {
-        flex: 0 0 calc(100% - 20px); /* 1 image sur mobile */
+        flex: 0 0 calc(100% - 20px);
     }
 }
