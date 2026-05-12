@@ -31,6 +31,7 @@
     border-radius: 5px;
     align-items: center;
     justify-content: center;
+    font-size: 15px;
 }
 
 .janine-bio-text-box p {
@@ -42,9 +43,9 @@
 .janine-bio-external-link {
     display: flex;
     align-items: center;
-    font-size: 11px;
-    color: #888;
-    text-decoration: none;
+    font-size: 13px;
+    color: #888 !important;
+    text-decoration: none !important;
     margin-top: 8px;
 }
 
@@ -94,12 +95,126 @@
     }
 }
 
+/* QUOTES */
+
+/* ===================== */
+/* Biographie quotes */
+/* ======================*/
+
+.biographie-quote-section {
+  background-color: #f0f0f0 !important;
+  padding: 80px 20px !important;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.biographie-quote-container {
+  max-width: 850px !important;
+  width: 100% !important;
+}
+
+.biographie-quote-text {
+  position: relative !important;
+  font-size: 1.4rem !important;
+  line-height: 1.6 !important;
+  color: #111 !important;
+  margin: 0 0 50px 0 !important;
+  font-weight: 400 !important;
+  padding: 0 50px !important;
+}
+
+.biographie-quote-text::before,
+.biographie-quote-text::after {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 5rem !important;
+  line-height: 1 !important;
+  color: #111 !important;
+  position: absolute !important;
+}
+
+.biographie-quote-text::before {
+  content: '\201C' !important;
+  top: -10px !important;
+  left: -10px !important;
+}
+
+.biographie-quote-text::after {
+  content: '\201D' !important; 
+  bottom: -40px !important;
+  right: 0 !important;
+}
+
+
+.biographie-quote-footer {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  padding-left: 15% !important;
+}
+
+.biographie-quote-line {
+  width: 60px !important;
+  height: 1px !important;
+  background-color: #111 !important;
+  margin-top: 14px !important;
+}
+
+.biographie-quote-author-info {
+  display: flex !important;
+  flex-direction: column !important;
+  font-size: 1.15rem !important;
+  color: #111 !important;
+}
+
+.biographie-quote-author {
+  margin-bottom: 5px !important;
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 768px) {
+  .biographie-quote-section {
+    padding: 50px 15px !important;
+  }
+  
+  .biographie-quote-text {
+    font-size: 1.1rem !important;
+    padding: 0 30px !important;
+    margin: 0 0 40px 0 !important;
+  }
+
+  .biographie-quote-text::before,
+  .biographie-quote-text::after {
+    font-size: 3.5rem !important;
+  }
+
+  .biographie-quote-text::before {
+    top: -5px !important;
+    left: -5px !important;
+  }
+
+  .biographie-quote-text::after {
+    bottom: -25px !important;
+    right: -10px !important;
+  }
+
+  .biographie-quote-footer {
+    padding-left: 0 !important;
+    justify-content: flex-start !important;
+  }
+  
+  .biographie-quote-line {
+    width: 40px !important;
+  }
+}
 
 
 
 /* Carousel */
 .janine-bio-carousel-container {
-    max-width: 1200px; 
     margin: 40px auto;
     font-family: Arial, sans-serif;
 }
@@ -117,7 +232,6 @@
     align-items: center;
     position: relative;
     padding: 0;
-    border-radius: 5px;
     overflow: hidden;
 }
 
@@ -199,13 +313,15 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 15px 20px;
-    text-decoration: none;
-    color: #333;
+    text-decoration: none !important;
+    color: #888 !important;
+    margin-left: 10px;
+    font-size: 13px;
 }
 
 .janine-bio-carousel-link-text {
     margin-right: 8px;
+    color: #888 !important;
 }
 
 .janine-bio-carousel-link-icon {
@@ -227,5 +343,116 @@
     }
     .janine-bio-carousel-item {
         flex: 0 0 calc(100% - 20px);
+    }
+}
+
+
+
+/* --- Habillage Section Suggestions --- */
+
+.arland-suggestions-section {
+    background-color: #f9f9f9; /* Fond très léger pour séparer du reste */
+    padding: 60px 20px;
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+.arland-suggestions-main-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 45px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+/* Grille de cartes */
+.arland-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Design des Cartes (Habillage) */
+.arland-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.arland-card:hover {
+    transform: translateY(-5px); /* Petit saut au survol */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.arland-card-image-box {
+    overflow: hidden;
+    height: 200px;
+}
+
+.arland-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.arland-card:hover .arland-card-img {
+    transform: scale(1.05); /* Zoom léger image */
+}
+
+.arland-card-content {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.arland-card-title a {
+    text-decoration: none;
+    color: #111;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/* Style Bouton Consulter */
+.arland-card-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 25px;
+    border: 1px solid var(--accent, #8b3a3a);
+    color: var(--accent, #8b3a3a);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.arland-card:hover .arland-card-btn {
+    background-color: var(--accent, #8b3a3a);
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .arland-cards-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+    }
+}
+
+@media (max-width: 600px) {
+    .arland-cards-grid {
+        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+    }
+    .arland-suggestions-main-title {
+        font-size: 1.6rem;
     }
 }

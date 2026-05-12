@@ -1,3 +1,159 @@
+/* =========================================
+   5. HERO - BASE & STANDARD
+   ========================================= */
+.archive-fonds-hero {
+    display: flex;
+    border-bottom: 1px solid #999;
+    background-color: #fff;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.archive-fonds-hero-img-wrap {
+    flex: 0 0 50%;
+    border-right: 1px solid #999;
+}
+
+.archive-fonds-hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.archive-fonds-hero-text-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 50px;
+    box-sizing: border-box;
+}
+
+.archive-fonds-hero-ref {
+    color: #666;
+    font-size: 0.9rem !important;
+    letter-spacing: 2px;
+    margin: 0 0 40px 0;
+    text-transform: uppercase;
+}
+
+.archive-fonds-hero-title {
+    margin: 0;
+    font-size: 2.8rem !important;
+    color: #000;
+    line-height: 1.1;
+    font-weight: 400;
+    text-align: left;
+}
+
+/* Le bouton qui remplace les dates */
+.archive-fonds-hero-btn-wrap {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 40px;
+}
+
+.archive-fonds-hero-btn {
+    color: #8b3a3a;
+    border: 1px solid #8b3a3a;
+    padding: 6px 18px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-family: 'futura-pt', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.archive-fonds-hero-btn:hover {
+    background-color: #8b3a3a;
+    color: #fff;
+}
+
+/* =========================================
+   5b. HERO INVERSÉ (MIROIR)
+   ========================================= */
+.archive-hero-inverted .archive-fonds-hero-img-wrap {
+    border-right: none;
+    border-left: 1px solid #999;
+    order: 2;
+}
+
+.archive-hero-inverted .archive-fonds-hero-text-wrap {
+    order: 1;
+    align-items: flex-end; /* Aimante tout le contenu contre l'image à droite */
+}
+
+.archive-hero-inverted .archive-fonds-hero-title,
+.archive-hero-inverted .archive-fonds-hero-ref {
+    text-align: right;
+    width: 100%;
+}
+
+.archive-hero-inverted .archive-fonds-hero-btn-wrap {
+    justify-content: flex-end; /* Aimante le bouton contre l'image à droite */
+}
+
+/* =========================================
+   8. RESPONSIVE MOBILE
+   ========================================= */
+@media (max-width: 900px) {
+    .archive-fonds-hero, .archive-hero-inverted {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .archive-fonds-hero-img-wrap, 
+    .archive-hero-inverted .archive-fonds-hero-img-wrap {
+        flex: 0 0 auto;
+        order: 1;
+        border: none;
+        border-bottom: 1px solid #999;
+    }
+
+    .archive-fonds-hero-img-wrap img {
+        height: 250px;
+    }
+
+    .archive-fonds-hero-text-wrap,
+    .archive-hero-inverted .archive-fonds-hero-text-wrap {
+        order: 2;
+        padding: 40px 30px;
+        align-items: flex-start; /* Retour à gauche sur mobile pour tout le monde */
+    }
+
+    .archive-fonds-hero-title,
+    .archive-hero-inverted .archive-fonds-hero-title,
+    .archive-fonds-hero-ref,
+    .archive-hero-inverted .archive-fonds-hero-ref {
+        text-align: left;
+        font-size: 2rem !important;
+    }
+
+    .archive-fonds-hero-btn-wrap,
+    .archive-hero-inverted .archive-fonds-hero-btn-wrap {
+        justify-content: flex-start;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Enlever les surplus et les navigation automatique */
 .site-page-pagination {
