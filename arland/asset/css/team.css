@@ -1,89 +1,213 @@
-/* TEAM */
+.team-section--remerciements {
+    margin-bottom: 0 !important;
+    padding-bottom: 10px !important;
+}
 
+/* SECTION */
 .team-section {
-  background: #e6e6e6;
-  padding: 70px 20px;
+    max-width: 900px;
+    margin: 0 auto 60px;
 }
 
-.team-title {
-  font-size: 32px;
-  margin-bottom: 50px;
-  text-align: center;
+.team-section__title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 280px);
-  gap: 40px;
-  justify-content: center;
-  padding: 20px;
+/* ITEM */
+.accordion__item {
+    margin-bottom: 20px;
 }
 
-.team-card {
-  background: #f6f5f5;
-  border: 1px solid #bdbaba;
-  border-radius: 10px;
-  padding: 35px 20px;
-  text-align: center;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* HEADER */
+.accordion__header {
+    background: white;
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 24px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* ✅ FIX */
+
+    transition: all 0.3s ease;
+    z-index: 2;
+    position: relative;
 }
 
-.team-card:hover {
-  transform: translateY(-20px);
-  cursor: pointer;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.accordion__item.is-open .accordion__header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-.team-card h3 {
-  font-size: 16px;
-  margin-top: 18px;
-  margin-bottom: 6px;
-  cursor: pointer;
+.accordion__header:hover {
+    background: color-mix(in srgb, white 90%, var(--accent));
 }
 
-.team-card p {
-  font-size: 14px;
-  color: #555;
-  cursor: pointer;
+/* NOM */
+.accordion__name {
+    font-size: 20px;
+    font-weight: 500;
+
+    /* ✅ FIX MOBILE TEXTE */
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+    hyphens: auto;
 }
 
-.team-img img {
-  width: 80px;
-  height: 80px;
-  margin: auto;
-  background: #cfcfcf;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+/* ICON */
+.accordion__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
 }
 
-
-
-/* RESPONSIVE TEAM */
-
-@media (max-width: 900px) {
-
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 500px;
-    margin: auto;
-  }
-
+.accordion__icon::after {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    transform: rotate(45deg);
+    margin-top: -4px;
+    transition: all 0.3s ease;
 }
 
-@media (max-width: 600px) {
+.accordion__item.is-open .accordion__icon {
+    transform: rotate(180deg);
+}
 
-  .team-grid {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-  }
+.accordion__header:hover .accordion__icon::after {
+    border-color: var(--accent);
+}
 
-  .team-title {
-    font-size: 26px;
-  }
+/* CONTENU */
+.accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
 
+/* CARTE INTERNE */
+.accordion__inner {
+    background: white;
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 28px 32px;
+    margin-bottom: 2px;
+}
+
+/* TITRE */
+.accordion__subtitle {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* TEXTE */
+.accordion__description {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* IDS (ORCID + IDREF) */
+.accordion__ids {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.accordion__id {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.accordion__id img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.accordion__id a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .team-section {
+        margin: 0;
+        padding: 20px;
+    }
+
+    .team-section__title {
+        font-size: 28px;
+        margin-bottom: 20px;
+        padding: 0 15px;
+    }
+
+    .accordion__header {
+        padding: 15px 18px;
+    }
+
+    .accordion__name {
+        font-size: 17px;
+        line-height: 1.3;
+    }
+
+    .accordion__inner {
+        padding: 20px;
+    }
+
+    .accordion__subtitle {
+        font-size: 19px;
+        margin-bottom: 15px;
+    }
+
+    .accordion__description {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-section__title {
+        font-size: 24px;
+    }
+
+    .accordion__name {
+        font-size: 15px;
+    }
+
+    .accordion__icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .accordion__icon::after {
+        width: 10px;
+        height: 10px;
+    }
+
+    /* ✅ IDS en colonne sur mobile */
+    .accordion__ids {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }

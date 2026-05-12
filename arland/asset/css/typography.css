@@ -101,3 +101,51 @@ i, em {
     font-size: 3.5rem !important;
     line-height: 1.1; 
 }
+
+/* query 800px responsive */
+
+@media (max-width: 800px) {
+    body {
+        font-size: 18px;
+    }
+    
+    h1 {
+        font-size: 56px;
+    }
+    
+    h2 {
+        font-size: 36px;
+    }
+    
+    h3 {
+        font-size: 32px;
+    }
+    
+    h4, h5, h6 {
+        font-size: 28px;
+    }
+    
+    .subhead {
+        font-size: 32px;
+    }
+    
+    .resource-list .resource,
+    .metadata,
+    #linked-resources,
+    .item-set-items {
+        font-size: 16px;
+    }
+    
+    .archives-light {
+        font-size: 16px;
+    }
+
+    .block.block-pageTitle h2 {
+        padding: 0 80px !important;
+        font-size: 2.5rem !important;
+    }
+
+    #content.content {
+        padding:10px !important;
+    }
+}

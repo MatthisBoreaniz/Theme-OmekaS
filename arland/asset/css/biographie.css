@@ -1,0 +1,210 @@
+.arland-bio-wrapper {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    font-family: Arial, sans-serif !important;
+    color: #4a4a4a !important;
+    box-sizing: border-box !important;
+}
+
+.arland-bio-wrapper *,
+.arland-bio-wrapper *::before,
+.arland-bio-wrapper *::after,
+.arland-bio-legacy-wrapper *,
+.arland-bio-legacy-wrapper *::before,
+.arland-bio-legacy-wrapper *::after {
+    box-sizing: border-box !important;
+}
+
+.arland-bio-top-section {
+    display: flex !important;
+    gap: 50px !important;
+    align-items: flex-start !important;
+    margin-bottom: 40px !important;
+}
+
+.arland-bio-passport {
+    width: 100% !important;
+    max-width: 420px !important;
+    flex-shrink: 0 !important;
+}
+
+.arland-bio-passport img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+.arland-bio-caption {
+    margin-top: 10px !important;
+    font-size: 14px !important;
+    color: #888 !important;
+    font-style: italic !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+}
+
+.arland-bio-caption img {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+.arland-bio-intro-text {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.arland-bio-intro-text p {
+    margin-bottom: 30px !important;
+}
+
+.arland-bio-wrapper hr {
+    border: none !important;
+    border-top: 1px solid #dcdcdc !important;
+    margin: 45px 0 !important;
+}
+
+.arland-bio-content-text {
+    font-size: clamp(17px, 1.5vw, 22px) !important;
+}
+
+.arland-bio-content-text p {
+    margin-bottom: 30px !important;
+}
+
+.arland-bio-legacy-wrapper {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    font-family: Arial, sans-serif !important;
+    color: #4a4a4a !important;
+
+    box-sizing: border-box !important;
+}
+
+/* IMAGE */
+
+.arland-bio-legacy-image {
+    width: 100% !important;
+    margin-bottom: 35px !important;
+}
+
+.arland-bio-legacy-image > a {
+    display: block !important;
+}
+
+.arland-bio-legacy-image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+/* CAPTION */
+
+.arland-bio-legacy-caption {
+    margin-top: 10px !important;
+    font-size: 14px !important;
+    color: #888 !important;
+    font-style: italic !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+}
+
+.arland-bio-legacy-caption a {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.arland-bio-legacy-caption img {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* CONTENT */
+
+.arland-bio-legacy-content {
+    max-width: 850px !important;
+    margin: 0 auto !important;
+    font-size: clamp(17px, 1.5vw, 22px) !important;
+}
+
+.arland-bio-legacy-content p {
+    margin-bottom: 28px !important;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+
+    .arland-bio-top-section {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    .arland-bio-passport {
+        max-width: 100% !important;
+    }
+
+    .arland-bio-intro-text {
+        width: 100% !important;
+    }
+
+    .arland-bio-legacy-wrapper {
+        padding: 0 18px !important;
+    }
+
+    .arland-bio-legacy-image {
+        margin-bottom: 28px !important;
+    }
+
+    .arland-bio-legacy-content {
+        font-size: 18px !important;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+    .arland-bio-wrapper,
+    .arland-bio-legacy-wrapper {
+        padding: 0 15px !important;
+    }
+
+    .arland-bio-top-section {
+        gap: 25px !important;
+        margin-bottom: 25px !important;
+    }
+
+    .arland-bio-intro-text {
+        font-size: 22px !important;
+    }
+
+    .arland-bio-content-text {
+        font-size: 17px !important;
+    }
+
+    .arland-bio-content-text p,
+    .arland-bio-intro-text p,
+    .arland-bio-legacy-content p {
+        margin-bottom: 22px !important;
+    }
+
+    .arland-bio-wrapper hr {
+        margin: 30px 0 !important;
+    }
+
+    .arland-bio-legacy-image {
+        margin-bottom: 22px !important;
+    }
+
+    .arland-bio-legacy-caption {
+        font-size: 13px !important;
+    }
+
+    .arland-bio-legacy-content {
+        font-size: 17px !important;
+    }
+}
