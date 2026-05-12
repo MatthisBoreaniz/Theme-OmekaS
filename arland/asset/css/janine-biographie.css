@@ -1,0 +1,232 @@
+
+.janine-bio-container {
+    margin: 0 auto;
+    font-family: Arial, sans-serif; 
+    color: #333;
+}
+
+
+.janine-bio-intro-section {
+    margin: 0 auto;
+    max-width: 1280px;
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.janine-bio-image-wrapper {
+    flex: 0 0 300px;
+}
+
+.janine-bio-portrait {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.janine-bio-text-box {
+    background-color: rgba(0, 78, 72, 0.15); /* #004E48 à 15% */
+    padding: 30px;
+    flex: 1;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.janine-bio-text-box p {
+    margin-top: 0;
+    margin-bottom: 1.2em;
+    font-size: 0.95rem;
+}
+
+
+.janine-bio-external-link {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    color: #888;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+.link2 {
+    padding: 10px;
+}
+
+.janine-bio-external-link img {
+    width: 12px;
+    height: 12px;
+    margin-left: 5px;
+}
+
+
+.janine-bio-middle-section {
+    margin-bottom: 30px;
+}
+
+.janine-bio-group-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.janine-bio-footer-text {
+    font-size: 0.95rem;
+    padding: 0 10px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.janine-bio-footer-text p {
+    margin-bottom: 1.5em;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .janine-bio-intro-section {
+        flex-direction: column;
+    }
+    .janine-bio-image-wrapper {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
+
+
+
+
+/* Carousel */
+.janine-bio-carousel-container {
+    max-width: 1200px; 
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+}
+
+
+.janine-bio-carousel-title {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.janine-bio-carousel-frame {
+    background-color: #004E48; 
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    border-radius: 5px;
+}
+
+
+.janine-bio-carousel-window {
+    flex: 1;
+    overflow: hidden; 
+    position: relative;
+}
+
+
+.janine-bio-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out; 
+}
+
+.janine-bio-carousel-item {
+    flex: 0 0 calc(25% - 20px); 
+    height: 300px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px; 
+    padding: 10px 0; 
+    cursor: pointer;
+}
+
+.janine-bio-carousel-item a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.janine-bio-carousel-item:hover {
+    scale: 1.02;
+    transition: transform 5s ease-in-out;
+}
+
+.janine-bio-carousel-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+    border: none;
+}
+
+.janine-bio-carousel-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex: 0 0 50px; 
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    padding: 0;
+}
+
+.janine-bio-carousel-btn.prev-btn {
+    left: 0;
+}
+
+.janine-bio-carousel-btn.next-btn {
+    right: 0;
+}
+
+.janine-bio-carousel-btn svg {
+    width: 40px;
+    height: 40px;
+    fill: white;
+}
+
+
+.janine-bio-carousel-link-external {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.janine-bio-carousel-link-text {
+    margin-right: 8px;
+}
+
+.janine-bio-carousel-link-icon {
+    width: 16px;
+    height: 16px;
+    fill: #333;
+    display: block;
+}
+
+
+@media (max-width: 900px) {
+    .janine-bio-carousel-item {
+        flex: 0 0 calc(50% - 20px); 
+    }
+}
+
+@media (max-width: 600px) {
+    .janine-bio-carousel-item {
+        flex: 0 0 calc(100% - 20px); /* 1 image sur mobile */
+    }
+}
