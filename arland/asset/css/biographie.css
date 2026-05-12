@@ -37,13 +37,15 @@
 
 .arland-bio-caption {
     margin-top: 10px !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
     color: #888 !important;
     font-style: italic !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
     gap: 6px !important;
     flex-wrap: wrap !important;
+    text-align: center !important;
 }
 
 .arland-bio-caption img {
@@ -100,7 +102,7 @@
 
 .arland-bio-legacy-caption {
     margin-top: 10px !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
     color: #888 !important;
     font-style: italic !important;
     display: flex !important;
@@ -108,6 +110,8 @@
     gap: 6px !important;
     flex-wrap: wrap !important;
     margin-left: 10px !important;
+    justify-content: center !important;
+    text-align: center !important;
 }
 
 .arland-bio-legacy-caption a {

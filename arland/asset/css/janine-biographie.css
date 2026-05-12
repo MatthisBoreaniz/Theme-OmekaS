@@ -47,6 +47,8 @@
     color: #888 !important;
     text-decoration: none !important;
     margin-top: 8px;
+    justify-content: center !important;
+    text-align: center !important;
 }
 
 .link2 {
@@ -61,7 +63,7 @@
 
 
 .janine-bio-middle-section {
-    margin-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 .janine-bio-group-img {
@@ -215,7 +217,8 @@
 
 /* Carousel */
 .janine-bio-carousel-container {
-    margin: 40px auto;
+    padding: 30px 0;
+    margin: 0px auto;
     font-family: Arial, sans-serif;
 }
 
@@ -312,11 +315,13 @@
 .janine-bio-carousel-link-external {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     text-decoration: none !important;
     color: #888 !important;
     margin-left: 10px;
-    font-size: 13px;
+    font-size: 15px;
+    justify-content: center !important;
+    text-align: center !important;
 }
 
 .janine-bio-carousel-link-text {
