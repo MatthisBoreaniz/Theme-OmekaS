@@ -66,9 +66,6 @@
     margin: 45px 0 !important;
 }
 
-.arland-bio-content-text {
-    font-size: clamp(17px, 1.5vw, 22px) !important;
-}
 
 .arland-bio-content-text p {
     margin-bottom: 30px !important;
@@ -129,7 +126,6 @@
 .arland-bio-legacy-content {
     max-width: 850px !important;
     margin: 0 auto !important;
-    font-size: clamp(17px, 1.5vw, 22px) !important;
 }
 
 .arland-bio-legacy-content p {
