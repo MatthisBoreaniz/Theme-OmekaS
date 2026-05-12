@@ -43,7 +43,7 @@
 .janine-bio-external-link {
     display: flex;
     align-items: center;
-    font-size: 13px;
+    font-size: 20px;
     color: #888 !important;
     text-decoration: none !important;
     margin-top: 8px;
@@ -56,8 +56,8 @@
 }
 
 .janine-bio-external-link img {
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
     margin-left: 5px;
 }
 
@@ -348,7 +348,8 @@
     justify-content: center;
     text-decoration: none !important;
     margin-top: 20px;
-    font-size: 15px;
+    font-size: 20px;
+    color: #888 !important;
 }
 
 @media (max-width: 900px) {
