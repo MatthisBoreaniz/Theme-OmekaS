@@ -1,0 +1,213 @@
+
+.chat-bio-container {
+    margin: 0 auto;
+    font-family: Arial, sans-serif; 
+    color: #333;
+}
+
+
+
+.chat-bio-external-link {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #888 !important;
+    text-decoration: none !important;
+    margin-top: 8px;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.link2 {
+    padding: 10px;
+}
+
+.chat-bio-external-link img {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+
+.chat-bio-middle-section {
+    padding-bottom: 30px;
+}
+
+.chat-bio-group-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.chat-bio-footer-text {
+    padding: 0 10px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-bio-footer-text p {
+    margin-bottom: 1.5em;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+
+    .chat-bio-image-wrapper {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
+
+
+
+
+/* --- Carousel Base --- */
+.chat-bio-carousel-container {
+    padding: 30px 0;
+    margin: 0px auto;
+    font-family: Arial, sans-serif;
+}
+
+.chat-bio-carousel-title {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.chat-bio-carousel-frame {
+    background-color: #8D323B; 
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.chat-bio-carousel-window {
+    flex: 1;
+    overflow: hidden; 
+    position: relative;
+    margin: 0 50px;
+    scroll-behavior: smooth;
+}
+
+.chat-bio-carousel-track {
+    display: flex;
+}
+
+.chat-bio-carousel-item {
+    flex: 0 0 calc(25% - 20px); 
+    height: 300px; 
+    margin: 0 10px; 
+    padding: 20px 0; 
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.chat-bio-carousel-item a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+/* --- Effet de survol (Overlay CORRIGÉ) --- */
+.chat-bio-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrage absolu par rapport au lien */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Laisse le clic traverser vers le lien principal */
+}
+
+.chat-bio-overlay span {
+    color: white;
+    border: 1px solid white;
+    padding: 8px 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(0,0,0,0.2);
+}
+
+.chat-bio-carousel-item:hover {
+    transform: scale(1.03);
+}
+
+.chat-bio-carousel-item:hover .chat-bio-overlay {
+    opacity: 1;
+}
+
+.chat-bio-carousel-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+/* --- Navigation --- */
+.chat-bio-carousel-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 50px; 
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-bio-carousel-btn.prev-btn {
+    left: 0;
+    background: linear-gradient(to right, rgba(0,78,72,0.95), transparent);
+}
+
+.chat-bio-carousel-btn.next-btn {
+    right: 0;
+    background: linear-gradient(to left, rgba(0,78,72,0.95), transparent);
+}
+
+.chat-bio-carousel-btn svg {
+    width: 35px; height: 35px; fill: white;
+}
+
+.chat-bio-carousel-link-external {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    margin-top: 20px;
+    font-size: 20px;
+    color: #888 !important;
+}
+
+@media (max-width: 900px) {
+    .chat-bio-carousel-item { flex: 0 0 calc(50% - 20px); }
+}
+@media (max-width: 600px) {
+    .chat-bio-carousel-window { margin: 0 40px; }
+    .chat-bio-carousel-item { flex: 0 0 calc(100% - 20px); }
+}
+
+
