@@ -180,12 +180,12 @@
 
 .chat-bio-carousel-btn.prev-btn {
     left: 0;
-    background: linear-gradient(to right, rgba(0,78,72,0.95), transparent);
+    background: linear-gradient( to right, rgba(99, 33, 39, 0.95), transparent);
 }
 
 .chat-bio-carousel-btn.next-btn {
     right: 0;
-    background: linear-gradient(to left, rgba(0,78,72,0.95), transparent);
+    background: linear-gradient(to left, rgba(99, 33, 39, 0.95), transparent);
 }
 
 .chat-bio-carousel-btn svg {
@@ -211,3 +211,13 @@
 }
 
 
+
+
+.chat-bio-carousel-track {
+    display: flex;
+    justify-content: center; /* centrage par défaut */
+}
+
+.chat-bio-carousel-track.overflow {
+    justify-content: flex-start; /* scroll si ça déborde */
+}
