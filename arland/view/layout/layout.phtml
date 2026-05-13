@@ -29,6 +29,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/unContenu.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/popup-news.css'));
 $this->headScript()->prependFile($this->assetUrl('js/default.js'));
 $this->headScript()->prependFile($this->assetUrl('js/global.js', 'Omeka'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/Oeuvres.css'));
 $this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 'Omeka'));
 $this->jsTranslate();
 $this->htmlElement('body')->appendAttribute('class', 'body-truncate-' . $browseBodyTruncation);
