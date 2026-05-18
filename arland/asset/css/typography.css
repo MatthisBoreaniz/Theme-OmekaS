@@ -197,3 +197,104 @@ i, em {
 body {
     background-color: #fff;
 }
+
+
+.arland-video-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.arland-video-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.arland-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;  
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.arland-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover; /* Force le contenu à remplir parfaitement le cadre */
+}
+
+.arland-video-caption {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+    text-align: left;
+}
+
+.arland-video-cast {
+    margin-bottom: 12px;
+}
+
+.arland-video-credits {
+    font-size: 13px;
+    color: #777;
+    position: relative;
+}
+
+.arland-video-link {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-left: 8px;
+    text-decoration: none;
+}
+
+.arland-video-link img {
+    width: 14px;
+    height: auto;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.arland-video-link:hover img {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .arland-video-container {
+        margin: 40px auto;
+        gap: 45px;
+    }
+    
+    .arland-video-caption {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+}
+
+.arland-carousel,
+.arland-track,
+.arland-slide-content {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.arland-carousel::-webkit-scrollbar,
+.arland-track::-webkit-scrollbar,
+.arland-slide-content::-webkit-scrollbar {
+  display: none; 
+}
