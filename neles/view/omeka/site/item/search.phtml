@@ -335,6 +335,29 @@ $coteIdx = 99; // fixed slot
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeAllDropdowns();
         });
+        /* ── Nettoyage avant envoi pour éviter les URL trop longues ── */
+        var searchForm = document.getElementById('advanced-search');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function () {
+                // Pour chaque bloc, on vérifie si l'input texte est vide
+                searchForm.querySelectorAll('.sf-input-wrap').forEach(function (wrap) {
+                    var textInput = wrap.querySelector('input[type="text"]');
+                    if (textInput && textInput.value.trim() === '') {
+                        // S'il est vide, on désactive TOUS les inputs de ce bloc (y compris les cachés)
+                        wrap.querySelectorAll('input').forEach(function (input) {
+                            input.disabled = true;
+                        });
+                    }
+                });
+            });
+
+            // Si l'utilisateur clique sur le bouton "Précédent" de son navigateur, on réactive tout
+            window.addEventListener('pageshow', function () {
+                searchForm.querySelectorAll('.sf-input-wrap input').forEach(function (input) {
+                    input.disabled = false;
+                });
+            });
+        }
     });
 </script>
 
