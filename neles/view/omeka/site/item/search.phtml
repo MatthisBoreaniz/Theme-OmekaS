@@ -634,8 +634,9 @@ $coteIdx = 99; // fixed slot
     }
 
     .btn-submit:hover {
-        background: #732a30;
-        border-color: #732a30;
+        background: #fff !important;
+        border-color: var(--accent) !important;
+        color: var(--accent) !important;
     }
 
     .btn-reset {
@@ -646,8 +647,9 @@ $coteIdx = 99; // fixed slot
 
     .btn-reset:hover {
         border-color: var(--accent, #8e353c);
-        background: #fdf2f2;
+        background: color-mix(in srgb, var(--accent) 10%, #fff) !important;
     }
+
 
     /* ── Responsive ─────────────────────────────────────────────────────────── */
     @media (max-width: 768px) {
