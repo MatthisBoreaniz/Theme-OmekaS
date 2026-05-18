@@ -1,10 +1,151 @@
 <?php
 $translate = $this->plugin('translate');
 $this->htmlElement('body')->appendAttribute('class', 'items search');
+$query = $this->params()->fromQuery();
+
+// ── Récupération du Site courant (pour filtrer les listes déroulantes) ──────
+$site = $this->currentSite();
+$siteId = $site ? $site->id() : null;
+
+// ── PDO connection ──────────────────────────────────────────────────────────
+$pathToCheck = __DIR__;
+$baseDir = null;
+for ($i = 0; $i < 10; $i++) {
+    if (file_exists($pathToCheck . '/config/database.ini')) {
+        $baseDir = $pathToCheck;
+        break;
+    }
+    $pathToCheck = dirname($pathToCheck);
+}
+$dbConfig = $baseDir ? parse_ini_file($baseDir . '/config/database.ini') : [];
+$host = $dbConfig['host'] ?? '127.0.0.1';
+$dbname = $dbConfig['dbname'] ?? 'omekas';
+$user = $dbConfig['user'] ?? 'root';
+$password = $dbConfig['password'] ?? '';
+$port = isset($dbConfig['port']) && $dbConfig['port'] ? ';port=' . $dbConfig['port'] : '';
+try {
+    $pdo = new \PDO("mysql:host={$host}{$port};dbname={$dbname}", $user, $password);
+    $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+} catch (\Exception $e) {
+    $pdo = null;
+}
+
+// ── Helper: get property ID ─────────────────────────────────────────────────
+$propIdCache = [];
+$getPropId = function (string $term) use (&$propIdCache) {
+    if (!isset($propIdCache[$term])) {
+        $propData = $this->api()->searchOne('properties', ['term' => $term])->getContent();
+        $propIdCache[$term] = $propData ? $propData->id() : $term;
+    }
+    return $propIdCache[$term];
+};
+
+// ── Helper: get submitted value for a property ──────────────────────────────
+$getSubmittedValue = function ($propId) use ($query) {
+    if (!isset($query['property']))
+        return '';
+    foreach ($query['property'] as $pq) {
+        if (isset($pq['property']) && $pq['property'] == $propId) {
+            return $pq['text'] ?? '';
+        }
+    }
+    return '';
+};
+
+// ── Helper: get distinct values for datalist (FILTRÉ PAR SITE) ──────────────
+$getDistinctValues = function ($propId) use ($pdo, $siteId) {
+    if (!$pdo || !is_numeric($propId))
+        return [];
+
+    if ($siteId) {
+        try {
+            // Dans Omeka S, la table liant les items aux sites s'appelle item_site.
+            // On vérifie quand même si "site_item" existe au cas où (rétrocompatibilité/modules).
+            $linkTable = 'item_site';
+            $check = $pdo->query("SHOW TABLES LIKE 'site_item'");
+            if ($check && $check->rowCount() > 0) {
+                $linkTable = 'site_item';
+            }
+
+            $stmt = $pdo->prepare("
+                SELECT DISTINCT v.value 
+                FROM value v
+                INNER JOIN {$linkTable} si ON v.resource_id = si.item_id
+                WHERE v.property_id = :pid 
+                  AND si.site_id = :site_id
+                  AND v.value IS NOT NULL AND v.value != ''
+                ORDER BY v.value ASC LIMIT 500
+            ");
+            $stmt->execute(['pid' => $propId, 'site_id' => $siteId]);
+            return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+        } catch (\Exception $e) {
+            // Si la table n'existe pas ou qu'il y a une erreur SQL, on laisse passer et on utilise le fallback global ci-dessous
+        }
+    }
+
+    // Requête globale (fallback au cas où appelé hors d'un site ou si la jointure échoue)
+    try {
+        $stmt = $pdo->prepare("
+            SELECT DISTINCT value FROM value
+            WHERE property_id = :pid AND value IS NOT NULL AND value != ''
+            ORDER BY value ASC LIMIT 500
+        ");
+        $stmt->execute(['pid' => $propId]);
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+    } catch (\Exception $e) {
+        return [];
+    }
+};
+
+// ── Helper: render a single filter input ────────────────────────────────────
+$idx = 0; // global index for property[] names
+$renderInput = function (string $label, string $term, string $slotKey = '') use (&$idx, $getPropId, $getSubmittedValue, $getDistinctValues) {
+    $propId = $getPropId($term);
+    $value = $getSubmittedValue($propId);
+    $values = $getDistinctValues($propId);
+    $listId = 'dl_' . $idx;
+    $inputId = 'fi_' . $idx;
+    $i = $idx++;
+    $hasList = !empty($values);
+    ob_start();
+    ?>
+    <div class="sf-field<?php echo $hasList ? ' sf-has-list' : ''; ?>">
+        <label for="<?php echo $inputId; ?>"><?php echo htmlspecialchars($label); ?></label>
+        <div class="sf-input-wrap">
+            <input type="hidden" name="property[<?php echo $i; ?>][joiner]" value="and">
+            <input type="hidden" name="property[<?php echo $i; ?>][property]"
+                value="<?php echo htmlspecialchars((string) $propId); ?>">
+            <input type="hidden" name="property[<?php echo $i; ?>][type]" value="eq">
+            <input id="<?php echo $inputId; ?>" type="text" name="property[<?php echo $i; ?>][text]"
+                value="<?php echo htmlspecialchars($value); ?>" placeholder="<?php echo htmlspecialchars($label); ?>"
+                autocomplete="off" <?php if ($hasList): ?>data-sflist="<?php echo $listId; ?>" <?php endif; ?>>
+            <?php if ($hasList): ?>
+                <button type="button" class="sf-arrow" aria-label="Afficher les suggestions" tabindex="-1">
+                    <svg viewBox="0 0 10 6" width="10" height="6">
+                        <path d="M0 0l5 6 5-6z" fill="currentColor" />
+                    </svg>
+                </button>
+                <ul class="sf-dropdown" id="<?php echo $listId; ?>" role="listbox">
+                    <?php foreach ($values as $v): ?>
+                        <li role="option" tabindex="-1"><?php echo htmlspecialchars($v); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+};
+
+// ── Cote (special: dcterms:bibliographicCitation, type eq) ──────────────────
+$cotePropId = $getPropId('dcterms:bibliographicCitation');
+$coteValue = $getSubmittedValue($cotePropId);
+$coteValues = $getDistinctValues($cotePropId);
+$coteHasList = !empty($coteValues);
+$coteIdx = 99; // fixed slot
 ?>
 
 <div class="custom-search-container">
-
     <div class="search-header">
         <h2>Recherche avancée</h2>
     </div>
@@ -15,148 +156,102 @@ $this->htmlElement('body')->appendAttribute('class', 'items search');
         <?php
         $this->headLink()->prependStylesheet($this->assetUrl('css/advanced-search.css', 'Omeka'));
         $this->headScript()->appendFile($this->assetUrl('js/advanced-search.js', 'Omeka'));
-        $query = $this->params()->fromQuery();
         ?>
-        <div class="advanced-search-content">
-            <?php
-            // Fetch Cote property ID dynamically
-            $propDataCote = $this->api()->searchOne('properties', ['term' => 'dcterms:bibliographicCitation'])->getContent();
-            $propertyIdCote = $propDataCote ? $propDataCote->id() : 'dcterms:bibliographicCitation';
-            
-            // Retain submitted value for Cote
-            $submittedTextCote = '';
-            if (isset($query['property'])) {
-                foreach ($query['property'] as $pq) {
-                    if (isset($pq['property']) && ($pq['property'] == $propertyIdCote || $pq['property'] == 'dcterms:bibliographicCitation')) {
-                        $submittedTextCote = $pq['text'] ?? '';
-                        break;
-                    }
-                }
-            }
-            ?>
-            <div id="cote-query" class="field">
-                <div class="field-meta">
-                    <label>Cote</label>
-                </div>
-                <div class="inputs">
-                    <input type="hidden" name="property[99][joiner]" value="and">
-                    <input type="hidden" name="property[99][property]" value="<?php echo $this->escapeHtml($propertyIdCote); ?>">
-                    <input type="hidden" name="property[99][type]" value="eq">
-                    <input type="text" name="property[99][text]" value="<?php echo $this->escapeHtml($submittedTextCote); ?>" placeholder="Cote">
-                </div>
-            </div>
-            
-            <div id="property-queries" class="field custom-filters">
-                <div class="field-meta">
-                    <span id="by-value-label" class="label">Filtres</span>
-                    <div class="field-description">Recherche par champs spécifiques</div>
-                </div>
-                <div class="inputs custom-filters-grid">
-                    <?php
-                    // Hack to elegantly fetch distinct values per site without heavy item queries
-                    $pathToCheck = __DIR__;
-                    $baseDir = null;
-                    // On remonte jusqu'à trouver le dossier 'config' à la racine d'Omeka
-                    for ($i = 0; $i < 10; $i++) {
-                        if (file_exists($pathToCheck . '/config/database.ini')) {
-                            $baseDir = $pathToCheck;
-                            break;
-                        }
-                        $pathToCheck = dirname($pathToCheck);
-                    }
-                    
-                    $dbConfig = $baseDir ? parse_ini_file($baseDir . '/config/database.ini') : [];
-                    $host = $dbConfig['host'] ?? '127.0.0.1';
-                    $dbname = $dbConfig['dbname'] ?? 'omekas';
-                    $user = $dbConfig['user'] ?? 'root';
-                    $password = $dbConfig['password'] ?? '';
-                    $port = isset($dbConfig['port']) && $dbConfig['port'] ? ';port=' . $dbConfig['port'] : '';
-                    
-                    try {
-                        $pdo = new \PDO("mysql:host={$host}{$port};dbname={$dbname}", $user, $password);
-                        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-                    } catch (\Exception $e) {
-                        $pdo = null;
-                        // Log the error silently for debugging if enabled
-                        if (defined('APPLICATION_ENV') && APPLICATION_ENV === 'development') {
-                            error_log("Search custom filters PDO error: " . $e->getMessage());
-                        }
-                    }
 
-                    $customFilters = [
-                        ['label' => 'Année', 'term' => 'index:year'],
-                        ['label' => 'Lieu', 'term' => 'index:geogname'],
-                        ['label' => 'Organisme', 'term' => 'index:corpname'],
-                        ['label' => 'Personne', 'term' => 'index:persname'],
-                        ['label' => 'Sujet', 'term' => 'index:subject'],
-                        ['label' => 'Typologie documentaire', 'term' => 'index:recordType'],
-                    ];
-                    
-                    $siteId = $this->layout()->site->id();
-                    $index = 0;
-                    
-                    foreach ($customFilters as $filter):
-                        // Fetch proper property ID dynamically
-                        $propData = $this->api()->searchOne('properties', ['term' => $filter['term']])->getContent();
-                        $propertyId = $propData ? $propData->id() : $filter['term'];
-                        
-                        // Retain submitted values
-                        $submittedText = '';
-                        if (isset($query['property'])) {
-                            foreach ($query['property'] as $pq) {
-                                if (isset($pq['property']) && ($pq['property'] == $propertyId || $pq['property'] == $filter['term'])) {
-                                    $submittedText = $pq['text'] ?? '';
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        // Fetch distinct values for datalist
-                        $distinctValues = [];
-                        if (empty($filter['nolist']) && $pdo && is_numeric($propertyId)) {
-                            $stmt = $pdo->prepare("
-                                SELECT DISTINCT value
-                                FROM value
-                                WHERE property_id = :propertyId
-                                AND value IS NOT NULL
-                                AND value != ''
-                                ORDER BY value ASC
-                            ");
-                            $stmt->execute(['propertyId' => $propertyId]);
-                            $distinctValues = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-                        }
-                        
-                        $listId = "list_" . $index;
-                    ?>
-                    <div class="custom-filter-item">
-                        <label><?php echo $this->escapeHtml($filter['label']); ?></label>
-                        <input type="hidden" name="property[<?php echo $index; ?>][joiner]" value="and">
-                        <input type="hidden" name="property[<?php echo $index; ?>][property]" value="<?php echo $this->escapeHtml($propertyId); ?>">
-                        <input type="hidden" name="property[<?php echo $index; ?>][type]" value="eq">
-                        <input type="text" name="property[<?php echo $index; ?>][text]" value="<?php echo $this->escapeHtml($submittedText); ?>" placeholder="<?php echo $this->escapeHtml($filter['label']); ?>" <?php if (!empty($distinctValues)) echo 'list="' . $listId . '"'; ?>>
-                        <?php if (!empty($distinctValues)): ?>
-                        <datalist id="<?php echo $listId; ?>">
-                            <?php foreach ($distinctValues as $val): ?>
-                                <option value="<?php echo $this->escapeHtml($val); ?>"></option>
-                            <?php endforeach; ?>
-                        </datalist>
-                        <?php endif; ?>
+        <div class="advanced-search-content">
+
+            <div class="sf-card" id="cote-query">
+                <div class="sf-card-header">
+                    <span class="sf-card-title">Cote</span>
+                </div>
+                <div class="sf-card-body sf-single">
+                    <div class="sf-field<?php echo $coteHasList ? ' sf-has-list' : ''; ?>">
+                        <div class="sf-input-wrap">
+                            <input type="hidden" name="property[99][joiner]" value="and">
+                            <input type="hidden" name="property[99][property]"
+                                value="<?php echo htmlspecialchars((string) $cotePropId); ?>">
+                            <input type="hidden" name="property[99][type]" value="eq">
+                            <input type="text" id="cote_input" name="property[99][text]"
+                                value="<?php echo htmlspecialchars($coteValue); ?>" placeholder="Cote"
+                                autocomplete="off" <?php if ($coteHasList): ?>data-sflist="dl_cote" <?php endif; ?>>
+                            <?php if ($coteHasList): ?>
+                                <button type="button" class="sf-arrow" aria-label="Afficher les suggestions" tabindex="-1">
+                                    <svg viewBox="0 0 10 6" width="10" height="6">
+                                        <path d="M0 0l5 6 5-6z" fill="currentColor" />
+                                    </svg>
+                                </button>
+                                <ul class="sf-dropdown" id="dl_cote" role="listbox">
+                                    <?php foreach ($coteValues as $v): ?>
+                                        <li role="option" tabindex="-1"><?php echo htmlspecialchars($v); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <?php 
-                    $index++;
-                    endforeach; 
+                </div>
+            </div>
+
+            <div class="sf-card">
+                <div class="sf-card-header">
+                    <span class="sf-card-title">Date</span>
+                </div>
+                <div class="sf-card-body sf-grid-3">
+                    <?php
+                    echo $renderInput('Jour', 'index:dateDay');
+                    echo $renderInput('Mois', 'index:dateMonth');
+                    echo $renderInput('Année', 'index:dateYear');
                     ?>
                 </div>
             </div>
-            
-            <?php echo $this->partial('common/advanced-search/fulltext', ['query' => $query, 'resourceType' => 'item']); ?>
-            <?php echo $this->partial('common/advanced-search/resource-template-restrict', ['query' => $query, 'resourceType' => 'item']); ?>
+
+            <div class="sf-card">
+                <div class="sf-card-header">
+                    <span class="sf-card-title">Lieu</span>
+                    <span class="sf-card-desc">Rechercher par entité géographique</span>
+                </div>
+                <div class="sf-card-body sf-grid-3">
+                    <?php
+                    echo $renderInput('Territoire', 'index:geognameTerritory');
+                    echo $renderInput('Pays', 'index:geognameCountry');
+                    echo $renderInput('Ville', 'index:geognameCity');
+                    ?>
+                </div>
+            </div>
+
+            <div class="sf-card">
+                <div class="sf-card-header">
+                    <span class="sf-card-title">Autres</span>
+                    <span class="sf-card-desc">Rechercher par champs spécifiques</span>
+                </div>
+                <div class="sf-card-body sf-grid-3">
+                    <?php
+                    echo $renderInput('Personne', 'index:persname');
+                    echo $renderInput('Institution', 'index:corpname');
+                    echo $renderInput('Périodique', 'index:namePeriodical');
+
+                    echo $renderInput('Typologie documentaire', 'index:genreformType');
+                    echo $renderInput('Œuvre citée', 'index:title');
+                    echo $renderInput('Sujet', 'index:subjectKeywords');
+                    ?>
+                </div>
+            </div>
+
+            <div class="sf-card">
+                <div class="sf-card-body sf-single fulltext-override">
+                    <?php echo $this->partial('common/advanced-search/fulltext', ['query' => $query, 'resourceType' => 'item']); ?>
+                    <div style="display:none;">
+                        <?php echo $this->partial('common/advanced-search/resource-template-restrict', ['query' => $query, 'resourceType' => 'item']); ?>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
         <script>Omeka.prepareSearchForm($('#advanced-search'));</script>
 
         <div id="page-actions" class="search-actions">
             <button type="submit" name="submit" class="btn-submit">RECHERCHE</button>
-            <button type="button" class="btn-reset" id="reset-search">réinitialiser</button>
+            <button type="button" class="btn-reset" id="reset-search">RÉINITIALISER</button>
         </div>
 
     </form>
@@ -164,201 +259,336 @@ $this->htmlElement('body')->appendAttribute('class', 'items search');
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+        /* ── Reset button ───────────────────────────────────────────────────── */
         document.getElementById('reset-search').addEventListener('click', function () {
             var form = document.getElementById('advanced-search');
-            // Clear all text inputs
-            form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function (input) {
-                input.value = '';
+            form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function (i) { i.value = ''; });
+            form.querySelectorAll('select').forEach(function (s) { s.selectedIndex = 0; });
+            form.querySelectorAll('.value:not(:first-child)').forEach(function (r) { r.remove(); });
+            closeAllDropdowns();
+        });
+
+        /* ── Custom dropdown logic ──────────────────────────────────────────── */
+        function closeAllDropdowns() {
+            document.querySelectorAll('.sf-dropdown.open').forEach(function (d) {
+                d.classList.remove('open');
             });
-            // Reset all selects to first option
-            form.querySelectorAll('select').forEach(function (select) {
-                select.selectedIndex = 0;
+            document.querySelectorAll('.sf-arrow.active').forEach(function (b) {
+                b.classList.remove('active');
             });
-            // Remove extra value rows (cloned by Omeka's add-value)
-            form.querySelectorAll('.value:not(:first-child)').forEach(function (row) {
-                row.remove();
+        }
+
+        function filterDropdown(dropdown, term) {
+            var t = term.toLowerCase();
+            dropdown.querySelectorAll('li').forEach(function (li) {
+                li.style.display = (!t || li.textContent.toLowerCase().includes(t)) ? '' : 'none';
             });
+        }
+
+        document.querySelectorAll('.sf-arrow').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var wrap = btn.closest('.sf-input-wrap');
+                var input = wrap.querySelector('input[type="text"]');
+                var listId = input.dataset.sflist;
+                var dropdown = document.getElementById(listId);
+                if (!dropdown) return;
+
+                var isOpen = dropdown.classList.contains('open');
+                closeAllDropdowns();
+                if (!isOpen) {
+                    filterDropdown(dropdown, input.value);
+                    dropdown.classList.add('open');
+                    btn.classList.add('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('input[data-sflist]').forEach(function (input) {
+            input.addEventListener('input', function () {
+                var listId = input.dataset.sflist;
+                var dropdown = document.getElementById(listId);
+                if (!dropdown) return;
+                filterDropdown(dropdown, input.value);
+                if (!dropdown.classList.contains('open')) {
+                    dropdown.classList.add('open');
+                    var btn = input.closest('.sf-input-wrap').querySelector('.sf-arrow');
+                    if (btn) btn.classList.add('active');
+                }
+            });
+
+            var listId = input.dataset.sflist;
+            var dropdown = document.getElementById(listId);
+            if (dropdown) {
+                dropdown.querySelectorAll('li').forEach(function (li) {
+                    li.addEventListener('mousedown', function (e) {
+                        e.preventDefault();
+                        input.value = li.textContent;
+                        closeAllDropdowns();
+                    });
+                });
+            }
+        });
+
+        document.addEventListener('click', closeAllDropdowns);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeAllDropdowns();
         });
     });
 </script>
 
 <style>
-    /* ══════════════════════════════════════════
-       Search page – neles theme
-       ══════════════════════════════════════════ */
-
-    /* Conteneur principal */
+    /* ════════════════════════════════════════════════════════════════════════════
+   Search form – redesign matching screenshot
+════════════════════════════════════════════════════════════════════════════ */
     .custom-search-container {
-        max-width: 900px;
-        padding: 0 20px;
-        font-family: 'Open Sans', sans-serif;
-        padding: 40px;
+        max-width: 860px;
         margin: 0 auto;
+        padding: 40px 24px;
+        font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    /* Titre avec les petites lignes sur le côté */
+    /* ── Titre ──────────────────────────────────────────────────────────────── */
     .search-header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 36px;
     }
 
     .search-header h2 {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        font-family: 'Playfair Display', Georgia, serif;
         font-size: 2.2rem;
-        font-weight: bold;
+        font-weight: 700;
         color: #1a1a1a;
-        position: relative;
         margin: 0;
     }
 
     .search-header h2::before,
     .search-header h2::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        width: 50px;
+        content: '';
+        display: block;
+        width: 46px;
         height: 1.5px;
-        background-color: var(--accent, #920b0b);
+        background: var(--accent, #920b0b);
+        flex-shrink: 0;
     }
 
-    .search-header h2::before {
-        right: 100%;
-        margin-right: 20px;
-    }
-
-    .search-header h2::after {
-        left: 100%;
-        margin-left: 20px;
-    }
-
-    /* ── Grid layout on the wrapper that contains the .field elements ── */
-    #advanced-search .advanced-search-content {
-        display: flex !important;
+    /* ── Wrapper ────────────────────────────────────────────────────────────── */
+    .advanced-search-content {
+        display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 16px;
     }
 
-    /* ── Card style for each .field ── */
-    #advanced-search .advanced-search-content>.field {
-        background-color: #fff;
+    /* ── Card ───────────────────────────────────────────────────────────────── */
+    .sf-card {
+        background: #fff;
         border: 1px solid #ddd;
-        border-radius: 6px;
-        padding: 22px;
-        margin: 0 !important;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-        display: block !important;
-        flex-wrap: nowrap !important;
+        border-radius: 8px;
+        /* Rayon un peu plus doux pour coller au reste */
+        padding: 24px;
+        box-shadow: none;
     }
 
-    /* ── Labels ── */
-    #advanced-search .advanced-search-content>.field .field-meta {
+    .sf-card-header {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 20px;
+    }
+
+    .sf-card-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sf-card-desc {
+        font-size: .85rem;
+        color: #888;
+    }
+
+    /* ── Grids ──────────────────────────────────────────────────────────────── */
+    .sf-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px 16px;
+    }
+
+    .sf-single {
+        display: block;
+    }
+
+    /* ── Field ──────────────────────────────────────────────────────────────── */
+    .sf-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .sf-field label {
+        font-size: .85rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    /* ── Input wrap ─────────────────────────────────────────────────────────── */
+    .sf-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .sf-input-wrap input[type="text"] {
+        width: 100%;
+        padding: 10px 34px 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: .9rem;
+        color: #333;
+        background: #fff;
+        transition: border-color .18s;
+        box-sizing: border-box;
+    }
+
+    .sf-input-wrap input[type="text"]::placeholder {
+        color: #999;
+        font-style: italic;
+    }
+
+    .sf-input-wrap input[type="text"]:focus {
+        border-color: var(--accent, #920b0b);
+        outline: none;
+    }
+
+    /* ── Arrow button ───────────────────────────────────────────────────────── */
+    .sf-arrow {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #bbb;
+        padding: 2px 4px;
+        line-height: 1;
+        transition: color .15s, transform .2s;
+        z-index: 2;
+    }
+
+    .sf-arrow:hover {
+        color: var(--accent, #920b0b);
+    }
+
+    .sf-arrow.active {
+        color: var(--accent, #920b0b);
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* ── Dropdown ───────────────────────────────────────────────────────────── */
+    .sf-dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid var(--accent, #920b0b);
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+        max-height: 220px;
+        overflow-y: auto;
+        z-index: 200;
+        list-style: none;
+        margin: 0;
+        padding: 4px 0;
+    }
+
+    .sf-dropdown.open {
+        display: block;
+    }
+
+    .sf-dropdown li {
+        padding: 8px 14px;
+        font-size: .85rem;
+        color: #333;
+        cursor: pointer;
+        transition: background .12s;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .sf-dropdown li:hover,
+    .sf-dropdown li:focus {
+        background: #f9eded;
+        color: var(--accent, #920b0b);
+        outline: none;
+    }
+
+    /* ── Fulltext partial override ──────────────────────────────────────────── */
+    .fulltext-override .field {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    /* Afficher le label du field-meta et le styler comme les autres titres de cartes */
+    .fulltext-override .field-meta {
         width: 100% !important;
         padding: 0 !important;
         margin-bottom: 12px;
+        display: block !important;
     }
 
-    #advanced-search .advanced-search-content>.field .field-meta label {
-        font-weight: 600;
-        font-size: 1rem;
-        color: #222;
-        display: block;
-        margin-bottom: 0;
+    .fulltext-override .field-meta label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+        font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+        /* Pour surcharger s'il y a lieu */
     }
 
-    #advanced-search .advanced-search-content>.field .field-description {
-        font-size: 0.8rem;
-        color: #999;
-        margin-top: 4px;
-    }
-
-    /* ── Inputs wrapper ── */
-    #advanced-search .advanced-search-content>.field .inputs {
+    .fulltext-override .inputs {
         width: 100% !important;
         padding: 0 !important;
     }
 
-    /* ── Inputs & selects ── */
-    #advanced-search .advanced-search-content input[type="text"],
-    #advanced-search .advanced-search-content input[type="search"],
-    #advanced-search .advanced-search-content select {
+    /* Forcer la pleine largeur sur l'input de recherche Omeka */
+    .fulltext-override input[type="text"],
+    .fulltext-override input[type="search"] {
         width: 100% !important;
+        max-width: 100% !important;
         padding: 10px 12px;
-        border: 1.5px solid #ccc;
+        border: 1px solid #ccc;
         border-radius: 4px;
-        box-sizing: border-box;
-        margin-bottom: 8px;
         font-family: 'Open Sans', sans-serif;
-        font-size: 0.9rem;
-        transition: border-color 0.2s ease;
-        appearance: auto;
+        font-size: .9rem;
+        color: #333;
+        background: #fff;
+        transition: border-color .18s;
+        box-sizing: border-box;
     }
 
-    #advanced-search .advanced-search-content input[type="text"]:focus,
-    #advanced-search .advanced-search-content input[type="search"]:focus,
-    #advanced-search .advanced-search-content select:focus {
+    .fulltext-override input[type="text"]:focus,
+    .fulltext-override input[type="search"]:focus {
         border-color: var(--accent, #920b0b);
         outline: none;
-        box-shadow: 0 0 0 2px rgba(146, 11, 11, 0.08);
     }
 
-    /* ── Add/Remove value buttons ── */
-    #advanced-search .add-value,
-    #advanced-search .remove-value {
-        background-color: var(--accent, #920b0b) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 50%;
-        width: 26px;
-        height: 26px;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        transition: opacity 0.2s ease;
-    }
-
-    #advanced-search .add-value:hover,
-    #advanced-search .remove-value:hover {
-        opacity: 0.8;
-    }
-
-    /* ── Flaubert Custom Filters Grid ── */
-    .custom-filters-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        margin-top: 15px;
-    }
-
-    .custom-filter-item {
-        flex: 1 1 calc(33.333% - 15px);
-        min-width: 200px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .custom-filter-item label {
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 6px;
-        color: #444;
-    }
-
-    .custom-filter-item input[type="text"] {
-        width: 100% !important;
-    }
-
-    /* end of custom search css */
-
-    /* ══════════════════════════════════════════
-       Action buttons
-       ══════════════════════════════════════════ */
+    /* ── Action buttons ─────────────────────────────────────────────────────── */
     .search-actions {
         display: flex;
-        gap: 15px;
-        padding-top: 25px;
-        justify-content: flex-start;
+        gap: 20px;
+        padding-top: 28px;
+        flex-wrap: wrap;
     }
 
     .btn-submit,
@@ -367,69 +597,64 @@ $this->htmlElement('body')->appendAttribute('class', 'items search');
         border-radius: 30px;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        font-size: 0.85rem;
+        letter-spacing: 1px;
+        font-size: .85rem;
         cursor: pointer;
-        text-decoration: none;
-        text-align: center;
-        transition: all 0.25s ease;
+        transition: all .2s ease;
         font-family: 'Open Sans', sans-serif;
     }
 
     .btn-submit {
-        background-color: var(--accent, #920b0b);
+        background: var(--accent, #8e353c);
         color: #fff;
-        border: 2px solid var(--accent, #920b0b);
+        border: 1px solid var(--accent, #8e353c);
     }
 
     .btn-submit:hover {
-        opacity: 0.85;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: #732a30;
+        border-color: #732a30;
     }
 
     .btn-reset {
-        background-color: #fff;
-        color: var(--accent, #920b0b);
-        border: 2px solid #ddd;
+        background: #fff;
+        color: var(--accent, #8e353c);
+        border: 1px solid #ccc;
     }
 
     .btn-reset:hover {
-        border-color: var(--accent, #920b0b);
-        background-color: #fafafa;
+        border-color: var(--accent, #8e353c);
+        background: #fdf2f2;
     }
 
-    /* ══════════════════════════════════════════
-       Responsive
-       ══════════════════════════════════════════ */
-    @media screen and (max-width: 768px) {
-        #advanced-search .advanced-search-content {
-            grid-template-columns: 1fr !important;
-        }
-
-        #advanced-search .advanced-search-content>.field {
-            grid-column: 1 / -1 !important;
+    /* ── Responsive ─────────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+        .sf-grid-3 {
+            grid-template-columns: 1fr 1fr;
         }
 
         .search-header h2 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
 
         .search-header h2::before,
         .search-header h2::after {
             width: 30px;
         }
+    }
+
+    @media (max-width: 480px) {
+        .sf-grid-3 {
+            grid-template-columns: 1fr;
+        }
 
         .search-actions {
-            display: block;
-            text-align: center;
-            padding: 20px;
+            flex-direction: column;
         }
 
         .btn-submit,
         .btn-reset {
-            display: block;
-            margin: 10px auto;
+            width: 100%;
+            text-align: center;
         }
     }
 </style>

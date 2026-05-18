@@ -3,6 +3,10 @@ $translate = $this->plugin('translate');
 $this->htmlElement('body')->appendAttribute('class', 'items search');
 $query = $this->params()->fromQuery();
 
+// ── Récupération du Site courant (pour filtrer les listes déroulantes) ──────
+$site = $this->currentSite();
+$siteId = $site ? $site->id() : null;
+
 // ── PDO connection ──────────────────────────────────────────────────────────
 $pathToCheck = __DIR__;
 $baseDir = null;
@@ -48,21 +52,49 @@ $getSubmittedValue = function ($propId) use ($query) {
     return '';
 };
 
-// ── Helper: get distinct values for datalist ────────────────────────────────
-$getDistinctValues = function ($propId) use ($pdo) {
+// ── Helper: get distinct values for datalist (FILTRÉ PAR SITE) ──────────────
+$getDistinctValues = function ($propId) use ($pdo, $siteId) {
     if (!$pdo || !is_numeric($propId))
         return [];
-    $stmt = $pdo->prepare("
-        SELECT DISTINCT value FROM value
-        WHERE property_id = :pid AND value IS NOT NULL AND value != ''
-        ORDER BY value ASC LIMIT 500
-    ");
-    $stmt->execute(['pid' => $propId]);
-    return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+
+    if ($siteId) {
+        try {
+            $linkTable = 'item_site';
+            $check = $pdo->query("SHOW TABLES LIKE 'site_item'");
+            if ($check && $check->rowCount() > 0) {
+                $linkTable = 'site_item';
+            }
+
+            $stmt = $pdo->prepare("
+                SELECT DISTINCT v.value 
+                FROM value v
+                INNER JOIN {$linkTable} si ON v.resource_id = si.item_id
+                WHERE v.property_id = :pid 
+                  AND si.site_id = :site_id
+                  AND v.value IS NOT NULL AND v.value != ''
+                ORDER BY v.value ASC LIMIT 500
+            ");
+            $stmt->execute(['pid' => $propId, 'site_id' => $siteId]);
+            return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+        } catch (\Exception $e) {
+        }
+    }
+
+    try {
+        $stmt = $pdo->prepare("
+            SELECT DISTINCT value FROM value
+            WHERE property_id = :pid AND value IS NOT NULL AND value != ''
+            ORDER BY value ASC LIMIT 500
+        ");
+        $stmt->execute(['pid' => $propId]);
+        return $stmt->fetchAll(\PDO::FETCH_COLUMN);
+    } catch (\Exception $e) {
+        return [];
+    }
 };
 
 // ── Helper: render a single filter input ────────────────────────────────────
-$idx = 0; // global index for property[] names
+$idx = 0;
 $renderInput = function (string $label, string $term, string $slotKey = '') use (&$idx, $getPropId, $getSubmittedValue, $getDistinctValues) {
     $propId = $getPropId($term);
     $value = $getSubmittedValue($propId);
@@ -76,23 +108,18 @@ $renderInput = function (string $label, string $term, string $slotKey = '') use 
     <div class="sf-field<?php echo $hasList ? ' sf-has-list' : ''; ?>">
         <label for="<?php echo $inputId; ?>"><?php echo htmlspecialchars($label); ?></label>
         <div class="sf-input-wrap">
-            <input
-                type="hidden" name="property[<?php echo $i; ?>][joiner]" value="and">
-            <input
-                type="hidden" name="property[<?php echo $i; ?>][property]" value="<?php echo htmlspecialchars((string) $propId); ?>">
-            <input
-                type="hidden" name="property[<?php echo $i; ?>][type]" value="eq">
-            <input
-                id="<?php echo $inputId; ?>"
-                type="text"
-                name="property[<?php echo $i; ?>][text]"
-                value="<?php echo htmlspecialchars($value); ?>"
-                placeholder="<?php echo htmlspecialchars($label); ?>"
-                autocomplete="off"
-                <?php if ($hasList): ?>data-sflist="<?php echo $listId; ?>"<?php endif; ?>>
+            <input type="hidden" name="property[<?php echo $i; ?>][joiner]" value="and">
+            <input type="hidden" name="property[<?php echo $i; ?>][property]"
+                value="<?php echo htmlspecialchars((string) $propId); ?>">
+            <input type="hidden" name="property[<?php echo $i; ?>][type]" value="eq">
+            <input id="<?php echo $inputId; ?>" type="text" name="property[<?php echo $i; ?>][text]"
+                value="<?php echo htmlspecialchars($value); ?>" placeholder="<?php echo htmlspecialchars($label); ?>"
+                autocomplete="off" <?php if ($hasList): ?>data-sflist="<?php echo $listId; ?>" <?php endif; ?>>
             <?php if ($hasList): ?>
                 <button type="button" class="sf-arrow" aria-label="Afficher les suggestions" tabindex="-1">
-                    <svg viewBox="0 0 10 6" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
+                    <svg viewBox="0 0 10 6" width="10" height="6">
+                        <path d="M0 0l5 6 5-6z" fill="currentColor" />
+                    </svg>
                 </button>
                 <ul class="sf-dropdown" id="<?php echo $listId; ?>" role="listbox">
                     <?php foreach ($values as $v): ?>
@@ -106,12 +133,12 @@ $renderInput = function (string $label, string $term, string $slotKey = '') use 
     return ob_get_clean();
 };
 
-// ── Cote (special: dcterms:bibliographicCitation, type eq) ──────────────────
+// ── Cote (special) ──────────────────────────────────────────────────────────
 $cotePropId = $getPropId('dcterms:bibliographicCitation');
 $coteValue = $getSubmittedValue($cotePropId);
 $coteValues = $getDistinctValues($cotePropId);
 $coteHasList = !empty($coteValues);
-$coteIdx = 99; // fixed slot
+$coteIdx = 99;
 ?>
 
 <div class="custom-search-container">
@@ -129,7 +156,6 @@ $coteIdx = 99; // fixed slot
 
         <div class="advanced-search-content">
 
-            <!-- ── Cote ─────────────────────────────────────────────────── -->
             <div class="sf-card" id="cote-query">
                 <div class="sf-card-header">
                     <span class="sf-card-title">Cote</span>
@@ -138,15 +164,17 @@ $coteIdx = 99; // fixed slot
                     <div class="sf-field<?php echo $coteHasList ? ' sf-has-list' : ''; ?>">
                         <div class="sf-input-wrap">
                             <input type="hidden" name="property[99][joiner]" value="and">
-                            <input type="hidden" name="property[99][property]" value="<?php echo htmlspecialchars((string) $cotePropId); ?>">
+                            <input type="hidden" name="property[99][property]"
+                                value="<?php echo htmlspecialchars((string) $cotePropId); ?>">
                             <input type="hidden" name="property[99][type]" value="eq">
                             <input type="text" id="cote_input" name="property[99][text]"
-                                value="<?php echo htmlspecialchars($coteValue); ?>"
-                                placeholder="Cote" autocomplete="off"
-                                <?php if ($coteHasList): ?>data-sflist="dl_cote"<?php endif; ?>>
+                                value="<?php echo htmlspecialchars($coteValue); ?>" placeholder="Cote"
+                                autocomplete="off" <?php if ($coteHasList): ?>data-sflist="dl_cote" <?php endif; ?>>
                             <?php if ($coteHasList): ?>
                                 <button type="button" class="sf-arrow" aria-label="Afficher les suggestions" tabindex="-1">
-                                    <svg viewBox="0 0 10 6" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg>
+                                    <svg viewBox="0 0 10 6" width="10" height="6">
+                                        <path d="M0 0l5 6 5-6z" fill="currentColor" />
+                                    </svg>
                                 </button>
                                 <ul class="sf-dropdown" id="dl_cote" role="listbox">
                                     <?php foreach ($coteValues as $v): ?>
@@ -159,7 +187,6 @@ $coteIdx = 99; // fixed slot
                 </div>
             </div>
 
-            <!-- ── Date ─────────────────────────────────────────────────── -->
             <div class="sf-card">
                 <div class="sf-card-header">
                     <span class="sf-card-title">Date</span>
@@ -173,7 +200,6 @@ $coteIdx = 99; // fixed slot
                 </div>
             </div>
 
-            <!-- ── Correspondance ────────────────────────────────────────── -->
             <div class="sf-card">
                 <div class="sf-card-header">
                     <span class="sf-card-title">Correspondance</span>
@@ -181,14 +207,13 @@ $coteIdx = 99; // fixed slot
                 </div>
                 <div class="sf-card-body sf-grid-3">
                     <?php
-                    echo $renderInput('Correspondant', 'index:persname');
+                    echo $renderInput('Correspondant', 'index:functionFrom');
                     echo $renderInput('Pays', 'index:geognameCountry');
                     echo $renderInput('Ville', 'index:geognameCity');
                     ?>
                 </div>
             </div>
 
-            <!-- ── Réception dans la presse ──────────────────────────────── -->
             <div class="sf-card">
                 <div class="sf-card-header">
                     <span class="sf-card-title">Réception dans la presse</span>
@@ -203,7 +228,6 @@ $coteIdx = 99; // fixed slot
                 </div>
             </div>
 
-            <!-- ── Œuvres d'art ──────────────────────────────────────────── -->
             <div class="sf-card">
                 <div class="sf-card-header">
                     <span class="sf-card-title">Œuvres d'art</span>
@@ -218,7 +242,6 @@ $coteIdx = 99; // fixed slot
                 </div>
             </div>
 
-            <!-- ── Autres ────────────────────────────────────────────────── -->
             <div class="sf-card">
                 <div class="sf-card-header">
                     <span class="sf-card-title">Autres</span>
@@ -231,14 +254,21 @@ $coteIdx = 99; // fixed slot
                     echo $renderInput('Typologie documentaire', 'index:genreformType');
                     ?>
                 </div>
-                <div class="sf-card-body sf-single" style="margin-top:12px;">
-                    <?php echo $renderInput('Lieu de conservation des archives', 'index:noteRepository'); ?>
+                <div class="sf-card-body sf-single" style="margin-top: 16px;">
+                    <?php
+                    echo $renderInput('Lieu de conservation des archives', 'index:noteRepository');
+                    ?>
                 </div>
             </div>
 
-            <!-- ── Texte intégral ────────────────────────────────────────── -->
-            <?php echo $this->partial('common/advanced-search/fulltext', ['query' => $query, 'resourceType' => 'item']); ?>
-            <?php echo $this->partial('common/advanced-search/resource-template-restrict', ['query' => $query, 'resourceType' => 'item']); ?>
+            <div class="sf-card">
+                <div class="sf-card-body sf-single fulltext-override">
+                    <?php echo $this->partial('common/advanced-search/fulltext', ['query' => $query, 'resourceType' => 'item']); ?>
+                    <div style="display:none;">
+                        <?php echo $this->partial('common/advanced-search/resource-template-restrict', ['query' => $query, 'resourceType' => 'item']); ?>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -246,373 +276,394 @@ $coteIdx = 99; // fixed slot
 
         <div id="page-actions" class="search-actions">
             <button type="submit" name="submit" class="btn-submit">RECHERCHE</button>
-            <button type="button" class="btn-reset" id="reset-search">Réinitialiser</button>
+            <button type="button" class="btn-reset" id="reset-search">RÉINITIALISER</button>
         </div>
 
     </form>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    /* ── Reset button ───────────────────────────────────────────────────── */
-    document.getElementById('reset-search').addEventListener('click', function () {
-        var form = document.getElementById('advanced-search');
-        form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function (i) { i.value = ''; });
-        form.querySelectorAll('select').forEach(function (s) { s.selectedIndex = 0; });
-        form.querySelectorAll('.value:not(:first-child)').forEach(function (r) { r.remove(); });
-        closeAllDropdowns();
-    });
-
-    /* ── Custom dropdown logic ──────────────────────────────────────────── */
-    function closeAllDropdowns() {
-        document.querySelectorAll('.sf-dropdown.open').forEach(function (d) {
-            d.classList.remove('open');
-        });
-        document.querySelectorAll('.sf-arrow.active').forEach(function (b) {
-            b.classList.remove('active');
-        });
-    }
-
-    /* Filter items in a dropdown */
-    function filterDropdown(dropdown, term) {
-        var t = term.toLowerCase();
-        dropdown.querySelectorAll('li').forEach(function (li) {
-            li.style.display = (!t || li.textContent.toLowerCase().includes(t)) ? '' : 'none';
-        });
-    }
-
-    /* Open / close on arrow click */
-    document.querySelectorAll('.sf-arrow').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            var wrap    = btn.closest('.sf-input-wrap');
-            var input   = wrap.querySelector('input[type="text"]');
-            var listId  = input.dataset.sflist;
-            var dropdown = document.getElementById(listId);
-            if (!dropdown) return;
-
-            var isOpen = dropdown.classList.contains('open');
+    document.addEventListener('DOMContentLoaded', function () {
+        /* ── Reset button ───────────────────────────────────────────────────── */
+        document.getElementById('reset-search').addEventListener('click', function () {
+            var form = document.getElementById('advanced-search');
+            form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function (i) { i.value = ''; });
+            form.querySelectorAll('select').forEach(function (s) { s.selectedIndex = 0; });
+            form.querySelectorAll('.value:not(:first-child)').forEach(function (r) { r.remove(); });
             closeAllDropdowns();
-            if (!isOpen) {
-                filterDropdown(dropdown, input.value);
-                dropdown.classList.add('open');
-                btn.classList.add('active');
-            }
-        });
-    });
-
-    /* Filter on typing */
-    document.querySelectorAll('input[data-sflist]').forEach(function (input) {
-        input.addEventListener('input', function () {
-            var listId   = input.dataset.sflist;
-            var dropdown = document.getElementById(listId);
-            if (!dropdown) return;
-            filterDropdown(dropdown, input.value);
-            if (!dropdown.classList.contains('open')) {
-                dropdown.classList.add('open');
-                var btn = input.closest('.sf-input-wrap').querySelector('.sf-arrow');
-                if (btn) btn.classList.add('active');
-            }
         });
 
-        /* Select item from dropdown */
-        var listId   = input.dataset.sflist;
-        var dropdown = document.getElementById(listId);
-        if (dropdown) {
-            dropdown.querySelectorAll('li').forEach(function (li) {
-                li.addEventListener('mousedown', function (e) {
-                    e.preventDefault();
-                    input.value = li.textContent;
-                    closeAllDropdowns();
-                });
+        /* ── Custom dropdown logic ──────────────────────────────────────────── */
+        function closeAllDropdowns() {
+            document.querySelectorAll('.sf-dropdown.open').forEach(function (d) {
+                d.classList.remove('open');
+            });
+            document.querySelectorAll('.sf-arrow.active').forEach(function (b) {
+                b.classList.remove('active');
             });
         }
-    });
 
-    /* Close on outside click */
-    document.addEventListener('click', closeAllDropdowns);
+        function filterDropdown(dropdown, term) {
+            var t = term.toLowerCase();
+            dropdown.querySelectorAll('li').forEach(function (li) {
+                li.style.display = (!t || li.textContent.toLowerCase().includes(t)) ? '' : 'none';
+            });
+        }
 
-    /* Close on Escape */
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeAllDropdowns();
+        document.querySelectorAll('.sf-arrow').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var wrap = btn.closest('.sf-input-wrap');
+                var input = wrap.querySelector('input[type="text"]');
+                var listId = input.dataset.sflist;
+                var dropdown = document.getElementById(listId);
+                if (!dropdown) return;
+
+                var isOpen = dropdown.classList.contains('open');
+                closeAllDropdowns();
+                if (!isOpen) {
+                    filterDropdown(dropdown, input.value);
+                    dropdown.classList.add('open');
+                    btn.classList.add('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('input[data-sflist]').forEach(function (input) {
+            input.addEventListener('input', function () {
+                var listId = input.dataset.sflist;
+                var dropdown = document.getElementById(listId);
+                if (!dropdown) return;
+                filterDropdown(dropdown, input.value);
+                if (!dropdown.classList.contains('open')) {
+                    dropdown.classList.add('open');
+                    var btn = input.closest('.sf-input-wrap').querySelector('.sf-arrow');
+                    if (btn) btn.classList.add('active');
+                }
+            });
+
+            var listId = input.dataset.sflist;
+            var dropdown = document.getElementById(listId);
+            if (dropdown) {
+                dropdown.querySelectorAll('li').forEach(function (li) {
+                    li.addEventListener('mousedown', function (e) {
+                        e.preventDefault();
+                        input.value = li.textContent;
+                        closeAllDropdowns();
+                    });
+                });
+            }
+        });
+
+        document.addEventListener('click', closeAllDropdowns);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeAllDropdowns();
+        });
     });
-});
 </script>
 
 <style>
-/* ════════════════════════════════════════════════════════════════════════════
-   Search form – redesign
-════════════════════════════════════════════════════════════════════════════ */
-.custom-search-container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 40px 24px;
-    font-family: 'Open Sans', sans-serif;
-}
+    /* ════════════════════════════════════════════════════════════════════════════
+    Search form – redesign matching screenshot
+    ════════════════════════════════════════════════════════════════════════════ */
+    .custom-search-container {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
 
-/* ── Titre ──────────────────────────────────────────────────────────────── */
-.search-header {
-    text-align: center;
-    margin-bottom: 36px;
-}
-.search-header h2 {
-    display: inline-flex;
-    align-items: center;
-    gap: 18px;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0;
-}
-.search-header h2::before,
-.search-header h2::after {
-    content: '';
-    display: block;
-    width: 46px;
-    height: 1.5px;
-    background: var(--accent, #920b0b);
-    flex-shrink: 0;
-}
+    .search-header {
+        text-align: center;
+        margin-bottom: 36px;
+    }
 
-/* ── Wrapper ────────────────────────────────────────────────────────────── */
-.advanced-search-content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
+    .search-header h2 {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0;
+    }
 
-/* ── Card ───────────────────────────────────────────────────────────────── */
-.sf-card {
-    background: #fff;
-    border: 1px solid #e2e2e2;
-    border-radius: 8px;
-    padding: 20px 22px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.04);
-}
-.sf-card-header {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-}
-.sf-card-title {
-    font-size: .95rem;
-    font-weight: 700;
-    color: #1a1a1a;
-}
-.sf-card-desc {
-    font-size: .75rem;
-    color: #999;
-}
-
-/* ── Grids ──────────────────────────────────────────────────────────────── */
-.sf-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-}
-.sf-single {
-    display: block;
-}
-
-/* ── Field ──────────────────────────────────────────────────────────────── */
-.sf-field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.sf-field label {
-    font-size: .78rem;
-    font-weight: 600;
-    color: #444;
-}
-
-/* ── Input wrap ─────────────────────────────────────────────────────────── */
-.sf-input-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-.sf-input-wrap input[type="text"] {
-    width: 100%;
-    padding: 9px 34px 9px 11px;
-    border: 1.5px solid #d0d0d0;
-    border-radius: 5px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: .85rem;
-    color: #222;
-    background: #fafafa;
-    transition: border-color .18s, box-shadow .18s, background .18s;
-    box-sizing: border-box;
-}
-.sf-input-wrap input[type="text"]::placeholder {
-    color: #bbb;
-    font-style: italic;
-}
-.sf-input-wrap input[type="text"]:focus {
-    border-color: var(--accent, #920b0b);
-    background: #fff;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(146,11,11,.08);
-}
-
-/* ── Arrow button ───────────────────────────────────────────────────────── */
-.sf-arrow {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #bbb;
-    padding: 2px 4px;
-    line-height: 1;
-    transition: color .15s, transform .2s;
-    z-index: 2;
-}
-.sf-arrow:hover { color: var(--accent, #920b0b); }
-.sf-arrow.active {
-    color: var(--accent, #920b0b);
-    transform: translateY(-50%) rotate(180deg);
-}
-
-/* ── Dropdown ───────────────────────────────────────────────────────────── */
-.sf-dropdown {
-    display: none;
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    right: 0;
-    background: #fff;
-    border: 1.5px solid var(--accent, #920b0b);
-    border-radius: 6px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.12);
-    max-height: 220px;
-    overflow-y: auto;
-    z-index: 200;
-    list-style: none;
-    margin: 0;
-    padding: 4px 0;
-}
-.sf-dropdown.open { display: block; }
-.sf-dropdown li {
-    padding: 8px 14px;
-    font-size: .83rem;
-    color: #333;
-    cursor: pointer;
-    transition: background .12s;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.sf-dropdown li:hover,
-.sf-dropdown li:focus {
-    background: #f9eded;
-    color: var(--accent, #920b0b);
-    outline: none;
-}
-.sf-dropdown::-webkit-scrollbar { width: 5px; }
-.sf-dropdown::-webkit-scrollbar-track { background: transparent; }
-.sf-dropdown::-webkit-scrollbar-thumb {
-    background: #ddd;
-    border-radius: 99px;
-}
-
-/* ── Fulltext partial override ──────────────────────────────────────────── */
-#advanced-search .advanced-search-content > .field {
-    background: #fff;
-    border: 1px solid #e2e2e2;
-    border-radius: 8px;
-    padding: 20px 22px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.04);
-    margin: 0 !important;
-    display: block !important;
-}
-#advanced-search .advanced-search-content > .field .field-meta {
-    width: 100% !important;
-    padding: 0 !important;
-    margin-bottom: 12px;
-}
-#advanced-search .advanced-search-content > .field .field-meta label {
-    font-weight: 700;
-    font-size: .95rem;
-    color: #1a1a1a;
-}
-#advanced-search .advanced-search-content > .field .inputs {
-    width: 100% !important;
-    padding: 0 !important;
-}
-#advanced-search .advanced-search-content input[type="search"],
-#advanced-search .advanced-search-content select {
-    width: 100% !important;
-    padding: 9px 11px;
-    border: 1.5px solid #d0d0d0;
-    border-radius: 5px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: .85rem;
-    background: #fafafa;
-    transition: border-color .18s;
-    box-sizing: border-box;
-}
-#advanced-search .advanced-search-content input[type="search"]:focus,
-#advanced-search .advanced-search-content select:focus {
-    border-color: var(--accent, #920b0b);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(146,11,11,.08);
-}
-
-/* ── Action buttons ─────────────────────────────────────────────────────── */
-.search-actions {
-    display: flex;
-    gap: 14px;
-    padding-top: 28px;
-    flex-wrap: wrap;
-}
-.btn-submit,
-.btn-reset {
-    padding: 11px 34px;
-    border-radius: 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-    font-size: .8rem;
-    cursor: pointer;
-    transition: all .22s ease;
-    font-family: 'Open Sans', sans-serif;
-}
-.btn-submit {
-    background: var(--accent, #920b0b);
-    color: #fff;
-    border: 2px solid var(--accent, #920b0b);
-}
-.btn-submit:hover {
-    opacity: .85;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(0,0,0,.15);
-}
-.btn-reset {
-    background: #fff;
-    color: #555;
-    border: 2px solid #ddd;
-}
-.btn-reset:hover {
-    border-color: var(--accent, #920b0b);
-    color: var(--accent, #920b0b);
-}
-
-/* ── Responsive ─────────────────────────────────────────────────────────── */
-@media (max-width: 680px) {
-    .sf-grid-3 { grid-template-columns: 1fr 1fr; }
-    .search-header h2 { font-size: 1.5rem; }
     .search-header h2::before,
-    .search-header h2::after { width: 28px; }
-}
-@media (max-width: 480px) {
-    .sf-grid-3 { grid-template-columns: 1fr; }
-    .search-actions { flex-direction: column; }
-    .btn-submit, .btn-reset { text-align: center; }
-}
+    .search-header h2::after {
+        content: '';
+        display: block;
+        width: 46px;
+        height: 1.5px;
+        background: var(--accent, #920b0b);
+        flex-shrink: 0;
+    }
+
+    .advanced-search-content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .sf-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: none;
+    }
+
+    .sf-card-header {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 20px;
+    }
+
+    .sf-card-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sf-card-desc {
+        font-size: .85rem;
+        color: #888;
+    }
+
+    .sf-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px 16px;
+    }
+
+    .sf-single {
+        display: block;
+    }
+
+    .sf-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .sf-field label {
+        font-size: .85rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .sf-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .sf-input-wrap input[type="text"] {
+        width: 100%;
+        padding: 10px 34px 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: .9rem;
+        color: #333;
+        background: #fff;
+        transition: border-color .18s;
+        box-sizing: border-box;
+    }
+
+    .sf-input-wrap input[type="text"]::placeholder {
+        color: #999;
+        font-style: italic;
+    }
+
+    .sf-input-wrap input[type="text"]:focus {
+        border-color: var(--accent, #920b0b);
+        outline: none;
+    }
+
+    .sf-arrow {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #bbb;
+        padding: 2px 4px;
+        line-height: 1;
+        transition: color .15s, transform .2s;
+        z-index: 2;
+    }
+
+    .sf-arrow:hover {
+        color: var(--accent, #920b0b);
+    }
+
+    .sf-arrow.active {
+        color: var(--accent, #920b0b);
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    .sf-dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid var(--accent, #920b0b);
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+        max-height: 220px;
+        overflow-y: auto;
+        z-index: 200;
+        list-style: none;
+        margin: 0;
+        padding: 4px 0;
+    }
+
+    .sf-dropdown.open {
+        display: block;
+    }
+
+    .sf-dropdown li {
+        padding: 8px 14px;
+        font-size: .85rem;
+        color: #333;
+        cursor: pointer;
+        transition: background .12s;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .sf-dropdown li:hover,
+    .sf-dropdown li:focus {
+        background: #f9eded;
+        color: var(--accent, #920b0b);
+        outline: none;
+    }
+
+    .fulltext-override .field {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    .fulltext-override .field-meta {
+        width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 12px;
+        display: block !important;
+    }
+
+    .fulltext-override .field-meta label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+        font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .fulltext-override .inputs {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .fulltext-override input[type="text"],
+    .fulltext-override input[type="search"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: .9rem;
+        color: #333;
+        background: #fff;
+        transition: border-color .18s;
+        box-sizing: border-box;
+    }
+
+    .fulltext-override input[type="text"]:focus,
+    .fulltext-override input[type="search"]:focus {
+        border-color: var(--accent, #920b0b);
+        outline: none;
+    }
+
+    .search-actions {
+        display: flex;
+        gap: 20px;
+        padding-top: 28px;
+        flex-wrap: wrap;
+    }
+
+    .btn-submit,
+    .btn-reset {
+        padding: 12px 36px;
+        border-radius: 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: .85rem;
+        cursor: pointer;
+        transition: all .2s ease;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .btn-submit {
+        background: var(--accent, #8e353c);
+        color: #fff;
+        border: 1px solid var(--accent, #8e353c);
+    }
+
+    .btn-submit:hover {
+        background: #732a30;
+        border-color: #732a30;
+    }
+
+    .btn-reset {
+        background: #fff;
+        color: var(--accent, #8e353c);
+        border: 1px solid #ccc;
+    }
+
+    .btn-reset:hover {
+        border-color: var(--accent, #8e353c);
+        background: #fdf2f2;
+    }
+
+    @media (max-width: 768px) {
+        .sf-grid-3 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .search-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .search-header h2::before,
+        .search-header h2::after {
+            width: 30px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .sf-grid-3 {
+            grid-template-columns: 1fr;
+        }
+
+        .search-actions {
+            flex-direction: column;
+        }
+
+        .btn-submit,
+        .btn-reset {
+            width: 100%;
+            text-align: center;
+        }
+    }
 </style>
