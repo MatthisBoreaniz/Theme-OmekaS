@@ -288,6 +288,7 @@
   overflow: hidden;
   box-sizing: border-box;
   background-color: #ffffff;
+  border-bottom: 1px solid var(--accent);
 }
 
 .arland-home-split-img,
