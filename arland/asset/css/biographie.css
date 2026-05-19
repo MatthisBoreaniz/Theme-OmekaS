@@ -212,10 +212,10 @@
 /* --- Habillage Section Suggestions --- */
 
 .arland-suggestions-section {
-    background-color: #f9f9f9; /* Fond très léger pour séparer du reste */
+    background-color: #f9f9f9; 
     padding: 60px 20px;
-    margin-top: 40px;
     border-top: 1px solid #eee;
+    margin: 0 !important;
 }
 
 .arland-suggestions-main-title {
@@ -228,92 +228,9 @@
     text-transform: capitalize;
 }
 
-/* Grille de cartes */
-.arland-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
-/* Design des Cartes (Habillage) */
-.arland-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
 
-.arland-card:hover {
-    transform: translateY(-5px); /* Petit saut au survol */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-}
 
-.arland-card-image-box {
-    overflow: hidden;
-    height: 200px;
-}
 
-.arland-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
-}
 
-.arland-card:hover .arland-card-img {
-    transform: scale(1.05); /* Zoom léger image */
-}
 
-.arland-card-content {
-    padding: 20px;
-    text-align: center;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.arland-card-title a {
-    text-decoration: none;
-    color: #111;
-    font-size: 1.25rem;
-    font-weight: 400;
-}
-
-/* Style Bouton Consulter */
-.arland-card-btn {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px 25px;
-    border: 1px solid var(--accent, #8b3a3a);
-    color: var(--accent, #8b3a3a);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-}
-
-.arland-card:hover .arland-card-btn {
-    background-color: var(--accent, #8b3a3a);
-    color: #fff;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-    .arland-cards-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
-    }
-}
-
-@media (max-width: 600px) {
-    .arland-cards-grid {
-        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
-    }
-    .arland-suggestions-main-title {
-        font-size: 1.6rem;
-    }
-}

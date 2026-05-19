@@ -74,6 +74,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   color: #fff;
 }
@@ -288,7 +289,6 @@
   overflow: hidden;
   box-sizing: border-box;
   background-color: #ffffff;
-  border-bottom: 1px solid var(--accent);
 }
 
 .arland-home-split-img,
@@ -336,7 +336,7 @@
 /* Titre principal */
 .arland-home-title-display {
   margin: 0;
-  font-size: 3.5rem; 
+  font-size: 3.5rem !important; 
   line-height: 1.1;
   
   word-break: break-word; 
@@ -383,7 +383,7 @@
 }
 
 /* Responsive pour tablettes */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .arland-home-split-block {
     grid-template-columns: 1fr;
   }
@@ -394,7 +394,7 @@
     padding: 3rem 2rem;
   }
   .arland-home-title-display {
-    font-size: 2.5rem;
+    font-size: 3rem !important;
   }
 }
 
@@ -404,7 +404,7 @@
     padding: 2rem 1.5rem; 
   }
   .arland-home-title-display {
-    font-size: 2rem; 
+    font-size: 2rem !important; 
   }
   .arland-h3-base {
     font-size: 1.25rem; 

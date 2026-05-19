@@ -10,7 +10,7 @@ $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1')
 $this->headTitle($siteTitle)->setSeparator(' · ');
 $this->headTitle()->append($this->setting('installation_title', 'Omeka S'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/style.css'));
-$this->headLink()->appendStylesheet($this->assetUrl('css/typography.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/normalize.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/elliadd-header.css'));
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
 $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700');

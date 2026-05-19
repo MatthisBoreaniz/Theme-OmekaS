@@ -193,27 +193,11 @@ $coteIdx = 99; // fixed slot
 
             <div class="sf-card">
                 <div class="sf-card-header">
-                    <span class="sf-card-title">Date</span>
+                    <span class="sf-card-title">Année</span>
                 </div>
                 <div class="sf-card-body sf-grid-3">
                     <?php
-                    echo $renderInput('Jour', 'index:dateDay');
-                    echo $renderInput('Mois', 'index:dateMonth');
                     echo $renderInput('Année', 'index:dateYear');
-                    ?>
-                </div>
-            </div>
-
-            <div class="sf-card">
-                <div class="sf-card-header">
-                    <span class="sf-card-title">Lieu</span>
-                    <span class="sf-card-desc">Rechercher par entité géographique</span>
-                </div>
-                <div class="sf-card-body sf-grid-3">
-                    <?php
-                    echo $renderInput('Territoire', 'index:geognameTerritory');
-                    echo $renderInput('Pays', 'index:geognameCountry');
-                    echo $renderInput('Ville', 'index:geognameCity');
                     ?>
                 </div>
             </div>
@@ -226,11 +210,9 @@ $coteIdx = 99; // fixed slot
                 <div class="sf-card-body sf-grid-3">
                     <?php
                     echo $renderInput('Personne', 'index:persname');
-                    echo $renderInput('Institution', 'index:corpname');
                     echo $renderInput('Périodique', 'index:namePeriodical');
 
                     echo $renderInput('Typologie documentaire', 'index:genreformType');
-                    echo $renderInput('Œuvre citée', 'index:title');
                     echo $renderInput('Sujet', 'index:subjectKeywords');
                     ?>
                 </div>
@@ -437,7 +419,7 @@ $coteIdx = 99; // fixed slot
     /* ── Grids ──────────────────────────────────────────────────────────────── */
     .sf-grid-3 {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 20px 16px;
     }
 

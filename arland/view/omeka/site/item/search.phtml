@@ -223,7 +223,6 @@ $coteIdx = 99;
                     <?php
                     echo $renderInput('Périodique', 'index:namePeriodical');
                     echo $renderInput('Œuvre citée', 'index:title');
-                    echo $renderInput('Thématique', 'index:subjectCategory');
                     ?>
                 </div>
             </div>
@@ -453,10 +452,10 @@ $coteIdx = 99;
         font-size: .85rem;
         color: #888;
     }
-
+    
     .sf-grid-3 {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 20px 16px;
     }
 
