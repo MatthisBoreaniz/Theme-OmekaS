@@ -416,12 +416,22 @@ $coteIdx = 99; // fixed slot
         color: #888;
     }
 
-    /* ── Grids ──────────────────────────────────────────────────────────────── */
-    .sf-grid-3 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px 16px;
-    }
+.sf-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px 16px;
+}
+
+/* Si le dernier élément est seul sur la dernière ligne */
+.sf-grid-3 > :last-child:nth-child(3n + 1) {
+    grid-column: 1 / -1;
+}
+
+/* Si la dernière ligne contient 2 éléments */
+.sf-grid-3 > :nth-last-child(2):nth-child(3n + 1),
+.sf-grid-3 > :last-child:nth-child(3n + 2) {
+    grid-column: span 1;
+}
 
     .sf-single {
         display: block;
