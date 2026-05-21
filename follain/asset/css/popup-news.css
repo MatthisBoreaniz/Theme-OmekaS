@@ -164,3 +164,7 @@
     transform: translateY(0) scale(1);
   }
 }
+
+.site-page-pagination {
+    display: none !important;
+}

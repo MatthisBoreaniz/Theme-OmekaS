@@ -28,3 +28,7 @@
 .breadcrumbs{
     display: none !important;
 }
+
+.site-page-pagination {
+    display: none !important;
+}

@@ -84,3 +84,7 @@ i, em {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+
+.site-page-pagination {
+    display: none !important;
+}

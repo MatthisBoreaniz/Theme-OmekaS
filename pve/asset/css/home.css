@@ -255,53 +255,112 @@
 
 
   .pve-thanks {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: system-ui, sans-serif;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 2rem !important;
+    font-family: 'Montserrat', sans-serif, system-ui !important;
 }
 
 .pve-thanks__title {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 600;
+    font-size: 2rem !important;
+    margin-bottom: 2.5rem !important;
+    text-align: center !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
 }
 
-.pve-thanks__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+/* CARTE DE MISE EN AVANT (Porteuse de projet) */
+.pve-thanks__lead {
+    background: #ffffff !important;
+    padding: 2rem !important;
+    border-radius: 12px !important;
+    text-align: center !important;
+    margin-bottom: 1.5rem !important;
+    border: 2px solid var(--accent, #f9a826) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
 }
 
+.pve-thanks__lead .pve-thanks__role {
+    font-size: 0.95rem !important;
+    color: var(--accent, #f9a826) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-weight: 700 !important;
+}
+
+.pve-thanks__lead .pve-thanks__names {
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+    color: #1e293b !important;
+}
+
+/* GRILLE POUR LE RESTE DE L'ÉQUIPE */
+.pve-thanks__grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* STYLE DES CARTES CLASSIQUES */
 .pve-thanks__item {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 1.2rem;
-  border-radius: 12px;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 1.5rem !important;
+    border-radius: 12px !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+    border-left: 4px solid #cbd5e1 !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .pve-thanks__item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+    border-left-color: var(--accent, #f9a826) !important;
 }
 
+.pve-thanks__item--full {
+    grid-column: 1 / -1 !important;
+}
+
+/* TYPOGRAPHIE DES CARTES */
 .pve-thanks__role {
-  font-size: 0.85rem;
-  color: #6b7280;
-  margin-bottom: 0.2rem;
+    font-size: 0.85rem !important;
+    color: #64748b !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
 }
 
 .pve-thanks__names {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
+    font-size: 1.05rem !important;
+    font-weight: 500 !important;
+    color: #334155 !important;
+    line-height: 1.6 !important;
+}
+
+/* Mise en forme des Volets dans les textes */
+.pve-thanks__names strong {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+.pve-thanks__names em {
+    color: #64748b !important;
+    font-style: italic !important;
+    font-size: 0.95rem !important;
+}
+
+/* RESPONSIVE POUR MOBILES */
+@media (max-width: 768px) {
+    .pve-thanks__grid {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 

@@ -298,3 +298,7 @@ body {
 .arland-slide-content::-webkit-scrollbar {
   display: none; 
 }
+
+.site-page-pagination {
+    display: none !important;
+}
