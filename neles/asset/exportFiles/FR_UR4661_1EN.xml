@@ -1,0 +1,1263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" audience="external" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd http://www.w3.org/1999/xlink http://www.loc.gov/standards/xlink/xlink.xsd">
+  <eadheader>
+    <eadid>FR/UR4661/1EN</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Fonds Émile Nélès</titleproper>
+        <subtitle>Inventaire analytique</subtitle>
+        <author>Établi par Thomas Dandin.</author>
+      </titlestmt>
+      <editionstmt>
+        <edition>Première édition électronique</edition>
+      </editionstmt>
+      <publicationstmt>
+        <publisher>Université Marie et Louis Pasteur, laboratoire ELLIADD (UR 4661),  Pôle Arts et Littérature</publisher>
+        <address>
+          <addressline>30 rue Mégevand 25030 Besançon</addressline>
+        </address>
+        <date calendar="gregorian" era="ce" normal="2022-09-21">21 septembre 2022</date>
+      </publicationstmt>
+    </filedesc>
+    <profiledesc>
+      <creation>Encodage réalisé par Thomas Dandin, archiviste, laboratoire ELLIADD (UR 4661), université Marie et Louis Pasteur, le 17 mars 2026, avec le logiciel Oxygen et l'outil SimplEAD conformément à la DTD EAD 2002.</creation>
+      <langusage>
+        <language>Français</language>
+      </langusage>
+      <descrules>Instrument de recherche rédigé conformément à la norme générale et internationale de description archivistique (ISAD-G) du Conseil international des archives, deuxième édition, 2000.</descrules>
+    </profiledesc>
+  </eadheader>
+  <archdesc level="fonds">
+    <did>
+      <unitid>1 EN 1 - 1 EN 55</unitid>
+      <unittitle>Fonds Émile Nélès</unittitle>
+      <unitdate calendar="gregorian" era="ce">1901-[années 1940]</unitdate>
+      <origination>
+        <persname>Nélès, Émile (1876-1942)</persname>
+      </origination>
+      <physdesc>
+        <extent>55 articles.</extent>
+      </physdesc>
+      <langmaterial>
+        <language>Français</language>
+      </langmaterial>
+      <repository>Centre de ressources littéraires et artistiques Jacques-Petit, Laboratoire ELLIADD (UR 4661).</repository>
+    </did>
+    <accessrestrict>
+      <p>Librement communicable.</p>
+    </accessrestrict>
+    <acqinfo>
+      <p>Prêt pour numérisation.</p>
+    </acqinfo>
+    <scopecontent>
+      <p>Archives inédites constituée de photographies dédicacées d'acteurs et de comédiens, d'affiches de spectacle, de programmes dramatiques (documents qui retracent la vie théâtrale bruxelloise de 1910 à 1930, mais aussi la carrière française et internationale de Nélès, à Avignon et en Indochine, de 1901 à 1906).</p>
+    </scopecontent>
+    <dsc>
+      <c id="o_id_499" level="series">
+        <did>
+          <unitid>1 EN 1 - 1 EN 9</unitid>
+          <unittitle>Paris et Avignon</unittitle>
+          <unitdate calendar="gregorian" era="ce">1901-1907</unitdate>
+        </did>
+        <scopecontent>
+          <p>Émile Nélès fait ses débuts à la Comédie-Française, dans l'emploi de « jeune premier comique » sous la houlette de Coquelin l'aîné, puis poursuit sa carrière au Grand Théâtre d'Avignon, comme trial. Il tente sa chance dans les colonies.</p>
+        </scopecontent>
+        <c id="o_id_5" level="item">
+          <did>
+            <unitid>1 EN 1</unitid>
+            <unittitle>Théâtre-bouffes de la Scala (Lyon) : tableau de la troupe pour la saison 1901-1902.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1901</unitdate>
+            <physdesc>
+              <extent>Recto-verso. Lithographie couleur.  18,5 x 10,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Répertoire de l'administration et des artistes de la troupe.</p>
+          </scopecontent>
+          <phystech>
+            <p>Document non solidaire, déchirures multiples et signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.9bfdcyku"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
+            <subject>État de troupe dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_6" level="item">
+          <did>
+            <unitid>1 EN 2</unitid>
+            <unittitle>Programme du Grand Théâtre municipal de la ville d'Avignon pour la saison 1904-1905.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1904</unitdate>
+            <physdesc>
+              <extent>11 pages. Impression encre noire et couleur. Signet de tête en ruban rouge. 19 x 12 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Programme des représentations et répertoire de l'administration et des artistes de la troupe.</p>
+            <p>Imprimeur : Eugène Millo.</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signet de tête coupé et traces d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.1e5bhw75"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
+            <subject>Programme théâtral</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_7" level="item">
+          <did>
+            <unitid>1 EN 3</unitid>
+            <unittitle>Théâtre-Casino de Cavaillon : affiche des représentations données par la troupe Mouret le dimanche 14 mai 1905.</unittitle>
+            <unitdate> calendar="gregorian" era="ce"">1905</unitdate>
+            <physdesc>
+              <extent>Impression encre noire.  22,7 x 17,5 cm.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure et présence de papier adhésif.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5316rxbc"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche programme lyrique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_8" level="item">
+          <did>
+            <unitid>1 EN 4</unitid>
+            <unittitle>Grand Théâtre municipal de la ville d'Avignon : programme et tableaux de la troupe et de l'orchestre pour la saison 1905-1906.</unittitle>
+            <unitdate> calendar="gregorian" era="ce"">1905</unitdate>
+            <physdesc>
+              <extent>12 pages. Impression encre noire et verte. 21,5 cm x 13,3 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Répertoire de l'administration et des artistes et instrumentistes du théâtre.</p>
+            <p>Imprimeur : Eugène Millo.</p>
+          </scopecontent>
+          <phystech>
+            <p>Document non solidaire, légères déchirures, quatrième de couverture manquante et signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.6af0c541"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
+            <subject>Tableau de la troupe</subject>
+            <subject>Programme théâtral</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_9" level="item">
+          <did>
+            <unitid>1 EN 5</unitid>
+            <unittitle>Émile Nélès jeune dans le rôle de Pomponnet à Haïphong dans La Fille de Mme Angot de Charles Lecocq, livret de Clairville, Paul Siraudin et Victor Koning.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1906</unitdate>
+            <physdesc>
+              <extent>1 photographie en noir et blanc.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.a85601w0"></dao>
+          <scopecontent>
+            <p>Photographe :  Paul Joseph Dufresne, Haïphong, Protectorat du Tonkin, Indochine française (république socialiste du Vietnam depuis 1976).</p>
+          </scopecontent>
+          <controlaccess>
+            <geogname role="territory" source="ISNI" authfilenumber="https://isni.org/isni/0000000121834360">Indochine française</geogname>
+            <geogname role="country" source="GeoNames" authfilenumber="https://www.geonames.org/1562822/socialist-republic-of-vietnam.html">Vietnam</geogname>
+            <geogname role="city" source="GeoNames" authfilenumber="https://www.geonames.org/1581298/haiphong.html">Haïphong</geogname>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_10" level="item">
+          <did>
+            <unitid>1 EN 6</unitid>
+            <unittitle>Théâtres municipaux du Tonkin : affiche de l'opéra comique Les Dragons de Villars, d'Eugène Cormon et Lockroy, musique d'Aimé Maillart (1906). Portrait de comédien d'Émile Nélès : coupure incomplète d'une brochure avec photographie, [1906].</unittitle>
+            <unitdate calendar="gregorian" era="ce">1906</unitdate>
+            <physdesc>
+              <extent>Impression encre noire. 20,5 x 13,8 cm.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure et présence de papier adhésif.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.ba9a7y1g"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/terms/DCMIType">Affiche</genreform>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/terms/DCMIType">Coupure de presse</genreform>
+            <subject>Affiche programme lyrique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_11" level="item">
+          <did>
+            <unitid>1 EN 7</unitid>
+            <unittitle>Théâtres municipaux du Tonkin : affiche du vaudeville Le Chopin de Henri Kéroul et Albert Barré.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1906</unitdate>
+            <physdesc>
+              <extent>Papier couleur. Impression encre noire. 25,5 x 18,5 cm.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2cb197g9"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche programme lyrique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_12" level="item">
+          <did>
+            <unitid>1 EN 8</unitid>
+            <unittitle>Théâtres municipaux du Tonkin : affiche de l'opérette Les Fétards d'Antony Mars et Maurice Hennequin, musique de Victor Roger.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1906</unitdate>
+            <physdesc>
+              <extent>Papier couleur. Impression encre noire. 25,5 x 19 cm.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.cda7do41"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche programme lyrique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_13" level="item">
+          <did>
+            <unitid>1 EN 9</unitid>
+            <unittitle>3567e numéro (première édition) du journal quotidien L'Avenir du Tonkin.</unittitle>
+            <unitdate calendar="gregorian" era="ce" normal="1907-01-27">27 janvier 1907</unitdate>
+            <physdesc>
+              <extent>4 pages. Impression encre noire. 62,5 x 46,6 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Sommaire : La Politique (p. 1),  Courrier de Hanoï (p. 1), Echos de partout (p. 1), Notes d'un tonkinois (p. 1 ), Lettre de Canton (p. 1), Contres et nouvelles (p. 2), Chronique du travail (p. 2), Cartes et livrets des serviteurs indigènes (p. 1), Chronique judiciaire (p. 2), Chronique locale (p. 2), Tribune libre (p. 3),  L'« Avenir » sportif (p. 3), La vie militaire et maritime (p. 4).</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <otherfindaid><archref xlink:href="https://gallica.bnf.fr/ark:/12148/bpt6k2766501q?rk=21459;2#">BnF - Gallica</archref></otherfindaid>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.de6awnlg"></dao>
+          <controlaccess>
+            <name role="periodical" source="BnF" authfilenumber="http://ark.bnf.fr/ark:/12148/cb327087806">L' Avenir du Tonkin</name>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Périodique</genreform>
+          </controlaccess>
+        </c>
+      </c>
+      <c id="o_id_500" level="series">
+        <did>
+          <unitid>1 EN 10 - 1 EN 29</unitid>
+          <unittitle>Galeries Royales de Saint-Hubert</unittitle>
+          <unitdate calendar="gregorian" era="ce">1909-[1921], s.d.</unitdate>
+        </did>
+        <scopecontent>
+          <p>De retour dans le Bruxelles de la Belle Époque, il est employé au Théâtre royal des Galeries Saint-Hubert dans les rôles de « premier comique » avant de remplacer Jules Berry aux côtés de Nicolas Ambreville dans le duo « comique truculent/comique délicat » qu’ils forment.</p>
+          </scopecontent>
+        <c id="o_id_14" level="item">
+          <did>
+            <unitid>1 EN 10</unitid>
+            <unittitle>Théâtre Moderne d'Anvers : programme de soirée, saison d'été 1909 annonçant le vaudeville Le Garde du corps de Marcel Nancey et Paul Armont.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1909</unitdate>
+            <physdesc>
+              <extent>4 pages. Impression encre bleue. 22 x 13,7 cm.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2f51zdl4"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
+            <subject>Affiche programme dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_15" level="item">
+          <did>
+            <unitid>1 EN 11</unitid>
+            <unittitle>Revue hebdomadaire, théâtrale et mondaine Le Manteau d'Arlequin.</unittitle>
+            <unitdate calendar="gregorian" era="ce" normal="1911-02-11">11 février 1911</unitdate>
+            <physdesc>
+              <extent>28 pages. Impression encre noire. 22 x 16,3 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Lithographe : Edouard Fuytynck.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5a258xp6"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Périodique</genreform>
+          </controlaccess>
+        </c>
+        <c id="o_id_16" level="item">
+          <did>
+            <unitid>1 EN 12</unitid>
+            <unittitle>Texte pour le rôle de Toby dans Miss Trotwood.</unittitle>
+            <unitdate calendar="gregorian" era="ce" normal="1912-03-05">5 mars 1912</unitdate>
+            <physdesc>
+              <extent>Manuscrit. 20 pages. 21,5 x 18,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Tampons encreurs : Théâtre Royal des Galeries Saint-Hubert Bruxelles et Alfred Bloch de la Société des auteurs et compositeurs dramatiques (SACD).</p>
+          </scopecontent>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.35a557r9"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Autre</genreform>
+            <subject>Manuscrit d'un rôle</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_17" level="recordgrp">
+          <did>
+            <unitid>1 EN 13</unitid>
+            <unittitle>Émile Nélès, Marcel Roels et Darmain dans Le Million de Georges Beer et Marcel Guillemand.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[entre 1911 et 1912]</unitdate>
+            <physdesc>
+              <extent>3 cartes postales photographiques en noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : Marc Galuzzi.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.4bdexvr4"></dao>
+          <controlaccess>
+            <persname>Darmain</persname>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <persname>Roels, Marcel</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_18" level="item">
+          <did>
+            <unitid>1 EN 14</unitid>
+            <unittitle>Revue hebdomadaire, théâtrale et mondaine Le Manteau d'Arlequin.</unittitle>
+            <unitdate calendar="gregorian" era="ce" normal="1913-10-04">4 octobre 1913</unitdate>
+            <physdesc>
+              <extent>28 pages. Impression encre noire. 22 x 16,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Lithographe : Edouard Fuytynck.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.c556j714"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
+          </controlaccess>
+        </c>
+        <c id="o_id_19" level="item">
+          <did>
+            <unitid>1 EN 15</unitid>
+            <unittitle>Théâtre Beriot (Louvain): programme de la soirée de Gala du 10 avril 1915, donnée au profit de l'Œuvre du Secours Théâtral annonçant la comédie Le Voyage de M. Perrichond d'Eugène Labiche et Robert Martin</unittitle>
+            <unitdate calendar="gregorian" era="ce">1915</unitdate>
+            <physdesc>
+              <extent>4 pages. Impression encre noire. 22 x 14,3 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimeur et lithographe : Pol. De Raeve.</p>
+          </scopecontent>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.bc8enk99"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text"></genreform>
+            <subject>Programme dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_20" level="item">
+          <did>
+            <unitid>1 EN 16</unitid>
+            <unittitle>Théâtre de La Scala (Bruxelles) : affiche du vaudeville Les 35 milliards de Doore Thiry de M. L. Peerendboom, adaptation française de J. Willekens, 18 décembre 1915 (saison d'hiver 1915-1916).</unittitle>
+            <unitdate calendar="gregorian" era="ce">1915</unitdate>
+            <physdesc>
+              <extent>Lithographie en couleurs.  Timbre oblitéré. 85 x 61,2 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Lithographe : Edouard Fuytynck.</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.bac32le7"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_21" level="item">
+          <did>
+            <unitid>1 EN 17</unitid>
+            <unittitle>Théâtre de La Scala (Bruxelles) : affiche du vaudeville La Famille Klepkens d'Auguste Hendrikx pour la saison d'été 1916.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1916</unitdate>
+            <physdesc>
+              <extent>Lithographie en couleurs. Timbre oblitéré. 84 x 62 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Lithographe : Jean Fuytynck.</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5b4b0be1"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_22" level="item">
+          <did>
+            <unitid>1 EN 18</unitid>
+            <unittitle>Théâtre du Vaudeville (Bruxelles) : programme officiel et tableau de la troupe pour la saison d'été et d'hiver 1918-1919</unittitle>
+            <unitdate calendar="gregorian" era="ce">1918</unitdate>
+            <physdesc>
+              <extent>16 pages. Impression encre noire et rouge. 21,3 x 13,9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimeur : Gustave Fischlin.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.6e3avn80"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text"></genreform>
+            <subject>Tableau de la troupe</subject>
+            <subject>Programme théâtral</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_23" level="item">
+          <did>
+            <unitid>1 EN 19</unitid>
+            <unittitle>Portrait de Nicolas Ambreville.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[entre 1900 et 1910]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : Marc Galuzzi.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href=""></dao>
+          <controlaccess>
+            <persname>Ambreville, Nicolas (1863-1921)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_24" level="item">
+          <did>
+            <unitid>1 EN 20</unitid>
+            <unittitle>Portrait dédicacé et signé de Nicolas Ambreville.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[entre 1916 et 1921]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe :  A. van Bever.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.06798fw9"></dao>
+          <controlaccess>
+            <persname>Ambreville, Nicolas (1863-1921)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>          
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_25" level="item">
+          <did>
+            <unitid>1 EN 21</unitid>
+            <unittitle>Photographie avec signatures autographes d'Alfred Jacque et Nicolas Ambreville dans la comédie Le Mariage de Mlle Beulemans de Fernand Wicheler et Frantz Fonson</unittitle>
+            <unitdate calendar="gregorian" era="ce">[vers 1915]</unitdate>
+            <physdesc>
+              <extent>Noir et blanc. 14 x 8,8 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe :  Dupont Emèra.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.eb0a1sem"></dao>
+          <controlaccess>
+            <persname>Ambreville, Nicolas (1863-1921)</persname>
+            <persname>Jacque, Alfred</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>             
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_26" level="item">
+          <did>
+            <unitid>1 EN 22</unitid>
+            <unittitle>Photographie dédicacée de Nicolas Ambreville.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[entre 1910 et 1915]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.abeak93t"></dao>
+          <controlaccess>
+            <persname>Ambreville, Nicolas (1863-1921)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>             
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_27" level="item">
+          <did>
+            <unitid>1 EN 23</unitid>
+            <unittitle>Photographie signée de Jules Berry.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[entre 1910 et 1916]</unitdate>
+            <physdesc>
+              <extent>Noir et blanc. 14,5 x 9,2 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : G.D.E.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.3c17i58g"></dao>
+          <controlaccess>
+            <persname>Berry, Jules</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>     
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_28" level="item">
+          <did>
+            <unitid>1 EN 24</unitid>
+            <unittitle>Dessin du visage d'Émile Nélès dédicacé et signé par Jules Berry.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1920]</unitdate>
+          </did>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.abeak93t"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>           
+            <subject>Dessin d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_29" level="item">
+          <did>
+            <unitid>1 EN 25</unitid>
+            <unittitle>Portrait avec signature autographe d'Elsa Dolcey.</unittitle>
+            <unitdate calendar="gregorian" era="ce">s.d.</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : S. Polat.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.d14b621a"></dao>
+          <controlaccess>
+            <persname>Dolcey, Elsa</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform> 
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_30" level="item">
+          <did>
+            <unitid>1 EN 26</unitid>
+            <unittitle>Portrait dédicacé avec signature autographe d'André Brulé.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[1910]</unitdate>
+            <physdesc>
+              <extent>Photographie en noir et blanc. 13,7 x 8,9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : G.D.E.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.ff39o18g"></dao>
+          <controlaccess>
+            <persname>Brulé, André</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_31" level="item">
+          <did>
+            <unitid>1 EN 27</unitid>
+            <unittitle>Photographie Beulemans marie sa fille avec signature autographe d'Émile Nélès.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[vers 1920]</unitdate>
+            <physdesc>
+              <extent>Noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : Dupont Emèra.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.eaf4s125"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_32" level="item">
+          <did>
+            <unitid>1 EN 28</unitid>
+            <unittitle>Photographie d'Émile Nélès, de Darmain et de Hubert Daix dans les Dégourdis de la 11 d'André Mouëzy-Éon et Charles DaveillansPhotographie d'Émile Nélès, de Darmain et de Hubert Daix dans les Dégourdis de la 11 d'André Mouëzy-Éon et Charles Daveillans (avec signature autographe d'Émile Nélès)</unittitle>
+            <unitdate calendar="gregorian" era="ce">[vers 1920]</unitdate>
+            <physdesc>
+              <extent>Noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : S. Polat.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.43f07220"></dao>
+          <controlaccess>
+            <persname>Daix, Hubert</persname>
+            <persname>Darmain</persname>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_33" level="item">
+          <did>
+            <unitid>1 EN 29</unitid>
+            <unittitle>Programme et description de la troupe de la tournée Ambreville pour le vaudeville J'ai trompé Gustave d'Alexandre Bisson et André Sylvane</unittitle>
+            <unitdate calendar="gregorian" era="ce">1918</unitdate>
+            <physdesc>
+              <extent>12 pages. Impression encre noire. 20,2 x 14,4 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimerie-Lithographie : L'Agence de publicité théâtrale</p>
+          </scopecontent>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b21ep231"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
+            <subject>Programme théâtral</subject>
+            <subject>Description de la troupe</subject>
+          </controlaccess>
+        </c>
+      </c>
+      <c id="o_id_501" level="series">
+        <did>
+          <unitid>1 EN 30 - 1 EN 53</unitid>
+          <unittitle>Directeur de tournées et impresario.</unittitle>
+          <unitdate calendar="gregorian" era="ce">1919-1936</unitdate>
+        </did>
+        <scopecontent>
+          <p>Il crée pour la Belgique et la Hollande les tournées Ambreville-Nélès, devenant les tournées Nélès à la mort de la star, gardant toujours le schéma du duo comique, en partageant la réplique avec Isidore Festerat. Il finit sa carrière dans l’emploi de « premier grand comique ».</p>
+        </scopecontent>
+        <c id="o_id_34" level="item">
+          <did>
+            <unitid>1 EN 30</unitid>
+            <unittitle>Programme de la tournée Ambreville pour le vaudeville J'ai trompé Gustave d'Alexandre Bisson et André Sylvane, et la comédie L'Oncle curé de Victorine Miller.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1919</unitdate>
+            <physdesc>
+              <extent>12 pages. Impression encre noire. 21,6 x 12,7 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimerie : La Concurrence.</p>
+          </scopecontent>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.9bcdiv02"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
+            <subject>Programme théâtral</subject>
+            <subject>Description de la troupe</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_35" level="item">
+          <did>
+            <unitid>1 EN 31</unitid>
+            <unittitle>Tournée Ambreville : affiche de théâtre pour la comédie L'Oncle curé de Victorine Miller.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1919</unitdate>
+            <physdesc>
+              <extent>Encre noire et couleur. Timbre oblitéré. 72,6 x 55 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimerie : La Concurrence.</p>
+          </scopecontent>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.a7b52t6q"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_36" level="item">
+          <did>
+            <unitid>1 EN 32</unitid>
+            <unittitle>Théâtre Palladium (Anvers) : affiche de théâtre de la tournée Nélès pour la comédie Le Mariage de Mlle Beulemans de Fernand Wicheler et Frantz Fonson</unittitle>
+            <unitdate calendar="gregorian" era="ce">1923</unitdate>
+            <physdesc>
+              <extent>Encre noire et couleur. Timbre oblitéré. 86 x 60 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimerie : Jos. De Volder.</p>
+          </scopecontent>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b6b33704"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_37" level="item">
+          <did>
+            <unitid>1 EN 33</unitid>
+            <unittitle>Théâtre de l'Ilon (Namur) : affiche de théâtre de la tournée Nélès pour la comédie Le Million de Georges Beer et Marcel Guillemand</unittitle>
+            <unitdate calendar="gregorian" era="ce">1925</unitdate>
+            <physdesc>
+              <extent>Impression couleur. Timbre oblitéré. 84 x 62 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimerie : non lisible.</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b6bbt890"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_38" level="item">
+          <did>
+            <unitid>1 EN 34</unitid>
+            <unittitle>Théâtre du Mess [Bruxelles] : affiche de théâtre de la tournée Nélès pour la comédie-vaudeville Médor d'Henri Malin.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1925</unitdate>
+            <physdesc>
+              <extent>Impression encre noire. 72 x 55 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimeur : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.cfa2l9hv"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>         
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_39" level="item">
+          <did>
+            <unitid>1 EN 35</unitid>
+            <unittitle>Coupure de presse sur le rôle de Zootebeck interprété par Émile Nélès dans la comédie-vaudeville Médor d'Henri Malin.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[1925]</unitdate>
+            <physdesc>
+              <extent>Impression encre noire. 13,5 x 10 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Journaliste : E. D.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.d685i13z"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Coupure de presse</genreform>   
+          </controlaccess>
+        </c>
+        <c id="o_id_40" level="item">
+          <did>
+            <unitid>1 EN 36</unitid>
+            <unittitle>Théâtre Le Palace (Liège) : affiche de théâtre de la tournée Nélès pour la comédie Le Mariage de Mlle Beulemans de Fernand Wicheler et Frantz Fonson.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1928</unitdate>
+            <physdesc>
+              <extent>Impression couleur. Timbre oblitéré. 62 x 42 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimerie : Julien Waseigne et ses Fils.</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure et présence de papier adhésif.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.aeaa3r7w"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>           
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_41" level="item">
+          <did>
+            <unitid>1 EN 37</unitid>
+            <unittitle>Portrait dédicacé avec signature autographe de Léa de Réal.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[entre 1920 et 1928]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.ac85p0s3"></dao>
+          <controlaccess>
+            <persname>Réal, Léa de </persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_42" level="item">
+          <did>
+            <unitid>1 EN 38</unitid>
+            <unittitle>Portrait de Mlle Flory.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1923</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : V. Van de Cruys.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b5e60dcr"></dao>
+          <controlaccess>
+            <persname> Flory (Mlle)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_43" level="item">
+          <did>
+            <unitid>1 EN 39</unitid>
+            <unittitle>Portrait d'Émile Nélès (autour de 45 ans).</unittitle>
+            <unitdate calendar="gregorian" era="ce">[entre 1920 et 1930]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 13,5 x 8,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : S. Polat.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2ccax2cd"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_44" level="item">
+          <did>
+            <unitid>1 EN 40</unitid>
+            <unittitle>Portrait dédicacé avec signature autographe en date du 3 janvier 1923, d'un comédien non identifié.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1923</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.35ae306s"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>             
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_45" level="item">
+          <did>
+            <unitid>1 EN 41</unitid>
+            <unittitle>Théâtre de l'Ilon (Namur) : affiche de théâtre pour la comédie Le Mariage de Mlle Beulemans de Fernand Wicheler et Frantz Fonson.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1925</unitdate>
+            <physdesc>
+              <extent>Impression couleur. 120 x 42,2 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimeur : La Rapide.</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.0931h8q8"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>            
+            <subject>Affiche dramatique</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_46" level="item">
+          <did>
+            <unitid>1 EN 42</unitid>
+            <unittitle>51e numéro (6e année) de la revue hebdomadaire La Semaine Théâtrale, Artistique &amp; Littéraire (Namur).</unittitle>
+            <unitdate calendar="gregorian" era="ce" normal="1925-03-29">29 mars 1925</unitdate>
+            <physdesc>
+              <extent>4 pages. Impression encre noir et blanc. 55 x 36 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Imprimeur : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Déchirures multiples, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2d4cmv69"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Périodique</genreform> 
+          </controlaccess>
+        </c>
+        <c id="o_id_47" level="item">
+          <did>
+            <unitid>1 EN 43</unitid>
+            <unittitle>Photographie dédicacée avec signature autographe en date du 15 mars 1925, de Marcelle [Chouret].</unittitle>
+            <unitdate calendar="gregorian" era="ce">1925</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Lègers signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.d6f61akg"></dao>
+          <controlaccess>
+            <persname>Chouret, Marcelle</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_48" level="item">
+          <did>
+            <unitid>1 EN 44</unitid>
+            <unittitle>Photographie dédicacée avec signature autographe en date du 15 mars 1925, de Marcelle [Chouret] et de sa fille.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1925</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.3e1f1g1w"></dao>
+          <controlaccess>
+            <persname>Chouret, Marcelle</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_49" level="item">
+          <did>
+            <unitid>1 EN 45</unitid>
+            <unittitle>Portrait-dessin d'Émile Nélès</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1930]</unitdate>
+            <physdesc>
+              <extent>Lithographie en couleur. 100 x 50 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Dessinateur : Géo (Georges) De Vlamynck.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5d9fn002"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Dessin d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_50" level="item">
+          <did>
+            <unitid>1 EN 46</unitid>
+            <unittitle>Photographie d'Émile Nélès (autour de 50 ans).</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1930]</unitdate>
+            <physdesc>
+              <extent>Noir et blanc.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.3f0f9l5f"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>            
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_51" level="item">
+          <did>
+            <unitid>1 EN 47</unitid>
+            <unittitle>Portrait dédicacé (à Marguerite Nélès, seconde épouse d'Émile Nélès) et signé de Fernand Gravey.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1930]</unitdate>
+            <physdesc>
+              <extent>Photographie en noir et blanc. 14,2 x 10,2 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.db5858qp"></dao>
+          <controlaccess>
+            <persname>Gravey, Fernand</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_52" level="item">
+          <did>
+            <unitid>1 EN 48</unitid>
+            <unittitle>Portrait dédicacé avec signature autographe en date du 16 septembre 1937 de Charles Mahieu.</unittitle>
+            <unitdate calendar="gregorian" era="ce">1937</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : Verhassel.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b076uwo7"></dao>
+          <controlaccess>
+            <persname>Mahieu, Charles</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_53" level="item">
+          <did>
+            <unitid>1 EN 49</unitid>
+            <unittitle>Recette de cuisine sur le homard à l'américaine donnée par le cuisinier de la famille royale belge.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1930]-</unitdate>
+            <physdesc>
+              <extent>Manuscrit. 1 page. 28 x 21,5 cm.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Petites déchirures, signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.adf66z51"></dao>
+          <controlaccess>
+            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Autre</genreform> 
+          </controlaccess>
+        </c>
+        <c id="o_id_54" level="item">
+          <did>
+            <unitid>1 EN 50</unitid>
+            <unittitle>Émile Nélès (autour de 55 ans).</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1940]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 13,5 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : Ed. Drauwet.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.11fdlgru"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>   
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_55" level="item">
+          <did>
+            <unitid>1 EN 51</unitid>
+            <unittitle>Émile Nélès (autour de 60 ans).</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1940]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 13,5 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.22c1hn58"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_56" level="item">
+          <did>
+            <unitid>1 EN 52</unitid>
+            <unittitle>Émile Nélès, sa femme Marguerite Nélès et Marcelle [Chouret] dans une station balnéaire belge.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1930]</unitdate>
+            <physdesc>
+              <extent>Photographie en noir et blanc. 11 x 6,5 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.a5f20635"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <persname>Nélès, Marguerite</persname>
+            <persname>Chouret, Marcelle</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>              
+            <subject>Photographie privée</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_57" level="item">
+          <did>
+            <unitid>1 EN 53</unitid>
+            <unittitle>Photographie de comédiens dont André Brulé et [Jules Berry];</unittitle>
+            <unitdate calendar="gregorian" era="ce">[années 1930]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b77c9dcx"></dao>
+          <controlaccess>
+            <persname>Brulé, André</persname>
+            <persname>Berry, Jules</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>    
+            <subject>Photographie d'artiste</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_502" level="series">
+          <did>
+            <unitid>1 EN 54 - 1 EN 55</unitid>
+            <unittitle>Divers</unittitle>
+            <unitdate calendar="gregorian" era="ce">[après 1911], s.d.</unitdate>
+          </did>
+        </c>
+        <c id="o_id_58" level="item">
+          <did>
+            <unitid>1 EN 54</unitid>
+            <unittitle>Photographie d'une pièce de théâtre, [possiblement Le Million de Georges Beer et Marcel Guillemand], avec Émile Nélès (debout de face) et peut-être Marcel Roels de profil à gauche.</unittitle>
+            <unitdate calendar="gregorian" era="ce">[après 1911]</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Photographie d'une pièce de théâtre, [possiblement Le Million de Georges Beer et Marcel Guillemand], avec Émile Nélès (debout de face) et peut-être Marcel Roels de profil à gauche.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.8c1675d7"></dao>
+          <controlaccess>
+            <persname>Nélès, Émile (1876-1942)</persname>
+            <persname>Roels, Marcel</persname>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artistes au plateau</subject>
+          </controlaccess>
+        </c>
+        <c id="o_id_59" level="item">
+          <did>
+            <unitid>1 EN 55</unitid>
+            <unittitle>Photographie de comédiens non identifiés.</unittitle>
+            <unitdate calendar="gregorian" era="ce">s.d.</unitdate>
+            <physdesc>
+              <extent>Carte postale photographique en noir et blanc. 14 x 9 cm.</extent>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>Photographe : inconnu.</p>
+          </scopecontent>
+          <phystech>
+            <p>Signes d'usage et d'usure.</p>
+          </phystech>
+          <dao xlink:href="https://www.nakala.fr/10.34847/nkl.cd441oaz"></dao>
+          <controlaccess>
+            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <subject>Photographie d'artistes au plateau</subject>
+          </controlaccess>
+        </c>
+      </c>
+    </dsc>
+  </archdesc>
+</ead>
