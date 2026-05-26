@@ -19,6 +19,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/hero.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/chronologie.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/team.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/exposition.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/hierarchy.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/cards.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/marcel-arland-saisi-dans-l-il-d-un-chat.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/biographie.css'));
@@ -151,11 +152,13 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/indexation.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/item-toolbar.js'); ?>"></script>
-<script>window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";</script>
+<script>
+    window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";
+</script>
 <script src="<?php echo $this->assetUrl('js/popup-news.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/CarouselHome.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/team.js'); ?>"></script>
-
+<script src="<?php echo $this->assetUrl('js/hierarchyPage.js'); ?>"></script>
 
 
 </body>

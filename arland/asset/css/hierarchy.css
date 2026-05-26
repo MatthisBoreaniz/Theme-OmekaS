@@ -1,0 +1,385 @@
+/* =========================================
+   1. MISE EN PAGE GLOBALE HIERARCHY
+   ========================================= */
+
+.hierarchy-row {
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    grid-auto-rows: min-content !important;
+    gap: 30px 50px !important;
+    align-items: start !important;
+    transition: grid-template-columns 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    padding: 0 40px 40px 40px !important;
+}
+
+/* --- MODE REPLIÉ (Joli carré de 60px) --- */
+.hierarchy-row.is-collapsed {
+    grid-template-columns: 60px 1fr !important;
+}
+
+.hierarchy-row.is-collapsed .hierarchy-sidebar-content {
+    width: 100% !important;
+    min-width: unset !important;
+    resize: none !important;
+    padding: 0 !important;
+    height: 60px !important; /* Coupe la hauteur pour faire un bouton */
+    min-height: unset !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important; /* Cache tout le texte qui déborde */
+}
+
+.hierarchy-row.is-collapsed .hierarchy-metadata,
+.hierarchy-row.is-collapsed .hierarchy-filters {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.hierarchy-row.is-collapsed .sidebar-toggle {
+    position: static !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Évite l'overlap sur le redimensionnement */
+.hierarchy-main-content {
+    min-width: 0 !important; 
+}
+
+/* =========================================
+   2. MENU LATÉRAL
+   ========================================= */
+
+.hierarchy-sidebar-content {
+    position: relative !important;
+    border: 1px solid #111 !important;
+    border-radius: 8px !important;
+    padding: 35px 30px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    background-color: #fff !important;
+    width: 28vw;
+    min-width: 220px;
+    max-width: 60vw;
+    max-height: calc(100vh - 180px);
+    overflow: auto;
+    resize: both; /* Mieux de garder juste horizontal pour pas casser le bas */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) #f9f9f9;
+}
+
+/* Scrollbar styling for Chrome/Safari */
+.hierarchy-sidebar-content::-webkit-scrollbar { width: 15px; }
+.hierarchy-sidebar-content::-webkit-scrollbar-track { background: #f9f9f9; }
+.hierarchy-sidebar-content::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 10px; }
+.hierarchy-sidebar-content::-webkit-resizer {
+    background-color: var(--accent);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 14L14 20M20 7L7 20' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top-left-radius: 4px;
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.sidebar-toggle:hover {
+    color: var(--accent);
+}
+
+.hierarchy-filters h3 {
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+    color: #111 !important;
+    margin-top: 0 !important;
+    margin-bottom: 30px !important;
+}
+
+.hierarchy-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.hierarchy-list ul {
+    list-style: none !important;
+    padding-left: 28px !important;
+    margin-top: 10px !important;
+}
+
+.hierarchy-list li {
+    margin-bottom: 18px !important;
+    font-size: 1.5rem !important;
+    display: block !important;
+    color: #000 !important;
+    padding-left: 0 !important;
+}
+
+/* Ligne grise */
+.hierarchy-list > li:first-child > .item-wrapper {
+    position: relative;
+}
+
+.hierarchy-list > li:first-child > .item-wrapper::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -30px !important;
+    left: -22px !important;
+    width: 14px !important;
+    height: 40px !important;
+    border-left: 1.5px solid #888 !important;
+    border-bottom: 1.5px solid #888 !important;
+    border-bottom-left-radius: 6px !important;
+    pointer-events: none !important;
+    display: block !important;
+    transform: none !important;
+}
+
+.item-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hierarchy-list a {
+    color: inherit !important;
+    text-decoration: none !important;
+    line-height: 1.4 !important;
+    transition: color 0.3s ease !important;
+    display: inline-block !important;
+    width: auto !important;
+    margin-right: 5px;
+}
+
+.hierarchy-list .item-wrapper:hover > a,
+.hierarchy-list li.is-open > .item-wrapper > a,
+.hierarchy-list a.active,
+.hierarchy-list b > a {
+    color: var(--accent) !important;
+}
+
+.toc-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    cursor: pointer;
+    user-select: none;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.toc-toggle.style-box {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    font-family: monospace;
+    margin-right: 18px;
+}
+
+.toc-toggle.style-document {
+    width: 28px;
+    height: 28px;
+    cursor: default;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* =========================================
+   3. RESPONSIVE MOBILE
+   ========================================= */
+@media (max-width: 1200px) {
+    .hierarchy-row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        padding: 0 20px 20px 20px !important;
+    }
+
+    .hierarchy-sidebar-content {
+        width: 100% !important;
+        max-width: none !important;
+        resize: none !important;
+        padding: 25px 20px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    }
+
+    .sidebar-toggle {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: absolute !important;
+        top: 15px !important;
+        right: 20px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0 !important;
+        cursor: pointer !important;
+    }
+
+    .sidebar-toggle::after {
+        content: "";
+        display: block;
+        width: 12px;
+        height: 12px;
+        border-right: 2.5px solid #333;
+        border-bottom: 2.5px solid #333;
+        transform: rotate(45deg);
+        transition: transform 0.3s ease;
+        margin-top: -4px;
+    }
+
+    .hierarchy-row.is-collapsed .sidebar-toggle::after {
+        transform: rotate(-135deg);
+        margin-top: 4px;
+    }
+}
+
+
+/* On enlève les bordures directes sur les listes et sous-listes */
+.hierarchy-list,
+.hierarchy-list ul,
+.hierarchy-list li {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* On désactive (tue) absolument tous les pseudo-éléments (lignes) natifs */
+.hierarchy-list li::before,
+.hierarchy-list li::after,
+.hierarchy-list ul::before,
+.hierarchy-list ul::after {
+    content: none !important;
+    display: none !important;
+    border: none !important;
+    background: transparent !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* =========================================
+   STYLE DES RESSOURCES (TYPE RECHERCHE AVANCÉE)
+   ========================================= */
+
+/* Le conteneur devient une liste verticale (colonne) */
+.hierarchy-main-content .resource-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 0 !important;
+    margin: 30px 0 0 0 !important;
+    list-style: none !important;
+}
+
+.hierarchy-main-content .resource {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* La carte (Le lien complet) */
+.hierarchy-main-content .resource-link {
+    display: flex !important;
+    flex-direction: row !important; /* Image à gauche, texte à droite */
+    gap: 18px !important;
+    padding: 16px !important;
+    background: #fff !important;
+    border-radius: 10px !important;
+    border: 1px solid #eee !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+/* Effet au survol (Bordure, couleur et translation) */
+.hierarchy-main-content .resource-link:hover {
+    border-color: var(--accent, #8b1a1a) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05) !important;
+    transform: translateY(-2px) !important;
+    background-color: color-mix(in srgb, var(--accent, var(--accent)) 5%, #fff) !important;
+}
+
+/* L'image (Carré 110x110px comme sur la recherche) */
+.hierarchy-main-content .resource-link img {
+    flex-shrink: 0 !important;
+    width: 110px !important;
+    height: 110px !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+    margin: 0 !important;
+    display: block !important;
+}
+
+/* Le Titre */
+.hierarchy-main-content .resource-name {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    margin: 0 0 4px 0 !important;
+    color: #1a1a1a !important;
+    line-height: 1.4 !important;
+    transition: color 0.3s ease !important;
+    display: block !important;
+}
+
+.hierarchy-main-content .resource-link:hover .resource-name {
+    color: var(--accent, #8b1a1a) !important;
+}
+
+/* Responsive Mobile (petits écrans) */
+@media (max-width: 600px) {
+    .hierarchy-main-content .resource-link {
+        gap: 12px !important;
+        padding: 12px !important;
+    }
+
+    .hierarchy-main-content .resource-link img {
+        width: 75px !important;
+        height: 75px !important;
+    }
+
+    .hierarchy-main-content .resource-name {
+        font-size: 1.1rem !important;
+    }
+}
+
+ .content > h2 {
+    font-size: 1.6rem !important;
+    font-weight: 600 !important;
+    color: var(--accent) !important;
+    padding: 18px 30px !important;
+    border-left: 3px solid var(--accent) !important;
+    background: color-mix(in srgb, var(--accent) 5%, transparent) !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+}
