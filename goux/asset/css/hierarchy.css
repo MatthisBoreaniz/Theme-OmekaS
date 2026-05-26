@@ -170,6 +170,7 @@
 }
 
 .hierarchy-list .item-wrapper:hover > a,
+.hierarchy-list li.is-open > .item-wrapper > a,
 .hierarchy-list a.active,
 .hierarchy-list b > a {
     color: var(--accent) !important;

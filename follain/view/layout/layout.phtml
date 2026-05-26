@@ -11,6 +11,7 @@ $this->headTitle($siteTitle)->setSeparator(' · ');
 $this->headTitle()->append($this->setting('installation_title', 'Omeka S'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/style.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/elliadd-header.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/hierarchy.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/popup-news.css'));
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
 $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700');
@@ -94,13 +95,18 @@ $userBar = $this->userBar();
 
 <!-- Back to top button -->
 <button id="back-to-top" aria-label="Retour en haut">
-    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
 </button>
 
 <!-- Header + back-to-top JS -->
 <script src="<?php echo $this->assetUrl('js/elliadd-header.js'); ?>"></script>
-<script>window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";</script>
+<script>
+    window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";
+</script>
 <script src="<?php echo $this->assetUrl('js/popup-news.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/hierarchyPage.js'); ?>"></script>
 
 </body>
 

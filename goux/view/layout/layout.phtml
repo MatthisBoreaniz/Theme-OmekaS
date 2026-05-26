@@ -23,6 +23,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/parolesDouvrieres.css')
 $this->headLink()->appendStylesheet($this->assetUrl('css/popup-news.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/unContenu.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/unFond.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/hierarchy.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/uneOeuvre.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/biographie.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/fabriqueEnclave.css'));
@@ -142,7 +143,7 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const currentDomain = window.location.hostname;
         const links = document.querySelectorAll('a');
         links.forEach(link => {
@@ -156,7 +157,9 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/equipe-accordeon.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/carousselBio.js'); ?>"></script>
-<script>window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";</script>
+<script>
+    window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";
+</script>
 <script src="<?php echo $this->assetUrl('js/popup-news.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/indexation.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/item-toolbar.js'); ?>"></script>
@@ -164,6 +167,7 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/metadata-utils.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/sidebar-toc.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/voir-plus.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/hierarchyPage.js'); ?>"></script>
 </body>
 
 </html>
