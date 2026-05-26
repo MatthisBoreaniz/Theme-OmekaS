@@ -155,8 +155,9 @@
 
 .item-wrapper {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: center !important; /* Centré verticalement pour que le texte soit aligné avec l'icône */
+    flex-wrap: nowrap !important;
+    gap: 8px !important; /* Ajoute un espacement naturel entre l'icône, le lien et le compteur */
 }
 
 .hierarchy-list a {
@@ -166,7 +167,12 @@
     transition: color 0.3s ease !important;
     display: inline-block !important;
     width: auto !important;
-    margin-right: 5px;
+    /* Suppression du flex: 1 qui poussait le texte tout à droite */
+    word-break: break-word !important;
+}
+
+.hierarchy-list b {
+    font-weight: normal !important; 
 }
 
 .hierarchy-list .item-wrapper:hover > a,
@@ -198,6 +204,25 @@
     background-color: transparent;
     font-family: monospace;
     margin-right: 18px;
+}
+
+/* Nouveau style pour le chevron + Animation de rotation */
+.toc-toggle.style-chevron {
+    width: 28px;
+    height: 28px;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    font-family: monospace;
+    margin-right: 18px;
+    transition: transform 0.25s ease !important; /* L'animation de rotation est ici */
+}
+
+li.is-open > .item-wrapper .toc-toggle.style-chevron {
+    transform: rotate(90deg) !important; /* Pivote vers le bas quand c'est ouvert */
 }
 
 .toc-toggle.style-document {

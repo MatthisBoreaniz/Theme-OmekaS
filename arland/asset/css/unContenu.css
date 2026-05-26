@@ -12,9 +12,10 @@ body:not(:has(.block-listOfPages)) .block-mirador {
     margin: 0 auto !important;
 }
 
-/* ===== METADATA (EXCLUSION MIRADOR) ===== */
+/* ===== METADATA (EXCLUSION MIRADOR + HIERARCHY) ===== */
 .resource.show dl:not(.mirador-label-value-metadata),
-.block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata) {
+.block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata),
+.hierarchy-metadata-custom dl {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     column-gap: 50px !important;
@@ -28,7 +29,8 @@ body:not(:has(.block-listOfPages)) .block-mirador {
 }
 
 .resource.show .property,
-.block-itemWithMetadata .resource .property {
+.block-itemWithMetadata .resource .property,
+.hierarchy-metadata-custom .property {
     display: flex !important;
     flex-direction: row !important;
     align-items: flex-start !important;
@@ -37,7 +39,8 @@ body:not(:has(.block-listOfPages)) .block-mirador {
 }
 
 .resource.show .property dt,
-.block-itemWithMetadata .resource .property dt {
+.block-itemWithMetadata .resource .property dt,
+.hierarchy-metadata-custom .property dt {
     flex: 0 0 40% !important;
     font-weight: bold !important;
     color: #000 !important;
@@ -46,7 +49,8 @@ body:not(:has(.block-listOfPages)) .block-mirador {
 }
 
 .resource.show .property dd,
-.block-itemWithMetadata .resource .property dd {
+.block-itemWithMetadata .resource .property dd,
+.hierarchy-metadata-custom .property dd {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -60,7 +64,8 @@ body:not(:has(.block-listOfPages)) .block-mirador {
 }
 
 .resource.show .property:last-child,
-.block-itemWithMetadata .resource .property:nth-last-child(-n+2) {
+.block-itemWithMetadata .resource .property:nth-last-child(-n+2),
+.hierarchy-metadata-custom .property:last-child {
     border-bottom: none !important;
 }
 
