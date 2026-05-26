@@ -12,7 +12,6 @@
     padding: 0 40px 40px 40px !important;
 }
 
-/* --- MODE REPLIÉ (Joli carré de 60px) --- */
 .hierarchy-row.is-collapsed {
     grid-template-columns: 60px 1fr !important;
 }
@@ -22,12 +21,12 @@
     min-width: unset !important;
     resize: none !important;
     padding: 0 !important;
-    height: 60px !important; /* Coupe la hauteur pour faire un bouton */
+    height: 60px !important; 
     min-height: unset !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    overflow: hidden !important; /* Cache tout le texte qui déborde */
+    overflow: hidden !important; 
 }
 
 .hierarchy-row.is-collapsed .hierarchy-metadata,
@@ -47,9 +46,12 @@
     justify-content: center !important;
 }
 
-/* Évite l'overlap sur le redimensionnement */
 .hierarchy-main-content {
     min-width: 0 !important; 
+    border-left: 3px solid var(--accent) !important;
+    padding: 30px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
 }
 
 /* =========================================
@@ -70,12 +72,11 @@
     max-width: 60vw;
     max-height: calc(100vh - 180px);
     overflow: auto;
-    resize: both; /* Mieux de garder juste horizontal pour pas casser le bas */
+    resize: both; 
     scrollbar-width: thin;
     scrollbar-color: var(--accent) #f9f9f9;
 }
 
-/* Scrollbar styling for Chrome/Safari */
 .hierarchy-sidebar-content::-webkit-scrollbar { width: 15px; }
 .hierarchy-sidebar-content::-webkit-scrollbar-track { background: #f9f9f9; }
 .hierarchy-sidebar-content::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 10px; }
@@ -261,8 +262,6 @@
     }
 }
 
-
-/* On enlève les bordures directes sur les listes et sous-listes */
 .hierarchy-list,
 .hierarchy-list ul,
 .hierarchy-list li {
@@ -271,7 +270,6 @@
     background: transparent !important;
 }
 
-/* On désactive (tue) absolument tous les pseudo-éléments (lignes) natifs */
 .hierarchy-list li::before,
 .hierarchy-list li::after,
 .hierarchy-list ul::before,
@@ -288,7 +286,6 @@
    STYLE DES RESSOURCES (TYPE RECHERCHE AVANCÉE)
    ========================================= */
 
-/* Le conteneur devient une liste verticale (colonne) */
 .hierarchy-main-content .resource-list {
     display: flex !important;
     flex-direction: column !important;
@@ -307,7 +304,7 @@
 /* La carte (Le lien complet) */
 .hierarchy-main-content .resource-link {
     display: flex !important;
-    flex-direction: row !important; /* Image à gauche, texte à droite */
+    flex-direction: row !important; 
     gap: 18px !important;
     padding: 16px !important;
     background: #fff !important;
@@ -319,7 +316,6 @@
     text-align: left !important;
 }
 
-/* Effet au survol (Bordure, couleur et translation) */
 .hierarchy-main-content .resource-link:hover {
     border-color: var(--accent, #8b1a1a) !important;
     box-shadow: 0 8px 20px rgba(0,0,0,0.05) !important;
@@ -327,7 +323,6 @@
     background-color: color-mix(in srgb, var(--accent, var(--accent)) 5%, #fff) !important;
 }
 
-/* L'image (Carré 110x110px comme sur la recherche) */
 .hierarchy-main-content .resource-link img {
     flex-shrink: 0 !important;
     width: 110px !important;
@@ -338,7 +333,6 @@
     display: block !important;
 }
 
-/* Le Titre */
 .hierarchy-main-content .resource-name {
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
     font-size: 1.5rem !important;
@@ -381,4 +375,203 @@ body.hierarchy-module .content > h2 {
     margin: 0 0 20px 0 !important;
     line-height: 1.4 !important;
     text-align: center !important;
+}
+
+
+
+/* =========================================
+   BROWSE CONTROLS (GLOBAL)
+   ========================================= */
+
+.browse-controls {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding: 12px 18px !important;
+    margin: 25px 0 !important;
+    background: #fff !important;
+    border: 1px solid #eee !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04) !important;
+}
+
+.browse-controls .advanced-search {
+    color: var(--accent, #8b1a1a) !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    padding: 6px 10px !important;
+    border-radius: 6px !important;
+    transition: all 0.25s ease !important;
+}
+
+.browse-controls .advanced-search:hover {
+    background: color-mix(in srgb, var(--accent) 10%, #fff) !important;
+}
+
+/* =========================================
+   PAGINATION BLOCK
+   ========================================= */
+
+.pagination {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+}
+
+.page-count,
+.row-count {
+    font-size: 0.95rem !important;
+    color: #666 !important;
+}
+
+.page-input-top {
+    width: 55px !important;
+    padding: 6px 8px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    outline: none !important;
+    transition: border 0.2s ease !important;
+}
+
+.page-input-top:focus {
+    border-color: var(--accent) !important;
+}
+
+.pagination-buttons {
+    display: flex !important;
+    gap: 8px !important;
+}
+
+.pagination .button {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+    border: 1px solid #ddd !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.25s ease !important;
+    background: #fff !important;
+}
+
+.pagination .button:not(.inactive):hover {
+    border-color: var(--accent) !important;
+    background: color-mix(in srgb, var(--accent) 8%, #fff) !important;
+}
+
+.pagination .button.inactive {
+    opacity: 0.35 !important;
+    cursor: not-allowed !important;
+}
+
+/* icônes flèches */
+.o-icon-prev::before,
+.o-icon-next::before {
+    color: var(--accent) !important;
+}
+
+
+/* =========================================
+   SORTING (SELECT + BUTTON)
+   ========================================= */
+
+.sorting {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    align-items: center !important;
+    padding: 10px 14px !important;
+    background: #fff !important;
+    border: 1px solid #eee !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04) !important;
+}
+
+.sorting select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+
+    padding: 8px 38px 8px 12px !important;
+    border-radius: 8px !important;
+    border: 1px solid #ddd !important;
+    background: #fff !important;
+
+    font-size: 0.95rem !important;
+    color: #222 !important;
+
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%238b1a1a' d='M5.5 7.5l4.5 5 4.5-5z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    background-size: 14px !important;
+}
+
+.sorting select:hover {
+    border-color: var(--accent) !important;
+}
+
+.sorting select:focus {
+    outline: none !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent) !important;
+}
+
+.sorting button {
+    padding: 8px 14px !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--accent) !important;
+
+    background: var(--accent) !important;
+
+    color: #fff !important;
+
+    font-weight: 600 !important;
+    cursor: pointer !important;
+
+    transition: all 0.25s ease !important;
+}
+
+.sorting button:hover {
+    background: color-mix(in srgb, var(--accent) 85%, #000) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08) !important;
+}
+
+.sorting button:active {
+    transform: translateY(0px) !important;
+}
+
+/* =========================================
+   FIX PAGINATION ICONS (PREV / NEXT)
+   ========================================= */
+
+.pagination .button::before {
+    font-family: inherit !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+}
+
+.o-icon-prev::before,
+.o-icon-next::before {
+    content: none !important;
+}
+
+.o-icon-prev::after {
+    content: "←" !important;
+    font-size: 16px !important;
+    color: var(--accent, #8b1a1a) !important;
+}
+
+.o-icon-next::after {
+    content: "→" !important;
+    font-size: 16px !important;
+    color: var(--accent, #8b1a1a) !important;
 }
