@@ -371,15 +371,14 @@
     }
 }
 
- .content > h2 {
+body.hierarchy-module .content > h2 {
     font-size: 1.6rem !important;
     font-weight: 600 !important;
     color: var(--accent) !important;
     padding: 18px 30px !important;
     border-left: 3px solid var(--accent) !important;
     background: color-mix(in srgb, var(--accent) 5%, transparent) !important;
-    margin: 0 !important;
+    margin: 0 0 20px 0 !important;
     line-height: 1.4 !important;
-    margin-bottom: 20px !important;
     text-align: center !important;
 }
