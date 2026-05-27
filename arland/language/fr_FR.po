@@ -1,8 +1,0 @@
-sudo docker exec omekas bash -c 'cat > /var/www/html/volume/themes/arland/language/fr_FR.po << EOF
-msgid ""
-msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-
-msgid "Custom (%s)"
-msgstr "%s"
-EOF'
