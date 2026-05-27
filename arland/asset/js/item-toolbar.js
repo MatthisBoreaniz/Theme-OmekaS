@@ -112,18 +112,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
     }
 
-    if (manifestUrl) {
-        const btnIiif = document.createElement('button');
-        btnIiif.className = 'metadata-btn-action btn-iiif';
-        btnIiif.title = 'Copier le manifest IIIF';
-        btnIiif.innerHTML = '<img src="' + iiifLogoUrl + '" alt="IIIF" width="20" height="20" style="vertical-align: middle; display: block;">';
-        toolbar.appendChild(btnIiif);
+    if (manifestUrl && !document.body.classList.contains("is-private")) {
+      const btnIiif = document.createElement("button");
+      btnIiif.className = "metadata-btn-action btn-iiif";
+      btnIiif.title = "Copier le manifest IIIF";
+      btnIiif.innerHTML =
+        '<img src="' +
+        iiifLogoUrl +
+        '" alt="IIIF" width="20" height="20" style="vertical-align: middle; display: block;">';
+      toolbar.appendChild(btnIiif);
 
-        btnIiif.addEventListener('click', function () {
-            copyToClipboard(manifestUrl).then(function () {
-                showCopySuccess(btnIiif, 'Manifest IIIF copié !');
-            });
+      btnIiif.addEventListener("click", function () {
+        copyToClipboard(manifestUrl).then(function () {
+          showCopySuccess(btnIiif, "Manifest IIIF copié !");
         });
+      });
     }
 
     const btnShare = document.createElement('button');
