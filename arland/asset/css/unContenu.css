@@ -325,7 +325,8 @@ dl.indexation-collapsed .indexation-prop {
 /* ===== RESPONSIVE ===== */
 @media screen and (max-width: 900px) {
     .resource.show dl:not(.mirador-label-value-metadata),
-    .block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata) {
+    .block-itemWithMetadata .resource dl:not(.mirador-label-value-metadata),
+    .hierarchy-metadata-custom dl {
         grid-template-columns: 1fr !important;
         display: block !important;
         padding: 20px !important;
@@ -333,21 +334,24 @@ dl.indexation-collapsed .indexation-prop {
     }
 
     .resource.show .property,
-    .block-itemWithMetadata .resource .property {
+    .block-itemWithMetadata .resource .property,
+    .hierarchy-metadata-custom .property {
         flex-direction: column !important;
         align-items: stretch !important;
         padding: 12px 0 !important;
     }
 
     .resource.show .property dt,
-    .block-itemWithMetadata .resource .property dt {
+    .block-itemWithMetadata .resource .property dt,
+    .hierarchy-metadata-custom .property dt {
         width: 100% !important;
         margin-bottom: 8px !important;
         color: #666 !important;
     }
 
     .resource.show .property dd,
-    .block-itemWithMetadata .resource .property dd {
+    .block-itemWithMetadata .resource .property dd,
+    .hierarchy-metadata-custom .property dd {
         width: 100% !important;
         line-height: 1.5 !important;
     }
