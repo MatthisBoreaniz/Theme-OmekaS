@@ -376,8 +376,6 @@ dl.indexation-collapsed .indexation-prop {
     }
 }
 
-
-
 .resource.show dl.media-list {
     display: none !important;
 }
@@ -387,4 +385,55 @@ dl.indexation-collapsed .indexation-prop {
     background-color: #f9f9f9 !important;
     border: 1px solid var(--accent) !important;
     color: var(--accent) !important;
+}
+
+/* =======================================================
+   BOÎTE DE REMPLACEMENT POUR MÉDIAS PRIVÉS (PHP)
+   ======================================================= */
+/* Le style de notre encadré généré en PHP */
+
+
+/* On tue (littéralement) l'espace vide fantôme de 700px généré par Omeka */
+body.is-private #mirador,
+body.is-private .mirador-container,
+body.is-private [id^="mirador"],
+body.is-private .block-mirador,
+body.is-private .media-embeds {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.private-media-placeholder {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #fafafa !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 8px !important;
+    height: 250px !important;
+    max-width: 1200px !important;
+    margin: 30px auto !important;
+    text-align: center !important;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    color: #666 !important;
+    line-height: 1.7 !important;
+    padding: 20px !important;
+}
+
+.private-media-placeholder svg {
+    margin-bottom: 15px !important;
+}
+
+.private-media-placeholder p {
+    margin: 0 !important;
+    font-size: 1rem !important;
+}
+
+.private-media-placeholder strong {
+    font-size: 1.1rem !important;
+    color: #444 !important;
 }

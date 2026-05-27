@@ -1,0 +1,35 @@
+<?php
+$translate = $this->plugin('translate');
+$this->headLink()->appendStylesheet($this->assetUrl('css/resource-page-blocks.css', 'Omeka'));
+$this->htmlElement('body')->appendAttribute('class', 'item resource show');
+
+// --- NOTRE INTERRUPTEUR ---
+$user = $this->identity();
+$hasVisibleMedia = (count($item->media()) > 0);
+$isPrivate = (!$hasVisibleMedia && !$user);
+
+if ($isPrivate) {
+    $this->htmlElement('body')->appendAttribute('class', 'is-private');
+}
+// --------------------------
+
+$filterLocale = (bool) $this->siteSetting('filter_locale_values');
+$lang = $this->lang();
+$valueLang = $filterLocale ? [$lang, ''] : null;
+?>
+<?php echo $this->pageTitle($item->displayTitle(null, $valueLang), 2); ?>
+<h3><?php echo $translate('Item'); ?></h3>
+<?php $this->trigger('view.show.before'); ?>
+
+<?php if ($isPrivate): ?>
+    <div class="private-media-placeholder">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="11" width="16" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        <p><strong>Accès restreint</strong><br>La consultation numérique de ce document n'est pas disponible pour le public en raison de<br>restrictions liées à la confidentialité ou aux droits de diffusion.</p>
+    </div>
+<?php endif; ?>
+
+<?php echo $this->resourcePageBlocks($item)->getBlocks(); ?>
+<?php $this->trigger('view.show.after'); ?>

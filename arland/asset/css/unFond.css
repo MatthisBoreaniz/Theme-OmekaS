@@ -603,5 +603,54 @@ body.item.show .content > h2 {
     line-height: 1.4 !important;
     text-align: center !important;
     border-radius: 0px 8px 8px 0px !important;
+}
 
+/* =======================================================
+   NOUVEAU : CADENAS SUR L'IMAGE POUR ITEM PRIVÉ (BLOCS)
+   ======================================================= */
+/* Masque l'image vignette réelle pour un item privé */
+.block-browsePreview .resource-link.is-private img,
+.block-browse .resource-link.is-private img {
+    display: none !important;
+}
+
+/* Crée un place-holder d'image avec un cadenas minimaliste */
+.block-browsePreview .resource-link.is-private::before,
+.block-browse .resource-link.is-private::before {
+    content: "" !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 250px !important; /* Limite la largeur du faux cadre pour qu'il soit harmonieux */
+    height: 180px !important; /* Hauteur fixe pour recréer le format d'une image */
+    background-color: #fafafa !important;
+    border-radius: 6px !important;
+    border: 1px solid #e0e0e0 !important;
+    
+    /* Icône de cadenas minimaliste (SVG) en background */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ccc' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='11' width='16' height='11' rx='2' ry='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 35px !important;
+    
+    /* On reprend la disposition de l'image (au-dessus du titre) */
+    margin: 0 auto 15px auto !important;
+    order: -1 !important;
+    transition: all 0.3s ease !important;
+}
+
+/* S'assure que le style de survol anime aussi notre faux-cadre comme une vraie image */
+.block-browsePreview .resource-link.is-private:hover::before,
+.block-browse .resource-link.is-private:hover::before {
+    transform: scale(1.02) !important;
+}
+
+/* On s'assure que le texte du titre garde son comportement par défaut (pas grisé) */
+.block-browsePreview .resource-link.is-private .resource-name,
+.block-browse .resource-link.is-private .resource-name {
+    color: #111 !important;
+}
+
+.block-browsePreview .resource-link.is-private:hover .resource-name,
+.block-browse .resource-link.is-private:hover .resource-name {
+    color: var(--accent) !important;
 }

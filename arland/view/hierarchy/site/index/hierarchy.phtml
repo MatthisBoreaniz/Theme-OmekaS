@@ -250,18 +250,30 @@ if ($hierarchyGrouping->getLabel()) {
                     $heading = $headingTerm ? $item->value($headingTerm, ['default' => $translate('[Untitled]'), 'lang' => $valueLang]) : $item->displayTitle(null, $valueLang);
                     $body = $bodyTerm ? $item->value($bodyTerm, ['lang' => $valueLang]) : $item->displayDescription(null, $valueLang);
                     $Cote = $item->value('dcterms:bibliographicCitation');
-                    $date = $item->value('dcterms:date');          
-                    ?>
+                    $date = $item->value('dcterms:date');
+
+                    // 1. On vérifie si quelqu'un est connecté
+                    $user = $this->identity();
+
+                    // 2. On regarde si Omeka autorise l'affichage d'au moins un média
+                    $hasVisibleMedia = (count($item->media()) > 0);
+
+                    // 3. S'il n'y a pas de média visible ET que ce n'est pas l'admin, on verrouille !
+                    $privateClass = (!$hasVisibleMedia && !$user) ? ' is-private' : '';
+                ?>
                     <li class="item resource">
                         <?php
-                    $linkContent = sprintf(
-                        '%s<div class="resource-info"><span class="resource-name">%s</span>%s%s</div>',
-                        $thumbnail($item, 'square'),
-                        $escape($heading),
-                        $Cote ? '<span class="neles-advanced-search__meta-cote">' . $escape($Cote) . '</span>' : '',
-                        $date ? '<span class="neles-advanced-search__meta-date">' . $escape($date) . '</span>' : ''
-                    );
-                    echo $item->linkRaw($linkContent, null, ['class' => 'resource-link']);
+                        // 2. On prépare le contenu HTML à l'intérieur du lien
+                        $linkContent = sprintf(
+                            '%s<div class="resource-info"><span class="resource-name">%s</span>%s%s</div>',
+                            $thumbnail($item, 'square'),
+                            $escape($heading),
+                            $Cote ? '<span class="neles-advanced-search__meta-cote">' . $escape($Cote) . '</span>' : '',
+                            $date ? '<span class="neles-advanced-search__meta-date">' . $escape($date) . '</span>' : ''
+                        );
+
+                        // 3. OMEKA GÉNÈRE LE LIEN <a> ICI : on lui passe nos deux classes !
+                        echo $item->linkRaw($linkContent, null, ['class' => 'resource-link' . $privateClass]);
                         ?>
                     </li>
                 <?php endforeach; ?>
