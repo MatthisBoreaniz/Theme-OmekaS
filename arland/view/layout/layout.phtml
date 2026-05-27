@@ -160,6 +160,24 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/team.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/hierarchyPage.js'); ?>"></script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sortSelects = document.querySelectorAll('select[name="sort_by"]');
+
+        sortSelects.forEach(select => {
+            Array.from(select.options).forEach(option => {
+                let text = option.text.trim();
+                if (text === 'Created') option.text = 'Date de création';
+                if (text === 'Title') option.text = 'Titre';
+                if (text === 'Resource class') option.text = 'Type de ressource';
+                if (text.includes('Custom (')) {
+                    option.text = text.replace('Custom (', '').replace(')', '').trim();
+                }
+            });
+        });
+    });
+</script>
+
 
 </body>
 

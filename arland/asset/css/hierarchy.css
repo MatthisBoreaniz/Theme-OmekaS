@@ -599,3 +599,29 @@ body.hierarchy-module .content > h2 {
     font-size: 16px !important;
     color: var(--accent, #8b1a1a) !important;
 }
+
+.hierarchy-main-content .resource-info {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.hierarchy-main-content .neles-advanced-search__meta-cote {
+    order: -1 !important;
+    font-size: 1rem !important;
+    color: #444 !important;
+    font-weight: 500 !important;
+}
+
+.hierarchy-main-content .neles-advanced-search__meta-date {
+    align-self: flex-end !important;
+    font-size: 1.3rem !important;
+    color: #444 !important;
+    font-weight: 500 !important;
+    margin-top: auto !important;
+}
+
+.hierarchy-main-content .resource-name {
+    order: 0 !important;
+}

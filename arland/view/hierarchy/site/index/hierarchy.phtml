@@ -249,15 +249,19 @@ if ($hierarchyGrouping->getLabel()) {
                 foreach ($items as $item):
                     $heading = $headingTerm ? $item->value($headingTerm, ['default' => $translate('[Untitled]'), 'lang' => $valueLang]) : $item->displayTitle(null, $valueLang);
                     $body = $bodyTerm ? $item->value($bodyTerm, ['lang' => $valueLang]) : $item->displayDescription(null, $valueLang);
-                ?>
+                    $Cote = $item->value('dcterms:bibliographicCitation');
+                    $date = $item->value('dcterms:date');          
+                    ?>
                     <li class="item resource">
                         <?php
-                        $linkContent = sprintf(
-                            '%s<span class="resource-name">%s</span>',
-                            $thumbnail($item, 'square'),
-                            $escape($heading)
-                        );
-                        echo $item->linkRaw($linkContent, null, ['class' => 'resource-link']);
+                    $linkContent = sprintf(
+                        '%s<div class="resource-info"><span class="resource-name">%s</span>%s%s</div>',
+                        $thumbnail($item, 'square'),
+                        $escape($heading),
+                        $Cote ? '<span class="neles-advanced-search__meta-cote">' . $escape($Cote) . '</span>' : '',
+                        $date ? '<span class="neles-advanced-search__meta-date">' . $escape($date) . '</span>' : ''
+                    );
+                    echo $item->linkRaw($linkContent, null, ['class' => 'resource-link']);
                         ?>
                     </li>
                 <?php endforeach; ?>
