@@ -1,0 +1,132 @@
+<?php
+$escape = $this->plugin('escapeHtml');
+$translate = $this->plugin('translate');
+$siteTitle = $site->title();
+$browseBodyTruncation = ($this->themeSetting('browse_body_truncation')) ? $this->themeSetting('browse_body_truncation') : 'fade';
+$banner = $this->themeSettingAssetUrl('banner');
+$this->htmlElement('html')->setAttribute('lang', $this->lang());
+$this->headMeta()->setCharset('utf-8');
+$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1');
+$this->headTitle($siteTitle)->setSeparator(' · ');
+$this->headTitle()->append($this->setting('installation_title', 'Omeka S'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/style.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/indexSites.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/elliadd-header.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/tooltip.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/popup-news.css'));
+$this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
+$this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700');
+$this->headScript()->prependFile($this->assetUrl('js/default.js'));
+$this->headScript()->prependFile($this->assetUrl('js/global.js', 'Omeka'));
+$this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 'Omeka'));
+$this->jsTranslate();
+$this->htmlElement('body')->appendAttribute('class', 'body-truncate-' . $browseBodyTruncation);
+$this->trigger('view.layout');
+$userBar = $this->userBar();
+?>
+<?php echo $this->doctype(); ?>
+<?php echo $this->htmlElement('html'); ?>
+
+<head>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headTitle(); ?>
+    <?php echo $this->headLink(); ?>
+    <?php echo $this->headStyle(); ?>
+    <?php echo $this->headScript(); ?>
+    <?php echo $this->partial('common/theme-config'); ?>
+    <link rel="icon" type="image/svg+xml" href="<?php echo $this->assetUrl('img/favicon.svg'); ?>">
+
+</head>
+
+<?php echo $this->htmlElement('body'); ?>
+
+<!-- Loader -->
+<div id="elliadd-loader">
+    <div class="loader-logo-container">
+        <?php if ($this->themeSettingAssetUrl('logo')): ?>
+            <img src="<?php echo $this->escapeHtml($this->themeSettingAssetUrl('logo')); ?>"
+                alt="<?php echo $this->escapeHtml($site->title()); ?>">
+        <?php else: ?>
+            <?php echo $this->escapeHtml($site->title()); ?>
+        <?php endif; ?>
+    </div>
+</div>
+
+<a id="skipnav" href="#content"><?php echo $this->translate('Skip to main content'); ?></a>
+<?php echo $userBar; ?>
+
+
+<header id="elliadd-header" class="elliadd-header">
+</header>
+
+<!-- Main content -->
+<div class="content" id="content" role="main">
+    <?php echo $this->content; ?>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <?php include __DIR__ . '/../../../elliadd-common-files/indexFooter.phtml'; ?>
+</footer>
+
+<!-- Back to top button -->
+<button id="back-to-top" aria-label="Retour en haut">
+    <svg viewBox="0 0 24 24">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</button>
+
+<!-- Header + back-to-top JS -->
+<script src="<?php echo $this->assetUrl('js/elliadd-header.js'); ?>"></script>
+<script>
+    fetch('/api/sites?per_page=50')
+        .then(r => r.json())
+        .then(sites => {
+            const filtered = sites.filter(s => s['o:slug'] !== 'presentation');
+            const assetIds = filtered
+                .filter(s => s['o:thumbnail']?.['o:id'])
+                .map(s => s['o:thumbnail']['o:id']);
+
+            return Promise.all(
+                assetIds.map(id => fetch('/api/assets/' + id).then(r => r.json()))
+            ).then(assets => {
+                const assetMap = {};
+                assets.forEach(a => {
+                    assetMap[a['o:id']] = a['o:asset_url'];
+                });
+
+                document.getElementById('ea-root').innerHTML = `
+                <div class="elliadd-landing">
+                    <div class="hero">
+                        <span class="tag">Plateforme numérique</span>
+                        <h1>ELLIADD Archives</h1>
+                        <p>Fonds numériques, archives littéraires et projets de recherche.</p>
+                    </div>
+                    <div class="sites-grid">
+                        ${filtered.map(s => {
+                            const thumbId = s['o:thumbnail']?.['o:id'];
+                            const thumbUrl = thumbId ? assetMap[thumbId] : null;
+                            return `
+                                <a href="${s['o:url']}" class="site-card">
+                                    <div class="site-image">
+                                        ${thumbUrl ? `<img src="${thumbUrl}" alt="">` : ''}
+                                    </div>
+                                    <div class="site-content">
+                                        <h2>${s['o:title']}</h2>
+                                        ${s['o:summary'] ? `<p>${s['o:summary']}</p>` : ''}
+                                    </div>
+                                </a>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            });
+        });
+</script>
+
+
+</body>
+
+</html>

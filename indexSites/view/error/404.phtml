@@ -1,0 +1,22 @@
+<?php
+$this->headTitle('Erreur 404 - Page introuvable');
+?>
+
+<div class="custom-error-404" style="text-align: center; padding: 100px 20px; font-family: sans-serif;">
+
+    <h1 style="font-size: 6rem; color: var(--accent, #920b0b); margin-bottom: 0;">404</h1>
+    <h2 style="font-size: 2rem; color: #333;">Oups... Vous vous êtes perdu dans les archives.</h2>
+
+    <p style="color: #666; font-size: 1.2rem; max-width: 600px; margin: 20px auto;">
+        La ressource, la collection ou la page que vous cherchez a probablement été déplacée, renommée, ou n'a peut-être
+        jamais existé.
+    </p>
+
+    <br><br>
+
+    <a href="<?php echo $this->url('site', [], true); ?>"
+        style="display: inline-block; padding: 15px 30px; background-color: var(--accent, #920b0b); color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s;">
+        Retourner à l'accueil
+    </a>
+
+</div>
