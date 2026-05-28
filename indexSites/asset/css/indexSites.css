@@ -14,6 +14,7 @@ root {
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     margin: -2rem; /* À ajuster selon le conteneur de ton thème */
+    padding: 2rem; /* À ajuster selon le conteneur de ton thème */
 }
 
 .hero {
@@ -58,6 +59,7 @@ root {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
+    padding: 10px !important;
 }
 
 .site-card {
@@ -115,5 +117,64 @@ root {
     color: var(--text-muted);
     font-size: 0.95rem;
     line-height: 1.6;
+    margin: 0 ! important;
+}
+
+
+
+
+
+.elliadd-footer-intro-wrapper {
+    width: 100%;
+    background: #0D0D0D;
+    display: flex;
+    justify-content: flex-start;
+    padding: 60px 0;
+}
+
+.elliadd-footer-intro-inner {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-left: 40px;
+}
+
+.elliadd-footer-logo img {
+    max-height: 80px;
+    width: auto;
+    display: block;
+}
+
+.elliadd-footer-intro-text {
+    flex: 1;
+}
+
+.elliadd-footer-intro-text p {
+    color: #B3B3B3;
+    font-size: 15px;
+    line-height: 1.6;
     margin: 0;
+}
+
+@media (max-width: 900px) {
+    .elliadd-footer-intro-inner {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .elliadd-footer-logo img {
+        max-height: 60px;
+    }
+}
+
+#content.content {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.block.block-html {
+    margin: 0 !important;
 }
