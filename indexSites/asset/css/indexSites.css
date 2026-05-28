@@ -1,5 +1,5 @@
-root {
-    --bg-page: #f8fafc;
+:root {
+    --bg-page: #fff;
     --card-bg: #ffffff;
     --text-main: #0f172a;
     --text-muted: #475569;
@@ -13,8 +13,11 @@ root {
     background-color: var(--bg-page);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
-    margin: -2rem; /* À ajuster selon le conteneur de ton thème */
-    padding: 2rem; /* À ajuster selon le conteneur de ton thème */
+    margin: -2rem; 
+    padding: 2rem; 
+    border-top: 1px solid var(--border-color);
+    width: 95% !important;
+        margin: 0 auto;
 }
 
 .hero {
@@ -22,6 +25,17 @@ root {
     margin: 0 auto 4rem;
     text-align: center;
 }
+
+
+.hero-logo {
+    display: block;
+    max-width: 85%;    
+    width: auto;
+    height: auto;
+    max-height: 150px;   
+    margin: 0 auto 1.8rem; 
+}
+
 
 .tag {
     display: inline-block;
@@ -69,7 +83,7 @@ root {
     color: inherit;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 8px; /* Bords moins ronds, plus institutionnels */
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -113,16 +127,26 @@ root {
     line-height: 1.3;
 }
 
+/* BLOC OPTIMISÉ POUR LA TYPOGRAPHIE DES DESCRIPTIONS */
 .site-content p {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem; /* Légèrement ajusté pour une meilleure harmonie */
     line-height: 1.6;
-    margin: 0 ! important;
+    margin: 0 !important;
+    
+    /* On désactive complètement les tirets de coupure */
+    hyphens: none;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    
+    /* On utilise les règles de wrapping modernes et propres */
+    text-wrap: pretty; /* Équilibre automatiquement les lignes pour éviter les gros vides */
+    overflow-wrap: break-word;
+    word-break: normal;
+    
+    /* Optionnel : tu peux tester 'justify' si tu veux un bloc parfaitement carré comme dans un livre */
+    text-align: left; 
 }
-
-
-
-
 
 .elliadd-footer-intro-wrapper {
     width: 100%;

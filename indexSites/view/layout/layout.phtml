@@ -119,17 +119,16 @@ $userBar = $this->userBar();
 
                 document.getElementById('ea-root').innerHTML = `
                 <div class="elliadd-landing">
-                    <div class="hero">
-                        <span class="tag">Plateforme numérique</span>
-                        <h1>ELLIADD Archives</h1>
-                        <p>Fonds numériques, archives littéraires et projets de recherche.</p>
-                    </div>
                     <div class="sites-grid">
                         ${filtered.map(s => {
                             const thumbId = s['o:thumbnail']?.['o:id'];
                             const thumbUrl = thumbId ? assetMap[thumbId] : null;
+                            
+                            // MODIFICATION ICI : On construit l'URL avec le slug
+                            const siteUrl = '/s/' + s['o:slug']; 
+
                             return `
-                                <a href="${s['o:url']}" class="site-card">
+                                <a href="${siteUrl}" class="site-card">
                                     <div class="site-image">
                                         ${thumbUrl ? `<img src="${thumbUrl}" alt="">` : ''}
                                     </div>

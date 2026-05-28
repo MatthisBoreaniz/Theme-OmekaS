@@ -79,7 +79,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.9bfdcyku"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
             <subject>État de troupe dramatique</subject>
           </controlaccess>
         </c>
@@ -101,7 +100,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.1e5bhw75"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
             <subject>Programme théâtral</subject>
           </controlaccess>
         </c>
@@ -119,7 +117,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5316rxbc"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche programme lyrique</subject>
           </controlaccess>
         </c>
@@ -141,7 +138,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.6af0c541"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
             <subject>Tableau de la troupe</subject>
             <subject>Programme théâtral</subject>
           </controlaccess>
@@ -167,7 +163,6 @@
             <geogname role="country" source="GeoNames" authfilenumber="https://www.geonames.org/1562822/socialist-republic-of-vietnam.html">Vietnam</geogname>
             <geogname role="city" source="GeoNames" authfilenumber="https://www.geonames.org/1581298/haiphong.html">Haïphong</geogname>
             <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -185,8 +180,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.ba9a7y1g"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/terms/DCMIType">Affiche</genreform>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/terms/DCMIType">Coupure de presse</genreform>
             <subject>Affiche programme lyrique</subject>
           </controlaccess>
         </c>
@@ -204,7 +197,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2cb197g9"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche programme lyrique</subject>
           </controlaccess>
         </c>
@@ -222,7 +214,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.cda7do41"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche programme lyrique</subject>
           </controlaccess>
         </c>
@@ -245,7 +236,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.de6awnlg"></dao>
           <controlaccess>
             <name role="periodical" source="BnF" authfilenumber="http://ark.bnf.fr/ark:/12148/cb327087806">L' Avenir du Tonkin</name>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Périodique</genreform>
           </controlaccess>
         </c>
       </c>
@@ -272,7 +262,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2f51zdl4"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
             <subject>Affiche programme dramatique</subject>
           </controlaccess>
         </c>
@@ -292,9 +281,6 @@
             <p>Signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5a258xp6"></dao>
-          <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Périodique</genreform>
-          </controlaccess>
         </c>
         <c id="o_id_16" level="item">
           <did>
@@ -313,7 +299,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.35a557r9"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Autre</genreform>
             <subject>Manuscrit d'un rôle</subject>
           </controlaccess>
         </c>
@@ -337,7 +322,6 @@
             <persname>Darmain</persname>
             <persname>Nélès, Émile (1876-1942)</persname>
             <persname>Roels, Marcel</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -357,9 +341,6 @@
             <p>Signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.c556j714"></dao>
-          <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
-          </controlaccess>
         </c>
         <c id="o_id_19" level="item">
           <did>
@@ -378,7 +359,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.bc8enk99"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text"></genreform>
             <subject>Programme dramatique</subject>
           </controlaccess>
         </c>
@@ -399,7 +379,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.bac32le7"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -420,7 +399,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5b4b0be1"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -441,7 +419,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.6e3avn80"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text"></genreform>
             <subject>Tableau de la troupe</subject>
             <subject>Programme théâtral</subject>
           </controlaccess>
@@ -464,7 +441,6 @@
           <dao xlink:href=""></dao>
           <controlaccess>
             <persname>Ambreville, Nicolas (1863-1921)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -485,8 +461,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.06798fw9"></dao>
           <controlaccess>
-            <persname>Ambreville, Nicolas (1863-1921)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>          
+            <persname>Ambreville, Nicolas (1863-1921)</persname>      
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -508,8 +483,7 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.eb0a1sem"></dao>
           <controlaccess>
             <persname>Ambreville, Nicolas (1863-1921)</persname>
-            <persname>Jacque, Alfred</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>             
+            <persname>Jacque, Alfred</persname>        
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -530,8 +504,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.abeak93t"></dao>
           <controlaccess>
-            <persname>Ambreville, Nicolas (1863-1921)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>             
+            <persname>Ambreville, Nicolas (1863-1921)</persname>           
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -552,8 +525,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.3c17i58g"></dao>
           <controlaccess>
-            <persname>Berry, Jules</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>     
+            <persname>Berry, Jules</persname>  
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -568,8 +540,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.abeak93t"></dao>
           <controlaccess>
-            <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>           
+            <persname>Nélès, Émile (1876-1942)</persname>        
             <subject>Dessin d'artiste</subject>
           </controlaccess>
         </c>
@@ -591,7 +562,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.d14b621a"></dao>
           <controlaccess>
             <persname>Dolcey, Elsa</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform> 
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -613,7 +583,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.ff39o18g"></dao>
           <controlaccess>
             <persname>Brulé, André</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -634,7 +603,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.eaf4s125"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -658,7 +626,6 @@
             <persname>Daix, Hubert</persname>
             <persname>Darmain</persname>
             <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -679,7 +646,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b21ep231"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
             <subject>Programme théâtral</subject>
             <subject>Description de la troupe</subject>
           </controlaccess>
@@ -711,7 +677,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.9bcdiv02"></dao>
           <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Brochure</genreform>
             <subject>Programme théâtral</subject>
             <subject>Description de la troupe</subject>
           </controlaccess>
@@ -733,7 +698,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.a7b52t6q"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -754,7 +718,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b6b33704"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -775,7 +738,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b6bbt890"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -795,8 +757,7 @@
             <p>Petites déchirures, signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.cfa2l9hv"></dao>
-          <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>         
+          <controlaccess>       
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -816,9 +777,6 @@
             <p>Signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.d685i13z"></dao>
-          <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Coupure de presse</genreform>   
-          </controlaccess>
         </c>
         <c id="o_id_40" level="item">
           <did>
@@ -836,8 +794,7 @@
             <p>Déchirures multiples, signes d'usage et d'usure et présence de papier adhésif.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.aeaa3r7w"></dao>
-          <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>           
+          <controlaccess>         
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -859,7 +816,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.ac85p0s3"></dao>
           <controlaccess>
             <persname>Réal, Léa de </persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -881,7 +837,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b5e60dcr"></dao>
           <controlaccess>
             <persname> Flory (Mlle)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -903,7 +858,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2ccax2cd"></dao>
           <controlaccess>
             <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -923,8 +877,7 @@
             <p>Signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.35ae306s"></dao>
-          <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>             
+          <controlaccess>           
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -944,8 +897,7 @@
             <p>Déchirures multiples, signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.0931h8q8"></dao>
-          <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>            
+          <controlaccess>         
             <subject>Affiche dramatique</subject>
           </controlaccess>
         </c>
@@ -965,9 +917,6 @@
             <p>Déchirures multiples, signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.2d4cmv69"></dao>
-          <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Périodique</genreform> 
-          </controlaccess>
         </c>
         <c id="o_id_47" level="item">
           <did>
@@ -987,7 +936,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.d6f61akg"></dao>
           <controlaccess>
             <persname>Chouret, Marcelle</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1008,8 +956,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.3e1f1g1w"></dao>
           <controlaccess>
-            <persname>Chouret, Marcelle</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <persname>Chouret, Marcelle</persname> 
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1030,8 +977,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.5d9fn002"></dao>
           <controlaccess>
-            <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <persname>Nélès, Émile (1876-1942)</persname>  
             <subject>Dessin d'artiste</subject>
           </controlaccess>
         </c>
@@ -1052,8 +998,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.3f0f9l5f"></dao>
           <controlaccess>
-            <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>            
+            <persname>Nélès, Émile (1876-1942)</persname>      
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1075,7 +1020,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.db5858qp"></dao>
           <controlaccess>
             <persname>Gravey, Fernand</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1096,8 +1040,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b076uwo7"></dao>
           <controlaccess>
-            <persname>Mahieu, Charles</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
+            <persname>Mahieu, Charles</persname> 
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1114,9 +1057,6 @@
             <p>Petites déchirures, signes d'usage et d'usure.</p>
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.adf66z51"></dao>
-          <controlaccess>
-            <genreform type="Text" authfilenumber="http://purl.org/dc/dcmitype/Text">Autre</genreform> 
-          </controlaccess>
         </c>
         <c id="o_id_54" level="item">
           <did>
@@ -1135,8 +1075,7 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.11fdlgru"></dao>
           <controlaccess>
-            <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>   
+            <persname>Nélès, Émile (1876-1942)</persname> 
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1155,7 +1094,6 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.22c1hn58"></dao>
           <controlaccess>
             <persname>Nélès, Émile (1876-1942)</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1178,8 +1116,7 @@
           <controlaccess>
             <persname>Nélès, Émile (1876-1942)</persname>
             <persname>Nélès, Marguerite</persname>
-            <persname>Chouret, Marcelle</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>              
+            <persname>Chouret, Marcelle</persname>        
             <subject>Photographie privée</subject>
           </controlaccess>
         </c>
@@ -1201,8 +1138,7 @@
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.b77c9dcx"></dao>
           <controlaccess>
             <persname>Brulé, André</persname>
-            <persname>Berry, Jules</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>    
+            <persname>Berry, Jules</persname> 
             <subject>Photographie d'artiste</subject>
           </controlaccess>
         </c>
@@ -1232,7 +1168,6 @@
           <controlaccess>
             <persname>Nélès, Émile (1876-1942)</persname>
             <persname>Roels, Marcel</persname>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artistes au plateau</subject>
           </controlaccess>
         </c>
@@ -1253,7 +1188,6 @@
           </phystech>
           <dao xlink:href="https://www.nakala.fr/10.34847/nkl.cd441oaz"></dao>
           <controlaccess>
-            <genreform type="Image" authfilenumber="http://purl.org/dc/dcmitype/Image">Document figuré</genreform>  
             <subject>Photographie d'artistes au plateau</subject>
           </controlaccess>
         </c>
