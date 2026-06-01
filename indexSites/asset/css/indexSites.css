@@ -136,7 +136,12 @@
     margin: 0 0 0.8rem 0;
     color: var(--accent);
     line-height: 1.3;
+    white-space: normal !important;
+    word-break: keep-all !important; 
+    hyphens: none !important; 
+    text-wrap: balance; 
 }
+
 
 .site-content p {
     color: var(--text-muted);
