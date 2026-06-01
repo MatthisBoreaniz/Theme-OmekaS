@@ -104,7 +104,7 @@ $renderInput = function (string $label, string $term, string $slotKey = '') use 
     $i = $idx++;
     $hasList = !empty($values);
     ob_start();
-?>
+    ?>
     <div class="sf-field<?php echo $hasList ? ' sf-has-list' : ''; ?>">
         <label for="<?php echo $inputId; ?>"><?php echo htmlspecialchars($label); ?></label>
         <div class="sf-input-wrap">
@@ -129,7 +129,7 @@ $renderInput = function (string $label, string $term, string $slotKey = '') use 
             <?php endif; ?>
         </div>
     </div>
-<?php
+    <?php
     return ob_get_clean();
 };
 
@@ -271,9 +271,7 @@ $coteIdx = 99;
 
         </div>
 
-        <script>
-            Omeka.prepareSearchForm($('#advanced-search'));
-        </script>
+        <script>Omeka.prepareSearchForm($('#advanced-search'));</script>
 
         <div id="page-actions" class="search-actions">
             <button type="submit" name="submit" class="btn-submit">RECHERCHE</button>
@@ -284,41 +282,35 @@ $coteIdx = 99;
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         /* ── Reset button ───────────────────────────────────────────────────── */
-        document.getElementById('reset-search').addEventListener('click', function() {
+        document.getElementById('reset-search').addEventListener('click', function () {
             var form = document.getElementById('advanced-search');
-            form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function(i) {
-                i.value = '';
-            });
-            form.querySelectorAll('select').forEach(function(s) {
-                s.selectedIndex = 0;
-            });
-            form.querySelectorAll('.value:not(:first-child)').forEach(function(r) {
-                r.remove();
-            });
+            form.querySelectorAll('input[type="text"], input[type="search"]').forEach(function (i) { i.value = ''; });
+            form.querySelectorAll('select').forEach(function (s) { s.selectedIndex = 0; });
+            form.querySelectorAll('.value:not(:first-child)').forEach(function (r) { r.remove(); });
             closeAllDropdowns();
         });
 
         /* ── Custom dropdown logic ──────────────────────────────────────────── */
         function closeAllDropdowns() {
-            document.querySelectorAll('.sf-dropdown.open').forEach(function(d) {
+            document.querySelectorAll('.sf-dropdown.open').forEach(function (d) {
                 d.classList.remove('open');
             });
-            document.querySelectorAll('.sf-arrow.active').forEach(function(b) {
+            document.querySelectorAll('.sf-arrow.active').forEach(function (b) {
                 b.classList.remove('active');
             });
         }
 
         function filterDropdown(dropdown, term) {
             var t = term.toLowerCase();
-            dropdown.querySelectorAll('li').forEach(function(li) {
+            dropdown.querySelectorAll('li').forEach(function (li) {
                 li.style.display = (!t || li.textContent.toLowerCase().includes(t)) ? '' : 'none';
             });
         }
 
-        document.querySelectorAll('.sf-arrow').forEach(function(btn) {
-            btn.addEventListener('click', function(e) {
+        document.querySelectorAll('.sf-arrow').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
                 e.stopPropagation();
                 var wrap = btn.closest('.sf-input-wrap');
                 var input = wrap.querySelector('input[type="text"]');
@@ -336,8 +328,8 @@ $coteIdx = 99;
             });
         });
 
-        document.querySelectorAll('input[data-sflist]').forEach(function(input) {
-            input.addEventListener('input', function() {
+        document.querySelectorAll('input[data-sflist]').forEach(function (input) {
+            input.addEventListener('input', function () {
                 var listId = input.dataset.sflist;
                 var dropdown = document.getElementById(listId);
                 if (!dropdown) return;
@@ -352,8 +344,8 @@ $coteIdx = 99;
             var listId = input.dataset.sflist;
             var dropdown = document.getElementById(listId);
             if (dropdown) {
-                dropdown.querySelectorAll('li').forEach(function(li) {
-                    li.addEventListener('mousedown', function(e) {
+                dropdown.querySelectorAll('li').forEach(function (li) {
+                    li.addEventListener('mousedown', function (e) {
                         e.preventDefault();
                         input.value = li.textContent;
                         closeAllDropdowns();
@@ -363,19 +355,19 @@ $coteIdx = 99;
         });
 
         document.addEventListener('click', closeAllDropdowns);
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeAllDropdowns();
         });
         /* ── Nettoyage avant envoi pour éviter les URL trop longues ── */
         var searchForm = document.getElementById('advanced-search');
         if (searchForm) {
-            searchForm.addEventListener('submit', function() {
+            searchForm.addEventListener('submit', function () {
                 // Pour chaque bloc, on vérifie si l'input texte est vide
-                searchForm.querySelectorAll('.sf-input-wrap').forEach(function(wrap) {
+                searchForm.querySelectorAll('.sf-input-wrap').forEach(function (wrap) {
                     var textInput = wrap.querySelector('input[type="text"]');
                     if (textInput && textInput.value.trim() === '') {
                         // S'il est vide, on désactive TOUS les inputs de ce bloc (y compris les cachés)
-                        wrap.querySelectorAll('input').forEach(function(input) {
+                        wrap.querySelectorAll('input').forEach(function (input) {
                             input.disabled = true;
                         });
                     }
@@ -383,8 +375,8 @@ $coteIdx = 99;
             });
 
             // Si l'utilisateur clique sur le bouton "Précédent" de son navigateur, on réactive tout
-            window.addEventListener('pageshow', function() {
-                searchForm.querySelectorAll('.sf-input-wrap input').forEach(function(input) {
+            window.addEventListener('pageshow', function () {
+                searchForm.querySelectorAll('.sf-input-wrap input').forEach(function (input) {
                     input.disabled = false;
                 });
             });
@@ -460,7 +452,7 @@ $coteIdx = 99;
         font-size: .85rem;
         color: #888;
     }
-
+    
     .sf-grid-3 {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

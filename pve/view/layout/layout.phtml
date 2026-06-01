@@ -19,6 +19,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/unPodcast.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/elliadd-header.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/tooltip.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/actualite.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/hierarchy.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/popup-news.css'));
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
 $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700');
@@ -114,7 +115,26 @@ $userBar = $this->userBar();
 </script>
 <script src="<?php echo $this->assetUrl('js/popup-news.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/actualite.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/hierarchyPage.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/item-toolbar.js'); ?>"></script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sortSelects = document.querySelectorAll('select[name="sort_by"]');
+
+        sortSelects.forEach(select => {
+            Array.from(select.options).forEach(option => {
+                let text = option.text.trim();
+                if (text === 'Created') option.text = 'Date de création';
+                if (text === 'Title') option.text = 'Titre';
+                if (text === 'Resource class') option.text = 'Type de ressource';
+                if (text.includes('Custom (')) {
+                    option.text = text.replace('Custom (', '').replace(')', '').trim();
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>
