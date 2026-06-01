@@ -181,6 +181,7 @@
     border: 1px solid #e2e8f0;
     padding: 2.5rem;
     border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .index-intro-text strong {
@@ -250,6 +251,7 @@
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 2.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .index-infosSection-icon {
