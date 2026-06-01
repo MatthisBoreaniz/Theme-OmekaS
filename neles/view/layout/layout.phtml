@@ -17,6 +17,7 @@ $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+San
 $this->headLink()->appendStylesheet($this->assetUrl('css/accueil.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/hero.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/carousel.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/actualites.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/chronologie.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/team.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/biblio.css'));
@@ -149,8 +150,12 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/indexation.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/item-toolbar.js'); ?>"></script>
-<script>window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";</script>
+<script>
+    window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";
+</script>
 <script src="<?php echo $this->assetUrl('js/popup-news.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/actualite.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/actualite.js'); ?>"></script>
 
 
 

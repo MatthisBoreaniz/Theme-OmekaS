@@ -6,7 +6,7 @@ $browseBodyTruncation = ($this->themeSetting('browse_body_truncation')) ? $this-
 $banner = $this->themeSettingAssetUrl('banner');
 $this->htmlElement('html')->setAttribute('lang', $this->lang());
 $this->headMeta()->setCharset('utf-8');
-$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1');   
+$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1');
 $this->headTitle($siteTitle)->setSeparator(' · ');
 $this->headTitle()->append($this->setting('installation_title', 'Omeka S'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/style.css'));
@@ -18,6 +18,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/prologuePodcast.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/unPodcast.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/elliadd-header.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/tooltip.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/actualite.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/popup-news.css'));
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
 $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic,700');
@@ -108,8 +109,11 @@ $userBar = $this->userBar();
 <script src="<?php echo $this->assetUrl('js/unPoscastCarousel.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/partcipantsAccordeon.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/tooltip.js'); ?>"></script>
-<script>window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";</script>
+<script>
+    window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";
+</script>
 <script src="<?php echo $this->assetUrl('js/popup-news.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/actualite.js'); ?>"></script>
 
 </body>
 

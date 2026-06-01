@@ -17,6 +17,7 @@ $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+San
 $this->headLink()->appendStylesheet($this->assetUrl('css/accueil.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/hero.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/chronologie.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/actualites.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/team.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/exposition.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/hierarchy.css'));
@@ -159,6 +160,7 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/CarouselHome.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/team.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/hierarchyPage.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/actualite.js'); ?>"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
