@@ -596,3 +596,12 @@
         max-height: 60px;
     }
 }
+
+
+
+
+
+#content.content {
+    /* Tes styles ici */
+    background-color: white; /* Exemple */
+}
