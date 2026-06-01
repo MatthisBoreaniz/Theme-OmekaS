@@ -16,6 +16,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/normalize.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/home.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/journee-etudes.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/leprojet.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/actualites.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/presentation.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/equipe.css'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/biblio.css'));
@@ -168,6 +169,7 @@ if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentatio
 <script src="<?php echo $this->assetUrl('js/sidebar-toc.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/voir-plus.js'); ?>"></script>
 <script src="<?php echo $this->assetUrl('js/hierarchyPage.js'); ?>"></script>
+<script src="<?php echo $this->assetUrl('js/actualite.js'); ?>"></script>
 </body>
 
 </html>

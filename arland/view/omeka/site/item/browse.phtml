@@ -35,321 +35,387 @@ $showZeroState = $isSearchPage && (empty($searchQuery) || !$hasResults);
 
 <div class="neles-advanced-search__container">
 
-<?php if (!$showZeroState): ?>
+    <?php if (!$showZeroState): ?>
 
-    <div class="neles-advanced-search__header">
-        <?php echo $this->pageTitle($translate('Collections'), 2); ?>
-    </div>
+        <div class="neles-advanced-search__header">
+            <?php echo $this->pageTitle($translate('Collections'), 2); ?>
+        </div>
 
-    <!-- FILTERS -->
-    <div class="neles-advanced-search__filters">
-        <?php echo $this->searchFilters(); ?>
-    </div>
+        <!-- FILTERS -->
+        <div class="neles-advanced-search__filters">
+            <?php echo $this->searchFilters(); ?>
+        </div>
 
-    <!-- CONTROLS -->
-    <div class="neles-advanced-search__controls">
-        <div class="neles-advanced-search__pagination">
+        <!-- CONTROLS -->
+        <div class="neles-advanced-search__controls">
+            <div class="neles-advanced-search__pagination">
+                <?php echo $this->pagination(); ?>
+            </div>
+
+            <div class="neles-advanced-search__actions">
+                <?php echo $this->hyperlink(
+                    $translate('Recherche avancée'),
+                    $this->url('site/resource', ['controller' => 'item', 'action' => 'search'], ['query' => $query], true),
+                    ['class' => 'neles-advanced-search__btn']
+                ); ?>
+
+                <div class="neles-advanced-search__sort">
+                    <?php echo $this->browse()->renderSortSelector('items'); ?>
+                </div>
+            </div>
+        </div>
+
+        <!-- LIST -->
+        <ul class="neles-advanced-search__list">
+            <?php
+            $headingTerm = $this->siteSetting('browse_heading_property_term');
+            $bodyTerm = $this->siteSetting('browse_body_property_term');
+
+            foreach ($items as $item):
+
+                $Cote = $item->value('dcterms:bibliographicCitation');
+                $heading = $headingTerm
+                    ? $item->value($headingTerm, ['default' => $translate('[Sans titre]'), 'lang' => $valueLang])
+                    : $item->displayTitle(null, $valueLang);
+
+                $body = $bodyTerm
+                    ? $item->value($bodyTerm, ['lang' => $valueLang])
+                    : $item->displayDescription(null, $valueLang);
+
+                $date = $item->value('dcterms:date');
+                $place = $item->value('dcterms:spatial');
+            ?>
+                <li class="neles-advanced-search__item">
+                    <a href="<?php echo $item->url(); ?>" class="neles-advanced-search__card<?php echo (!$item->isPublic()) ? ' is-private' : ''; ?>">
+
+                        <div class="neles-advanced-search__thumb">
+                            <?php echo $thumbnail($item, 'medium'); ?>
+                        </div>
+
+                        <div class="neles-advanced-search__content">
+                            <?php if ($Cote): ?>
+                                <span class="neles-advanced-search__meta-cote">
+                                    <?php echo $escape($Cote); ?>
+                                </span>
+                            <?php endif; ?>
+                            <h3 class="neles-advanced-search__title">
+                                <?php echo $escape($heading); ?>
+                            </h3>
+
+                            <div class="neles-advanced-search__meta">
+                                <?php if ($place): ?>
+                                    <span class="neles-advanced-search__meta-place">
+                                        <?php echo $escape($place); ?>
+                                    </span>
+                                <?php endif; ?>
+
+                                <?php if ($date): ?>
+                                    <span class="neles-advanced-search__meta-date">
+                                        <?php echo $escape($date); ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <?php if ($body): ?>
+                                <p class="neles-advanced-search__description">
+                                    <?php echo $escape(mb_strimwidth($body, 0, 220, '...')); ?>
+                                </p>
+                            <?php endif; ?>
+
+                        </div>
+
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+        <div class="neles-advanced-search__pagination-bottom">
             <?php echo $this->pagination(); ?>
         </div>
 
-        <div class="neles-advanced-search__actions">
-            <?php echo $this->hyperlink(
-                $translate('Recherche avancée'),
-                $this->url('site/resource', ['controller' => 'item', 'action' => 'search'], ['query' => $query], true),
-                ['class' => 'neles-advanced-search__btn']
-            ); ?>
+    <?php else: ?>
 
-            <div class="neles-advanced-search__sort">
-                <?php echo $this->browse()->renderSortSelector('items'); ?>
-            </div>
+        <div class="neles-advanced-search__zero">
+            <h2>Aucun résultat</h2>
+            <p>Essayez une autre recherche ou modifiez les filtres.</p>
         </div>
-    </div>
 
-    <!-- LIST -->
-    <ul class="neles-advanced-search__list">
-    <?php
-    $headingTerm = $this->siteSetting('browse_heading_property_term');
-    $bodyTerm = $this->siteSetting('browse_body_property_term');
-
-    foreach ($items as $item):
-
-        $Cote = $item->value('dcterms:bibliographicCitation');
-        $heading = $headingTerm 
-            ? $item->value($headingTerm, ['default' => $translate('[Sans titre]'), 'lang' => $valueLang]) 
-            : $item->displayTitle(null, $valueLang);
-
-        $body = $bodyTerm 
-            ? $item->value($bodyTerm, ['lang' => $valueLang]) 
-            : $item->displayDescription(null, $valueLang);
-
-        $date = $item->value('dcterms:date');
-        $place = $item->value('dcterms:spatial');
-    ?>
-        <li class="neles-advanced-search__item">
-            <a href="<?php echo $item->url(); ?>" class="neles-advanced-search__card">
-
-                <div class="neles-advanced-search__thumb">
-                    <?php echo $thumbnail($item, 'medium'); ?>
-                </div>
-
-                <div class="neles-advanced-search__content">
-                    <?php if ($Cote): ?>
-                        <span class="neles-advanced-search__meta-cote">
-                            <?php echo $escape($Cote); ?>
-                        </span>
-                    <?php endif; ?>
-                    <h3 class="neles-advanced-search__title">
-                        <?php echo $escape($heading); ?>
-                    </h3>
-
-                    <div class="neles-advanced-search__meta">
-                        <?php if ($place): ?>
-                            <span class="neles-advanced-search__meta-place">
-                                <?php echo $escape($place); ?>
-                            </span>
-                        <?php endif; ?>
-
-                        <?php if ($date): ?>
-                            <span class="neles-advanced-search__meta-date">
-                                <?php echo $escape($date); ?>
-                            </span>
-                        <?php endif; ?>
-                    </div>
-
-                    <?php if ($body): ?>
-                        <p class="neles-advanced-search__description">
-                            <?php echo $escape(mb_strimwidth($body, 0, 220, '...')); ?>
-                        </p>
-                    <?php endif; ?>
-
-                </div>
-
-            </a>
-        </li>
-    <?php endforeach; ?>
-    </ul>
-
-    <div class="neles-advanced-search__pagination-bottom">
-        <?php echo $this->pagination(); ?>
-    </div>
-
-<?php else: ?>
-
-<div class="neles-advanced-search__zero">
-    <h2>Aucun résultat</h2>
-    <p>Essayez une autre recherche ou modifiez les filtres.</p>
-</div>
-
-<?php endif; ?>
+    <?php endif; ?>
 
 </div>
 
 <style>
+    /* CONTAINER */
+    .neles-advanced-search__container {
+        max-width: 950px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
 
-/* CONTAINER */
-.neles-advanced-search__container {
-    max-width: 950px;
-    margin: 0 auto;
-    padding: 0 16px;
-}
+    /* FILTERS */
+    .neles-advanced-search__filters {
+        background: #fff;
+        padding: 16px;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        margin-bottom: 20px;
+    }
 
-/* FILTERS */
-.neles-advanced-search__filters {
-    background: #fff;
-    padding: 16px;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    margin-bottom: 20px;
-}
-
-/* CONTROLS */
-.neles-advanced-search__controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.neles-advanced-search__actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-/* BUTTON */
-.neles-advanced-search__btn {
-    display: inline-block;
-    background: var(--accent, #8b1a1a);
-    color: #fff !important;
-    padding: 8px 14px;
-    border-radius: 6px;
-    text-decoration: none !important;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    line-height: 1.4;
-}
-
-.neles-advanced-search__btn:hover {
-    opacity: 0.85;
-}
-
-/* LIST — supprime les puces et le padding natif */
-.neles-advanced-search__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.neles-advanced-search__item {
-    list-style: none;
-}
-
-/* CARD */
-.neles-advanced-search__card {
-    display: flex;
-    gap: 18px;
-    padding: 16px;
-    background: #fff;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    text-decoration: none;
-    transition: all 0.25s ease;
-    align-items: flex-start;
-}
-
-.neles-advanced-search__card:hover {
-    border-color: var(--accent, #8b1a1a);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transform: translateY(-2px);
-}
-
-/* IMAGE */
-.neles-advanced-search__thumb {
-    flex-shrink: 0;
-}
-
-.neles-advanced-search__thumb img {
-    width: 110px;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
-}
-
-/* placeholder si pas d'image */
-.neles-advanced-search__thumb:empty,
-.neles-advanced-search__thumb img[src=""] {
-    width: 110px;
-    height: 110px;
-    background: #f0f0f0;
-    border-radius: 6px;
-}
-
-/* CONTENT */
-.neles-advanced-search__content {
-    flex: 1;
-    min-width: 0; /* empêche le débordement du texte en flex */
-}
-
-/* TITLE */
-.neles-advanced-search__title {
-    font-size: 1.5rem !important;
-    font-weight: 600;
-    margin: 0 0 4px 0;
-    color: #1a1a1a;
-    line-height: 1.4;
-}
-
-.neles-advanced-search__card:hover .neles-advanced-search__title {
-    color: var(--accent, #8b1a1a);
-}
-
-/* META */
-.neles-advanced-search__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    font-size: 0.82rem;
-    margin-bottom: 6px;
-    justify-content: flex-end !important;
-    align-items: flex-end !important;
-}
-
-.neles-advanced-search__meta-place {
-    color: #777;
-}
-
-.neles-advanced-search__meta-date {
-    color: #444;
-    font-weight: 500;
-    font-size: 1.3rem !important;
-    justify-content: flex-end !important;
-    align-items: flex-end !important;
-}
-
-.neles-advanced-search__meta-cote {
-    color: #444;
-    font-weight: 500;
-    font-size: 0.8rem !important;
-}
-
-/* DESC */
-.neles-advanced-search__description {
-    font-size: 0.88rem;
-    color: #555;
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* ZERO STATE */
-.neles-advanced-search__zero {
-    text-align: center;
-    padding: 60px 20px;
-    color: #555;
-}
-
-/* ===== RESPONSIVE MOBILE ===== */
-@media (max-width: 600px) {
-
+    /* CONTROLS */
     .neles-advanced-search__controls {
-        flex-direction: column;
-        align-items: flex-start;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
     }
 
     .neles-advanced-search__actions {
-        width: 100%;
-        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
+    /* BUTTON */
+    .neles-advanced-search__btn {
+        display: inline-block;
+        background: var(--accent, #8b1a1a);
+        color: #fff !important;
+        padding: 8px 14px;
+        border-radius: 6px;
+        text-decoration: none !important;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        line-height: 1.4;
+    }
+
+    .neles-advanced-search__btn:hover {
+        opacity: 0.85;
+    }
+
+    /* LIST — supprime les puces et le padding natif */
+    .neles-advanced-search__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .neles-advanced-search__item {
+        list-style: none;
+    }
+
+    /* CARD */
     .neles-advanced-search__card {
-        gap: 12px;
-        padding: 12px;
+        display: flex;
+        gap: 18px;
+        padding: 16px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        align-items: flex-start;
+    }
+
+    .neles-advanced-search__card:hover {
+        border-color: var(--accent, #8b1a1a);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+    }
+
+    /* IMAGE */
+    .neles-advanced-search__thumb {
+        flex-shrink: 0;
     }
 
     .neles-advanced-search__thumb img {
-        width: 75px;
-        height: 75px;
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 6px;
+        display: block;
     }
 
+    /* placeholder si pas d'image */
     .neles-advanced-search__thumb:empty,
     .neles-advanced-search__thumb img[src=""] {
-        width: 75px;
-        height: 75px;
+        width: 110px;
+        height: 110px;
+        background: #f0f0f0;
+        border-radius: 6px;
     }
 
+    /* CONTENT */
+    .neles-advanced-search__content {
+        flex: 1;
+        min-width: 0;
+        /* empêche le débordement du texte en flex */
+    }
+
+    /* TITLE */
     .neles-advanced-search__title {
-        font-size: 0.9rem !important;
+        font-size: 1.5rem !important;
+        font-weight: 600;
+        margin: 0 0 4px 0;
+        color: #1a1a1a;
+        line-height: 1.4;
     }
 
+    .neles-advanced-search__card:hover .neles-advanced-search__title {
+        color: var(--accent, #8b1a1a);
+    }
+
+    /* META */
+    .neles-advanced-search__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        font-size: 0.82rem;
+        margin-bottom: 6px;
+        justify-content: flex-end !important;
+        align-items: flex-end !important;
+    }
+
+    .neles-advanced-search__meta-place {
+        color: #777;
+    }
+
+    .neles-advanced-search__meta-date {
+        color: #444;
+        font-weight: 500;
+        font-size: 1.3rem !important;
+        justify-content: flex-end !important;
+        align-items: flex-end !important;
+    }
+
+    .neles-advanced-search__meta-cote {
+        color: #444;
+        font-weight: 500;
+        font-size: 0.8rem !important;
+    }
+
+    /* DESC */
     .neles-advanced-search__description {
-        display: none; /* masque la description sur très petit écran pour aérer */
+        font-size: 0.88rem;
+        color: #555;
+        line-height: 1.5;
+        margin: 0;
     }
-}
 
+    /* ZERO STATE */
+    .neles-advanced-search__zero {
+        text-align: center;
+        padding: 60px 20px;
+        color: #555;
+    }
+
+    /* ===== RESPONSIVE MOBILE ===== */
+    @media (max-width: 600px) {
+
+        .neles-advanced-search__controls {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .neles-advanced-search__actions {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .neles-advanced-search__card {
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .neles-advanced-search__thumb img {
+            width: 75px;
+            height: 75px;
+        }
+
+        .neles-advanced-search__thumb:empty,
+        .neles-advanced-search__thumb img[src=""] {
+            width: 75px;
+            height: 75px;
+        }
+
+        .neles-advanced-search__title {
+            font-size: 0.9rem !important;
+        }
+
+        .neles-advanced-search__description {
+            display: none;
+            /* masque la description sur très petit écran pour aérer */
+        }
+    }
+
+
+    /* ── ÉLÉMENTS PRIVÉS ── */
+    .neles-advanced-search__card.is-private {
+        background: #fcfcfc;
+        border-color: #e5e5e5;
+        box-shadow: none;
+        pointer-events: none;
+        /* désactive le clic si tu veux */
+        cursor: default;
+    }
+
+    /* Thumbnail grisée si image présente */
+    .neles-advanced-search__card.is-private .neles-advanced-search__thumb img {
+        filter: grayscale(100%);
+        opacity: 0.4;
+    }
+
+    /* Placeholder cadenas si pas d'image */
+    .neles-advanced-search__card.is-private .neles-advanced-search__thumb:not(:has(img)),
+    .neles-advanced-search__card.is-private .neles-advanced-search__thumb:has(img[src=""]) {
+        width: 110px;
+        height: 110px;
+        background-color: #f0f0f0;
+        border-radius: 6px;
+        border: 1px dashed #ccc;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2' ry='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30px;
+    }
+
+    /* Titre et texte atténués */
+    .neles-advanced-search__card.is-private .neles-advanced-search__title {
+        color: #aaa;
+    }
+
+    .neles-advanced-search__card.is-private .neles-advanced-search__description,
+    .neles-advanced-search__card.is-private .neles-advanced-search__meta {
+        opacity: 0.4;
+    }
+
+    /* Badge "Privé" en haut à droite du content */
+    .neles-advanced-search__card.is-private .neles-advanced-search__content::after {
+        content: "Privé";
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #888;
+        background: #efefef;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 2px 8px;
+        margin-top: 8px;
+    }
+
+    @media (max-width: 600px) {
+
+        .neles-advanced-search__card.is-private .neles-advanced-search__thumb:not(:has(img)),
+        .neles-advanced-search__card.is-private .neles-advanced-search__thumb:has(img[src=""]) {
+            width: 75px;
+            height: 75px;
+        }
+    }
 </style>
