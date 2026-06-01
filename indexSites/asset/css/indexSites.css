@@ -431,7 +431,7 @@
 }
 
 .index-carousel-btn {
-    background: black;
+    background: none;
     border: none;
     cursor: pointer;
     width: 50px;
@@ -450,7 +450,7 @@
 .index-carousel-btn svg {
     width: 35px;
     height: 35px;
-    fill: white;
+    fill: black !important;
 }
 
 .index-carousel-link-external {
