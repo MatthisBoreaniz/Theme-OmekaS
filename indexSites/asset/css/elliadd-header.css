@@ -9,7 +9,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #0D0D0D;
+    background-color: #FFFFFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +21,6 @@
     width: 150px;
     height: auto;
     position: relative;
-    color: #333333;
 }
 
 .loader-logo-container img {
@@ -67,7 +66,6 @@ header {
 }
 
 #content {
-    background-color: #FFFFFF;
     margin: 0;
     max-width: 100%;
 }
@@ -82,8 +80,8 @@ footer {
    ══════════════════════════════════════════ */
 
 #elliadd-header.elliadd-header {
-    background-color: #0D0D0D;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #0D0D0D;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -93,12 +91,20 @@ footer {
     z-index: 99999;
 }
 
+
+#elliadd-header .elliadd-header-logo {
+    flex-shrink: 0;
+}
+
+
+
 #elliadd-header .elliadd-header-logo img {
     max-height: 70px;
     width: auto;
     display: block;
     position: relative;
     z-index: 1001;
+    
 }
 
 #elliadd-header .elliadd-header-content {
@@ -119,7 +125,7 @@ footer {
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    gap: 80px !important;
+    gap: 20px    !important;
     background: transparent !important;
     height: auto !important;
     overflow: visible !important;
@@ -136,9 +142,10 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation>li>a:visited,
 #elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link,
 #elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a {
-    color: #FFFFFF !important;
+    color: #000 !important;
     text-decoration: none !important;
-    font-size: 16px !important;
+    font-size: 20px !important;
+    font-family: 'futura-pt', sans-serif;
     font-weight: 300 !important;
     transition: color 0.3s ease !important;
     white-space: nowrap;
@@ -148,13 +155,21 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a:hover,
 #elliadd-header .elliadd-header-nav ul.navigation>li>a:hover {
     color: #B3B3B3 !important;
-}
+    text-decoration: underline !important;
+    text-underline-offset: 20px !important;
+    text-decoration-thickness: 4px !important;
+    text-decoration-color: var(--accent) !important;
+} 
 
 #elliadd-header .elliadd-header-nav ul.navigation>li.active>.parent-link>a,
 #elliadd-header .elliadd-header-nav ul.navigation>li.current>.parent-link>a,
 #elliadd-header .elliadd-header-nav ul.navigation>li.active>a,
 #elliadd-header .elliadd-header-nav ul.navigation>li.current>a {
-    color: #FFFFFF !important;
+    color: black !important;
+    text-decoration: underline !important;
+    text-underline-offset: 20px !important;
+    text-decoration-thickness: 4px !important;
+    text-decoration-color: var(--accent) !important;
 }
 
 /* Kill Omeka pseudo-elements */
@@ -180,7 +195,7 @@ footer {
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
-    color: #FFFFFF !important;
+    color: #0D0D0D !important;
     cursor: pointer !important;
     font-size: 12px !important;
     box-shadow: none !important;
@@ -188,6 +203,11 @@ footer {
     z-index: 10 !important;
     width: auto !important;
     height: auto !important;
+}
+
+#elliadd-header .elliadd-header-nav .child-toggle svg {
+    display: block;
+    transition: transform 0.3s ease;
 }
 
 #elliadd-header .elliadd-header-nav .child-toggle:hover {
@@ -205,9 +225,9 @@ footer {
     min-width: 250px !important;
     width: max-content !important;
     max-width: 400px !important;
-    background-color: #0D0D0D !important;
-    border: 1px solid #333 !important;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.8) !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #cccccc !important;
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.8) !important;
     z-index: 99999 !important;
     height: auto !important;
     overflow: visible !important;
@@ -234,8 +254,8 @@ footer {
 #elliadd-header .elliadd-header-nav ul.navigation li ul li a {
     display: block !important;
     padding: 12px 20px !important;
-    color: #FFFFFF !important;
-    background-color: #0D0D0D !important;
+    color: #0D0D0D !important;
+    background-color: #FFFFFF !important;
     text-decoration: none !important;
     text-align: left !important;
     font-size: 15px !important;
@@ -245,67 +265,55 @@ footer {
 
 #elliadd-header .elliadd-header-nav ul.navigation li ul li a:hover,
 #elliadd-header .elliadd-header-nav ul.navigation li ul li a:focus {
-    background-color: #FFFFFF !important;
-    color: #000000 !important;
-}
-
-/* ── Search bar ── */
-#elliadd-header .elliadd-header-search form {
-    display: flex !important;
-    align-items: center !important;
-    background: transparent !important;
-    border: none !important;
-    border-bottom: 1px solid transparent !important;
-    transition: all 0.3s ease !important;
-}
-
-#elliadd-header .elliadd-header-search input {
-    width: 0 !important;
-    opacity: 0 !important;
-    border: none !important;
-    background: transparent !important;
+    background-color: #0D0D0D !important;
     color: #FFFFFF !important;
-    font-size: 15px !important;
-    font-weight: 300 !important;
-    padding: 0 !important;
-    transition: width 0.4s ease, opacity 0.4s ease, padding 0.4s ease !important;
-    outline: none !important;
 }
 
-#elliadd-header .elliadd-header-search input::placeholder {
-    color: #B3B3B3 !important;
+/* ── Search link ── */
+#elliadd-header .elliadd-header-search a.search-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    color: #0D0D0D;
+    text-decoration: none;
+    position: relative; /* Pour positionner le texte au hover */
 }
 
-#elliadd-header .elliadd-header-search form:hover,
-#elliadd-header .elliadd-header-search form:focus-within {
-    border-bottom: 1px solid #FFFFFF !important;
-}
-
-#elliadd-header .elliadd-header-search form:hover input,
-#elliadd-header .elliadd-header-search form:focus-within input {
-    width: 180px !important;
-    opacity: 1 !important;
-    padding: 5px 10px !important;
-}
-
-#elliadd-header .elliadd-header-search button {
-    background: none !important;
-    background-color: transparent !important;
-    border: none !important;
-    padding: 5px !important;
-    cursor: pointer !important;
-    display: flex !important;
-    width: auto !important;
-    height: auto !important;
-}
-
-#elliadd-header .elliadd-header-search button svg {
-    width: 20px;
-    height: 20px;
+#elliadd-header .elliadd-header-search a.search-link svg {
+    width: 22px;
+    height: 22px;
     fill: none;
-    stroke: #FFFFFF;
+    stroke: #0D0D0D;
     stroke-width: 2;
+    transition: stroke 0.3s ease;
 }
+
+#elliadd-header .elliadd-header-search a.search-link:hover svg {
+    stroke: #B3B3B3;
+}
+
+/* Texte "Recherche avancée" au hover */
+#elliadd-header .elliadd-header-search a.search-link:hover::after {
+    content: "Recherche avancée";
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #FFFFFF;
+    color: #0D0D0D;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-family: 'Open Sans', sans-serif;
+    white-space: nowrap;
+    margin-top: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    border: 1px solid #cccccc;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+
 
 /* ── Burger button (hidden on desktop) ── */
 #elliadd-header .elliadd-mobile-toggle {
@@ -322,7 +330,7 @@ footer {
     display: block;
     width: 25px;
     height: 2px;
-    background-color: #FFFFFF;
+    background-color: #0D0D0D;
     margin: 5px 0;
     transition: all 0.3s ease;
     pointer-events: none;
@@ -341,7 +349,7 @@ footer {
     height: 48px;
     border-radius: 25%;
     border: 2px solid var(--accent, #920b0b);
-    background-color: white;
+    background-color: #FFFFFF;
     color: var(--accent, #920b0b);
     cursor: pointer;
     display: flex;
@@ -351,7 +359,6 @@ footer {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 0;
 }
 
 #back-to-top svg {
@@ -380,17 +387,9 @@ footer {
 }
 
 #back-to-top.over-footer {
-    background-color: #0D0D0D; /* Footer background */
-    border-color: #FFFFFF;
-}
-
-#back-to-top.over-footer svg {
-    stroke: #FFFFFF;
-}
-
-#back-to-top.over-footer:hover {
-    background-color: var(--accent, #920b0b);
-    border-color: var(--accent, #920b0b);
+    background-color: #0D0D0D !important; /* Footer background */
+    border-color: #FFFFFF !important;
+    color: #FFFFFF !important;
 }
 
 #back-to-top.hide-on-logos {
@@ -399,11 +398,23 @@ footer {
     pointer-events: none !important;
 }
 
+
+
+#back-to-top.over-footer svg {
+    stroke: #FFFFFF;
+}
+
+#back-to-top.over-footer:hover {
+    background-color: var(--accent, #920b0b) !important;
+    border-color: var(--accent, #920b0b) !important;
+}
+
+
 /* ══════════════════════════════════════════
    Mobile (≤ 800px)
    ══════════════════════════════════════════ */
 
-@media (max-width: 800px) {
+@media (max-width: 10000px) {
     #elliadd-header.elliadd-header {
         padding: 15px 20px !important;
     }
@@ -418,7 +429,7 @@ footer {
         top: 100% !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #0D0D0D !important;
+        background-color: #FFFFFF !important;
         flex-direction: column !important;
         align-items: flex-start !important;
         padding: 0 !important;
@@ -434,7 +445,7 @@ footer {
         overflow-x: hidden !important;
         overflow-y: auto !important;
         padding-bottom: 0 !important;
-        border-top: 1px solid #333 !important;
+        border-top: 1px solid #cccccc !important;
     }
 
     #elliadd-header .elliadd-header-nav {
@@ -457,7 +468,7 @@ footer {
 
     #elliadd-header .elliadd-header-nav ul.navigation>li {
         flex-wrap: nowrap !important;
-        border-bottom: 1px solid #333 !important;
+        border-bottom: 1px solid #cccccc !important;
         padding: 0 !important;
         width: 100% !important;
         justify-content: space-between !important;
@@ -468,6 +479,7 @@ footer {
         width: 100% !important;
         flex-grow: 1 !important;
         display: block !important;
+        text-align: center !important;
     }
 
     #elliadd-header .elliadd-header-nav .child-toggle {
@@ -475,7 +487,7 @@ footer {
         margin-left: 0 !important;
         padding: 16px 20px !important;
         flex-shrink: 0 !important;
-        border-left: 1px solid #333 !important;
+        border-left: 1px solid #cccccc !important;
         font-size: 14px !important;
     }
 
@@ -487,7 +499,7 @@ footer {
         left: 100% !important;
         width: 100% !important;
         min-height: 100% !important;
-        background-color: #0D0D0D !important;
+        background-color: #FFFFFF !important;
         margin: 0 !important;
         padding: 0 !important;
         border: none !important;
@@ -497,18 +509,18 @@ footer {
     }
 
     #elliadd-header .elliadd-header-nav ul.navigation li ul li {
-        border-bottom: 1px solid #333 !important;
+        border-bottom: 1px solid #cccccc !important;
     }
 
     #elliadd-header .elliadd-header-nav ul.navigation li ul li a {
         padding: 16px 20px !important;
-        background-color: #0D0D0D !important;
+        background-color: #FFFFFF !important;
     }
 
     #elliadd-header .elliadd-header-nav ul.navigation li ul li a:hover,
     #elliadd-header .elliadd-header-nav ul.navigation li ul li a:focus {
-        background-color: #1a1a1a !important;
-        color: #FFFFFF !important;
+        background-color: #e5e5e5 !important;
+        color: #0D0D0D !important;
     }
 
     /* Back button */
@@ -518,42 +530,38 @@ footer {
         gap: 8px !important;
         width: 100% !important;
         padding: 16px 20px !important;
-        background-color: #1a1a1a !important;
-        color: #FFFFFF !important;
+        background-color: #e5e5e5 !important;
+        color: #0D0D0D !important;
         border: none !important;
-        border-bottom: 1px solid #333 !important;
+        border-bottom: 1px solid #cccccc !important;
         font-size: 15px !important;
         font-weight: 600 !important;
         cursor: pointer !important;
         text-align: left !important;
     }
 
-    #elliadd-header .submenu-back:hover {
-        background-color: #252525 !important;
+    #elliadd-header .submenu-back svg {
+        display: inline-block;
+        vertical-align: middle;
+        flex-shrink: 0;
     }
 
-    #elliadd-header .elliadd-header-nav ul.navigation li:hover>ul {
-        /* hover disabled on mobile, only slide controls visibility */
+    #elliadd-header .submenu-back:hover {
+        background-color: #d9d9d9 !important;
     }
 
     #elliadd-header .elliadd-header-search {
-        width: 100% !important;
-        padding: 25px 20px !important;
-        margin-left: 0 !important;
-        margin-top: 10px !important;
+        padding: 20px !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
     }
 
-    #elliadd-header .elliadd-header-search form {
-        border-bottom: 1px solid #FFFFFF !important;
-        width: 100% !important;
+    #elliadd-header .elliadd-header-search a.search-link:hover::after {
+        display: none;
     }
 
-    #elliadd-header .elliadd-header-search input {
-        width: 100% !important;
-        opacity: 1 !important;
-        padding: 8px 10px !important;
-        transition: none !important;
-    }
 
     #elliadd-header .elliadd-mobile-toggle.is-active span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
@@ -574,47 +582,4 @@ footer {
         height: 42px;
         font-size: 18px;
     }
-}
-/* LIGHT THEME OVERRIDES */
-#elliadd-header.elliadd-header { background-color: #FFFFFF; color: #333333; }
-#elliadd-header .elliadd-header-nav ul.navigation>li>a,
-#elliadd-header .elliadd-header-nav ul.navigation>li>a:link,
-#elliadd-header .elliadd-header-nav ul.navigation>li>a:visited,
-#elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link,
-#elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a { color: #333333 !important; }
-#elliadd-header .elliadd-header-nav ul.navigation>li>.parent-link>a:hover,
-#elliadd-header .elliadd-header-nav ul.navigation>li>a:hover { color: #555555 !important; }
-#elliadd-header .elliadd-header-nav ul.navigation>li.active>.parent-link>a,
-#elliadd-header .elliadd-header-nav ul.navigation>li.current>.parent-link>a,
-#elliadd-header .elliadd-header-nav ul.navigation>li.active>a,
-#elliadd-header .elliadd-header-nav ul.navigation>li.current>a { color: #111111 !important; font-weight: 600 !important; }
-#elliadd-header .elliadd-header-nav .child-toggle { color: #333333 !important; }
-#elliadd-header .elliadd-header-nav .child-toggle:hover { color: #555555 !important; }
-#elliadd-header .elliadd-header-nav ul.navigation li ul { background-color: #FFFFFF !important; border: 1px solid #E0E0E0 !important; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1) !important; }
-#elliadd-header .elliadd-header-nav ul.navigation li ul li a { color: #333333 !important; background-color: #FFFFFF !important; }
-#elliadd-header .elliadd-header-nav ul.navigation li ul li a:hover,
-#elliadd-header .elliadd-header-nav ul.navigation li ul li a:focus { background-color: #F8F8F8 !important; color: #000000 !important; }
-#elliadd-header .elliadd-header-search a.search-link { display: flex; align-items: center; justify-content: center; padding: 5px; color: #333333; }
-#elliadd-header .elliadd-header-search a.search-link svg { width: 22px; height: 22px; fill: none; stroke: #333333; stroke-width: 1.5; transition: stroke 0.3s ease; }
-#elliadd-header .elliadd-header-search a.search-link:hover svg { stroke: #000000; }
-#elliadd-header .elliadd-mobile-toggle span { background-color: #333333; }
-#elliadd-loader { background-color: #FFFFFF; }
-@media (max-width: 800px) {
-    #elliadd-header .elliadd-header-content { background-color: #FFFFFF !important; border-top: 1px solid #E0E0E0 !important; }
-    #elliadd-header .elliadd-header-content.is-open { box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important; border-bottom: 1px solid #E0E0E0 !important; }
-    #elliadd-header .elliadd-header-nav ul.navigation>li { border-bottom: 1px solid #E0E0E0 !important; }
-    #elliadd-header .elliadd-header-nav .child-toggle { border-left: 1px solid #E0E0E0 !important; }
-    #elliadd-header .elliadd-header-nav ul.navigation li ul { background-color: #FFFFFF !important; }
-    #elliadd-header .elliadd-header-nav ul.navigation li ul li { border-bottom: 1px solid #E0E0E0 !important; }
-    #elliadd-header .elliadd-header-nav ul.navigation li ul li a { background-color: #FFFFFF !important; }
-    #elliadd-header .elliadd-header-nav ul.navigation li ul li a:hover { background-color: #F8F8F8 !important; color: #000000 !important; }
-    #elliadd-header .submenu-back { background-color: #F9F9F9 !important; color: #333333 !important; border-bottom: 1px solid #E0E0E0 !important; }
-    #elliadd-header .submenu-back:hover { background-color: #E0E0E0 !important; }
-}
-
-/* PVE SPECIFIC */
-#elliadd-header .elliadd-header-nav { justify-content: flex-end !important; margin-right: 20px !important; }
-#elliadd-header .elliadd-header-nav ul.navigation>li>a { text-transform: uppercase; font-size: 14px !important; letter-spacing: 1px; }
-@media (min-width: 801px) {
-    #elliadd-header .elliadd-header-nav ul.navigation { gap: 40px !important; }
 }

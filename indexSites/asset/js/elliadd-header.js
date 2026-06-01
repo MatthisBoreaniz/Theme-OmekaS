@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* ── Submenu toggle buttons ── */
-    var isMobile = function() { return window.innerWidth <= 800; };
+    var isMobile = function() { return window.innerWidth <= 10000; };
 
     var navItems = document.querySelectorAll('#elliadd-header .elliadd-header-nav ul.navigation > li');
     navItems.forEach(function(li) {
