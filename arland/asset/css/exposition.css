@@ -190,6 +190,14 @@
 
 
 
+.exposition-bottom-wrapper {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 60px auto; 
+    align-items: stretch;
+}
 
 .exposition-CTA-container {
     display: flex;
@@ -199,15 +207,14 @@
     border: 1px solid var(--accent);
     border-radius: 8px;
     padding: 40px 50px;
-    max-width: 1200px;
-    margin: 60px auto; 
     gap: 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .exposition-CTA-content {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
 }
 
 .exposition-CTA-title {
@@ -228,7 +235,7 @@
     display: inline-flex !important;
     align-items: center !important;
     gap: 12px !important;
-    background-color: none ;
+    background-color: transparent;
     color: var(--accent) !important;
     font-size: 16px !important;
     font-weight: 600 !important;
@@ -244,7 +251,6 @@
     height: 20px;
 }
 
-
 .exposition-CTA-btn:hover {
     background-color: var(--accent) !important;
     transform: translateY(-2px) !important;
@@ -252,17 +258,81 @@
     color: #ffffff !important;
 }
 
+.exposition-credits-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 35px 40px;
+    overflow-y: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    min-height: 0;
+    max-height: 250px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
 
-@media (max-width: 768px) {
+.exposition-credits-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.exposition-credits-container::-webkit-scrollbar-track {
+background: transparent !important;
+}
+
+.exposition-credits-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent) !important;
+    border-radius: 10px;
+}
+
+.exposition-credits-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent) !important;
+}
+
+.exposition-credits-container::-webkit-scrollbar-button {
+    display: none !important;
+}
+
+.exposition-credits-title {
+    font-size: 20px !important;
+    color: var(--accent) !important;
+    margin: 0 0 16px 0 !important;
+    font-weight: 600 !important;
+}
+
+.exposition-credits-text {
+    font-size: 14px !important;
+    color: #475569 !important;
+    margin: 0 0 10px 0 !important;
+    line-height: 1.5 !important;
+}
+
+.exposition-credits-text strong {
+    color: #1a1a1a;
+}
+
+@media (max-width: 900px) {
+    .exposition-bottom-wrapper {
+        grid-template-columns: 1fr;
+        margin: 40px 20px; 
+    }
+
     .exposition-CTA-container {
         flex-direction: column;
         text-align: center;
         padding: 30px 20px;
-        margin: 40px 20px; 
     }
 
     .exposition-CTA-btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .exposition-credits-container {
+        padding: 30px 20px;
+        max-height: 300px;
     }
 }
