@@ -191,12 +191,15 @@
 
 
 .exposition-bottom-wrapper {
-    display: grid;
+display: grid;
     grid-template-columns: 1.8fr 1fr;
     gap: 30px;
     max-width: 1200px;
     margin: 60px auto; 
+    padding: 0 20px; 
     align-items: stretch;
+    width: 100%; 
+    box-sizing: border-box;
 }
 
 .exposition-CTA-container {
@@ -317,13 +320,17 @@ background: transparent !important;
 @media (max-width: 900px) {
     .exposition-bottom-wrapper {
         grid-template-columns: 1fr;
-        margin: 40px 20px; 
+        margin: 40px auto; 
+        padding: 0 15px; 
+        gap: 20px;
     }
 
     .exposition-CTA-container {
         flex-direction: column;
         text-align: center;
         padding: 30px 20px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .exposition-CTA-btn {
@@ -333,6 +340,8 @@ background: transparent !important;
 
     .exposition-credits-container {
         padding: 30px 20px;
+        width: 100%;
+        box-sizing: border-box;
         max-height: 300px;
     }
 }
