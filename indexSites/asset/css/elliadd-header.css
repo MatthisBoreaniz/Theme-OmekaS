@@ -94,13 +94,13 @@ footer {
 
 #elliadd-header .elliadd-header-logo {
     flex-shrink: 0;
-    height: 120px !important;
+    height: 100px !important;
 }
 
 
 
 #elliadd-header .elliadd-header-logo img {
-    max-height: 120px;
+    max-height: 100px;
     width: auto;
     display: block;
     position: relative;
