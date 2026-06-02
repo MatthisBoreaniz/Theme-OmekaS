@@ -94,16 +94,18 @@ footer {
 
 #elliadd-header .elliadd-header-logo {
     flex-shrink: 0;
+    height: 120px !important;
 }
 
 
 
 #elliadd-header .elliadd-header-logo img {
-    max-height: 70px;
+    max-height: 120px;
     width: auto;
     display: block;
     position: relative;
     z-index: 1001;
+
     
 }
 
@@ -582,4 +584,25 @@ footer {
         height: 42px;
         font-size: 18px;
     }
+}
+
+
+@media (max-width: 700px) {
+
+    #elliadd-header .elliadd-header-logo {
+    flex-shrink: 0;
+    height: 70px !important;
+}
+
+
+
+#elliadd-header .elliadd-header-logo img {
+    max-height: 70px;
+    width: auto;
+    display: block;
+    position: relative;
+    z-index: 1001;
+
+    
+}
 }
