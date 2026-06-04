@@ -283,6 +283,11 @@ li.is-open > .item-wrapper .toc-toggle.style-chevron {
         transform: rotate(-135deg);
         margin-top: 4px;
     }
+
+        /* Ligne grise */
+.hierarchy-list > li:first-child > .item-wrapper {
+    display: none !important; /* Masquer la ligne par défaut */
+}
 }
 
 .hierarchy-list,
