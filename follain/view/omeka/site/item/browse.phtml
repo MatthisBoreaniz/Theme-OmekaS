@@ -128,11 +128,6 @@ $bodyTerm    = $this->siteSetting('browse_body_property_term');
                                 <?php endif; ?>
                             </div>
 
-                            <?php if ($body && !$isPrivate): ?>
-                                <p class="neles-advanced-search__description">
-                                    <?php echo $escape(mb_strimwidth($body, 0, 220, '...')); ?>
-                                </p>
-                            <?php endif; ?>
 
                             <?php if ($isPrivate): ?>
                                 <span class="neles-advanced-search__badge-private">Privé</span>
