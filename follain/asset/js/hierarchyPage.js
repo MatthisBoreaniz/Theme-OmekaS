@@ -1,3 +1,4 @@
+/* ===== Sidebar collapsible + Arbre TOC (+ / -) + Dépliage actif ===== */
 document.addEventListener("DOMContentLoaded", function () {
   // --- 1. BOUTON POUR REPLIER LA COLONNE (❮ / ❯) ---
   const sidebars = document.querySelectorAll(".hierarchy-sidebar-content");
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // --- 2. GESTION DE L'ARBRE (TOUT FERMER STRICTEMENT) ---
+  // --- 2. GESTION DE L'ARBRE (ICÔNES ET FERMETURE) ---
   const hierarchyLists = document.querySelectorAll(".hierarchy-list");
 
   hierarchyLists.forEach((list) => {
@@ -35,17 +36,35 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       const hasActualSubMenu = !!subMenu;
 
+      // Calcul de la profondeur pour attribuer + / - ou les flèches
+      let depth = 0;
+      let parent = li.parentElement;
+      while (
+        parent &&
+        !parent.classList.contains("hierarchy-sidebar-content")
+      ) {
+        if (parent.tagName && parent.tagName.toLowerCase() === "ul") depth++;
+        parent = parent.parentElement;
+      }
+
       const toggleBtn = document.createElement("span");
       toggleBtn.className = "toc-toggle";
 
-      if (hasActualSubMenu) {
+      if (!hasActualSubMenu) {
+        // Document final
+        toggleBtn.classList.add("style-document");
+      } else if (depth === 1) {
+        // Parent principal (+ / -)
         toggleBtn.classList.add("style-box");
         toggleBtn.innerText = "+";
-        // On force la fermeture du sous-menu quoi qu'il arrive
         subMenu.style.display = "none";
         li.classList.remove("is-open");
       } else {
-        toggleBtn.classList.add("style-document");
+        // Sous-dossier (flèche › gérée par CSS pour la rotation)
+        toggleBtn.classList.add("style-chevron");
+        toggleBtn.innerText = "›";
+        subMenu.style.display = "none";
+        li.classList.remove("is-open");
       }
 
       const wrapper = document.createElement("div");
@@ -70,10 +89,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         li.classList.toggle("is-open");
         if (li.classList.contains("is-open")) {
-          toggleBtn.innerText = "-";
+          // Ouverture
+          if (toggleBtn.classList.contains("style-box"))
+            toggleBtn.innerText = "-";
           subMenu.style.display = "block";
         } else {
-          toggleBtn.innerText = "+";
+          // Fermeture
+          if (toggleBtn.classList.contains("style-box"))
+            toggleBtn.innerText = "+";
           subMenu.style.display = "none";
         }
       });
@@ -88,8 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
       link.classList.add("active");
 
       let currentLi = link.closest("li");
-
-      // On remonte l'arbre depuis l'élément actif pour n'ouvrir QUE ses parents
       let parentUl = currentLi.parentElement;
 
       while (
@@ -97,13 +118,12 @@ document.addEventListener("DOMContentLoaded", function () {
         !parentUl.classList.contains("hierarchy-sidebar-content")
       ) {
         if (parentUl.tagName && parentUl.tagName.toLowerCase() === "ul") {
-          // On affiche le dossier parent
           parentUl.style.display = "block";
           let parentLi = parentUl.closest("li");
 
           if (parentLi) {
             parentLi.classList.add("is-open");
-            // On cherche spécifiquement le bouton du parent pour le passer en "-"
+            // Changer uniquement le bouton box si c'est un parent principal
             const btn = parentLi.querySelector(
               ":scope > .item-wrapper .toc-toggle.style-box",
             );
