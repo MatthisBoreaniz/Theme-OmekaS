@@ -155,8 +155,9 @@
 
 .item-wrapper {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: center !important; 
+    flex-wrap: nowrap !important;
+    gap: 8px !important; 
 }
 
 .hierarchy-list a {
@@ -166,11 +167,14 @@
     transition: color 0.3s ease !important;
     display: inline-block !important;
     width: auto !important;
-    margin-right: 5px;
+    word-break: break-word !important;
+}
+
+.hierarchy-list b {
+    font-weight: normal !important; 
 }
 
 .hierarchy-list .item-wrapper:hover > a,
-.hierarchy-list li.is-open > .item-wrapper > a,
 .hierarchy-list a.active,
 .hierarchy-list b > a {
     color: var(--accent) !important;
@@ -199,6 +203,25 @@
     background-color: transparent;
     font-family: monospace;
     margin-right: 18px;
+}
+
+/* Nouveau style pour le chevron + Animation de rotation */
+.toc-toggle.style-chevron {
+    width: 28px;
+    height: 28px;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    font-family: monospace;
+    margin-right: 18px;
+    transition: transform 0.25s ease !important; 
+}
+
+li.is-open > .item-wrapper .toc-toggle.style-chevron {
+    transform: rotate(90deg) !important; 
 }
 
 .toc-toggle.style-document {
@@ -377,8 +400,6 @@ body.hierarchy-module .content > h2 {
     text-align: center !important;
 }
 
-
-
 /* =========================================
    BROWSE CONTROLS (GLOBAL)
    ========================================= */
@@ -474,7 +495,6 @@ body.hierarchy-module .content > h2 {
 .o-icon-next::before {
     color: var(--accent) !important;
 }
-
 
 /* =========================================
    SORTING (SELECT + BUTTON)
@@ -575,3 +595,71 @@ body.hierarchy-module .content > h2 {
     font-size: 16px !important;
     color: var(--accent, #8b1a1a) !important;
 }
+
+.hierarchy-main-content .resource-info {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.hierarchy-main-content .neles-advanced-search__meta-cote {
+    order: -1 !important;
+    font-size: 1rem !important;
+    color: #444 !important;
+    font-weight: 500 !important;
+}
+
+.hierarchy-main-content .neles-advanced-search__meta-date {
+    align-self: flex-end !important;
+    font-size: 1.3rem !important;
+    color: #444 !important;
+    font-weight: 500 !important;
+    margin-top: auto !important;
+}
+
+.hierarchy-main-content .resource-name {
+    order: 0 !important;
+}
+
+/* =======================================================
+   NOUVEAU : ÉLÉMENTS PRIVÉS GRISÉS (AVEC CADENAS)
+   ======================================================= */
+.hierarchy-main-content .resource-link.is-private {
+    background: #fcfcfc !important;
+    border-color: #e5e5e5 !important;
+    box-shadow: none !important;
+}
+
+
+/* S'il reste une image (par miracle), on la grise */
+.hierarchy-main-content .resource-link.is-private img {
+    filter: grayscale(100%) !important;
+    opacity: 0.4 !important;
+}
+
+/* S'il n'y a pas d'image du tout, on crée un faux "carré" pour garder l'alignement */
+.hierarchy-main-content .resource-link.is-private::before {
+    content: "";
+    display: block;
+    flex-shrink: 0 !important;
+    width: 110px !important;
+    height: 110px !important;
+    background-color: #f0f0f0 !important;
+    border-radius: 6px !important;
+    border: 1px dashed #ccc !important;
+    
+    /* Petite icône de document barré/verrouillé au milieu du carré */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2' ry='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px;
+}
+
+/* Si par hasard l'image est là ET le ::before aussi, on cache le ::before pour éviter les doublons */
+.hierarchy-main-content .resource-link.is-private:has(img)::before {
+    display: none !important;
+}
+
+
+
