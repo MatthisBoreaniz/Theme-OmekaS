@@ -25,7 +25,7 @@
     max-width: 1100px !important;
     margin: 0 auto 60px auto !important;
     display: block !important;
-    user-select: none !important; /* Empêche de sélectionner le texte pendant le swipe */
+    user-select: none !important;
 }
 
 .unPodcast-carousel-window {
@@ -33,9 +33,8 @@
     width: 100% !important;
     display: block !important;
     padding: 10px 0 !important;
-    cursor: grab !important; /* Curseur main */
-    touch-action: pan-y !important; /* Permet le scroll vertical natif mais capture le swipe horizontal */
-    /* Cache les scrollbars */
+    cursor: grab !important;
+    touch-action: pan-y !important;
     -ms-overflow-style: none !important;  
     scrollbar-width: none !important; 
 }
@@ -56,15 +55,67 @@
     will-change: transform !important;
 }
 
+/* Modification : La slide devient un conteneur "a" */
 .unPodcast-carousel-slide {
     flex: 0 0 calc((100% - 40px) / 3) !important;
     height: 400px !important;
-    object-fit: cover !important;
+    position: relative !important;
+    overflow: hidden !important;
     border-radius: 4px !important;
     display: block !important;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
-    -webkit-user-drag: none !important; /* Autorise le clic mais empêche le drag de l'image au lieu de la glisser */
+    -webkit-user-drag: none !important;
     user-select: none !important;
+    text-decoration: none !important; /* Retire le soulignement du lien */
+}
+
+/* Nouvelle classe pour l'image à l'intérieur du lien */
+.unPodcast-carousel-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.4s ease !important;
+}
+
+/* Nouvelle classe pour le calque sombre au survol */
+.unPodcast-carousel-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    z-index: 2 !important;
+}
+
+/* Texte "Consulter" */
+.unPodcast-carousel-overlay span {
+    color: #ffffff !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    transform: translateY(15px) !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Effets au survol de la slide */
+.unPodcast-carousel-slide:hover .unPodcast-carousel-overlay {
+    opacity: 1 !important;
+}
+
+.unPodcast-carousel-slide:hover .unPodcast-carousel-img {
+    transform: scale(1.06) !important; /* Petit effet de zoom sur l'image */
+}
+
+.unPodcast-carousel-slide:hover .unPodcast-carousel-overlay span {
+    transform: translateY(0) !important; /* Animation du texte vers le haut */
 }
 
 .unPodcast-carousel-slide * {
@@ -205,4 +256,15 @@
     .unPodcast-carousel-slide { flex: 0 0 100% !important; height: 300px !important; }
     .unPodcast-carousel-prev { left: 10px !important; }
     .unPodcast-carousel-next { right: 10px !important; }
+}
+
+/* Rend TOUT le calque sombre cliquable, pas juste le texte */
+.unPodcast-carousel-overlay .unPodcast-carousel-link {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
 }
