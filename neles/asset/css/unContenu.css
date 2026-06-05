@@ -36,6 +36,7 @@ body:not(:has(.block-listOfPages)) .block-mirador {
     align-items: flex-start !important;
     padding: 15px 0 !important;
     border-bottom: 1px solid #d6d5d5 !important;
+    miw-width: 0 !important;
 }
 
 .resource.show .property dt,
@@ -61,6 +62,7 @@ body:not(:has(.block-listOfPages)) .block-mirador {
     font-size: 1rem !important;
     word-break: break-word !important;
     overflow-wrap: break-word !important;
+    min-width: 0 !important;
 }
 
 .resource.show .property:last-child,

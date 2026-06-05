@@ -131,6 +131,8 @@
     display: block !important;
     color: #000 !important;
     padding-left: 0 !important;
+    content-visibility: auto !important;
+    contain-intrinsic-size: 0 28px !important;
 }
 
 /* Ligne grise */
@@ -284,7 +286,8 @@ li.is-open > .item-wrapper .toc-toggle.style-chevron {
         margin-top: 4px;
     }
 
-        /* Ligne grise */
+
+    /* Ligne grise */
 .hierarchy-list > li:first-child > .item-wrapper {
     display: none !important; /* Masquer la ligne par défaut */
 }

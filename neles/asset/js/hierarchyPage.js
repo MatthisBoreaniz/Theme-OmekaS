@@ -1,137 +1,206 @@
-/* ===== Sidebar collapsible + Arbre TOC (+ / -) + Dépliage actif ===== */
-document.addEventListener("DOMContentLoaded", function () {
-  // --- 1. BOUTON POUR REPLIER LA COLONNE (❮ / ❯) ---
-  const sidebars = document.querySelectorAll(".hierarchy-sidebar-content");
+document.addEventListener("DOMContentLoaded", () => {
+  // ====================================================
+  // SIDEBAR COLLAPSIBLE
+  // ====================================================
 
-  sidebars.forEach((sidebar) => {
+  document.querySelectorAll(".hierarchy-sidebar-content").forEach((sidebar) => {
     const row = sidebar.closest(".hierarchy-row");
-    if (row && !sidebar.querySelector(".sidebar-toggle")) {
-      const toggleMenuBtn = document.createElement("div");
-      toggleMenuBtn.className = "sidebar-toggle";
-      toggleMenuBtn.innerHTML = "❮";
-      sidebar.appendChild(toggleMenuBtn);
+    if (!row || sidebar.querySelector(".sidebar-toggle")) return;
 
-      toggleMenuBtn.addEventListener("click", () => {
-        sidebar.style.width = "";
-        sidebar.style.height = "";
-        row.classList.toggle("is-collapsed");
-        toggleMenuBtn.innerHTML = row.classList.contains("is-collapsed")
-          ? "❯"
-          : "❮";
-      });
-    }
-  });
+    const btn = document.createElement("div");
+    btn.className = "sidebar-toggle";
+    btn.innerHTML = "❮";
+    sidebar.appendChild(btn);
 
-  // --- 2. GESTION DE L'ARBRE (ICÔNES ET FERMETURE) ---
-  const hierarchyLists = document.querySelectorAll(".hierarchy-list");
-
-  hierarchyLists.forEach((list) => {
-    const items = list.querySelectorAll("li");
-
-    items.forEach((li) => {
-      if (li.querySelector(":scope > .item-wrapper")) return;
-
-      const subMenu = Array.from(li.children).find(
-        (child) => child.tagName && child.tagName.toLowerCase() === "ul",
-      );
-      const hasActualSubMenu = !!subMenu;
-
-      // Calcul de la profondeur pour attribuer + / - ou les flèches
-      let depth = 0;
-      let parent = li.parentElement;
-      while (
-        parent &&
-        !parent.classList.contains("hierarchy-sidebar-content")
-      ) {
-        if (parent.tagName && parent.tagName.toLowerCase() === "ul") depth++;
-        parent = parent.parentElement;
-      }
-
-      const toggleBtn = document.createElement("span");
-      toggleBtn.className = "toc-toggle";
-
-      if (!hasActualSubMenu) {
-        // Document final
-        toggleBtn.classList.add("style-document");
-      } else if (depth === 1) {
-        // Parent principal (+ / -)
-        toggleBtn.classList.add("style-box");
-        toggleBtn.innerText = "+";
-        subMenu.style.display = "none";
-        li.classList.remove("is-open");
-      } else {
-        // Sous-dossier (flèche › gérée par CSS pour la rotation)
-        toggleBtn.classList.add("style-chevron");
-        toggleBtn.innerText = "›";
-        subMenu.style.display = "none";
-        li.classList.remove("is-open");
-      }
-
-      const wrapper = document.createElement("div");
-      wrapper.className = "item-wrapper";
-
-      const children = Array.from(li.childNodes);
-      children.forEach((child) => {
-        if (child !== subMenu) {
-          wrapper.appendChild(child);
-        }
-      });
-
-      wrapper.prepend(toggleBtn);
-      li.prepend(wrapper);
-
-      // --- ACTION AU CLIC ---
-      toggleBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (!hasActualSubMenu) return;
-
-        li.classList.toggle("is-open");
-        if (li.classList.contains("is-open")) {
-          // Ouverture
-          if (toggleBtn.classList.contains("style-box"))
-            toggleBtn.innerText = "-";
-          subMenu.style.display = "block";
-        } else {
-          // Fermeture
-          if (toggleBtn.classList.contains("style-box"))
-            toggleBtn.innerText = "+";
-          subMenu.style.display = "none";
-        }
-      });
+    btn.addEventListener("click", () => {
+      const collapsed = row.classList.toggle("is-collapsed");
+      btn.innerHTML = collapsed ? "❯" : "❮";
     });
   });
 
-  // --- 3. DÉPLIER UNIQUEMENT LE CHEMIN DES PARENTS DE LA PAGE ACTIVE ---
-  const currentUrl = window.location.href.split("#")[0].split("?")[0];
+  // ====================================================
+  // CHARGEMENT DU JSON
+  // ====================================================
 
-  document.querySelectorAll(".hierarchy-list a").forEach((link) => {
-    if (link.href.split("#")[0].split("?")[0] === currentUrl) {
-      link.classList.add("active");
+  const dataEl = document.getElementById("hierarchy-data");
+  if (!dataEl) return;
 
-      let currentLi = link.closest("li");
-      let parentUl = currentLi.parentElement;
+  let treeData;
+  try {
+    treeData = JSON.parse(dataEl.textContent);
+  } catch (e) {
+    console.error("hierarchy-data JSON invalide", e);
+    return;
+  }
 
-      while (
-        parentUl &&
-        !parentUl.classList.contains("hierarchy-sidebar-content")
-      ) {
-        if (parentUl.tagName && parentUl.tagName.toLowerCase() === "ul") {
-          parentUl.style.display = "block";
-          let parentLi = parentUl.closest("li");
+  const { nodes: nodeList, roots, activePath } = treeData;
 
-          if (parentLi) {
-            parentLi.classList.add("is-open");
-            // Changer uniquement le bouton box si c'est un parent principal
-            const btn = parentLi.querySelector(
-              ":scope > .item-wrapper .toc-toggle.style-box",
-            );
-            if (btn) btn.innerText = "-";
-          }
-        }
-        parentUl = parentUl.parentElement;
-      }
+  // Index rapide id → node
+  const nodeMap = new Map();
+  for (const n of nodeList) nodeMap.set(n.id, n);
+
+  // Index rapide parentId → [childId, ...]
+  const childrenMap = new Map();
+  for (const n of nodeList) {
+    if (!childrenMap.has(n.parent)) childrenMap.set(n.parent, []);
+    childrenMap.get(n.parent).push(n.id);
+  }
+
+  const activeSet = new Set(activePath);
+
+  // ====================================================
+  // CONSTRUCTION D'UN NŒUD
+  // ====================================================
+
+  function buildLi(nodeId) {
+    const n = nodeMap.get(nodeId);
+    if (!n) return null;
+
+    const li = document.createElement("li");
+    const hasChildren = !!childrenMap.get(nodeId)?.length;
+    const isActive = activeSet.has(nodeId);
+
+    if (isActive) li.classList.add("is-open");
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "item-wrapper";
+
+    const toggle = document.createElement("span");
+    toggle.className = "toc-toggle";
+
+    if (!hasChildren) {
+      toggle.classList.add("style-document");
+    } else {
+      li.dataset.nodeId = nodeId;
+      toggle.classList.add("style-chevron");
+      toggle.textContent = "›";
     }
+
+    wrapper.appendChild(toggle);
+
+    // Contenu texte / lien
+    if (n.url) {
+      const a = document.createElement("a");
+      a.href = n.url;
+      a.textContent = n.label;
+      if (n.active) a.classList.add("active");
+      if (n.bold) {
+        const b = document.createElement("b");
+        b.appendChild(a);
+        wrapper.appendChild(b);
+      } else {
+        wrapper.appendChild(a);
+      }
+    } else {
+      const span = document.createElement("span");
+      span.textContent = n.label;
+      wrapper.appendChild(span);
+    }
+
+    li.appendChild(wrapper);
+
+    // Enfants ouverts immédiatement si dans le chemin actif
+    if (hasChildren && isActive) {
+      const ul = buildUl(nodeId);
+      li.appendChild(ul);
+    }
+
+    return li;
+  }
+
+  function buildUl(parentId) {
+    const ul = document.createElement("ul");
+    const children = childrenMap.get(parentId) || [];
+    for (const childId of children) {
+      const li = buildLi(childId);
+      if (li) ul.appendChild(li);
+    }
+    // Un ul construit dynamiquement est FORCÉMENT un enfant (jamais la racine)
+    // On passe donc false pour "isRoot"
+    fixDepthStyles(ul, false);
+    return ul;
+  }
+
+  // Applique style-box (si racine) vs style-chevron (si enfant)
+  function fixDepthStyles(ul, isRoot) {
+    for (const li of ul.children) {
+      const toggle = li.querySelector(":scope > .item-wrapper > .toc-toggle");
+      if (!toggle) continue;
+      if (toggle.classList.contains("style-document")) continue;
+
+      toggle.classList.remove("style-box", "style-chevron");
+      if (isRoot) {
+        toggle.classList.add("style-box");
+        toggle.textContent = li.classList.contains("is-open") ? "-" : "+";
+      } else {
+        toggle.classList.add("style-chevron");
+        toggle.textContent = "›";
+      }
+
+      // Récursif sur les enfants déjà ouverts
+      const childUl = li.querySelector(":scope > ul");
+      if (childUl) fixDepthStyles(childUl, false);
+    }
+  }
+
+  // ====================================================
+  // RENDU DES RACINES
+  // ====================================================
+
+  const rootList = document.getElementById("hierarchy-root-list");
+  if (!rootList) return;
+
+  // Construit les racines
+  for (const rootId of roots) {
+    const li = buildLi(rootId);
+    if (li) rootList.appendChild(li);
+  }
+  // Seule la liste principale est considérée comme racine ("true")
+  fixDepthStyles(rootList, true);
+
+  // ====================================================
+  // EVENT DELEGATION — ouvre/ferme à la demande
+  // ====================================================
+
+  rootList.addEventListener("click", (e) => {
+    const toggle = e.target.closest(".toc-toggle");
+    if (!toggle) return;
+
+    const li = toggle.closest("li");
+    if (!li) return;
+
+    const nodeId = parseInt(li.dataset.nodeId, 10);
+    if (!nodeId) return;
+
+    const hasChildren = !!childrenMap.get(nodeId)?.length;
+    if (!hasChildren) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isOpen = li.classList.toggle("is-open");
+
+    if (isOpen) {
+      // Construit les enfants si pas encore fait
+      let ul = li.querySelector(":scope > ul");
+      if (!ul) {
+        // Plus besoin de boucler pour calculer la profondeur, buildUl() sait qu'il est un enfant
+        ul = buildUl(nodeId);
+        li.appendChild(ul);
+      } else {
+        ul.hidden = false;
+      }
+      if (toggle.classList.contains("style-box")) toggle.textContent = "-";
+    } else {
+      const ul = li.querySelector(":scope > ul");
+      if (ul) ul.hidden = true;
+      if (toggle.classList.contains("style-box")) toggle.textContent = "+";
+    }
+  });
+
+  // Nettoie les data-node-id inutiles après init
+  rootList.querySelectorAll("[data-node-id]").forEach((el) => {
+    const id = parseInt(el.dataset.nodeId, 10);
+    if (!childrenMap.get(id)?.length) delete el.dataset.nodeId;
   });
 });
