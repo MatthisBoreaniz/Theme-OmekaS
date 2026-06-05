@@ -1,137 +1,163 @@
-/* ===== Sidebar collapsible + Arbre TOC (+ / -) + Dépliage actif ===== */
-document.addEventListener("DOMContentLoaded", function () {
-  // --- 1. BOUTON POUR REPLIER LA COLONNE (❮ / ❯) ---
-  const sidebars = document.querySelectorAll(".hierarchy-sidebar-content");
+document.addEventListener("DOMContentLoaded", () => {
+  // ====================================================
+  // SIDEBAR COLLAPSIBLE
+  // ====================================================
 
-  sidebars.forEach((sidebar) => {
+  document.querySelectorAll(".hierarchy-sidebar-content").forEach((sidebar) => {
     const row = sidebar.closest(".hierarchy-row");
-    if (row && !sidebar.querySelector(".sidebar-toggle")) {
-      const toggleMenuBtn = document.createElement("div");
-      toggleMenuBtn.className = "sidebar-toggle";
-      toggleMenuBtn.innerHTML = "❮";
-      sidebar.appendChild(toggleMenuBtn);
+    if (!row || sidebar.querySelector(".sidebar-toggle")) return;
 
-      toggleMenuBtn.addEventListener("click", () => {
-        sidebar.style.width = "";
-        sidebar.style.height = "";
-        row.classList.toggle("is-collapsed");
-        toggleMenuBtn.innerHTML = row.classList.contains("is-collapsed")
-          ? "❯"
-          : "❮";
-      });
-    }
-  });
+    const btn = document.createElement("div");
+    btn.className = "sidebar-toggle";
+    btn.innerHTML = "❮";
+    sidebar.appendChild(btn);
 
-  // --- 2. GESTION DE L'ARBRE (ICÔNES ET FERMETURE) ---
-  const hierarchyLists = document.querySelectorAll(".hierarchy-list");
-
-  hierarchyLists.forEach((list) => {
-    const items = list.querySelectorAll("li");
-
-    items.forEach((li) => {
-      if (li.querySelector(":scope > .item-wrapper")) return;
-
-      const subMenu = Array.from(li.children).find(
-        (child) => child.tagName && child.tagName.toLowerCase() === "ul",
-      );
-      const hasActualSubMenu = !!subMenu;
-
-      // Calcul de la profondeur pour attribuer + / - ou les flèches
-      let depth = 0;
-      let parent = li.parentElement;
-      while (
-        parent &&
-        !parent.classList.contains("hierarchy-sidebar-content")
-      ) {
-        if (parent.tagName && parent.tagName.toLowerCase() === "ul") depth++;
-        parent = parent.parentElement;
-      }
-
-      const toggleBtn = document.createElement("span");
-      toggleBtn.className = "toc-toggle";
-
-      if (!hasActualSubMenu) {
-        // Document final
-        toggleBtn.classList.add("style-document");
-      } else if (depth === 1) {
-        // Parent principal (+ / -)
-        toggleBtn.classList.add("style-box");
-        toggleBtn.innerText = "+";
-        subMenu.style.display = "none";
-        li.classList.remove("is-open");
-      } else {
-        // Sous-dossier (flèche › gérée par CSS pour la rotation)
-        toggleBtn.classList.add("style-chevron");
-        toggleBtn.innerText = "›";
-        subMenu.style.display = "none";
-        li.classList.remove("is-open");
-      }
-
-      const wrapper = document.createElement("div");
-      wrapper.className = "item-wrapper";
-
-      const children = Array.from(li.childNodes);
-      children.forEach((child) => {
-        if (child !== subMenu) {
-          wrapper.appendChild(child);
-        }
-      });
-
-      wrapper.prepend(toggleBtn);
-      li.prepend(wrapper);
-
-      // --- ACTION AU CLIC ---
-      toggleBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (!hasActualSubMenu) return;
-
-        li.classList.toggle("is-open");
-        if (li.classList.contains("is-open")) {
-          // Ouverture
-          if (toggleBtn.classList.contains("style-box"))
-            toggleBtn.innerText = "-";
-          subMenu.style.display = "block";
-        } else {
-          // Fermeture
-          if (toggleBtn.classList.contains("style-box"))
-            toggleBtn.innerText = "+";
-          subMenu.style.display = "none";
-        }
-      });
+    btn.addEventListener("click", () => {
+      const collapsed = row.classList.toggle("is-collapsed");
+      btn.innerHTML = collapsed ? "❯" : "❮";
     });
   });
 
-  // --- 3. DÉPLIER UNIQUEMENT LE CHEMIN DES PARENTS DE LA PAGE ACTIVE ---
-  const currentUrl = window.location.href.split("#")[0].split("?")[0];
+  // ====================================================
+  // INIT ARBRE
+  // ====================================================
 
-  document.querySelectorAll(".hierarchy-list a").forEach((link) => {
-    if (link.href.split("#")[0].split("?")[0] === currentUrl) {
-      link.classList.add("active");
+  const BATCH_SIZE = 100;
 
-      let currentLi = link.closest("li");
-      let parentUl = currentLi.parentElement;
+  // Remonte les ancêtres pour compter la profondeur — O(depth) au lieu de querySelectorAll
+  function getDepth(li) {
+    let depth = 0;
+    let node = li.parentElement;
+    while (node) {
+      if (node.tagName === "UL") depth++;
+      node = node.parentElement;
+    }
+    return depth;
+  }
 
-      while (
-        parentUl &&
-        !parentUl.classList.contains("hierarchy-sidebar-content")
-      ) {
-        if (parentUl.tagName && parentUl.tagName.toLowerCase() === "ul") {
-          parentUl.style.display = "block";
-          let parentLi = parentUl.closest("li");
+  function initItem(li) {
+    // Skip si déjà traité
+    if (li.firstElementChild?.classList.contains("item-wrapper")) return;
 
-          if (parentLi) {
-            parentLi.classList.add("is-open");
-            // Changer uniquement le bouton box si c'est un parent principal
-            const btn = parentLi.querySelector(
-              ":scope > .item-wrapper .toc-toggle.style-box",
-            );
-            if (btn) btn.innerText = "-";
-          }
-        }
-        parentUl = parentUl.parentElement;
+    // Trouve le sous-menu direct sans querySelector récursif
+    let subMenu = null;
+    for (const child of li.children) {
+      if (child.tagName === "UL") {
+        subMenu = child;
+        break;
       }
     }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "item-wrapper";
+
+    const toggle = document.createElement("span");
+    toggle.className = "toc-toggle";
+
+    if (!subMenu) {
+      toggle.classList.add("style-document");
+    } else {
+      if (getDepth(li) <= 1) {
+        toggle.classList.add("style-box");
+        toggle.textContent = "+";
+      } else {
+        toggle.classList.add("style-chevron");
+        toggle.textContent = "›";
+      }
+      subMenu.hidden = true;
+    }
+
+    wrapper.appendChild(toggle);
+
+    // Déplace les childNodes (hors subMenu) dans le wrapper — sans Array.from ni filter
+    let node = li.firstChild;
+    while (node) {
+      const next = node.nextSibling;
+      if (node !== subMenu) wrapper.appendChild(node);
+      node = next;
+    }
+
+    li.insertBefore(wrapper, li.firstChild);
+  }
+
+  // Traitement par tranches idle pour ne pas bloquer le rendu
+  function processBatch(items, index, onDone) {
+    const end = Math.min(index + BATCH_SIZE, items.length);
+    for (let i = index; i < end; i++) initItem(items[i]);
+
+    if (end < items.length) {
+      (window.requestIdleCallback || window.setTimeout)(() =>
+        processBatch(items, end, onDone),
+      );
+    } else {
+      onDone?.();
+    }
+  }
+
+  // ====================================================
+  // EVENT DELEGATION
+  // ====================================================
+
+  document.querySelectorAll(".hierarchy-list").forEach((list) => {
+    list.addEventListener("click", (e) => {
+      const toggle = e.target.closest(".toc-toggle");
+      if (!toggle) return;
+
+      const li = toggle.closest("li");
+      if (!li) return;
+
+      const subMenu = li.querySelector(":scope > ul");
+      if (!subMenu) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const isOpen = li.classList.toggle("is-open");
+      subMenu.hidden = !isOpen;
+
+      if (toggle.classList.contains("style-box"))
+        toggle.textContent = isOpen ? "-" : "+";
+    });
   });
+
+  // ====================================================
+  // OUVERTURE AUTOMATIQUE DU CHEMIN ACTIF
+  // Appelée après la fin du batch
+  // ====================================================
+
+  function openActivePath() {
+    const currentUrl = window.location.href.split("#")[0].split("?")[0];
+
+    const links = document.querySelectorAll(".hierarchy-list a");
+    let activeLink = null;
+    for (const a of links) {
+      if (a.href.split("#")[0].split("?")[0] === currentUrl) {
+        activeLink = a;
+        break;
+      }
+    }
+
+    if (!activeLink) return;
+    activeLink.classList.add("active");
+
+    let cur = activeLink.closest("li");
+    while (cur) {
+      cur.classList.add("is-open");
+
+      const sub = cur.querySelector(":scope > ul");
+      if (sub) sub.hidden = false;
+
+      const box = cur.querySelector(":scope > .item-wrapper > .style-box");
+      if (box) box.textContent = "-";
+
+      cur = cur.parentElement?.closest("li");
+    }
+  }
+
+  // ====================================================
+  // LANCEMENT
+  // ====================================================
+
+  const allItems = document.querySelectorAll(".hierarchy-list li");
+  processBatch(allItems, 0, openActivePath);
 });
