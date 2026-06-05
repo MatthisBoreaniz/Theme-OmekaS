@@ -131,6 +131,8 @@
     display: block !important;
     color: #000 !important;
     padding-left: 0 !important;
+    content-visibility: auto !important;
+    contain-intrinsic-size: 0 28px !important;
 }
 
 /* Ligne grise */
