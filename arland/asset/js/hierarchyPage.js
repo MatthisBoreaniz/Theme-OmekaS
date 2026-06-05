@@ -19,77 +19,48 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ====================================================
-  // DÉTECTION MOBILE (Safari mobile = pas de requestIdleCallback)
+  // CHARGEMENT DU JSON
   // ====================================================
 
-  const isMobile = window.innerWidth < 1200;
+  const dataEl = document.getElementById("hierarchy-data");
+  if (!dataEl) return;
 
-  // ====================================================
-  // STRATÉGIE MOBILE : DETACH
-  // On retire du DOM tous les ul[hidden] → Safari n'a rien à layouter
-  // Stockés dans une WeakMap, réinjectés à la demande
-  // ====================================================
-
-  // detachedMap : li → ul (retiré du DOM)
-  const detachedMap = new WeakMap();
-
-  function detachHiddenSubMenus(root) {
-    // Parcours itératif (pas récursif) pour éviter la stack overflow sur 2500 nœuds
-    const stack = [root];
-    while (stack.length) {
-      const node = stack.pop();
-      // On cherche le ul direct de chaque li
-      for (const li of node.children) {
-        if (li.tagName !== "LI") continue;
-        let subMenu = null;
-        for (const child of li.children) {
-          if (child.tagName === "UL") {
-            subMenu = child;
-            break;
-          }
-        }
-        if (subMenu) {
-          if (subMenu.hidden) {
-            // Retire du DOM et stocke la référence
-            li.removeChild(subMenu);
-            detachedMap.set(li, subMenu);
-          } else {
-            // Sous-menu visible (chemin actif) → descend dedans
-            stack.push(subMenu);
-          }
-        }
-      }
-    }
+  let treeData;
+  try {
+    treeData = JSON.parse(dataEl.textContent);
+  } catch (e) {
+    console.error("hierarchy-data JSON invalide", e);
+    return;
   }
 
-  // ====================================================
-  // INIT ARBRE (commun desktop + mobile)
-  // Sur mobile le HTML est déjà pré-traité côté serveur / script précédent
-  // On ré-attache juste l'event delegation
-  // ====================================================
+  const { nodes: nodeList, roots, activePath } = treeData;
 
-  const BATCH_SIZE = 100;
+  // Index rapide id → node
+  const nodeMap = new Map();
+  for (const n of nodeList) nodeMap.set(n.id, n);
 
-  function getDepth(li) {
-    let depth = 0;
-    let node = li.parentElement;
-    while (node) {
-      if (node.tagName === "UL") depth++;
-      node = node.parentElement;
-    }
-    return depth;
+  // Index rapide parentId → [childId, ...]
+  const childrenMap = new Map();
+  for (const n of nodeList) {
+    if (!childrenMap.has(n.parent)) childrenMap.set(n.parent, []);
+    childrenMap.get(n.parent).push(n.id);
   }
 
-  function initItem(li) {
-    if (li.firstElementChild?.classList.contains("item-wrapper")) return;
+  const activeSet = new Set(activePath);
 
-    let subMenu = null;
-    for (const child of li.children) {
-      if (child.tagName === "UL") {
-        subMenu = child;
-        break;
-      }
-    }
+  // ====================================================
+  // CONSTRUCTION D'UN NŒUD
+  // ====================================================
+
+  function buildLi(nodeId) {
+    const n = nodeMap.get(nodeId);
+    if (!n) return null;
+
+    const li = document.createElement("li");
+    const hasChildren = !!childrenMap.get(nodeId)?.length;
+    const isActive = activeSet.has(nodeId);
+
+    if (isActive) li.classList.add("is-open");
 
     const wrapper = document.createElement("div");
     wrapper.className = "item-wrapper";
@@ -97,151 +68,151 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.createElement("span");
     toggle.className = "toc-toggle";
 
-    if (!subMenu) {
+    if (!hasChildren) {
       toggle.classList.add("style-document");
     } else {
-      if (getDepth(li) <= 1) {
-        toggle.classList.add("style-box");
-        toggle.textContent = "+";
-      } else {
-        toggle.classList.add("style-chevron");
-        toggle.textContent = "›";
-      }
-      subMenu.hidden = true;
+      // depth : compte les ul ancêtres
+      let depth = 0,
+        node = li;
+      // on ne peut pas remonter encore (li pas dans le DOM) — on passe depth via data
+      // depth sera fixé après insertion, mais le style dépend du niveau
+      // On utilise un attribut temporaire
+      li.dataset.nodeId = nodeId;
+      toggle.classList.add("style-chevron");
+      toggle.textContent = "›";
     }
 
     wrapper.appendChild(toggle);
 
-    let node = li.firstChild;
-    while (node) {
-      const next = node.nextSibling;
-      if (node !== subMenu) wrapper.appendChild(node);
-      node = next;
-    }
-
-    li.insertBefore(wrapper, li.firstChild);
-  }
-
-  function processBatch(items, index, onDone) {
-    const end = Math.min(index + BATCH_SIZE, items.length);
-    for (let i = index; i < end; i++) initItem(items[i]);
-    if (end < items.length) {
-      (window.requestIdleCallback || window.setTimeout)(() =>
-        processBatch(items, end, onDone),
-      );
-    } else {
-      onDone?.();
-    }
-  }
-
-  // ====================================================
-  // EVENT DELEGATION — gère les ul detachés sur mobile
-  // ====================================================
-
-  document.querySelectorAll(".hierarchy-list").forEach((list) => {
-    list.addEventListener("click", (e) => {
-      const toggle = e.target.closest(".toc-toggle");
-      if (!toggle) return;
-
-      const li = toggle.closest("li");
-      if (!li) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      const isOpen = li.classList.toggle("is-open");
-
-      if (isOpen) {
-        // Réinjecte le ul s'il était détaché
-        const detached = detachedMap.get(li);
-        if (detached) {
-          detached.hidden = false;
-          li.appendChild(detached);
-          detachedMap.delete(li);
-          // Sur mobile, détache immédiatement les petits-enfants cachés
-          if (isMobile) detachHiddenSubMenus(detached);
-        } else {
-          const subMenu = li.querySelector(":scope > ul");
-          if (subMenu) subMenu.hidden = false;
-        }
-        if (toggle.classList.contains("style-box")) toggle.textContent = "-";
+    // Contenu texte / lien
+    if (n.url) {
+      const a = document.createElement("a");
+      a.href = n.url;
+      a.textContent = n.label;
+      if (n.active) a.classList.add("active");
+      if (n.bold) {
+        const b = document.createElement("b");
+        b.appendChild(a);
+        wrapper.appendChild(b);
       } else {
-        const subMenu = li.querySelector(":scope > ul");
-        if (subMenu) {
-          subMenu.hidden = true;
-          // Sur mobile : re-détache pour libérer le DOM
-          if (isMobile) {
-            li.removeChild(subMenu);
-            detachedMap.set(li, subMenu);
-          }
-        }
-        if (toggle.classList.contains("style-box")) toggle.textContent = "+";
+        wrapper.appendChild(a);
       }
-    });
+    } else {
+      const span = document.createElement("span");
+      span.textContent = n.label;
+      wrapper.appendChild(span);
+    }
+
+    li.appendChild(wrapper);
+
+    // Enfants ouverts immédiatement si dans le chemin actif
+    if (hasChildren && isActive) {
+      const ul = buildUl(nodeId);
+      li.appendChild(ul);
+    }
+
+    return li;
+  }
+
+  function buildUl(parentId) {
+    const ul = document.createElement("ul");
+    const children = childrenMap.get(parentId) || [];
+    for (const childId of children) {
+      const li = buildLi(childId);
+      if (li) ul.appendChild(li);
+    }
+    // Fixe le style-box sur les nœuds de 1er niveau
+    fixDepthStyles(ul, 1);
+    return ul;
+  }
+
+  // Applique style-box (depth<=1) vs style-chevron (depth>1)
+  function fixDepthStyles(ul, depth) {
+    for (const li of ul.children) {
+      const toggle = li.querySelector(":scope > .item-wrapper > .toc-toggle");
+      if (!toggle) continue;
+      if (toggle.classList.contains("style-document")) continue;
+
+      toggle.classList.remove("style-box", "style-chevron");
+      if (depth <= 1) {
+        toggle.classList.add("style-box");
+        toggle.textContent = li.classList.contains("is-open") ? "-" : "+";
+      } else {
+        toggle.classList.add("style-chevron");
+        toggle.textContent = "›";
+      }
+
+      // Récursif sur les enfants déjà ouverts
+      const childUl = li.querySelector(":scope > ul");
+      if (childUl) fixDepthStyles(childUl, depth + 1);
+    }
+  }
+
+  // ====================================================
+  // RENDU DES RACINES
+  // ====================================================
+
+  const rootList = document.getElementById("hierarchy-root-list");
+  if (!rootList) return;
+
+  // Construit les racines (1er niveau uniquement, léger)
+  for (const rootId of roots) {
+    const li = buildLi(rootId);
+    if (li) rootList.appendChild(li);
+  }
+  fixDepthStyles(rootList, 0);
+
+  // ====================================================
+  // EVENT DELEGATION — ouvre/ferme à la demande
+  // ====================================================
+
+  rootList.addEventListener("click", (e) => {
+    const toggle = e.target.closest(".toc-toggle");
+    if (!toggle) return;
+
+    const li = toggle.closest("li");
+    if (!li) return;
+
+    const nodeId = parseInt(li.dataset.nodeId, 10);
+    if (!nodeId) return;
+
+    const hasChildren = !!childrenMap.get(nodeId)?.length;
+    if (!hasChildren) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isOpen = li.classList.toggle("is-open");
+
+    if (isOpen) {
+      // Construit les enfants si pas encore fait
+      let ul = li.querySelector(":scope > ul");
+      if (!ul) {
+        // Calcule la profondeur réelle
+        let depth = 0,
+          node = li.parentElement;
+        while (node) {
+          if (node.tagName === "UL") depth++;
+          node = node.parentElement;
+        }
+        ul = buildUl(nodeId);
+        fixDepthStyles(ul, depth);
+        li.appendChild(ul);
+      } else {
+        ul.hidden = false;
+      }
+      if (toggle.classList.contains("style-box")) toggle.textContent = "-";
+    } else {
+      const ul = li.querySelector(":scope > ul");
+      if (ul) ul.hidden = true;
+      if (toggle.classList.contains("style-box")) toggle.textContent = "+";
+    }
   });
 
-  // ====================================================
-  // OUVERTURE AUTOMATIQUE DU CHEMIN ACTIF
-  // ====================================================
-
-  function openActivePath() {
-    const currentUrl = window.location.href.split("#")[0].split("?")[0];
-
-    const links = document.querySelectorAll(".hierarchy-list a");
-    let activeLink = null;
-    for (const a of links) {
-      if (a.href.split("#")[0].split("?")[0] === currentUrl) {
-        activeLink = a;
-        break;
-      }
-    }
-
-    if (!activeLink) return;
-    activeLink.classList.add("active");
-
-    let cur = activeLink.closest("li");
-    while (cur) {
-      cur.classList.add("is-open");
-
-      // Réinjecte si détaché
-      const detached = detachedMap.get(cur);
-      if (detached) {
-        detached.hidden = false;
-        cur.appendChild(detached);
-        detachedMap.delete(cur);
-      } else {
-        const sub = cur.querySelector(":scope > ul");
-        if (sub) sub.hidden = false;
-      }
-
-      const box = cur.querySelector(":scope > .item-wrapper > .style-box");
-      if (box) box.textContent = "-";
-
-      cur = cur.parentElement?.closest("li");
-    }
-  }
-
-  // ====================================================
-  // LANCEMENT
-  // ====================================================
-
-  function onInitDone() {
-    if (isMobile) {
-      // Détache tous les ul fermés du DOM → Safari n'a rien à peindre
-      document
-        .querySelectorAll(".hierarchy-list")
-        .forEach(detachHiddenSubMenus);
-    }
-    openActivePath();
-  }
-
-  const allItems = document.querySelectorAll(".hierarchy-list li");
-
-  if (isMobile) {
-    // Sur mobile : pas de requestIdleCallback sur Safari → on batch quand même
-    // mais on le fait le plus tôt possible
-    processBatch(allItems, 0, onInitDone);
-  } else {
-    processBatch(allItems, 0, onInitDone);
-  }
+  // Nettoie les data-node-id inutiles après init
+  rootList.querySelectorAll("[data-node-id]").forEach((el) => {
+    // Garde uniquement sur les li qui ont des enfants potentiels
+    const id = parseInt(el.dataset.nodeId, 10);
+    if (!childrenMap.get(id)?.length) delete el.dataset.nodeId;
+  });
 });
