@@ -1,0 +1,161 @@
+/* --- Variables globales --- */
+:root {
+  --goux-fonds-primary: var(--accent);
+  --goux-fonds-primary-hover: var(--accent);
+  --goux-fonds-text-main: #111827;
+  --goux-fonds-text-muted: #6b7280;
+  --goux-fonds-bg-card: #ffffff;
+  --goux-fonds-radius: 12px;
+  --goux-fonds-transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Conteneur global --- */
+.goux-fonds-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+/* --- Grille Responsive --- */
+.goux-fonds-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .goux-fonds-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .goux-fonds-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1280px) {
+  .goux-fonds-grid { grid-template-columns: repeat(4, 1fr); } /* Max 4 par ligne */
+}
+
+/* --- Structure de la Carte (Devenu un DIV sécurisé) --- */
+.goux-fonds-card {
+  position: relative; /* Crucial pour le lien étendu */
+  display: flex;
+  flex-direction: column;
+  background: var(--goux-fonds-bg-card);
+  border-radius: var(--goux-fonds-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: var(--goux-fonds-transition);
+  height: 100%;
+}
+
+/* Effets au survol de la carte globale */
+.goux-fonds-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+  border-color: rgba(59, 130, 246, 0.3);
+  cursor: pointer;
+}
+
+/* --- Zone Image --- */
+.goux-fonds-card-img-container {
+  position: relative;
+  width: 100%;
+  padding-top: 60%; /* Ratio équilibré */
+  overflow: hidden;
+  background-color: #f3f4f6;
+}
+
+.goux-fonds-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--goux-fonds-transition);
+}
+
+.goux-fonds-card:hover .goux-fonds-card-img {
+  transform: scale(1.05);
+}
+
+
+
+/* --- Zone Contenu --- */
+.goux-fonds-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.goux-fonds-card-content:hover {
+  color: var(--goux-fonds-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  background-color: color-mix(in srgb, var(--goux-fonds-primary) 10%, transparent);
+}
+
+
+.goux-fonds-card-title {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--goux-fonds-text-main);
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+
+.goux-fonds-card:hover .goux-fonds-card-title {
+  color: var(--goux-fonds-primary);
+}
+
+.goux-fonds-card-desc {
+  margin: 0 0 20px 0;
+  font-size: 0.9rem;
+  color: var(--goux-fonds-text-muted);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* --- Zone Bas de carte (CTA) --- */
+.goux-fonds-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 15px;
+  margin-top: auto;
+}
+
+.goux-fonds-card-cta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--goux-fonds-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.goux-fonds-card-arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--goux-fonds-primary);
+  fill: none;
+  transition: var(--goux-fonds-transition);
+}
+
+.goux-fonds-card:hover .goux-fonds-card-arrow {
+  transform: translateX(4px);
+  color: var(--goux-fonds-primary-hover);
+}
+
+/* --- LA MAGIE POUR OMEKA S : Le Stretched Link --- */
+.goux-fonds-stretched-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  content: "";
+}
