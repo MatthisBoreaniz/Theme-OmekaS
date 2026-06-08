@@ -110,14 +110,6 @@
   color: var(--goux-fonds-primary);
 }
 
-.goux-fonds-card-desc {
-  margin: 0 0 20px 0;
-  font-size: 0.9rem;
-  color: var(--goux-fonds-text-muted);
-  line-height: 1.5;
-  flex-grow: 1;
-}
-
 /* --- Zone Bas de carte (CTA) --- */
 .goux-fonds-card-footer {
   display: flex;
