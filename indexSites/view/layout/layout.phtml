@@ -106,7 +106,7 @@ $userBar = $this->userBar();
     fetch('/api/sites?per_page=50')
         .then(r => r.json())
         .then(sites => {
-            const filtered = sites.filter(s => s['o:slug'] !== 'presentation');
+            const filtered = sites.filter(s => s['o:slug'] !== 'accueil-principal');
             const assetIds = filtered
                 .filter(s => s['o:thumbnail']?.['o:id'])
                 .map(s => s['o:thumbnail']['o:id']);
