@@ -590,7 +590,7 @@ ul.value.exporters {
         
         /* Option 2 : Si tu veux vraiment qu'il bouge avec la page (qu'il disparaisse quand on scrolle),
            supprime les lignes au-dessus et décommente la ligne ci-dessous : */
-        /* position: absolute !important; */
+        position: absolute !important;
     }
     ul.value.exporters {
         left: 0 !important;
