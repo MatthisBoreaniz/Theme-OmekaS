@@ -439,3 +439,139 @@ body.is-private .media-embeds {
     font-size: 1.1rem !important;
     color: #444 !important;
 }
+
+
+/* =========================
+   BOUTON PRINCIPAL
+========================= */
+
+.button-details {
+  position: relative;
+  display: inline-block;
+}
+
+/* le summary devient un vrai bouton moderne */
+.bulk-export-summary {
+  list-style: none;
+  cursor: pointer;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  color: #fff;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: all 0.25s ease;
+
+  user-select: none;
+}
+
+/* hover */
+.bulk-export-summary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(145deg, #334155, #1e293b);
+}
+
+/* clic */
+.bulk-export-summary:active {
+  transform: scale(0.96);
+}
+
+/* enlève le triangle natif */
+.bulk-export-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.bulk-export {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+
+  min-width: 190px;
+
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+
+  border-radius: 14px;
+  padding: 8px;
+
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+
+  z-index: 999;
+
+  /* animation base */
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+
+  transition: all 0.18s ease;
+}
+
+/* quand le details est ouvert */
+.button-details[open] .bulk-export {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* =========================
+   LISTE
+========================= */
+
+.exporters {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   ITEMS
+========================= */
+
+.exporter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  color: #e2e8f0;
+  text-decoration: none;
+
+  font-size: 14px;
+  letter-spacing: 0.2px;
+
+  transition: all 0.2s ease;
+}
+
+/* hover clean type “menu app” */
+.exporter:hover {
+  background: rgba(255,255,255,0.06);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* séparation visuelle subtile */
+.exporters li + li {
+  margin-top: 4px;
+}
+
+/* =========================
+   OPTIONNEL : petit effet glass + bord lumineux
+========================= */
+
+.bulk-export {
+  border: 1px solid rgba(255,255,255,0.08);
+}
