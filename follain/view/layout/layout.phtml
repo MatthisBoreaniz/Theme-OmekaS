@@ -107,6 +107,30 @@ $userBar = $this->userBar();
 
 <!-- Header + back-to-top JS -->
 <script src="<?php echo $this->assetUrl('js/elliadd-header.js'); ?>"></script>
+
+
+<!-- Neles config (PHP → JS) -->
+<?php
+$phpManifestUrl = '';
+if (isset($item) && $item instanceof \Omeka\Api\Representation\ItemRepresentation) {
+    try {
+        $phpManifestUrl = $this->url('iiif-item', ['id' => $item->id()], ['force_canonical' => true]);
+    } catch (\Exception $e) {
+        $phpManifestUrl = $this->serverUrl() . '/iiif/2/' . $item->id() . '/manifest';
+    }
+} elseif (isset($this->resource) && $this->resource instanceof \Omeka\Api\Representation\ItemRepresentation) {
+    try {
+        $phpManifestUrl = $this->url('iiif-item', ['id' => $this->resource->id()], ['force_canonical' => true]);
+    } catch (\Exception $e) {
+        $phpManifestUrl = $this->serverUrl() . '/iiif/2/' . $this->resource->id() . '/manifest';
+    }
+}
+?>
+<div id="neles-config" hidden
+    data-manifest-url="<?= $this->escapeHtmlAttr($phpManifestUrl) ?>"
+    data-iiif-logo="<?= $this->escapeHtmlAttr($this->assetUrl('img/International_Image_Interoperability_Framework_logo.png')) ?>">
+</div>
+
 <script>
     window.popupNewsDefaultImage = "<?php echo $this->assetUrl('img/image-actu.jpg'); ?>";
 </script>

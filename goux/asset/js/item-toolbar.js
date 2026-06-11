@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnHelp = document.createElement("a");
   btnHelp.className = "metadata-btn-action btn-help";
   btnHelp.title = "Aide";
-  btnHelp.href = "/s/presentation/page/aide";
+  btnHelp.href = "/s/accueil-principal/page/aide";
   btnHelp.innerHTML =
     '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><circle cx="12" cy="17" r="0.5" fill="currentColor"></circle></svg>';
 
