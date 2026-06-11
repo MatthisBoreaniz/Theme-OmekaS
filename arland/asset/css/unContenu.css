@@ -580,3 +580,21 @@ ul.value.exporters {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
 }
+
+@media (max-width: 768px) {
+    .bulk-export-details {
+        bottom: 25px !important;
+        left: 15px !important;
+        transform: scale(0.85) !important; 
+        transform-origin: bottom left !important;
+        
+        /* Option 2 : Si tu veux vraiment qu'il bouge avec la page (qu'il disparaisse quand on scrolle),
+           supprime les lignes au-dessus et décommente la ligne ci-dessous : */
+        /* position: absolute !important; */
+    }
+    ul.value.exporters {
+        left: 0 !important;
+        bottom: 100% !important; 
+        grid-template-columns: 1fr !important; 
+    }
+}
