@@ -440,24 +440,18 @@ body.is-private .media-embeds {
     color: #444 !important;
 }
 
-
 /* =======================================================
    BOUTON D'EXPORTATION (BULK EXPORT) - STYLE MODERNE
    ======================================================= */
 
-/* 1. Le conteneur principal (fixé en bas à gauche) */
 .bulk-export-details {
-    position: fixed !important;
-    bottom: 30px !important;
-    left: 30px !important;
-    z-index: 99999 !important; 
+    position: relative !important;
+    display: inline-block !important;
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
-    margin: 0 !important;
-    width: 55px !important;
-    height: 55px !important;
+    margin: 20px 0 !important;
+    padding: 30px !important;
 }
 
-/* 2. Le bouton principal (l'icône nuage) */
 .bulk-export-summary {
     background-color: var(--accent, #8b1a1a) !important;
     color: #ffffff !important;
@@ -470,46 +464,53 @@ body.is-private .media-embeds {
     justify-content: center !important;
     cursor: pointer !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-    list-style: none !important; /* Cache la flèche native */
+    transition: all 0.3s ease !important;
+    list-style: none !important;
     padding: 0 !important;
 }
 
-/* Cache la flèche native sur Chrome/Safari */
-.bulk-export-summary::-webkit-details-marker {
+.bulk-export-summary::-webkit-details-marker,
+.bulk-export-summary::marker {
     display: none !important;
+    content: "" !important;
 }
 
-/* Icône plus grande */
 .bulk-export-summary span {
     font-size: 1.4rem !important;
     color: #fff !important;
 }
 
-/* Effet au survol du bouton */
 .bulk-export-summary:hover {
     transform: translateY(-3px) !important;
     box-shadow: 0 8px 25px rgba(0,0,0,0.25) !important;
-    background-color: color-mix(in srgb, var(--accent, #8b1a1a) 85%, #000) !important;
 }
-
 
 @keyframes popUpMenu {
     0% { opacity: 0; transform: scale(0.8) translateY(10px); }
     100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* 4. La liste des liens */
-.bulk-export-details ul.exporters {
+/* LA CORRECTION EST ICI : On cible uniquement quand le menu est [open] */
+.bulk-export-details[open] ul.value.exporters {
+    position: absolute !important;
+    bottom: calc(100% + 15px) !important; /* S'ouvre juste au-dessus du bouton */
+    left: 30% !important;
+    z-index: 100 !important;
+    background: #fff !important;
+    border: 1px solid var(--accent, #8b1a1a) !important;
+    border-radius: 8px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 4px !important;
+    padding: 10px !important;
     list-style: none !important;
     margin: 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 4px !important;
+    width: max-content !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+    animation: popUpMenu 0.2s ease-out forwards !important;
+    transform-origin: bottom left !important;
 }
 
-/* LE TUEUR DE POINTS : On rend la ligne invisible (cache le point) */
 .bulk-export-details ul.exporters li {
     visibility: hidden !important; 
     font-size: 0 !important;
@@ -518,8 +519,6 @@ body.is-private .media-embeds {
     line-height: 0 !important;
 }
 
-/* 5. Les boutons de format (CSV, JSON, etc.) */
-/* On les rend à nouveau visibles par-dessus l'invisibilité du parent */
 .bulk-export-details ul.exporters a {
     visibility: visible !important; 
     display: block !important;
@@ -537,64 +536,23 @@ body.is-private .media-embeds {
     line-height: 1.2 !important;
 }
 
-/* Effet au survol des formats */
 .bulk-export-details ul.exporters a:hover {
-    background-color: color-mix(in srgb, var(--accent, #8b1a1a) 10%, #fff) !important;
+    background-color: #f5f5f5 !important;
     color: var(--accent, #8b1a1a) !important;
     transform: translateX(4px) !important;
 }
 
-/* 5. Les boutons de format (CSV, JSON, etc.) */
-.bulk-export-details ul.exporters a {
-    display: block !important;
-    padding: 10px  !important;
-    color: #444 !important;
-    text-decoration: none !important;
-    font-size: 0.9rem !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    border-radius: 8px !important;
-    background-color: transparent !important;
-    transition: all 0.2s ease !important;
-    text-align: center !important;
+/* Fix Arland : le menu sort du flux normal */
+.bulk-export-details {
+    overflow: visible !important;
 }
 
-/* Effet au survol des formats */
-.bulk-export-details ul.exporters a:hover {
-    background-color: color-mix(in srgb, var(--accent, #8b1a1a) 10%, #fff) !important;
-    color: var(--accent, #8b1a1a) !important;
-    transform: translateX(4px) !important;
+/* Si un ancêtre bloque (à identifier via inspecteur) */
+.metadata-toolbar {
+    overflow: visible !important;
 }
 
-ul.value.exporters {
-    border: 0.5px solid var(--accent, #8b1a1a) !important;
-    border-radius: 8px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 4px !important;
-    padding: 10px !important;
-    position: absolute !important;
-    bottom: 80% !important;
-    left: 30% !important;
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
-}
-
-@media (max-width: 768px) {
-    .bulk-export-details {
-        bottom: 25px !important;
-        left: 15px !important;
-        transform: scale(0.85) !important; 
-        transform-origin: bottom left !important;
-        
-        /* Option 2 : Si tu veux vraiment qu'il bouge avec la page (qu'il disparaisse quand on scrolle),
-           supprime les lignes au-dessus et décommente la ligne ci-dessous : */
-        position: absolute !important;
-    }
-    ul.value.exporters {
-        left: 0 !important;
-        bottom: 100% !important; 
-        grid-template-columns: 1fr !important; 
-    }
+/* Masquer le menu par défaut sur tous les thèmes */
+.bulk-export-details div.bulk-export ul.value.exporters {
+    display: none !important;
 }
