@@ -441,137 +441,142 @@ body.is-private .media-embeds {
 }
 
 
-/* =========================
-   BOUTON PRINCIPAL
-========================= */
+/* =======================================================
+   BOUTON D'EXPORTATION (BULK EXPORT) - STYLE MODERNE
+   ======================================================= */
 
-.button-details {
-  position: relative;
-  display: inline-block;
+/* 1. Le conteneur principal (fixé en bas à gauche) */
+.bulk-export-details {
+    position: fixed !important;
+    bottom: 30px !important;
+    left: 30px !important;
+    z-index: 99999 !important; 
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    margin: 0 !important;
+    width: 55px !important;
+    height: 55px !important;
 }
 
-/* le summary devient un vrai bouton moderne */
+/* 2. Le bouton principal (l'icône nuage) */
 .bulk-export-summary {
-  list-style: none;
-  cursor: pointer;
-
-  width: 44px;
-  height: 44px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 12px;
-
-  background: linear-gradient(145deg, #1e293b, #0f172a);
-  color: #fff;
-
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  transition: all 0.25s ease;
-
-  user-select: none;
+    background-color: var(--accent, #8b1a1a) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 55px !important;
+    height: 55px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    list-style: none !important; /* Cache la flèche native */
+    padding: 0 !important;
 }
 
-/* hover */
-.bulk-export-summary:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(145deg, #334155, #1e293b);
-}
-
-/* clic */
-.bulk-export-summary:active {
-  transform: scale(0.96);
-}
-
-/* enlève le triangle natif */
+/* Cache la flèche native sur Chrome/Safari */
 .bulk-export-summary::-webkit-details-marker {
-  display: none;
+    display: none !important;
 }
 
-/* =========================
-   DROPDOWN
-========================= */
-
-.bulk-export {
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-
-  min-width: 190px;
-
-  background: rgba(15, 23, 42, 0.92);
-  backdrop-filter: blur(12px);
-
-  border-radius: 14px;
-  padding: 8px;
-
-  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-
-  z-index: 999;
-
-  /* animation base */
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-
-  transition: all 0.18s ease;
+/* Icône plus grande */
+.bulk-export-summary span {
+    font-size: 1.4rem !important;
+    color: #fff !important;
 }
 
-/* quand le details est ouvert */
-.button-details[open] .bulk-export {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+/* Effet au survol du bouton */
+.bulk-export-summary:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25) !important;
+    background-color: color-mix(in srgb, var(--accent, #8b1a1a) 85%, #000) !important;
 }
 
-/* =========================
-   LISTE
-========================= */
 
-.exporters {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+@keyframes popUpMenu {
+    0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* =========================
-   ITEMS
-========================= */
-
-.exporter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 10px 12px;
-  border-radius: 10px;
-
-  color: #e2e8f0;
-  text-decoration: none;
-
-  font-size: 14px;
-  letter-spacing: 0.2px;
-
-  transition: all 0.2s ease;
+/* 4. La liste des liens */
+.bulk-export-details ul.exporters {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
 }
 
-/* hover clean type “menu app” */
-.exporter:hover {
-  background: rgba(255,255,255,0.06);
-  color: #ffffff;
-  transform: translateX(4px);
+/* LE TUEUR DE POINTS : On rend la ligne invisible (cache le point) */
+.bulk-export-details ul.exporters li {
+    visibility: hidden !important; 
+    font-size: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0 !important;
 }
 
-/* séparation visuelle subtile */
-.exporters li + li {
-  margin-top: 4px;
+/* 5. Les boutons de format (CSV, JSON, etc.) */
+/* On les rend à nouveau visibles par-dessus l'invisibilité du parent */
+.bulk-export-details ul.exporters a {
+    visibility: visible !important; 
+    display: block !important;
+    padding: 10px 15px !important;
+    color: #444 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 8px !important;
+    background-color: transparent !important;
+    transition: all 0.2s ease !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
 }
 
-/* =========================
-   OPTIONNEL : petit effet glass + bord lumineux
-========================= */
+/* Effet au survol des formats */
+.bulk-export-details ul.exporters a:hover {
+    background-color: color-mix(in srgb, var(--accent, #8b1a1a) 10%, #fff) !important;
+    color: var(--accent, #8b1a1a) !important;
+    transform: translateX(4px) !important;
+}
 
-.bulk-export {
-  border: 1px solid rgba(255,255,255,0.08);
+/* 5. Les boutons de format (CSV, JSON, etc.) */
+.bulk-export-details ul.exporters a {
+    display: block !important;
+    padding: 10px  !important;
+    color: #444 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 8px !important;
+    background-color: transparent !important;
+    transition: all 0.2s ease !important;
+    text-align: center !important;
+}
+
+/* Effet au survol des formats */
+.bulk-export-details ul.exporters a:hover {
+    background-color: color-mix(in srgb, var(--accent, #8b1a1a) 10%, #fff) !important;
+    color: var(--accent, #8b1a1a) !important;
+    transform: translateX(4px) !important;
+}
+
+ul.value.exporters {
+    border: 0.5px solid var(--accent, #8b1a1a) !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 10px !important;
+    position: absolute !important;
+    bottom: 80% !important;
+    left: 30% !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
 }
